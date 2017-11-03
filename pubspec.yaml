@@ -1,0 +1,21 @@
+name: ethereum
+description: An ethereum rpc client for Dart
+version: 1.0.0
+author: Steve Hamblett <steve.hamblett@linux.com>
+homepage: https://github.com/shamblett/ethereum
+
+environment:
+  sdk: ">=1.8.0  <2.0.0"
+
+dependencies:
+ json_rpc_2: "^2.0.4"
+ 
+
+dev_dependencies:
+  test: '^0.12.0'
+  coverage: '^0.7.3'
+  dart_dev: '^1.0.0'
+  dart_style: '>=0.2.0 <0.3.0'
+  dartdoc: '>=0.8.0 <=0.10.0'
+
+
