@@ -7,7 +7,8 @@
 
 library ethereum;
 
-import "package:json_rpc_2/json_rpc_2.dart";
-import "package:json_rpc_2/error_code.dart";
+import "package:json_rpc_2/json_rpc_2.dart" as rpc;
+import "package:json_rpc_2/error_code.dart" as rpc_error;
+import 'package:stream_channel/stream_channel.dart';
 
 part 'src/ethereum.dart';

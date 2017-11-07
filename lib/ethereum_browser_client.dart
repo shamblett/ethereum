@@ -1,5 +1,5 @@
 /*
- * Package : EthereumServerClient
+ * Package : Ethereum
  * Author : S. Hamblett <steve.hamblett@linux.com>
  * Date   : 06/011/2017
  * Copyright :  S.Hamblett
