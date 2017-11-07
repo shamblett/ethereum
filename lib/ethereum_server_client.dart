@@ -11,6 +11,14 @@ library ethereum_server_client;
 
 import 'dart:io';
 import 'package:ethereum/ethereum.dart';
+import 'package:ethereum/ethereum_connector_mixin.dart';
 
-class EthereumServerClient extends Ethereum {
+class EthereumServerClient extends Ethereum implements EthereumConnectorMixin {
+
+  EthereumServerClient() :super();
+
+  /// Overridden internal connect
+  void _connect() {
+
+  }
 }

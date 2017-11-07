@@ -13,7 +13,9 @@ part of ethereum;
 /// pre-supplied channel(socket).
 class Ethereum {
 
-  Ethereum(StreamChannel channel) {
+  Ethereum();
+
+  Ethereum.fromChannel(StreamChannel channel) {
     _channel = channel;
     _rpcClient = new rpc.Client(_channel);
   }
@@ -27,6 +29,5 @@ class Ethereum {
   rpc.Client _rpcClient;
 
   rpc.Client get rpcClient => _rpcClient;
-
 
 }
