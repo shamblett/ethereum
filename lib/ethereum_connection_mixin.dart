@@ -7,7 +7,7 @@
  * The Ethereum client package
  */
 
-abstract class EthereumConnectorMixin {
+abstract class EthereumConnectionMixin {
 
   /// Connection parameters
   int port = 8545;
