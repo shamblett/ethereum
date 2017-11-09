@@ -17,8 +17,8 @@ class EthereumServerClient extends Ethereum with EthereumConnectionMixin {
 
   EthereumServerClient() :super();
 
-  /// Overridden internal connect
-  void _connect() {
+  /// Overridden connect
+  void connect() {
 
   }
 }

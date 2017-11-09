@@ -7,6 +7,7 @@
  * The Ethereum client package
  */
 
+/// Implements common connection methods for both server and browser clients
 abstract class EthereumConnectionMixin {
   /// Constants
   static const String rpcScheme = 'http';
@@ -17,6 +18,7 @@ abstract class EthereumConnectionMixin {
   /// Connection parameters
   int port = defaultPort;
   String host;
+  Uri uri;
 
   /// Connected indicator
   bool connected = false;
@@ -26,26 +28,27 @@ abstract class EthereumConnectionMixin {
   void connectString(String hostname) {
     if (hostname == null) {
       throw new ArgumentError.notNull(
-          "Ethereum::connectString - hostname is null");
+          "Ethereum::connectString - hostname");
     }
-    final Uri uri = new Uri.dataFromString(hostname);
+    final Uri uri = Uri.parse(hostname);
     _validateUri(uri);
+    connect();
   }
 
   /// Connect using a URI, port is optional
   void connectUri(Uri uri) {
     if (uri == null) {
-      throw new ArgumentError.notNull("Ethereum::connectUri - uri is null");
+      throw new ArgumentError.notNull("Ethereum::connectUri - uri");
     }
     _validateUri(uri);
-    _connect();
+    connect();
   }
 
   /// Connect by explicitly setting the connection parameters
   void connectParameters(String hostname, [int port]) {
     if (hostname == null) {
       throw new ArgumentError.notNull(
-          "Ethereum::connectParameters - hostname is null");
+          "Ethereum::connectParameters - hostname");
     }
     int uriPort = defaultPort;
     if (port != null) {
@@ -53,23 +56,25 @@ abstract class EthereumConnectionMixin {
     }
     final Uri uri = new Uri(scheme: rpcScheme, host: hostname, port: uriPort);
     _validateUri(uri);
-    _connect();
+    connect();
   }
 
-  void _validateUri(Uri uri) {
+  void _validateUri(Uri puri) {
     // Must have a valid scheme which must be http, host and port
-    if (uri.hasAuthority && (uri.host.isNotEmpty)) {
-      host = uri.host;
+    if (puri.hasAuthority && (puri.host.isNotEmpty)) {
+      host = puri.host;
     } else {
       throw new ArgumentError.value(
-          uri.host, "Ethereum::_validateUri - invalid host");
+          puri.host, "Ethereum::_validateUri - invalid host");
     }
-    uri.replace(scheme: rpcScheme);
-    if (!uri.hasPort) {
-      uri.replace(port: defaultPort);
+    Uri newUri = puri.replace(scheme: rpcScheme);
+    if (!puri.hasPort) {
+      newUri = newUri.replace(port: defaultPort);
     }
+    port = newUri.port;
+    uri = newUri;
   }
 
-  /// Internal connect, must be overridden in a server/browser client class
-  void _connect();
+  /// Connect, must be overridden in a server/browser client class
+  void connect();
 }
