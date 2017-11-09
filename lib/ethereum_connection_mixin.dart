@@ -8,16 +8,21 @@
  */
 
 abstract class EthereumConnectionMixin {
-  /// Default port
+  /// Constants
+  static const String rpcScheme = 'http';
+
+  /// Defaults
   static const int defaultPort = 8545;
 
   /// Connection parameters
   int port = defaultPort;
-  String uri;
-  String scheme;
+  String host;
+
+  /// Connected indicator
+  bool connected = false;
 
   /// Connect using a host string of the form http://thehost.com:1234,
-  /// port is optional.
+  /// port is optional. Scheme must be http
   void connectString(String hostname) {
     if (hostname == null) {
       throw new ArgumentError.notNull(
@@ -33,28 +38,38 @@ abstract class EthereumConnectionMixin {
       throw new ArgumentError.notNull("Ethereum::connectUri - uri is null");
     }
     _validateUri(uri);
+    _connect();
   }
 
   /// Connect by explicitly setting the connection parameters
-  void connectParameters(String scheme, String hostname, [int port]) {
+  void connectParameters(String hostname, [int port]) {
     if (hostname == null) {
       throw new ArgumentError.notNull(
           "Ethereum::connectParameters - hostname is null");
-    }
-    if (scheme == null) {
-      throw new ArgumentError.notNull(
-          "Ethereum::connectParameters - scheme is null");
     }
     int uriPort = defaultPort;
     if (port != null) {
       uriPort = port;
     }
-    final Uri uri = new Uri(scheme: scheme, host: hostname, port: uriPort);
+    final Uri uri = new Uri(scheme: rpcScheme, host: hostname, port: uriPort);
     _validateUri(uri);
+    _connect();
   }
 
-  void _validateUri(Uri uri) {}
+  void _validateUri(Uri uri) {
+    // Must have a valid scheme which must be http, host and port
+    if (uri.hasAuthority && (uri.host.isNotEmpty)) {
+      host = uri.host;
+    } else {
+      throw new ArgumentError.value(
+          uri.host, "Ethereum::_validateUri - invalid host");
+    }
+    uri.replace(scheme: rpcScheme);
+    if (!uri.hasPort) {
+      uri.replace(port: defaultPort);
+    }
+  }
 
-  /// Internal connect, must be overridden in a server/browser class
+  /// Internal connect, must be overridden in a server/browser client class
   void _connect();
 }
