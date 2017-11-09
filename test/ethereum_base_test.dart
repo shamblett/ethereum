@@ -66,5 +66,30 @@ void main() {
       expect(client.host, "localhost");
       expect(client.port, EthereumConnectionMixin.defaultPort);
     });
+
+    test("connectParameters - Null", () {
+      bool thrown = false;
+      try {
+        client.connectParameters(null);
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::connectParameters - hostname): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
+
+    test("connectParameters - OK with port", () {
+      client.connectParameters("localhost", 3000);
+      expect(client.host, "localhost");
+      expect(client.port, 3000);
+    });
+
+    test("connectParameters - OK no port", () {
+      client.connectParameters("localhost");
+      expect(client.host, "localhost");
+      expect(client.port, EthereumConnectionMixin.defaultPort);
+    });
   });
 }

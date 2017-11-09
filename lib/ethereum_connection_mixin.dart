@@ -18,7 +18,9 @@ abstract class EthereumConnectionMixin {
   /// Connection parameters
   int port = defaultPort;
   String host;
-  Uri uri;
+  Uri _uri;
+
+  Uri get uri => _uri;
 
   /// Connected indicator
   bool connected = false;
@@ -72,7 +74,7 @@ abstract class EthereumConnectionMixin {
       newUri = newUri.replace(port: defaultPort);
     }
     port = newUri.port;
-    uri = newUri;
+    _uri = newUri;
   }
 
   /// Connect, must be overridden in a server/browser client class
