@@ -20,16 +20,17 @@ class EthereumBrowserClient extends Ethereum with EthereumConnectionMixin {
   /// Overridden connect
   Future connect() {
     final Completer completer = new Completer();
-    Socket.connect(host, port)
-      ..then((Socket sock) {
-        channel = new StreamChannel.withGuarantees(sock, sock);
-        rpcClient = new rpc.Client(channel);
-        rpcClient.listen();
-        connected = true;
-        return completer.complete();
-      }, onError: (e) {
-        throw new SocketException("EthereumServerClient::" + e.toString());
-      });
+    final HttpRequest req = new HttpRequest();
+
+//    Socket.connect(host, port)
+//      ..then((Socket sock) {
+//        channel = new StreamChannel.withGuarantees(sock, sock);
+//        rpcClient = new rpc.Client(channel);
+//        connected = true;
+//        return completer.complete();
+//      }, onError: (e) {
+//        throw new SocketException("EthereumServerClient::" + e.toString());
+//      });
     return completer.future;
   }
 
