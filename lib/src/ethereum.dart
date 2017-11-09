@@ -16,18 +16,22 @@ class Ethereum {
   Ethereum();
 
   Ethereum.fromChannel(StreamChannel channel) {
-    _channel = channel;
-    _rpcClient = new rpc.Client(_channel);
+    channel = channel;
+    rpcClient = new rpc.Client(channel);
   }
 
-  /// The communications stream channel
-  StreamChannel _channel;
-
-  StreamChannel get channel => _channel;
+  /// The communications stream channel, if using the default constructor
+  /// this must be set.
+  StreamChannel channel;
 
   /// Json RPC
-  rpc.Client _rpcClient;
+  rpc.Client rpcClient;
 
-  rpc.Client get rpcClient => _rpcClient;
+  /// isClosed indication from the rpc client
+  bool get isClosed => rpcClient.isClosed;
 
+  /// Close the client
+  Future close() {
+    return rpcClient.close();
+  }
 }
