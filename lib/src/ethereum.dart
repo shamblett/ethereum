@@ -12,14 +12,16 @@ part of ethereum;
 /// The Ethereum JSON-RPC client class. This implements the Ethereum RPC interface for a
 /// pre-supplied channel(socket).
 class Ethereum {
-  Ethereum(this._httpAdapter);
+  Ethereum(this._httpAdapter) {
+    rpcClient = new EthereumRpcClient(_httpAdapter);
+  }
 
   Ethereum.withConnectionParameters(EthereumIHTTPAdapter adapter,
       String hostname,
       [port = defaultPort]) {
     _httpAdapter = adapter;
+    rpcClient = new EthereumRpcClient(_httpAdapter);
     connectParameters(hostname, port);
-    //rpcClient = new rpc.Client(channel);
   }
 
   /// Constants
@@ -40,8 +42,8 @@ class Ethereum {
 
   set httpAdapter(EthereumIHTTPAdapter adapter) => _httpAdapter = adapter;
 
-  /// Json RPC
-  ///rpc.Client rpcClient;
+  /// Json RPC client
+  EthereumRpcClient rpcClient;
 
   /// Connection methods
 
@@ -92,11 +94,11 @@ class Ethereum {
     _uri = newUri;
   }
 
-/// API methods
+  /// API methods
 
-/// Protocol version
-//Future<String> protocolVersion() async {
-//var res = await rpcClient.sendRequest('eth_protocolVersion');
-//return res;
-//}
+  /// Protocol version
+  Future<String> protocolVersion() async {
+    final res = await rpcClient.request('eth_protocolVersion');
+    return res.version;
+  }
 }
