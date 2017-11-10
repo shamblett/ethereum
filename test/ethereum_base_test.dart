@@ -6,15 +6,14 @@
  */
 
 @TestOn("vm")
-import 'package:ethereum/ethereum_server_client.dart';
-import 'package:ethereum/ethereum_connection_mixin.dart';
+import 'package:ethereum/ethereum.dart';
 import 'package:test/test.dart';
 
 /// These test are common to both server and client, we use the server client for convenience.
 
 void main() {
-  group("Connection Mixin", () {
-    final EthereumServerClient client = new EthereumServerClient();
+  group("Connection tests", () {
+    final Ethereum client = new Ethereum();
     test("connectString - Null", () {
       bool thrown = false;
       try {
@@ -37,7 +36,7 @@ void main() {
     test("connectString - OK no port", () {
       client.connectString("http://localhost1");
       expect(client.host, "localhost1");
-      expect(client.port, EthereumConnectionMixin.defaultPort);
+      expect(client.port, Ethereum.defaultPort);
     });
 
     test("connectUri - Null", () {
@@ -64,7 +63,7 @@ void main() {
       final Uri uri = Uri.parse("http://localhost");
       client.connectUri(uri);
       expect(client.host, "localhost");
-      expect(client.port, EthereumConnectionMixin.defaultPort);
+      expect(client.port, Ethereum.defaultPort);
     });
 
     test("connectParameters - Null", () {
@@ -89,7 +88,7 @@ void main() {
     test("connectParameters - OK no port", () {
       client.connectParameters("localhost");
       expect(client.host, "localhost");
-      expect(client.port, EthereumConnectionMixin.defaultPort);
+      expect(client.port, Ethereum.defaultPort);
     });
   });
 }
