@@ -8,5 +8,8 @@
 library ethereum;
 
 import 'dart:async';
+import 'package:json_object_lite/json_object_lite.dart';
 
 part 'src/ethereum.dart';
+
+part 'src/adapters/ethereum_ihttp_adapter.dart';

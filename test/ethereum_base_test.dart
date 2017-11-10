@@ -6,6 +6,7 @@
  */
 
 @TestOn("vm")
+import 'package:ethereum/ethereum_server_client.dart';
 import 'package:ethereum/ethereum.dart';
 import 'package:test/test.dart';
 
@@ -13,7 +14,7 @@ import 'package:test/test.dart';
 
 void main() {
   group("Connection tests", () {
-    final Ethereum client = new Ethereum();
+    final EthereumServerClient client = new EthereumServerClient();
     test("connectString - Null", () {
       bool thrown = false;
       try {

@@ -6,14 +6,13 @@
  */
 
 @TestOn("vm")
-import 'dart:async';
 import 'package:ethereum/ethereum_server_client.dart';
 import 'package:test/test.dart';
 import 'ethereum_common.dart';
 
 void main() {
   // Run the common API tests
-  final EthereumServerClient client = new EthereumServerClient();
-  client.connectParameters("localhost");
+  final EthereumServerClient client =
+  new EthereumServerClient.withConnectionParameters("localhost");
   EthereumCommon.run(client);
 }
