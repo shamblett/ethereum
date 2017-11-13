@@ -9,8 +9,9 @@
 
 part of ethereum;
 
-/// The Ethereum JSON-RPC client class. This implements the Ethereum RPC interface for a
-/// pre-supplied channel(socket).
+/// The Ethereum JSON-RPC client class.
+/// Further details of this interface and its API specification can be found at
+/// https://github.com/ethereum/wiki/wiki/JSON-RPC#web3_clientversion
 class Ethereum {
   Ethereum(this._httpAdapter) {
     rpcClient = new EthereumRpcClient(_httpAdapter);
@@ -104,8 +105,7 @@ class Ethereum {
     if (res.containsKey('result')) {
       return res.result;
     }
-    print(
-        "ERROR::$method - Code: ${res.error.code} Message ${res.error
+    print("ERROR::$method - Code: ${res.error.code} Message ${res.error
             .message}");
     return null;
   }
@@ -119,9 +119,44 @@ class Ethereum {
     if (res.containsKey('result')) {
       return res.result;
     }
-    print(
-        "ERROR::$method - Code: ${res.error.code} Message ${res.error
+    print("ERROR::$method - Code: ${res.error.code} Message ${res.error
+        .message}");
+    return null;
+  }
+
+  /// Net version
+  Future<String> netVersion() async {
+    final String method = 'net_version';
+    final res = await rpcClient.request(method);
+    if (res.containsKey('result')) {
+      return res.result;
+    }
+    print("ERROR::$method - Code: ${res.error.code} Message ${res.error
+        .message}");
+    return null;
+  }
+
+  /// Net listening, true when listening
+  Future<bool> netListening() async {
+    final String method = 'net_listening';
+    final res = await rpcClient.request(method);
+    if (res.containsKey('result')) {
+      return res.result;
+    }
+    print("ERROR::$method - Code: ${res.error.code} Message ${res.error
             .message}");
+    return null;
+  }
+
+  /// Net peer count,
+  Future<int> netPeerCount() async {
+    final String method = 'net_peerCount';
+    final res = await rpcClient.request(method);
+    if (res.containsKey('result')) {
+      return int.parse(res.result);
+    }
+    print("ERROR::$method - Code: ${res.error.code} Message ${res.error
+        .message}");
     return null;
   }
 
@@ -132,8 +167,7 @@ class Ethereum {
     if (res.containsKey('result')) {
       return res.result;
     }
-    print(
-        "ERROR::$method - Code: ${res.error.code} Message ${res.error
+    print("ERROR::$method - Code: ${res.error.code} Message ${res.error
             .message}");
     return null;
   }

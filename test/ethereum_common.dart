@@ -37,5 +37,23 @@ class EthereumCommon {
           "0x47173285a8d7341e5e972fc677286384f802f8ef42a5ec5f03bbfa254cb01fad");
       expect(client.rpcClient.id, 4);
     });
+    test("Net version", () async {
+      final String version = await client.netVersion();
+      expect(version, isNotNull);
+      expect(client.rpcClient.id, 5);
+      print("Net Version is $version");
+    });
+    test("Net listening", () async {
+      final bool listening = await client.netListening();
+      expect(listening, isNotNull);
+      expect(client.rpcClient.id, 6);
+      print("Net Listening is $listening");
+    });
+    test("Net peer count", () async {
+      final int count = await client.netPeerCount();
+      expect(count, isNotNull);
+      expect(client.rpcClient.id, 7);
+      print("Net peer count is $count");
+    });
   }
 }
