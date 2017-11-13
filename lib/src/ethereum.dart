@@ -97,6 +97,34 @@ class Ethereum {
 
   /// API methods
 
+  //// Client version
+  Future<String> clientVersion() async {
+    final String method = 'web3_clientVersion';
+    final res = await rpcClient.request(method);
+    if (res.containsKey('result')) {
+      return res.result;
+    }
+    print(
+        "ERROR::$method - Code: ${res.error.code} Message ${res.error
+            .message}");
+    return null;
+  }
+
+  /// Returns Keccak-256 (not the standardized SHA3-256) of the given data.
+  Future<String> sha3(String hexString) async {
+    final String method = 'web3_sha3';
+    final List<String> params = new List<String>(1);
+    params[0] = hexString;
+    final res = await rpcClient.request(method, params);
+    if (res.containsKey('result')) {
+      return res.result;
+    }
+    print(
+        "ERROR::$method - Code: ${res.error.code} Message ${res.error
+            .message}");
+    return null;
+  }
+
   /// Protocol version
   Future<String> protocolVersion() async {
     final String method = 'eth_protocolVersion';
@@ -104,7 +132,9 @@ class Ethereum {
     if (res.containsKey('result')) {
       return res.result;
     }
-    print("ERROR::$method - Code: ${res.code} Message ${res.message}");
+    print(
+        "ERROR::$method - Code: ${res.error.code} Message ${res.error
+            .message}");
     return null;
   }
 }

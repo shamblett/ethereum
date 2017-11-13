@@ -30,7 +30,7 @@ class EthereumRpcClient {
   set uri(Uri uri) => _uri = uri;
 
   /// The request method
-  Future<JsonObjectLite> request(String method, [JsonObjectLite parameters]) {
+  Future<JsonObjectLite> request(String method, [dynamic parameters]) {
     final JsonObjectLite packet = new JsonObjectLite();
     packet.jsonrpc = jsonRPpcVersion;
     packet.method = method;
