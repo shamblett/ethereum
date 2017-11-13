@@ -18,8 +18,8 @@ class Ethereum {
 
   Ethereum.withConnectionParameters(EthereumIHTTPAdapter adapter,
       String hostname,
-      [port = defaultPort]) {
-    _httpAdapter = adapter;
+      [port = defaultPort])
+      : _httpAdapter = adapter {
     rpcClient = new EthereumRpcClient(_httpAdapter);
     connectParameters(hostname, port);
   }
@@ -92,13 +92,19 @@ class Ethereum {
     }
     port = newUri.port;
     _uri = newUri;
+    rpcClient.uri = _uri;
   }
 
   /// API methods
 
   /// Protocol version
   Future<String> protocolVersion() async {
-    final res = await rpcClient.request('eth_protocolVersion');
-    return res.version;
+    final String method = 'eth_protocolVersion';
+    final res = await rpcClient.request(method);
+    if (res.containsKey('result')) {
+      return res.result;
+    }
+    print("ERROR::$method - Code: ${res.code} Message ${res.message}");
+    return null;
   }
 }

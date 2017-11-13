@@ -13,6 +13,5 @@ part of ethereum_browser_client;
 class EthereumBrowserHTTPAdapter implements EthereumIHTTPAdapter {
   /// Processes the HTTP request returning the  HTTP response as
   /// a JSON Object
-  Future<JsonObjectLite> httpRequest(String url, JsonObjectLite request,
-      [Map headers = null]) {}
+  Future<JsonObjectLite> httpRequest(Uri uri, JsonObjectLite request) {}
 }
