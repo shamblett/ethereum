@@ -317,4 +317,25 @@ class Ethereum {
     _processError(method, res);
     return null;
   }
+
+  /// Transaction count, returns the number of transactions sent from an address.
+  /// The block can be an integer block number or the one of the strings
+  /// "latest", "earliest" or "pending.
+  Future<String> getTransactionCount(String address, String block) async {
+    if (address == null) {
+      throw new ArgumentError.notNull(
+          "Ethereum::getTransactionCount - address");
+    }
+    if (block == null) {
+      throw new ArgumentError.notNull("Ethereum::getTransactionCount - block");
+    }
+    final String method = 'eth_getTransactionCount';
+    final List params = [address, block];
+    final res = await rpcClient.request(method, params);
+    if (res.containsKey('result')) {
+      return res.result;
+    }
+    _processError(method, res);
+    return null;
+  }
 }

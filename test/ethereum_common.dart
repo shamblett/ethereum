@@ -176,5 +176,12 @@ class EthereumCommon {
       expect(client.rpcClient.id, 22);
       print("Storage at block is $storage");
     });
+    test("Transaction count - number", () async {
+      final String count = await client.getTransactionCount(
+          "0x407d73d8a49eeb85d32cf465507dd71d507100c1", "0x0");
+      expect(count, isNotNull);
+      expect(client.rpcClient.id, 23);
+      print("Balance number is $count");
+    });
   }
 }
