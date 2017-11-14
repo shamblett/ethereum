@@ -11,7 +11,8 @@ part of ethereum;
 
 /// The Ethereum JSON-RPC client class.
 /// Further details of this interface and its API specification can be found at
-/// https://github.com/ethereum/wiki/wiki/JSON-RPC#web3_clientversion
+/// https://github.com/ethereum/wiki/wiki/JSON-RPC#web3_clientversion.
+/// The API calls return null if an ethereum error occurred.
 class Ethereum {
   Ethereum(this._httpAdapter) {
     rpcClient = new EthereumRpcClient(_httpAdapter);
@@ -45,6 +46,10 @@ class Ethereum {
 
   /// Json RPC client
   EthereumRpcClient rpcClient;
+
+  /// Last error code and message
+  int lastErrorCode = 0;
+  String lastErrorMessage = "No Error";
 
   /// Connection methods
 
@@ -96,6 +101,19 @@ class Ethereum {
     rpcClient.uri = _uri;
   }
 
+  /// Print errors, default is off
+  bool printError = false;
+
+  /// Error processing helper
+  void _processError(String method, JsonObjectLite res) {
+    lastErrorCode = res.error.code;
+    lastErrorMessage = res.error.message;
+    if (printError) {
+      print("ERROR::$method - Code: ${res.error.code} Message :  ${res.error
+          .message}");
+    }
+  }
+
   /// API methods
 
   //// Client version
@@ -105,8 +123,7 @@ class Ethereum {
     if (res.containsKey('result')) {
       return res.result;
     }
-    print("ERROR::$method - Code: ${res.error.code} Message ${res.error
-            .message}");
+    _processError(method, res);
     return null;
   }
 
@@ -119,8 +136,7 @@ class Ethereum {
     if (res.containsKey('result')) {
       return res.result;
     }
-    print("ERROR::$method - Code: ${res.error.code} Message ${res.error
-        .message}");
+    _processError(method, res);
     return null;
   }
 
@@ -131,8 +147,7 @@ class Ethereum {
     if (res.containsKey('result')) {
       return res.result;
     }
-    print("ERROR::$method - Code: ${res.error.code} Message ${res.error
-        .message}");
+    _processError(method, res);
     return null;
   }
 
@@ -143,8 +158,7 @@ class Ethereum {
     if (res.containsKey('result')) {
       return res.result;
     }
-    print("ERROR::$method - Code: ${res.error.code} Message ${res.error
-            .message}");
+    _processError(method, res);
     return null;
   }
 
@@ -155,8 +169,7 @@ class Ethereum {
     if (res.containsKey('result')) {
       return int.parse(res.result);
     }
-    print("ERROR::$method - Code: ${res.error.code} Message ${res.error
-        .message}");
+    _processError(method, res);
     return null;
   }
 
@@ -167,8 +180,38 @@ class Ethereum {
     if (res.containsKey('result')) {
       return res.result;
     }
-    print("ERROR::$method - Code: ${res.error.code} Message ${res.error
-            .message}");
+    _processError(method, res);
+    return null;
+  }
+
+  /// Eth syncing, an object with data about the sync status if syncing or false if not.
+  /// Encoded as a JsonObject with a syncStatus, if true the sync status data is valid.
+  Future<JsonObjectLite> ethSyncing() async {
+    final String method = 'eth_syncing';
+    final res = await rpcClient.request(method);
+    if (res.containsKey('result')) {
+      final JsonObjectLite resp = new JsonObjectLite();
+      resp.syncStatus = false;
+      if (!(res.result is bool) && (res.result.containsKey('startingBlock'))) {
+        resp.syncStatus = true;
+        resp.startingBlock = res.result.startingBlock;
+        resp.currentBlock = res.result.currentBlock;
+        resp.highestBlock = res.result.highestBlock;
+      }
+      return resp;
+    }
+    _processError(method, res);
+    return null;
+  }
+
+  /// The client coinbase address.
+  Future<String> coinbaseAddress() async {
+    final String method = 'eth_coinbase';
+    final res = await rpcClient.request(method);
+    if (res.containsKey('result')) {
+      return res.result;
+    }
+    _processError(method, res);
     return null;
   }
 }

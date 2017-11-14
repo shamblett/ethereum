@@ -6,6 +6,7 @@
  */
 
 import 'package:ethereum/ethereum.dart';
+import 'package:json_object_lite/json_object_lite.dart';
 import 'package:test/test.dart';
 
 /// Class to run the common Ethereum API tests
@@ -54,6 +55,30 @@ class EthereumCommon {
       expect(count, isNotNull);
       expect(client.rpcClient.id, 7);
       print("Net peer count is $count");
+    });
+    test("Sync status", () async {
+      final JsonObjectLite res = await client.ethSyncing();
+      expect(res, isNotNull);
+      expect(client.rpcClient.id, 8);
+      if (res.syncStatus) {
+        print("Sync status is syncing");
+        print("Starting Block is ${res.startingBlock}");
+        print("Current Block is ${res.currentBlock}");
+        print("Highest Block is ${res.highestBlock}");
+      } else {
+        print("Sync status is not syncing");
+      }
+    });
+    test("Coinbase address", () async {
+      final String address = await client.coinbaseAddress();
+      expect(client.rpcClient.id, 9);
+      if (address != null) {
+        print("Coinbase address is $address");
+      } else {
+        expect(client.lastErrorCode, -32000);
+        expect(client.lastErrorMessage,
+            "etherbase address must be explicitly specified");
+      }
     });
   }
 }

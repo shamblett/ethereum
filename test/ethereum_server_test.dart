@@ -14,5 +14,7 @@ void main() {
   // Run the common API tests
   final EthereumServerClient client =
   new EthereumServerClient.withConnectionParameters("localhost");
+  // Print errors
+  client.printError = true;
   EthereumCommon.run(client);
 }
