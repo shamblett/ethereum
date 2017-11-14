@@ -237,4 +237,50 @@ class Ethereum {
     return null;
   }
 
+  /// The current price per gas in wei.
+  Future<String> gasPrice() async {
+    final String method = 'eth_gasPrice';
+    final res = await rpcClient.request(method);
+    if (res.containsKey('result')) {
+      return res.result;
+    }
+    _processError(method, res);
+    return null;
+  }
+
+  /// Accounts,  a list of addresses owned by client.
+  Future<List<String>> accounts() async {
+    final String method = 'eth_accounts';
+    final res = await rpcClient.request(method);
+    if (res.containsKey('result')) {
+      return res.result;
+    }
+    _processError(method, res);
+    return null;
+  }
+
+  /// Block number, the number of most recent block.
+  Future<String> blockNumber() async {
+    final String method = 'eth_blockNumber';
+    final res = await rpcClient.request(method);
+    if (res.containsKey('result')) {
+      return res.result;
+    }
+    _processError(method, res);
+    return null;
+  }
+
+  /// Get balance, the balance of the account of the given address.
+  /// The block can be an integer block number or the one of the strings
+  /// latest, earliest or pending.
+  Future<String> getBalance(String accountNumber, String block) async {
+    final String method = 'eth_getBalance';
+    final List params = [accountNumber, block];
+    final res = await rpcClient.request(method, params);
+    if (res.containsKey('result')) {
+      return res.result;
+    }
+    _processError(method, res);
+    return null;
+  }
 }

@@ -92,5 +92,55 @@ class EthereumCommon {
       expect(client.rpcClient.id, 11);
       print("Hashrate is $rate");
     });
+    test("Gas price", () async {
+      final String price = await client.gasPrice();
+      expect(price, isNotNull);
+      expect(client.rpcClient.id, 12);
+      print("Gas price is $price");
+    });
+    test("Accounts", () async {
+      final List<String> accounts = await client.accounts();
+      expect(accounts, isNotNull);
+      expect(client.rpcClient.id, 13);
+      if (accounts.length != 0) {
+        print("Accounts are $accounts");
+      } else {
+        print("There are no accounts");
+      }
+    });
+    test("Block number", () async {
+      final String num = await client.blockNumber();
+      expect(num, isNotNull);
+      expect(client.rpcClient.id, 14);
+      print("Block number is $num");
+    });
+    test("Balance - number", () async {
+      final String balance = await client.getBalance(
+          "0x407d73d8a49eeb85d32cf465507dd71d507100c1", "0x0");
+      expect(balance, isNotNull);
+      expect(client.rpcClient.id, 15);
+      print("Balance number is $balance");
+    });
+    test("Balance - latest", () async {
+      final String balance = await client.getBalance(
+          "0x407d73d8a49eeb85d32cf465507dd71d507100c1", "latest");
+      expect(balance, isNotNull);
+      expect(client.rpcClient.id, 16);
+      print("Balance latest is $balance");
+    });
+    test("Balance - earliest", () async {
+      final String balance = await client.getBalance(
+          "0x407d73d8a49eeb85d32cf465507dd71d507100c1", "earliest");
+      expect(balance, isNotNull);
+      expect(client.rpcClient.id, 17);
+      print("Balance earliest is $balance");
+    });
+    test("Balance - pending", () async {
+      final String balance = await client.getBalance(
+          "0x407d73d8a49eeb85d32cf465507dd71d507100c1", "pending");
+      expect(balance, isNotNull);
+      expect(client.rpcClient.id, 18);
+      print("Balance pending is $balance");
+    });
   }
 }
