@@ -114,6 +114,11 @@ class Ethereum {
     }
   }
 
+  /// API constants
+  static const String ethEarliest = "earliest";
+  static const String ethLatest = "latest";
+  static const String ethPending = "pending";
+
   /// API methods
 
   //// Client version
@@ -272,10 +277,24 @@ class Ethereum {
 
   /// Get balance, the balance of the account of the given address.
   /// The block can be an integer block number or the one of the strings
-  /// latest, earliest or pending.
+  /// "latest", "earliest" or "pending.
   Future<String> getBalance(String accountNumber, String block) async {
     final String method = 'eth_getBalance';
     final List params = [accountNumber, block];
+    final res = await rpcClient.request(method, params);
+    if (res.containsKey('result')) {
+      return res.result;
+    }
+    _processError(method, res);
+    return null;
+  }
+
+  /// Get Storage at, the value from a storage position at a given address.
+  /// Parameters are the address of the storage, the integer position of the storage and
+  /// the block number, or the string "latest", "earliest" or "pending.
+  Future<String> getStorageAt(String address, String pos, String block) async {
+    final String method = 'eth_getStorageAt';
+    final List params = [address, pos, block];
     final res = await rpcClient.request(method, params);
     if (res.containsKey('result')) {
       return res.result;

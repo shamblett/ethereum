@@ -123,24 +123,55 @@ class EthereumCommon {
     });
     test("Balance - latest", () async {
       final String balance = await client.getBalance(
-          "0x407d73d8a49eeb85d32cf465507dd71d507100c1", "latest");
+          "0x407d73d8a49eeb85d32cf465507dd71d507100c1", Ethereum.ethLatest);
       expect(balance, isNotNull);
       expect(client.rpcClient.id, 16);
       print("Balance latest is $balance");
     });
     test("Balance - earliest", () async {
       final String balance = await client.getBalance(
-          "0x407d73d8a49eeb85d32cf465507dd71d507100c1", "earliest");
+          "0x407d73d8a49eeb85d32cf465507dd71d507100c1", Ethereum.ethEarliest);
       expect(balance, isNotNull);
       expect(client.rpcClient.id, 17);
       print("Balance earliest is $balance");
     });
     test("Balance - pending", () async {
       final String balance = await client.getBalance(
-          "0x407d73d8a49eeb85d32cf465507dd71d507100c1", "pending");
+          "0x407d73d8a49eeb85d32cf465507dd71d507100c1", Ethereum.ethPending);
       expect(balance, isNotNull);
       expect(client.rpcClient.id, 18);
       print("Balance pending is $balance");
+    });
+    test("Get storage at - latest", () async {
+      final String storage = await client.getStorageAt(
+          "0x295a70b2de5e3953354a6a8344e616ed314d7251", "0x0",
+          Ethereum.ethLatest);
+      expect(storage, isNotNull);
+      expect(client.rpcClient.id, 19);
+      print("Storage at latest is $storage");
+    });
+    test("Get storage at - earliest", () async {
+      final String storage = await client.getStorageAt(
+          "0x295a70b2de5e3953354a6a8344e616ed314d7251", "0x0",
+          Ethereum.ethEarliest);
+      expect(storage, isNotNull);
+      expect(client.rpcClient.id, 20);
+      print("Storage at earliest is $storage");
+    });
+    test("Get storage at - pending", () async {
+      final String storage = await client.getStorageAt(
+          "0x295a70b2de5e3953354a6a8344e616ed314d7251", "0x0",
+          Ethereum.ethPending);
+      expect(storage, isNotNull);
+      expect(client.rpcClient.id, 21);
+      print("Storage at pending is $storage");
+    });
+    test("Get storage at - block", () async {
+      final String storage = await client.getStorageAt(
+          "0x295a70b2de5e3953354a6a8344e616ed314d7251", "0x0", "0x4b7");
+      expect(storage, isNotNull);
+      expect(client.rpcClient.id, 22);
+      print("Storage at block is $storage");
     });
   }
 }
