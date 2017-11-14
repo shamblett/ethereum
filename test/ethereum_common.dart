@@ -12,22 +12,23 @@ import 'package:test/test.dart';
 /// Class to run the common Ethereum API tests
 class EthereumCommon {
   static void run(Ethereum client) {
+    int id = 0;
     test("Protocol version 1", () async {
       final String version = await client.protocolVersion();
       expect(version, isNotNull);
-      expect(client.rpcClient.id, 1);
+      expect(client.rpcClient.id, ++id);
       print("Protocol Version is $version");
     });
     test("Protocol version 2", () async {
       final String version = await client.protocolVersion();
       expect(version, isNotNull);
-      expect(client.rpcClient.id, 2);
+      expect(client.rpcClient.id, ++id);
       print("Protocol Version is $version");
     });
     test("Client version", () async {
       final String version = await client.clientVersion();
       expect(version, isNotNull);
-      expect(client.rpcClient.id, 3);
+      expect(client.rpcClient.id, ++id);
       print("Client Version is $version");
     });
     test("SHA3", () async {
@@ -36,30 +37,30 @@ class EthereumCommon {
       expect(hash, isNotNull);
       expect(hash,
           "0x47173285a8d7341e5e972fc677286384f802f8ef42a5ec5f03bbfa254cb01fad");
-      expect(client.rpcClient.id, 4);
+      expect(client.rpcClient.id, ++id);
     });
     test("Net version", () async {
       final String version = await client.netVersion();
       expect(version, isNotNull);
-      expect(client.rpcClient.id, 5);
+      expect(client.rpcClient.id, ++id);
       print("Net Version is $version");
     });
     test("Net listening", () async {
       final bool listening = await client.netListening();
       expect(listening, isNotNull);
-      expect(client.rpcClient.id, 6);
+      expect(client.rpcClient.id, ++id);
       print("Net Listening is $listening");
     });
     test("Net peer count", () async {
       final int count = await client.netPeerCount();
       expect(count, isNotNull);
-      expect(client.rpcClient.id, 7);
+      expect(client.rpcClient.id, ++id);
       print("Net peer count is $count");
     });
     test("Sync status", () async {
       final JsonObjectLite res = await client.ethSyncing();
       expect(res, isNotNull);
-      expect(client.rpcClient.id, 8);
+      expect(client.rpcClient.id, ++id);
       if (res.syncStatus) {
         print("Sync status is syncing");
         print("Starting Block is ${res.startingBlock}");
@@ -71,7 +72,7 @@ class EthereumCommon {
     });
     test("Coinbase address", () async {
       final String address = await client.coinbaseAddress();
-      expect(client.rpcClient.id, 9);
+      expect(client.rpcClient.id, ++id);
       if (address != null) {
         print("Coinbase address is $address");
       } else {
@@ -83,25 +84,25 @@ class EthereumCommon {
     test("Mining", () async {
       final bool mining = await client.mining();
       expect(mining, isNotNull);
-      expect(client.rpcClient.id, 10);
+      expect(client.rpcClient.id, ++id);
       print("Mining is $mining");
     });
     test("Hashrate", () async {
       final String rate = await client.hashrate();
       expect(rate, isNotNull);
-      expect(client.rpcClient.id, 11);
+      expect(client.rpcClient.id, ++id);
       print("Hashrate is $rate");
     });
     test("Gas price", () async {
       final String price = await client.gasPrice();
       expect(price, isNotNull);
-      expect(client.rpcClient.id, 12);
+      expect(client.rpcClient.id, ++id);
       print("Gas price is $price");
     });
     test("Accounts", () async {
       final List<String> accounts = await client.accounts();
       expect(accounts, isNotNull);
-      expect(client.rpcClient.id, 13);
+      expect(client.rpcClient.id, ++id);
       if (accounts.length != 0) {
         print("Accounts are $accounts");
       } else {
@@ -111,35 +112,35 @@ class EthereumCommon {
     test("Block number", () async {
       final String num = await client.blockNumber();
       expect(num, isNotNull);
-      expect(client.rpcClient.id, 14);
+      expect(client.rpcClient.id, ++id);
       print("Block number is $num");
     });
     test("Balance - number", () async {
       final String balance = await client.getBalance(
           "0x407d73d8a49eeb85d32cf465507dd71d507100c1", "0x0");
       expect(balance, isNotNull);
-      expect(client.rpcClient.id, 15);
+      expect(client.rpcClient.id, ++id);
       print("Balance number is $balance");
     });
     test("Balance - latest", () async {
       final String balance = await client.getBalance(
           "0x407d73d8a49eeb85d32cf465507dd71d507100c1", Ethereum.ethLatest);
       expect(balance, isNotNull);
-      expect(client.rpcClient.id, 16);
+      expect(client.rpcClient.id, ++id);
       print("Balance latest is $balance");
     });
     test("Balance - earliest", () async {
       final String balance = await client.getBalance(
           "0x407d73d8a49eeb85d32cf465507dd71d507100c1", Ethereum.ethEarliest);
       expect(balance, isNotNull);
-      expect(client.rpcClient.id, 17);
+      expect(client.rpcClient.id, ++id);
       print("Balance earliest is $balance");
     });
     test("Balance - pending", () async {
       final String balance = await client.getBalance(
           "0x407d73d8a49eeb85d32cf465507dd71d507100c1", Ethereum.ethPending);
       expect(balance, isNotNull);
-      expect(client.rpcClient.id, 18);
+      expect(client.rpcClient.id, ++id);
       print("Balance pending is $balance");
     });
     test("Get storage at - latest", () async {
@@ -148,7 +149,7 @@ class EthereumCommon {
           "0x0",
           Ethereum.ethLatest);
       expect(storage, isNotNull);
-      expect(client.rpcClient.id, 19);
+      expect(client.rpcClient.id, ++id);
       print("Storage at latest is $storage");
     });
     test("Get storage at - earliest", () async {
@@ -157,7 +158,7 @@ class EthereumCommon {
           "0x0",
           Ethereum.ethEarliest);
       expect(storage, isNotNull);
-      expect(client.rpcClient.id, 20);
+      expect(client.rpcClient.id, ++id);
       print("Storage at earliest is $storage");
     });
     test("Get storage at - pending", () async {
@@ -166,21 +167,21 @@ class EthereumCommon {
           "0x0",
           Ethereum.ethPending);
       expect(storage, isNotNull);
-      expect(client.rpcClient.id, 21);
+      expect(client.rpcClient.id, ++id);
       print("Storage at pending is $storage");
     });
     test("Get storage at - block", () async {
       final String storage = await client.getStorageAt(
           "0x295a70b2de5e3953354a6a8344e616ed314d7251", "0x0", "0x4b7");
       expect(storage, isNotNull);
-      expect(client.rpcClient.id, 22);
+      expect(client.rpcClient.id, ++id);
       print("Storage at block is $storage");
     });
     test("Transaction count - number", () async {
       final String count = await client.getTransactionCount(
           "0x407d73d8a49eeb85d32cf465507dd71d507100c1", "0x0");
       expect(count, isNotNull);
-      expect(client.rpcClient.id, 23);
+      expect(client.rpcClient.id, ++id);
       print("Balance number is $count");
     });
   }
