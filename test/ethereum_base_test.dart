@@ -92,4 +92,68 @@ void main() {
       expect(client.port, Ethereum.defaultPort);
     });
   });
+
+  group("Null parameter tests", () {
+    final EthereumServerClient client = new EthereumServerClient();
+    test("Balance - account number", () async {
+      bool thrown = false;
+      try {
+        final String res = await client.getBalance(null, "");
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::getBalance - accountNumber): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
+    test("Balance - block", () async {
+      bool thrown = false;
+      try {
+        final String res = await client.getBalance("", null);
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::getBalance - block): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
+    test("Storage at - block", () async {
+      bool thrown = false;
+      try {
+        final String res = await client.getStorageAt("", "", null);
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::getStorageAt - block): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
+    test("Storage at - pos", () async {
+      bool thrown = false;
+      try {
+        final String res = await client.getStorageAt("", null, "");
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::getStorageAt - pos): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
+    test("Storage at - address", () async {
+      bool thrown = false;
+      try {
+        final String res = await client.getStorageAt(null, "", "");
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::getStorageAt - address): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
+  });
 }

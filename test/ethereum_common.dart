@@ -144,7 +144,8 @@ class EthereumCommon {
     });
     test("Get storage at - latest", () async {
       final String storage = await client.getStorageAt(
-          "0x295a70b2de5e3953354a6a8344e616ed314d7251", "0x0",
+          "0x295a70b2de5e3953354a6a8344e616ed314d7251",
+          "0x0",
           Ethereum.ethLatest);
       expect(storage, isNotNull);
       expect(client.rpcClient.id, 19);
@@ -152,7 +153,8 @@ class EthereumCommon {
     });
     test("Get storage at - earliest", () async {
       final String storage = await client.getStorageAt(
-          "0x295a70b2de5e3953354a6a8344e616ed314d7251", "0x0",
+          "0x295a70b2de5e3953354a6a8344e616ed314d7251",
+          "0x0",
           Ethereum.ethEarliest);
       expect(storage, isNotNull);
       expect(client.rpcClient.id, 20);
@@ -160,7 +162,8 @@ class EthereumCommon {
     });
     test("Get storage at - pending", () async {
       final String storage = await client.getStorageAt(
-          "0x295a70b2de5e3953354a6a8344e616ed314d7251", "0x0",
+          "0x295a70b2de5e3953354a6a8344e616ed314d7251",
+          "0x0",
           Ethereum.ethPending);
       expect(storage, isNotNull);
       expect(client.rpcClient.id, 21);

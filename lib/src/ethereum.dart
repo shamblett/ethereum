@@ -279,6 +279,12 @@ class Ethereum {
   /// The block can be an integer block number or the one of the strings
   /// "latest", "earliest" or "pending.
   Future<String> getBalance(String accountNumber, String block) async {
+    if (accountNumber == null) {
+      throw new ArgumentError.notNull("Ethereum::getBalance - accountNumber");
+    }
+    if (block == null) {
+      throw new ArgumentError.notNull("Ethereum::getBalance - block");
+    }
     final String method = 'eth_getBalance';
     final List params = [accountNumber, block];
     final res = await rpcClient.request(method, params);
@@ -293,6 +299,15 @@ class Ethereum {
   /// Parameters are the address of the storage, the integer position of the storage and
   /// the block number, or the string "latest", "earliest" or "pending.
   Future<String> getStorageAt(String address, String pos, String block) async {
+    if (address == null) {
+      throw new ArgumentError.notNull("Ethereum::getStorageAt - address");
+    }
+    if (pos == null) {
+      throw new ArgumentError.notNull("Ethereum::getStorageAt - pos");
+    }
+    if (block == null) {
+      throw new ArgumentError.notNull("Ethereum::getStorageAt - block");
+    }
     final String method = 'eth_getStorageAt';
     final List params = [address, pos, block];
     final res = await rpcClient.request(method, params);
