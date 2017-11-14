@@ -214,4 +214,27 @@ class Ethereum {
     _processError(method, res);
     return null;
   }
+
+  /// Mining, true when mining
+  Future<bool> mining() async {
+    final String method = 'eth_mining';
+    final res = await rpcClient.request(method);
+    if (res.containsKey('result')) {
+      return res.result;
+    }
+    _processError(method, res);
+    return null;
+  }
+
+  /// Hashrate, returns the number of hashes per second that the node is mining with.
+  Future<String> hashrate() async {
+    final String method = 'eth_hashrate';
+    final res = await rpcClient.request(method);
+    if (res.containsKey('result')) {
+      return res.result;
+    }
+    _processError(method, res);
+    return null;
+  }
+
 }

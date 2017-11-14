@@ -80,5 +80,17 @@ class EthereumCommon {
             "etherbase address must be explicitly specified");
       }
     });
+    test("Mining", () async {
+      final bool mining = await client.mining();
+      expect(mining, isNotNull);
+      expect(client.rpcClient.id, 10);
+      print("Mining is $mining");
+    });
+    test("Hashrate", () async {
+      final String rate = await client.hashrate();
+      expect(rate, isNotNull);
+      expect(client.rpcClient.id, 11);
+      print("Hashrate is $rate");
+    });
   }
 }
