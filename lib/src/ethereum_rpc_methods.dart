@@ -27,4 +27,5 @@ class EthereumRpcMethods {
   static const String balance = 'eth_getBalance';
   static const String storageAt = 'eth_getStorageAt';
   static const String transactionCount = 'eth_getTransactionCount';
+  static const String blockTransactionCountByHash = 'eth_getBlockTransactionCountByHash';
 }

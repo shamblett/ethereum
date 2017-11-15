@@ -184,5 +184,11 @@ class EthereumCommon {
       expect(client.rpcClient.id, ++id);
       print("Balance number is $count");
     });
+    test("Block transaction count by hash", () async {
+      final String count = await client.getBlockTransactionCountByHash(
+          "0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238");
+      expect(count, isNull);
+      expect(client.rpcClient.id, ++id);
+    });
   }
 }

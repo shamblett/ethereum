@@ -155,5 +155,17 @@ void main() {
       }
       expect(thrown, isTrue);
     });
+    test("Block transaction count by hash", () async {
+      bool thrown = false;
+      try {
+        final String res = await client.getBlockTransactionCountByHash(null);
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::getBlockTransactionCountByHash - blockHash): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
   });
 }

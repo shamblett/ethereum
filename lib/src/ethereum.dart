@@ -339,4 +339,21 @@ class Ethereum {
     _processError(method, res);
     return null;
   }
+
+  /// Block Transaction Count By Hash
+  /// The number of transactions in a block from a block matching the given block hash.
+  Future<String> getBlockTransactionCountByHash(String blockHash) async {
+    if (blockHash == null) {
+      throw new ArgumentError.notNull(
+          "Ethereum::getBlockTransactionCountByHash - blockHash");
+    }
+    final String method = EthereumRpcMethods.blockTransactionCountByHash;
+    final List params = [blockHash];
+    final res = await rpcClient.request(method, params);
+    if (res.containsKey(ethResultKey)) {
+      return res.result;
+    }
+    _processError(method, res);
+    return null;
+  }
 }
