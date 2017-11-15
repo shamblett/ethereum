@@ -118,14 +118,15 @@ class Ethereum {
   static const String ethEarliest = "earliest";
   static const String ethLatest = "latest";
   static const String ethPending = "pending";
+  static const String ethResultKey = "result";
 
   /// API methods
 
   //// Client version
   Future<String> clientVersion() async {
-    final String method = 'web3_clientVersion';
+    final String method = EthereumRpcMethods.web3ClientVersion;
     final res = await rpcClient.request(method);
-    if (res.containsKey('result')) {
+    if (res.containsKey(ethResultKey)) {
       return res.result;
     }
     _processError(method, res);
@@ -134,11 +135,11 @@ class Ethereum {
 
   /// Returns Keccak-256 (not the standardized SHA3-256) of the given data.
   Future<String> sha3(String hexString) async {
-    final String method = 'web3_sha3';
+    final String method = EthereumRpcMethods.web3Sha3;
     final List<String> params = new List<String>(1);
     params[0] = hexString;
     final res = await rpcClient.request(method, params);
-    if (res.containsKey('result')) {
+    if (res.containsKey(ethResultKey)) {
       return res.result;
     }
     _processError(method, res);
@@ -147,9 +148,9 @@ class Ethereum {
 
   /// Net version
   Future<String> netVersion() async {
-    final String method = 'net_version';
+    final String method = EthereumRpcMethods.netVersion;
     final res = await rpcClient.request(method);
-    if (res.containsKey('result')) {
+    if (res.containsKey(ethResultKey)) {
       return res.result;
     }
     _processError(method, res);
@@ -158,9 +159,9 @@ class Ethereum {
 
   /// Net listening, true when listening
   Future<bool> netListening() async {
-    final String method = 'net_listening';
+    final String method = EthereumRpcMethods.netListening;
     final res = await rpcClient.request(method);
-    if (res.containsKey('result')) {
+    if (res.containsKey(ethResultKey)) {
       return res.result;
     }
     _processError(method, res);
@@ -169,9 +170,9 @@ class Ethereum {
 
   /// Net peer count,
   Future<int> netPeerCount() async {
-    final String method = 'net_peerCount';
+    final String method = EthereumRpcMethods.netPeerCount;
     final res = await rpcClient.request(method);
-    if (res.containsKey('result')) {
+    if (res.containsKey(ethResultKey)) {
       return int.parse(res.result);
     }
     _processError(method, res);
@@ -180,9 +181,9 @@ class Ethereum {
 
   /// Protocol version
   Future<String> protocolVersion() async {
-    final String method = 'eth_protocolVersion';
+    final String method = EthereumRpcMethods.protocolVersion;
     final res = await rpcClient.request(method);
-    if (res.containsKey('result')) {
+    if (res.containsKey(ethResultKey)) {
       return res.result;
     }
     _processError(method, res);
@@ -192,9 +193,9 @@ class Ethereum {
   /// Eth syncing, an object with data about the sync status if syncing or false if not.
   /// Encoded as a JsonObject with a syncStatus, if true the sync status data is valid.
   Future<JsonObjectLite> ethSyncing() async {
-    final String method = 'eth_syncing';
+    final String method = EthereumRpcMethods.syncing;
     final res = await rpcClient.request(method);
-    if (res.containsKey('result')) {
+    if (res.containsKey(ethResultKey)) {
       final JsonObjectLite resp = new JsonObjectLite();
       resp.syncStatus = false;
       if (!(res.result is bool) && (res.result.containsKey('startingBlock'))) {
@@ -211,9 +212,9 @@ class Ethereum {
 
   /// The client coinbase address.
   Future<String> coinbaseAddress() async {
-    final String method = 'eth_coinbase';
+    final String method = EthereumRpcMethods.coinbaseAddress;
     final res = await rpcClient.request(method);
-    if (res.containsKey('result')) {
+    if (res.containsKey(ethResultKey)) {
       return res.result;
     }
     _processError(method, res);
@@ -222,9 +223,9 @@ class Ethereum {
 
   /// Mining, true when mining
   Future<bool> mining() async {
-    final String method = 'eth_mining';
+    final String method = EthereumRpcMethods.mining;
     final res = await rpcClient.request(method);
-    if (res.containsKey('result')) {
+    if (res.containsKey(ethResultKey)) {
       return res.result;
     }
     _processError(method, res);
@@ -233,9 +234,9 @@ class Ethereum {
 
   /// Hashrate, returns the number of hashes per second that the node is mining with.
   Future<String> hashrate() async {
-    final String method = 'eth_hashrate';
+    final String method = EthereumRpcMethods.hashrate;
     final res = await rpcClient.request(method);
-    if (res.containsKey('result')) {
+    if (res.containsKey(ethResultKey)) {
       return res.result;
     }
     _processError(method, res);
@@ -244,9 +245,9 @@ class Ethereum {
 
   /// The current price per gas in wei.
   Future<String> gasPrice() async {
-    final String method = 'eth_gasPrice';
+    final String method = EthereumRpcMethods.gasPrice;
     final res = await rpcClient.request(method);
-    if (res.containsKey('result')) {
+    if (res.containsKey(ethResultKey)) {
       return res.result;
     }
     _processError(method, res);
@@ -255,9 +256,9 @@ class Ethereum {
 
   /// Accounts,  a list of addresses owned by client.
   Future<List<String>> accounts() async {
-    final String method = 'eth_accounts';
+    final String method = EthereumRpcMethods.accounts;
     final res = await rpcClient.request(method);
-    if (res.containsKey('result')) {
+    if (res.containsKey(ethResultKey)) {
       return res.result;
     }
     _processError(method, res);
@@ -266,9 +267,9 @@ class Ethereum {
 
   /// Block number, the number of most recent block.
   Future<String> blockNumber() async {
-    final String method = 'eth_blockNumber';
+    final String method = EthereumRpcMethods.blockNumber;
     final res = await rpcClient.request(method);
-    if (res.containsKey('result')) {
+    if (res.containsKey(ethResultKey)) {
       return res.result;
     }
     _processError(method, res);
@@ -285,10 +286,10 @@ class Ethereum {
     if (block == null) {
       throw new ArgumentError.notNull("Ethereum::getBalance - block");
     }
-    final String method = 'eth_getBalance';
+    final String method = EthereumRpcMethods.balance;
     final List params = [accountNumber, block];
     final res = await rpcClient.request(method, params);
-    if (res.containsKey('result')) {
+    if (res.containsKey(ethResultKey)) {
       return res.result;
     }
     _processError(method, res);
@@ -308,10 +309,10 @@ class Ethereum {
     if (block == null) {
       throw new ArgumentError.notNull("Ethereum::getStorageAt - block");
     }
-    final String method = 'eth_getStorageAt';
+    final String method = EthereumRpcMethods.storageAt;
     final List params = [address, pos, block];
     final res = await rpcClient.request(method, params);
-    if (res.containsKey('result')) {
+    if (res.containsKey(ethResultKey)) {
       return res.result;
     }
     _processError(method, res);
@@ -329,10 +330,10 @@ class Ethereum {
     if (block == null) {
       throw new ArgumentError.notNull("Ethereum::getTransactionCount - block");
     }
-    final String method = 'eth_getTransactionCount';
+    final String method = EthereumRpcMethods.transactionCount;
     final List params = [address, block];
     final res = await rpcClient.request(method, params);
-    if (res.containsKey('result')) {
+    if (res.containsKey(ethResultKey)) {
       return res.result;
     }
     _processError(method, res);
