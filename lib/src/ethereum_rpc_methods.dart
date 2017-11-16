@@ -28,4 +28,7 @@ class EthereumRpcMethods {
   static const String storageAt = 'eth_getStorageAt';
   static const String transactionCount = 'eth_getTransactionCount';
   static const String blockTransactionCountByHash = 'eth_getBlockTransactionCountByHash';
+  static const String blockTransactionCountByNumber = 'eth_getBlockTransactionCountByNumber';
+  static const String blockUncleCountByHash = 'eth_getUncleCountByBlockHash';
+  static const String blockUncleCountByNumber = 'eth_getUncleCountByBlockNumber';
 }

@@ -182,12 +182,87 @@ class EthereumCommon {
           "0x407d73d8a49eeb85d32cf465507dd71d507100c1", "0x0");
       expect(count, isNotNull);
       expect(client.rpcClient.id, ++id);
-      print("Balance number is $count");
+      print("Transaction count is $count");
+    });
+    test("Transaction count - earliest", () async {
+      final String count = await client.getTransactionCount(
+          "0x407d73d8a49eeb85d32cf465507dd71d507100c1", Ethereum.ethEarliest);
+      expect(count, isNotNull);
+      expect(client.rpcClient.id, ++id);
+      print("Transaction count  is $count");
+    });
+    test("Transaction count - pending", () async {
+      final String count = await client.getTransactionCount(
+          "0x407d73d8a49eeb85d32cf465507dd71d507100c1", Ethereum.ethPending);
+      expect(count, isNotNull);
+      expect(client.rpcClient.id, ++id);
+      print("Transaction count  is $count");
+    });
+    test("Transaction count - latest", () async {
+      final String count = await client.getTransactionCount(
+          "0x407d73d8a49eeb85d32cf465507dd71d507100c1", Ethereum.ethLatest);
+      expect(count, isNotNull);
+      expect(client.rpcClient.id, ++id);
+      print("Transaction count  is $count");
     });
     test("Block transaction count by hash", () async {
       final String count = await client.getBlockTransactionCountByHash(
           "0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238");
-      expect(count, isNull);
+      expect(count, "0");
+      expect(client.rpcClient.id, ++id);
+    });
+    test("Block transaction count by number - number", () async {
+      final String count =
+      await client.getBlockTransactionCountByNumber("0xe8");
+      expect(count, isNotNull);
+      expect(client.rpcClient.id, ++id);
+    });
+    test("Block transaction count by number - latest", () async {
+      final String count =
+      await client.getBlockTransactionCountByNumber(Ethereum.ethLatest);
+      expect(count, isNotNull);
+      expect(client.rpcClient.id, ++id);
+    });
+    test("Block transaction count by number - pending", () async {
+      final String count =
+      await client.getBlockTransactionCountByNumber(Ethereum.ethPending);
+      expect(count, isNotNull);
+      expect(client.rpcClient.id, ++id);
+    });
+    test("Block transaction count by number - earliest", () async {
+      final String count =
+      await client.getBlockTransactionCountByNumber(Ethereum.ethEarliest);
+      expect(count, isNotNull);
+      expect(client.rpcClient.id, ++id);
+    });
+    test("Block uncle count by hash", () async {
+      final String count = await client.getUncleCountByHash(
+          "0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238");
+      expect(count, "0");
+      expect(client.rpcClient.id, ++id);
+    });
+    test("Uncle count by number - number", () async {
+      final String count =
+      await client.getUncleCountByNumber("0xe8");
+      expect(count, isNotNull);
+      expect(client.rpcClient.id, ++id);
+    });
+    test("Block uncle count by number - latest", () async {
+      final String count =
+      await client.getUncleCountByNumber(Ethereum.ethLatest);
+      expect(count, isNotNull);
+      expect(client.rpcClient.id, ++id);
+    });
+    test("Block uncle count by number - pending", () async {
+      final String count =
+      await client.getUncleCountByNumber(Ethereum.ethPending);
+      expect(count, isNotNull);
+      expect(client.rpcClient.id, ++id);
+    });
+    test("Block uncle count by number - earliest", () async {
+      final String count =
+      await client.getUncleCountByNumber(Ethereum.ethEarliest);
+      expect(count, isNotNull);
       expect(client.rpcClient.id, ++id);
     });
   }

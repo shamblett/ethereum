@@ -167,5 +167,41 @@ void main() {
       }
       expect(thrown, isTrue);
     });
+    test("Block transaction count by number", () async {
+      bool thrown = false;
+      try {
+        final String res = await client.getBlockTransactionCountByNumber(null);
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::getBlockTransactionCountByNumber - blockNumber): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
+    test("Block uncle count by hash", () async {
+      bool thrown = false;
+      try {
+        final String res = await client.getUncleCountByHash(null);
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::getUncleCountByHash - blockHash): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
+    test("Block uncle count by number", () async {
+      bool thrown = false;
+      try {
+        final String res = await client.getUncleCountByNumber(null);
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::getUncleCountByNumber - blockNumber): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
   });
 }

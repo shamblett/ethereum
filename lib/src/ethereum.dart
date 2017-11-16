@@ -342,6 +342,8 @@ class Ethereum {
 
   /// Block Transaction Count By Hash
   /// The number of transactions in a block from a block matching the given block hash.
+  /// If the method returns null a count of 0 is returned, this is to distinguish between
+  /// this and an error.
   Future<String> getBlockTransactionCountByHash(String blockHash) async {
     if (blockHash == null) {
       throw new ArgumentError.notNull(
@@ -351,7 +353,84 @@ class Ethereum {
     final List params = [blockHash];
     final res = await rpcClient.request(method, params);
     if (res.containsKey(ethResultKey)) {
-      return res.result;
+      if (res.result != null) {
+        return res.result;
+      } else {
+        return "0";
+      }
+    }
+    _processError(method, res);
+    return null;
+  }
+
+  /// Block Transaction Count By Number
+  /// The number of transactions in a block matching the given block number.
+  /// The block can be an integer block number or the one of the strings
+  /// "latest", "earliest" or "pending.
+  /// If the method returns null a count of 0 is returned, this is to distinguish between
+  /// this and an error.
+  Future<String> getBlockTransactionCountByNumber(String blockNumber) async {
+    if (blockNumber == null) {
+      throw new ArgumentError.notNull(
+          "Ethereum::getBlockTransactionCountByNumber - blockNumber");
+    }
+    final String method = EthereumRpcMethods.blockTransactionCountByNumber;
+    final List params = [blockNumber];
+    final res = await rpcClient.request(method, params);
+    if (res.containsKey(ethResultKey)) {
+      if (res.result != null) {
+        return res.result;
+      } else {
+        return "0";
+      }
+    }
+    _processError(method, res);
+    return null;
+  }
+
+  /// Block Uncle Count By Hash
+  /// The number of uncles in a block from a block matching the given block hash.
+  /// If the method returns null a count of 0 is returned, this is to distinguish between
+  /// this and an error.
+  Future<String> getUncleCountByHash(String blockHash) async {
+    if (blockHash == null) {
+      throw new ArgumentError.notNull(
+          "Ethereum::getUncleCountByHash - blockHash");
+    }
+    final String method = EthereumRpcMethods.blockUncleCountByHash;
+    final List params = [blockHash];
+    final res = await rpcClient.request(method, params);
+    if (res.containsKey(ethResultKey)) {
+      if (res.result != null) {
+        return res.result;
+      } else {
+        return "0";
+      }
+    }
+    _processError(method, res);
+    return null;
+  }
+
+  /// Block Uncle Count By Number
+  /// The number of uncles in a block matching the given block number.
+  /// The block can be an integer block number or the one of the strings
+  /// "latest", "earliest" or "pending.
+  /// If the method returns null a count of 0 is returned, this is to distinguish between
+  /// this and an error.
+  Future<String> getUncleCountByNumber(String blockNumber) async {
+    if (blockNumber == null) {
+      throw new ArgumentError.notNull(
+          "Ethereum::getUncleCountByNumber - blockNumber");
+    }
+    final String method = EthereumRpcMethods.blockUncleCountByNumber;
+    final List params = [blockNumber];
+    final res = await rpcClient.request(method, params);
+    if (res.containsKey(ethResultKey)) {
+      if (res.result != null) {
+        return res.result;
+      } else {
+        return "0";
+      }
     }
     _processError(method, res);
     return null;
