@@ -98,7 +98,7 @@ void main() {
     test("Balance - account number", () async {
       bool thrown = false;
       try {
-        final String res = await client.getBalance(null, "");
+        await client.getBalance(null, "");
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -110,7 +110,7 @@ void main() {
     test("Balance - block", () async {
       bool thrown = false;
       try {
-        final String res = await client.getBalance("", null);
+        await client.getBalance("", null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -122,7 +122,7 @@ void main() {
     test("Storage at - block", () async {
       bool thrown = false;
       try {
-        final String res = await client.getStorageAt("", "", null);
+        await client.getStorageAt("", "", null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -134,7 +134,7 @@ void main() {
     test("Storage at - pos", () async {
       bool thrown = false;
       try {
-        final String res = await client.getStorageAt("", null, "");
+        await client.getStorageAt("", null, "");
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -146,7 +146,7 @@ void main() {
     test("Storage at - address", () async {
       bool thrown = false;
       try {
-        final String res = await client.getStorageAt(null, "", "");
+        await client.getStorageAt(null, "", "");
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -158,7 +158,7 @@ void main() {
     test("Block transaction count by hash", () async {
       bool thrown = false;
       try {
-        final String res = await client.getBlockTransactionCountByHash(null);
+        await client.getBlockTransactionCountByHash(null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -170,7 +170,7 @@ void main() {
     test("Block transaction count by number", () async {
       bool thrown = false;
       try {
-        final String res = await client.getBlockTransactionCountByNumber(null);
+        await client.getBlockTransactionCountByNumber(null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -182,7 +182,7 @@ void main() {
     test("Block uncle count by hash", () async {
       bool thrown = false;
       try {
-        final String res = await client.getUncleCountByHash(null);
+        await client.getUncleCountByHash(null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -194,7 +194,7 @@ void main() {
     test("Block uncle count by number", () async {
       bool thrown = false;
       try {
-        final String res = await client.getUncleCountByNumber(null);
+        await client.getUncleCountByNumber(null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -206,7 +206,7 @@ void main() {
     test("Code - address", () async {
       bool thrown = false;
       try {
-        final String res = await client.getCode(null, "");
+        await client.getCode(null, "");
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -218,11 +218,35 @@ void main() {
     test("Code - block", () async {
       bool thrown = false;
       try {
-        final String res = await client.getCode("", null);
+        await client.getCode("", null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
             "Invalid argument(s) (Ethereum::getCode - block): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
+    test("Sign - account", () async {
+      bool thrown = false;
+      try {
+        await client.sign(null, "");
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::sign - account): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
+    test("Sign - message", () async {
+      bool thrown = false;
+      try {
+        await client.sign("", null);
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::sign - message): Must not be null");
         thrown = true;
       }
       expect(thrown, isTrue);

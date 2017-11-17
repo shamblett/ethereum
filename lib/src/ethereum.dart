@@ -455,4 +455,24 @@ class Ethereum {
     _processError(method, res);
     return null;
   }
+
+  /// Sign
+  /// The sign method calculates an Ethereum specific signature with:
+  /// sign(keccak256("\x19Ethereum Signed Message:\n" + len(message) + message))).
+  Future<String> sign(String account, String message) async {
+    if (account == null) {
+      throw new ArgumentError.notNull("Ethereum::sign - account");
+    }
+    if (message == null) {
+      throw new ArgumentError.notNull("Ethereum::sign - message");
+    }
+    final String method = EthereumRpcMethods.sign;
+    final List params = [account, message];
+    final res = await rpcClient.request(method, params);
+    if (res.containsKey(ethResultKey)) {
+      return res.result;
+    }
+    _processError(method, res);
+    return null;
+  }
 }

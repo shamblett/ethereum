@@ -242,8 +242,7 @@ class EthereumCommon {
       expect(client.rpcClient.id, ++id);
     });
     test("Uncle count by number - number", () async {
-      final String count =
-      await client.getUncleCountByNumber("0xe8");
+      final String count = await client.getUncleCountByNumber("0xe8");
       expect(count, isNotNull);
       expect(client.rpcClient.id, ++id);
     });
@@ -292,6 +291,14 @@ class EthereumCommon {
       expect(code, isNotNull);
       expect(client.rpcClient.id, ++id);
       print("Code is $code");
+    });
+    test("Sign", () async {
+      final String signature = await client.sign(
+          "0x9b2055d370f73ec7d8a03e965129118dc8f5bf83", "0xdeadbeaf");
+      expect(signature, isNull);
+      expect(client.lastErrorCode, -32000);
+      expect(client.lastErrorMessage, "unknown account");
+      expect(client.rpcClient.id, ++id);
     });
   }
 }
