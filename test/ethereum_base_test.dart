@@ -203,5 +203,29 @@ void main() {
       }
       expect(thrown, isTrue);
     });
+    test("Code - address", () async {
+      bool thrown = false;
+      try {
+        final String res = await client.getCode(null, "");
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::getCode - address): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
+    test("Code - block", () async {
+      bool thrown = false;
+      try {
+        final String res = await client.getCode("", null);
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::getCode - block): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
   });
 }

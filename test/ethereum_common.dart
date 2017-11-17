@@ -265,5 +265,33 @@ class EthereumCommon {
       expect(count, isNotNull);
       expect(client.rpcClient.id, ++id);
     });
+    test("Code - address", () async {
+      final String code = await client.getCode(
+          "0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b", "0x0");
+      expect(code, isNotNull);
+      expect(client.rpcClient.id, ++id);
+      print("Code is $code");
+    });
+    test("Code - latest", () async {
+      final String code = await client.getCode(
+          "0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b", Ethereum.ethLatest);
+      expect(code, isNotNull);
+      expect(client.rpcClient.id, ++id);
+      print("Code is $code");
+    });
+    test("Code - pending", () async {
+      final String code = await client.getCode(
+          "0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b", Ethereum.ethPending);
+      expect(code, isNotNull);
+      expect(client.rpcClient.id, ++id);
+      print("Code is $code");
+    });
+    test("Code - earliest", () async {
+      final String code = await client.getCode(
+          "0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b", Ethereum.ethEarliest);
+      expect(code, isNotNull);
+      expect(client.rpcClient.id, ++id);
+      print("Code is $code");
+    });
   }
 }

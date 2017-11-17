@@ -435,4 +435,24 @@ class Ethereum {
     _processError(method, res);
     return null;
   }
+
+  /// Get code, the code at the given address.
+  /// The block can be an integer block number or the one of the strings
+  /// "latest", "earliest" or "pending.
+  Future<String> getCode(String address, String block) async {
+    if (address == null) {
+      throw new ArgumentError.notNull("Ethereum::getCode - address");
+    }
+    if (block == null) {
+      throw new ArgumentError.notNull("Ethereum::getCode - block");
+    }
+    final String method = EthereumRpcMethods.code;
+    final List params = [address, block];
+    final res = await rpcClient.request(method, params);
+    if (res.containsKey(ethResultKey)) {
+      return res.result;
+    }
+    _processError(method, res);
+    return null;
+  }
 }

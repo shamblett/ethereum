@@ -31,4 +31,5 @@ class EthereumRpcMethods {
   static const String blockTransactionCountByNumber = 'eth_getBlockTransactionCountByNumber';
   static const String blockUncleCountByHash = 'eth_getUncleCountByBlockHash';
   static const String blockUncleCountByNumber = 'eth_getUncleCountByBlockNumber';
+  static const String code = 'eth_getCode';
 }
