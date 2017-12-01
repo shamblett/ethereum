@@ -8,6 +8,7 @@
 import 'package:ethereum/ethereum.dart';
 import 'package:json_object_lite/json_object_lite.dart';
 import 'package:test/test.dart';
+import 'test_configuration.dart';
 
 /// Class to run the common Ethereum API tests
 class EthereumCommon {
@@ -105,6 +106,7 @@ class EthereumCommon {
       expect(client.rpcClient.id, ++id);
       if (accounts.length != 0) {
         print("Accounts are $accounts");
+        expect(accounts[0], TestConfiguration.defaultAccount);
       } else {
         print("There are no accounts");
       }
@@ -294,10 +296,9 @@ class EthereumCommon {
     });
     test("Sign", () async {
       final String signature = await client.sign(
-          "0x9b2055d370f73ec7d8a03e965129118dc8f5bf83", "0xdeadbeaf");
-      expect(signature, isNull);
-      expect(client.lastErrorCode, -32000);
-      expect(client.lastErrorMessage, "unknown account");
+          TestConfiguration.defaultAccount, "0xdeadbeaf");
+      expect(signature, isNotNull);
+      print(signature);
       expect(client.rpcClient.id, ++id);
     });
   }

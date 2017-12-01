@@ -459,6 +459,7 @@ class Ethereum {
   /// Sign
   /// The sign method calculates an Ethereum specific signature with:
   /// sign(keccak256("\x19Ethereum Signed Message:\n" + len(message) + message))).
+  /// Note the address to sign with must be unlocked.
   Future<String> sign(String account, String message) async {
     if (account == null) {
       throw new ArgumentError.notNull("Ethereum::sign - account");
