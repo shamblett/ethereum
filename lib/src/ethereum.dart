@@ -47,9 +47,10 @@ class Ethereum {
   /// Json RPC client
   EthereumRpcClient rpcClient;
 
-  /// Last error code and message
+  /// Last error code, message and id
   int lastErrorCode = 0;
   String lastErrorMessage = "No Error";
+  int lastErrorId = -1;
 
   /// Connection methods
 
@@ -106,6 +107,7 @@ class Ethereum {
 
   /// Error processing helper
   void _processError(String method, JsonObjectLite res) {
+    lastErrorId = rpcClient.id;
     lastErrorCode = res.error.code;
     lastErrorMessage = res.error.message;
     if (printError) {

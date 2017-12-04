@@ -297,8 +297,11 @@ class EthereumCommon {
     test("Sign", () async {
       final String signature = await client.sign(
           TestConfiguration.defaultAccount, "0xdeadbeaf");
-      expect(signature, isNotNull);
-      print(signature);
+      if (signature != null) {
+        print(signature);
+      } else {
+        print("You must unlock your account for this method to work");
+      }
       expect(client.rpcClient.id, ++id);
     });
   }
