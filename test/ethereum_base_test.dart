@@ -251,5 +251,29 @@ void main() {
       }
       expect(thrown, isTrue);
     });
+    test("Send transaction - address", () async {
+      bool thrown = false;
+      try {
+        await client.sendTransaction(null, "");
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::sendTransaction - address): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
+    test("Send transaction - data", () async {
+      bool thrown = false;
+      try {
+        await client.sendTransaction("", null);
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::sendTransaction - data): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
   });
 }

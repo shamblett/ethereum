@@ -47,9 +47,10 @@ class Ethereum {
   /// Json RPC client
   EthereumRpcClient rpcClient;
 
-  /// Last error code and message
+  /// Last error code, message and id
   int lastErrorCode = 0;
   String lastErrorMessage = "No Error";
+  int lastErrorId = -1;
 
   /// Connection methods
 
@@ -106,6 +107,7 @@ class Ethereum {
 
   /// Error processing helper
   void _processError(String method, JsonObjectLite res) {
+    lastErrorId = rpcClient.id;
     lastErrorCode = res.error.code;
     lastErrorMessage = res.error.message;
     if (printError) {
@@ -469,6 +471,43 @@ class Ethereum {
     }
     final String method = EthereumRpcMethods.sign;
     final List params = [account, message];
+    final res = await rpcClient.request(method, params);
+    if (res.containsKey(ethResultKey)) {
+      return res.result;
+    }
+    _processError(method, res);
+    return null;
+  }
+
+  /// Send transaction
+  /// Creates new message call transaction or a contract creation, if the data field contains code.
+  /// from: The address the transaction is send from.
+  /// to: (optional when creating new contract) The address the transaction is directed to.
+  /// gas: (optional, default: 90000) Integer of the gas provided for the transaction execution. It will return unused gas.
+  /// gasPrice: (optional, default: To-Be-Determined) Integer of the gasPrice used for each paid gas
+  /// value: (optional) Integer of the value send with this transaction
+  /// data: The compiled code of a contract OR the hash of the invoked method signature and encoded parameters. For details see Ethereum Contract ABI
+  /// nonce: optional) Integer of a nonce. This allows to overwrite your own pending transactions that use the same nonce.
+  /// Returns the transaction hash, or the zero hash if the transaction is not yet available.
+  Future<String> sendTransaction(String address, String data,
+      {String to, int gas: 9000, int gasPrice, int value, int nonce}) async {
+    if (address == null) {
+      throw new ArgumentError.notNull("Ethereum::sendTransaction - address");
+    }
+    if (data == null) {
+      throw new ArgumentError.notNull("Ethereum::sendTransaction - data");
+    }
+    final String method = EthereumRpcMethods.sendTransaction;
+    final dynamic params = [{
+      "from": address,
+      "to": to,
+      "gas": "0x" + gas.toString(),
+      "gasPrice": "0x" + gasPrice.toString(),
+      "value": "0x" + value.toString(),
+      "data": data,
+      "nonce": "0x" + nonce.toString()
+    }
+    ];
     final res = await rpcClient.request(method, params);
     if (res.containsKey(ethResultKey)) {
       return res.result;

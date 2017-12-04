@@ -295,10 +295,27 @@ class EthereumCommon {
       print("Code is $code");
     });
     test("Sign", () async {
-      final String signature = await client.sign(
-          TestConfiguration.defaultAccount, "0xdeadbeaf");
-      expect(signature, isNotNull);
-      print(signature);
+      final String signature =
+      await client.sign(TestConfiguration.defaultAccount, "0xdeadbeaf");
+      if (signature != null) {
+        print(signature);
+      } else {
+        print("You must unlock your account for this method to work");
+      }
+      expect(client.rpcClient.id, ++id);
+    });
+    test("Sendt transaction", () async {
+      final String hash = await client.sendTransaction(
+          TestConfiguration.defaultAccount,
+          "0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675",
+          to: "0xd46e8dd67c5d32be8058bb8eb970870f07244567",
+          gas: 0x100,
+          gasPrice: 0x1000,
+          value: 0x2000,
+          nonce: 2);
+      if (hash != null) {
+        print(hash);
+      }
       expect(client.rpcClient.id, ++id);
     });
   }
