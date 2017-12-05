@@ -119,29 +119,29 @@ class EthereumCommon {
       print("Block number is $num");
     });
     test("Balance - number", () async {
-      final String balance = await client.getBalance(
-          "0x407d73d8a49eeb85d32cf465507dd71d507100c1", "0x0");
+      final int balance = await client.getBalance(
+          0x407d73d8a49eeb85d32cf465507dd71d507100c1, 0);
       expect(balance, isNotNull);
       expect(client.rpcClient.id, ++id);
       print("Balance number is $balance");
     });
     test("Balance - latest", () async {
-      final String balance = await client.getBalance(
-          "0x407d73d8a49eeb85d32cf465507dd71d507100c1", Ethereum.ethLatest);
+      final int balance = await client.getBalance(
+          0x407d73d8a49eeb85d32cf465507dd71d507100c1, Ethereum.ethLatest);
       expect(balance, isNotNull);
       expect(client.rpcClient.id, ++id);
       print("Balance latest is $balance");
     });
     test("Balance - earliest", () async {
-      final String balance = await client.getBalance(
-          "0x407d73d8a49eeb85d32cf465507dd71d507100c1", Ethereum.ethEarliest);
+      final int balance = await client.getBalance(
+          0x407d73d8a49eeb85d32cf465507dd71d507100c1, Ethereum.ethEarliest);
       expect(balance, isNotNull);
       expect(client.rpcClient.id, ++id);
       print("Balance earliest is $balance");
     });
     test("Balance - pending", () async {
-      final String balance = await client.getBalance(
-          "0x407d73d8a49eeb85d32cf465507dd71d507100c1", Ethereum.ethPending);
+      final int balance = await client.getBalance(
+          0x407d73d8a49eeb85d32cf465507dd71d507100c1, Ethereum.ethPending);
       expect(balance, isNotNull);
       expect(client.rpcClient.id, ++id);
       print("Balance pending is $balance");

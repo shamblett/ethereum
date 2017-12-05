@@ -284,7 +284,7 @@ class Ethereum {
   /// Get balance, the balance of the account of the given address.
   /// The block can be an integer block number or the one of the strings
   /// "latest", "earliest" or "pending.
-  Future<String> getBalance(String accountNumber, String block) async {
+  Future<int> getBalance(int accountNumber, dynamic block) async {
     if (accountNumber == null) {
       throw new ArgumentError.notNull("Ethereum::getBalance - accountNumber");
     }
@@ -292,10 +292,19 @@ class Ethereum {
       throw new ArgumentError.notNull("Ethereum::getBalance - block");
     }
     final String method = EthereumRpcMethods.balance;
-    final List params = [accountNumber, block];
+    String blockString;
+    if (block is int) {
+      blockString = EthereumUtilities.intToHex(block);
+    } else {
+      blockString = block;
+    }
+    final List params = [
+      EthereumUtilities.intToHex(accountNumber),
+      blockString
+    ];
     final res = await rpcClient.request(method, params);
     if (res.containsKey(ethResultKey)) {
-      return res.result;
+      return EthereumUtilities.hexToInt(res.result);
     }
     _processError(method, res);
     return null;

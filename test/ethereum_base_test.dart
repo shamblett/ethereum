@@ -140,7 +140,7 @@ void main() {
     test("Balance - block", () async {
       bool thrown = false;
       try {
-        await client.getBalance("", null);
+        await client.getBalance(0, null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
