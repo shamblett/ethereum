@@ -11,17 +11,15 @@ part of ethereum;
 
 /// General client support utilities
 class EthereumUtilities {
-  /// Invalid conversion
-  static const int invalidConversion = -1;
 
   /// Integer to hex string with leading 0x, lowercase
   static String intToHex(int val) {
     return "0x" + val.toRadixString(16);
   }
 
-  /// Hex string to integer, a value of invalidConversion indicates an error.
+  /// Hex string to integer, a value of null indicates an error.
   /// The string must start with 0x
   static int hexToInt(String val) {
-    return int.parse(val, onError: (val) => invalidConversion);
+    return int.parse(val, onError: (val) => null);
   }
 }

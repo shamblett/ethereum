@@ -27,7 +27,7 @@ void main() {
     test("Hex to int - invalid", () {
       String testString = "abcdef12345";
       int val = EthereumUtilities.hexToInt(testString);
-      expect(val, EthereumUtilities.invalidConversion);
+      expect(val, isNull);
     });
   });
 
@@ -113,6 +113,18 @@ void main() {
 
   group("Null parameter tests", () {
     final EthereumServerClient client = new EthereumServerClient();
+    test("Sha3 - data", () async {
+      bool thrown = false;
+      try {
+        await client.sha3(null);
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::sha3 - data): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
     test("Balance - account number", () async {
       bool thrown = false;
       try {

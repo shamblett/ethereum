@@ -111,8 +111,8 @@ class Ethereum {
     lastErrorCode = res.error.code;
     lastErrorMessage = res.error.message;
     if (printError) {
-      print("ERROR::$method - Code: ${res.error.code} Message :  ${res.error
-          .message}");
+      print(
+          "ERROR::$method - Code: $lastErrorCode} Message :  $lastErrorMessage} Id : $lastErrorId");
     }
   }
 
@@ -136,13 +136,15 @@ class Ethereum {
   }
 
   /// Returns Keccak-256 (not the standardized SHA3-256) of the given data.
-  Future<String> sha3(String hexString) async {
+  Future<int> sha3(int data) async {
+    if (data == null) {
+      throw new ArgumentError.notNull("Ethereum::sha3 - data");
+    }
     final String method = EthereumRpcMethods.web3Sha3;
-    final List<String> params = new List<String>(1);
-    params[0] = hexString;
+    List params = [EthereumUtilities.intToHex(data)];
     final res = await rpcClient.request(method, params);
     if (res.containsKey(ethResultKey)) {
-      return res.result;
+      return EthereumUtilities.hexToInt(res.result);
     }
     _processError(method, res);
     return null;
@@ -175,7 +177,7 @@ class Ethereum {
     final String method = EthereumRpcMethods.netPeerCount;
     final res = await rpcClient.request(method);
     if (res.containsKey(ethResultKey)) {
-      return int.parse(res.result);
+      return EthereumUtilities.hexToInt(res.result);
     }
     _processError(method, res);
     return null;
@@ -192,9 +194,9 @@ class Ethereum {
     return null;
   }
 
-  /// Eth syncing, an object with data about the sync status if syncing or false if not.
+  /// Sync status, an object with data about the sync status if syncing or false if not.
   /// Encoded as a JsonObject with a syncStatus, if true the sync status data is valid.
-  Future<JsonObjectLite> ethSyncing() async {
+  Future<JsonObjectLite> syncStatus() async {
     final String method = EthereumRpcMethods.syncing;
     final res = await rpcClient.request(method);
     if (res.containsKey(ethResultKey)) {
@@ -202,9 +204,10 @@ class Ethereum {
       resp.syncStatus = false;
       if (!(res.result is bool) && (res.result.containsKey('startingBlock'))) {
         resp.syncStatus = true;
-        resp.startingBlock = res.result.startingBlock;
-        resp.currentBlock = res.result.currentBlock;
-        resp.highestBlock = res.result.highestBlock;
+        resp.startingBlock =
+            EthereumUtilities.hexToInt(res.result.startingBlock);
+        resp.currentBlock = EthereumUtilities.hexToInt(res.result.currentBlock);
+        resp.highestBlock = EthereumUtilities.hexToInt(res.result.highestBlock);
       }
       return resp;
     }
@@ -213,11 +216,11 @@ class Ethereum {
   }
 
   /// The client coinbase address.
-  Future<String> coinbaseAddress() async {
+  Future<int> coinbaseAddress() async {
     final String method = EthereumRpcMethods.coinbaseAddress;
     final res = await rpcClient.request(method);
     if (res.containsKey(ethResultKey)) {
-      return res.result;
+      return EthereumUtilities.hexToInt(res.result);
     }
     _processError(method, res);
     return null;
@@ -498,15 +501,16 @@ class Ethereum {
       throw new ArgumentError.notNull("Ethereum::sendTransaction - data");
     }
     final String method = EthereumRpcMethods.sendTransaction;
-    final dynamic params = [{
-      "from": address,
-      "to": to,
-      "gas": "0x" + gas.toString(),
-      "gasPrice": "0x" + gasPrice.toString(),
-      "value": "0x" + value.toString(),
-      "data": data,
-      "nonce": "0x" + nonce.toString()
-    }
+    final dynamic params = [
+      {
+        "from": address,
+        "to": to,
+        "gas": "0x" + gas.toString(),
+        "gasPrice": "0x" + gasPrice.toString(),
+        "value": "0x" + value.toString(),
+        "data": data,
+        "nonce": "0x" + nonce.toString()
+      }
     ];
     final res = await rpcClient.request(method, params);
     if (res.containsKey(ethResultKey)) {
