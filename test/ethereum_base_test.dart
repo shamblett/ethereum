@@ -13,6 +13,24 @@ import 'package:test/test.dart';
 /// These test are common to both server and client, we use the server client for convenience.
 
 void main() {
+  group("Utilities", () {
+    test("Int to hex", () {
+      int testInt = 0xabcdef12345;
+      String val = EthereumUtilities.intToHex(testInt);
+      expect(val, "0xabcdef12345");
+    });
+    test("Hex to int - valid", () {
+      String testString = "0xabcdef12345";
+      int val = EthereumUtilities.hexToInt(testString);
+      expect(val, 0xabcdef12345);
+    });
+    test("Hex to int - invalid", () {
+      String testString = "abcdef12345";
+      int val = EthereumUtilities.hexToInt(testString);
+      expect(val, EthereumUtilities.invalidConversion);
+    });
+  });
+
   group("Connection tests", () {
     final EthereumServerClient client = new EthereumServerClient();
     test("connectString - Null", () {

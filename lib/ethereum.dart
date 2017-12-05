@@ -15,4 +15,5 @@ part 'src/ethereum.dart';
 part 'src/ethereum_rpc_methods.dart';
 part 'src/ethereum_rpc_client.dart';
 
+part 'src/ethereum_utilities.dart';
 part 'src/adapters/ethereum_ihttp_adapter.dart';
