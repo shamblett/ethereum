@@ -7,6 +7,5 @@
 
 /// Test configuration options
 class TestConfiguration {
-  static const String defaultAccount =
-      "0xd10de988e845d33859c3f96c7f1fc723b7b56f4c";
+  static const int defaultAccount = 0xd10de988e845d33859c3f96c7f1fc723b7b56f4c;
 }

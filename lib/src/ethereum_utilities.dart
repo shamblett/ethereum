@@ -11,7 +11,6 @@ part of ethereum;
 
 /// General client support utilities
 class EthereumUtilities {
-
   /// Integer to hex string with leading 0x, lowercase
   static String intToHex(int val) {
     return "0x" + val.toRadixString(16);
@@ -21,5 +20,17 @@ class EthereumUtilities {
   /// The string must start with 0x
   static int hexToInt(String val) {
     return int.parse(val, onError: (val) => null);
+  }
+
+  /// Hex String list to Integer list
+  static List<int> hexToIntList(List<String> val) {
+    return new List<int>.generate(
+        val.length, (int index) => hexToInt(val[index]));
+  }
+
+  /// Integer list to Hex String list
+  static List<String> intToHexList(List<int> val) {
+    return new List<String>.generate(
+        val.length, (int index) => intToHex(val[index]));
   }
 }

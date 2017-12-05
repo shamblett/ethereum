@@ -75,7 +75,7 @@ class EthereumCommon {
       final int address = await client.coinbaseAddress();
       expect(client.rpcClient.id, ++id);
       if (address != null) {
-        print("Coinbase address is $address");
+        print("Coinbase address is ${EthereumUtilities.intToHex(address)}");
       } else {
         expect(client.lastErrorCode, -32000);
         expect(client.lastErrorMessage,
@@ -89,30 +89,31 @@ class EthereumCommon {
       print("Mining is $mining");
     });
     test("Hashrate", () async {
-      final String rate = await client.hashrate();
+      final int rate = await client.hashrate();
       expect(rate, isNotNull);
       expect(client.rpcClient.id, ++id);
       print("Hashrate is $rate");
     });
     test("Gas price", () async {
-      final String price = await client.gasPrice();
+      final int price = await client.gasPrice();
       expect(price, isNotNull);
       expect(client.rpcClient.id, ++id);
       print("Gas price is $price");
     });
     test("Accounts", () async {
-      final List<String> accounts = await client.accounts();
+      final List<int> accounts = await client.accounts();
       expect(accounts, isNotNull);
+      final List<String> accountsStr = EthereumUtilities.intToHexList(accounts);
       expect(client.rpcClient.id, ++id);
       if (accounts.length != 0) {
-        print("Accounts are $accounts");
+        print("Accounts are $accountsStr");
         expect(accounts[0], TestConfiguration.defaultAccount);
       } else {
         print("There are no accounts");
       }
     });
     test("Block number", () async {
-      final String num = await client.blockNumber();
+      final int num = await client.blockNumber();
       expect(num, isNotNull);
       expect(client.rpcClient.id, ++id);
       print("Block number is $num");

@@ -238,44 +238,44 @@ class Ethereum {
   }
 
   /// Hashrate, returns the number of hashes per second that the node is mining with.
-  Future<String> hashrate() async {
+  Future<int> hashrate() async {
     final String method = EthereumRpcMethods.hashrate;
     final res = await rpcClient.request(method);
     if (res.containsKey(ethResultKey)) {
-      return res.result;
+      return EthereumUtilities.hexToInt(res.result);
     }
     _processError(method, res);
     return null;
   }
 
   /// The current price per gas in wei.
-  Future<String> gasPrice() async {
+  Future<int> gasPrice() async {
     final String method = EthereumRpcMethods.gasPrice;
     final res = await rpcClient.request(method);
     if (res.containsKey(ethResultKey)) {
-      return res.result;
+      return EthereumUtilities.hexToInt(res.result);
     }
     _processError(method, res);
     return null;
   }
 
   /// Accounts,  a list of addresses owned by client.
-  Future<List<String>> accounts() async {
+  Future<List<int>> accounts() async {
     final String method = EthereumRpcMethods.accounts;
     final res = await rpcClient.request(method);
     if (res.containsKey(ethResultKey)) {
-      return res.result;
+      return EthereumUtilities.hexToIntList(res.result);
     }
     _processError(method, res);
     return null;
   }
 
   /// Block number, the number of most recent block.
-  Future<String> blockNumber() async {
+  Future<int> blockNumber() async {
     final String method = EthereumRpcMethods.blockNumber;
     final res = await rpcClient.request(method);
     if (res.containsKey(ethResultKey)) {
-      return res.result;
+      return EthereumUtilities.hexToInt(res.result);
     }
     _processError(method, res);
     return null;
