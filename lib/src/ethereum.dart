@@ -47,10 +47,8 @@ class Ethereum {
   /// Json RPC client
   EthereumRpcClient rpcClient;
 
-  /// Last error code, message and id
-  int lastErrorCode = 0;
-  String lastErrorMessage = "No Error";
-  int lastErrorId = -1;
+  /// Last error
+  EthereumError lastError = new EthereumError();
 
   /// Connection methods
 
@@ -107,12 +105,9 @@ class Ethereum {
 
   /// Error processing helper
   void _processError(String method, JsonObjectLite res) {
-    lastErrorId = rpcClient.id;
-    lastErrorCode = res.error.code;
-    lastErrorMessage = res.error.message;
+    lastError.updateError(res.error.code, res.error.message, rpcClient.id);
     if (printError) {
-      print(
-          "ERROR::$method - Code: $lastErrorCode} Message :  $lastErrorMessage} Id : $lastErrorId");
+      print("ERROR::$method - ${lastError.toString()}");
     }
   }
 
