@@ -15,18 +15,18 @@ import 'package:test/test.dart';
 void main() {
   group("Utilities", () {
     test("Int to hex", () {
-      int testInt = 0xabcdef12345;
-      String val = EthereumUtilities.intToHex(testInt);
+      final int testInt = 0xabcdef12345;
+      final String val = EthereumUtilities.intToHex(testInt);
       expect(val, "0xabcdef12345");
     });
     test("Hex to int - valid", () {
-      String testString = "0xabcdef12345";
-      int val = EthereumUtilities.hexToInt(testString);
+      final String testString = "0xabcdef12345";
+      final int val = EthereumUtilities.hexToInt(testString);
       expect(val, 0xabcdef12345);
     });
     test("Hex to int - invalid", () {
-      String testString = "abcdef12345";
-      int val = EthereumUtilities.hexToInt(testString);
+      final String testString = "abcdef12345";
+      final int val = EthereumUtilities.hexToInt(testString);
       expect(val, isNull);
     });
   });
@@ -272,7 +272,7 @@ void main() {
     test("Code - block", () async {
       bool thrown = false;
       try {
-        await client.getCode("", null);
+        await client.getCode(2, null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -284,7 +284,7 @@ void main() {
     test("Sign - account", () async {
       bool thrown = false;
       try {
-        await client.sign(null, "");
+        await client.sign(null, 0);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -296,7 +296,7 @@ void main() {
     test("Sign - message", () async {
       bool thrown = false;
       try {
-        await client.sign("", null);
+        await client.sign(0, null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -308,7 +308,7 @@ void main() {
     test("Send transaction - address", () async {
       bool thrown = false;
       try {
-        await client.sendTransaction(null, "");
+        await client.sendTransaction(null, 0);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -320,7 +320,7 @@ void main() {
     test("Send transaction - data", () async {
       bool thrown = false;
       try {
-        await client.sendTransaction("", null);
+        await client.sendTransaction(0, null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),

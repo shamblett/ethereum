@@ -215,89 +215,89 @@ class EthereumCommon {
       expect(client.rpcClient.id, ++id);
     });
     test("Block transaction count by number - number", () async {
-      final String count =
-      await client.getBlockTransactionCountByNumber("0xe8");
+      final int count =
+      await client.getBlockTransactionCountByNumber(0xe8);
       expect(count, isNotNull);
       expect(client.rpcClient.id, ++id);
     });
     test("Block transaction count by number - latest", () async {
-      final String count =
+      final int count =
       await client.getBlockTransactionCountByNumber(Ethereum.ethLatest);
       expect(count, isNotNull);
       expect(client.rpcClient.id, ++id);
     });
     test("Block transaction count by number - pending", () async {
-      final String count =
+      final int count =
       await client.getBlockTransactionCountByNumber(Ethereum.ethPending);
       expect(count, isNotNull);
       expect(client.rpcClient.id, ++id);
     });
     test("Block transaction count by number - earliest", () async {
-      final String count =
+      final int count =
       await client.getBlockTransactionCountByNumber(Ethereum.ethEarliest);
       expect(count, isNotNull);
       expect(client.rpcClient.id, ++id);
     });
     test("Block uncle count by hash", () async {
-      final String count = await client.getUncleCountByHash(
-          "0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238");
-      expect(count, "0");
+      final int count = await client.getUncleCountByHash(
+          0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238);
+      expect(count, 0);
       expect(client.rpcClient.id, ++id);
     });
     test("Uncle count by number - number", () async {
-      final String count = await client.getUncleCountByNumber("0xe8");
+      final int count = await client.getUncleCountByNumber(0xe8);
       expect(count, isNotNull);
       expect(client.rpcClient.id, ++id);
     });
     test("Block uncle count by number - latest", () async {
-      final String count =
+      final int count =
       await client.getUncleCountByNumber(Ethereum.ethLatest);
       expect(count, isNotNull);
       expect(client.rpcClient.id, ++id);
     });
     test("Block uncle count by number - pending", () async {
-      final String count =
+      final int count =
       await client.getUncleCountByNumber(Ethereum.ethPending);
       expect(count, isNotNull);
       expect(client.rpcClient.id, ++id);
     });
     test("Block uncle count by number - earliest", () async {
-      final String count =
+      final int count =
       await client.getUncleCountByNumber(Ethereum.ethEarliest);
       expect(count, isNotNull);
       expect(client.rpcClient.id, ++id);
     });
     test("Code - address", () async {
-      final String code = await client.getCode(
-          "0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b", "0x0");
-      expect(code, isNotNull);
+      final int code = await client.getCode(
+          0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b, 0);
+      expect(code, isNull);
       expect(client.rpcClient.id, ++id);
       print("Code is $code");
     });
     test("Code - latest", () async {
-      final String code = await client.getCode(
-          "0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b", Ethereum.ethLatest);
-      expect(code, isNotNull);
+      final int code = await client.getCode(
+          0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b, Ethereum.ethLatest);
+      expect(code, isNull);
       expect(client.rpcClient.id, ++id);
       print("Code is $code");
     });
     test("Code - pending", () async {
-      final String code = await client.getCode(
-          "0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b", Ethereum.ethPending);
-      expect(code, isNotNull);
+      final int code = await client.getCode(
+          0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b, Ethereum.ethPending);
+      expect(code, isNull);
       expect(client.rpcClient.id, ++id);
       print("Code is $code");
     });
     test("Code - earliest", () async {
-      final String code = await client.getCode(
-          "0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b", Ethereum.ethEarliest);
-      expect(code, isNotNull);
+      final int code = await client.getCode(
+          0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b, Ethereum.ethEarliest);
+      expect(code, isNull);
       expect(client.rpcClient.id, ++id);
       print("Code is $code");
     });
     test("Sign", () async {
-      final String signature =
-      await client.sign(TestConfiguration.defaultAccount, "0xdeadbeaf");
+      final int signature =
+      await client.sign(TestConfiguration.defaultAccount, 0xdeadbeaf);
       if (signature != null) {
         print(signature);
       } else {
@@ -306,10 +306,10 @@ class EthereumCommon {
       expect(client.rpcClient.id, ++id);
     });
     test("Send transaction", () async {
-      final String hash = await client.sendTransaction(
+      final int hash = await client.sendTransaction(
           TestConfiguration.defaultAccount,
-          "0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675",
-          to: "0xd46e8dd67c5d32be8058bb8eb970870f07244567",
+          0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675,
+          to: 0xd46e8dd67c5d32be8058bb8eb970870f07244567,
           gas: 0x100,
           gasPrice: 0x1000,
           value: 0x2000,
@@ -319,5 +319,17 @@ class EthereumCommon {
       }
       expect(client.rpcClient.id, ++id);
     });
+    test("Send transaction - some null", () async {
+      final int hash = await client.sendTransaction(
+          TestConfiguration.defaultAccount,
+          0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675,
+          to: 0xd46e8dd67c5d32be8058bb8eb970870f07244567,
+          nonce: 2);
+      if (hash != null) {
+        print(hash);
+      }
+      expect(client.rpcClient.id, ++id);
+    });
+
   }
 }

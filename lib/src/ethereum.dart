@@ -136,7 +136,7 @@ class Ethereum {
       throw new ArgumentError.notNull("Ethereum::sha3 - data");
     }
     final String method = EthereumRpcMethods.web3Sha3;
-    List params = [EthereumUtilities.intToHex(data)];
+    final List params = [EthereumUtilities.intToHex(data)];
     final res = await rpcClient.request(method, params);
     if (res.containsKey(ethResultKey)) {
       return EthereumUtilities.hexToInt(res.result);
@@ -357,7 +357,6 @@ class Ethereum {
       blockString = block;
     }
     final List params = [EthereumUtilities.intToHex(address), blockString];
-    ;
     final res = await rpcClient.request(method, params);
     if (res.containsKey(ethResultKey)) {
       return EthereumUtilities.hexToInt(res.result);
@@ -395,19 +394,25 @@ class Ethereum {
   /// "latest", "earliest" or "pending.
   /// If the method returns null a count of 0 is returned, this is to distinguish between
   /// this and an error.
-  Future<String> getBlockTransactionCountByNumber(String blockNumber) async {
+  Future<int> getBlockTransactionCountByNumber(dynamic blockNumber) async {
     if (blockNumber == null) {
       throw new ArgumentError.notNull(
           "Ethereum::getBlockTransactionCountByNumber - blockNumber");
     }
     final String method = EthereumRpcMethods.blockTransactionCountByNumber;
-    final List params = [blockNumber];
+    String blockString;
+    if (blockNumber is int) {
+      blockString = EthereumUtilities.intToHex(blockNumber);
+    } else {
+      blockString = blockNumber;
+    }
+    final List params = [blockString];
     final res = await rpcClient.request(method, params);
     if (res.containsKey(ethResultKey)) {
       if (res.result != null) {
-        return res.result;
+        return EthereumUtilities.hexToInt(res.result);
       } else {
-        return "0";
+        return 0;
       }
     }
     _processError(method, res);
@@ -418,19 +423,19 @@ class Ethereum {
   /// The number of uncles in a block from a block matching the given block hash.
   /// If the method returns null a count of 0 is returned, this is to distinguish between
   /// this and an error.
-  Future<String> getUncleCountByHash(String blockHash) async {
+  Future<int> getUncleCountByHash(int blockHash) async {
     if (blockHash == null) {
       throw new ArgumentError.notNull(
           "Ethereum::getUncleCountByHash - blockHash");
     }
     final String method = EthereumRpcMethods.blockUncleCountByHash;
-    final List params = [blockHash];
+    final List params = [EthereumUtilities.intToHex(blockHash)];
     final res = await rpcClient.request(method, params);
     if (res.containsKey(ethResultKey)) {
       if (res.result != null) {
-        return res.result;
+        return EthereumUtilities.hexToInt(res.result);
       } else {
-        return "0";
+        return 0;
       }
     }
     _processError(method, res);
@@ -439,23 +444,29 @@ class Ethereum {
 
   /// Block Uncle Count By Number
   /// The number of uncles in a block matching the given block number.
-  /// The block can be an integer block number or the one of the strings
+  /// The block number can be an integer block number or the one of the strings
   /// "latest", "earliest" or "pending.
   /// If the method returns null a count of 0 is returned, this is to distinguish between
   /// this and an error.
-  Future<String> getUncleCountByNumber(String blockNumber) async {
+  Future<int> getUncleCountByNumber(dynamic blockNumber) async {
     if (blockNumber == null) {
       throw new ArgumentError.notNull(
           "Ethereum::getUncleCountByNumber - blockNumber");
     }
     final String method = EthereumRpcMethods.blockUncleCountByNumber;
-    final List params = [blockNumber];
+    String blockString;
+    if (blockNumber is int) {
+      blockString = EthereumUtilities.intToHex(blockNumber);
+    } else {
+      blockString = blockNumber;
+    }
+    final List params = [blockString];
     final res = await rpcClient.request(method, params);
     if (res.containsKey(ethResultKey)) {
       if (res.result != null) {
-        return res.result;
+        return EthereumUtilities.hexToInt(res.result);
       } else {
-        return "0";
+        return 0;
       }
     }
     _processError(method, res);
@@ -465,7 +476,7 @@ class Ethereum {
   /// Get code, the code at the given address.
   /// The block can be an integer block number or the one of the strings
   /// "latest", "earliest" or "pending.
-  Future<String> getCode(String address, String block) async {
+  Future<int> getCode(int address, dynamic block) async {
     if (address == null) {
       throw new ArgumentError.notNull("Ethereum::getCode - address");
     }
@@ -473,10 +484,18 @@ class Ethereum {
       throw new ArgumentError.notNull("Ethereum::getCode - block");
     }
     final String method = EthereumRpcMethods.code;
-    final List params = [address, block];
+    String blockString;
+    if (block is int) {
+      blockString = EthereumUtilities.intToHex(block);
+    } else {
+      blockString = block;
+    }
+    final List params = [EthereumUtilities.intToHex(address),
+    blockString
+    ];
     final res = await rpcClient.request(method, params);
     if (res.containsKey(ethResultKey)) {
-      return res.result;
+      return EthereumUtilities.hexToInt(res.result);
     }
     _processError(method, res);
     return null;
@@ -486,7 +505,7 @@ class Ethereum {
   /// The sign method calculates an Ethereum specific signature with:
   /// sign(keccak256("\x19Ethereum Signed Message:\n" + len(message) + message))).
   /// Note the address to sign with must be unlocked.
-  Future<String> sign(String account, String message) async {
+  Future<int> sign(int account, int message) async {
     if (account == null) {
       throw new ArgumentError.notNull("Ethereum::sign - account");
     }
@@ -494,10 +513,12 @@ class Ethereum {
       throw new ArgumentError.notNull("Ethereum::sign - message");
     }
     final String method = EthereumRpcMethods.sign;
-    final List params = [account, message];
+    final List params = [EthereumUtilities.intToHex(account),
+    EthereumUtilities.intToHex(message)
+    ];
     final res = await rpcClient.request(method, params);
     if (res.containsKey(ethResultKey)) {
-      return res.result;
+      return EthereumUtilities.hexToInt(res.result);
     }
     _processError(method, res);
     return null;
@@ -513,8 +534,8 @@ class Ethereum {
   /// data: The compiled code of a contract OR the hash of the invoked method signature and encoded parameters. For details see Ethereum Contract ABI
   /// nonce: optional) Integer of a nonce. This allows to overwrite your own pending transactions that use the same nonce.
   /// Returns the transaction hash, or the zero hash if the transaction is not yet available.
-  Future<String> sendTransaction(String address, String data,
-      {String to, int gas: 9000, int gasPrice, int value, int nonce}) async {
+  Future<int> sendTransaction(int address, int data,
+      {int to, int gas: 9000, int gasPrice, int value, int nonce}) async {
     if (address == null) {
       throw new ArgumentError.notNull("Ethereum::sendTransaction - address");
     }
@@ -525,17 +546,18 @@ class Ethereum {
     final dynamic params = [
       {
         "from": address,
-        "to": to,
-        "gas": "0x" + gas.toString(),
-        "gasPrice": "0x" + gasPrice.toString(),
-        "value": "0x" + value.toString(),
-        "data": data,
-        "nonce": "0x" + nonce.toString()
+        "to": to == null ? null : EthereumUtilities.intToHex(to),
+        "gas": EthereumUtilities.intToHex(gas),
+        "gasPrice": gasPrice == null ? null : EthereumUtilities.intToHex(
+            gasPrice),
+        "value": value == null ? null : EthereumUtilities.intToHex(value),
+        "data": EthereumUtilities.intToHex(data),
+        "nonce": nonce == null ? null : EthereumUtilities.intToHex(nonce)
       }
     ];
     final res = await rpcClient.request(method, params);
     if (res.containsKey(ethResultKey)) {
-      return res.result;
+      return EthereumUtilities.hexToInt(res.result);
     }
     _processError(method, res);
     return null;
