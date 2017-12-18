@@ -152,7 +152,7 @@ void main() {
     test("Storage at - block", () async {
       bool thrown = false;
       try {
-        await client.getStorageAt("", "", null);
+        await client.getStorageAt(1, 2, null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -164,7 +164,7 @@ void main() {
     test("Storage at - pos", () async {
       bool thrown = false;
       try {
-        await client.getStorageAt("", null, "");
+        await client.getStorageAt(1, null, "");
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -176,11 +176,35 @@ void main() {
     test("Storage at - address", () async {
       bool thrown = false;
       try {
-        await client.getStorageAt(null, "", "");
+        await client.getStorageAt(null, 1, "");
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
             "Invalid argument(s) (Ethereum::getStorageAt - address): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
+    test("Block transaction count - address", () async {
+      bool thrown = false;
+      try {
+        await client.getTransactionCount(null, "");
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::getTransactionCount - address): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
+    test("Block transaction count - block", () async {
+      bool thrown = false;
+      try {
+        await client.getTransactionCount(1, null);
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::getTransactionCount - block): Must not be null");
         thrown = true;
       }
       expect(thrown, isTrue);

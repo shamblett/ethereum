@@ -308,7 +308,7 @@ class Ethereum {
   /// Get Storage at, the value from a storage position at a given address.
   /// Parameters are the address of the storage, the integer position of the storage and
   /// the block number, or the string "latest", "earliest" or "pending.
-  Future<String> getStorageAt(String address, String pos, String block) async {
+  Future<int> getStorageAt(int address, int pos, dynamic block) async {
     if (address == null) {
       throw new ArgumentError.notNull("Ethereum::getStorageAt - address");
     }
@@ -319,10 +319,20 @@ class Ethereum {
       throw new ArgumentError.notNull("Ethereum::getStorageAt - block");
     }
     final String method = EthereumRpcMethods.storageAt;
-    final List params = [address, pos, block];
+    String blockString;
+    if (block is int) {
+      blockString = EthereumUtilities.intToHex(block);
+    } else {
+      blockString = block;
+    }
+    final List params = [
+      EthereumUtilities.intToHex(address),
+      EthereumUtilities.intToHex(pos),
+      blockString
+    ];
     final res = await rpcClient.request(method, params);
     if (res.containsKey(ethResultKey)) {
-      return res.result;
+      return EthereumUtilities.hexToInt(res.result);
     }
     _processError(method, res);
     return null;
@@ -331,7 +341,7 @@ class Ethereum {
   /// Transaction count, returns the number of transactions sent from an address.
   /// The block can be an integer block number or the one of the strings
   /// "latest", "earliest" or "pending.
-  Future<String> getTransactionCount(String address, String block) async {
+  Future<int> getTransactionCount(int address, dynamic block) async {
     if (address == null) {
       throw new ArgumentError.notNull(
           "Ethereum::getTransactionCount - address");
@@ -340,10 +350,17 @@ class Ethereum {
       throw new ArgumentError.notNull("Ethereum::getTransactionCount - block");
     }
     final String method = EthereumRpcMethods.transactionCount;
-    final List params = [address, block];
+    String blockString;
+    if (block is int) {
+      blockString = EthereumUtilities.intToHex(block);
+    } else {
+      blockString = block;
+    }
+    final List params = [EthereumUtilities.intToHex(address), blockString];
+    ;
     final res = await rpcClient.request(method, params);
     if (res.containsKey(ethResultKey)) {
-      return res.result;
+      return EthereumUtilities.hexToInt(res.result);
     }
     _processError(method, res);
     return null;
@@ -353,19 +370,19 @@ class Ethereum {
   /// The number of transactions in a block from a block matching the given block hash.
   /// If the method returns null a count of 0 is returned, this is to distinguish between
   /// this and an error.
-  Future<String> getBlockTransactionCountByHash(String blockHash) async {
+  Future<int> getBlockTransactionCountByHash(int blockHash) async {
     if (blockHash == null) {
       throw new ArgumentError.notNull(
           "Ethereum::getBlockTransactionCountByHash - blockHash");
     }
     final String method = EthereumRpcMethods.blockTransactionCountByHash;
-    final List params = [blockHash];
+    final List params = [EthereumUtilities.intToHex(blockHash)];
     final res = await rpcClient.request(method, params);
     if (res.containsKey(ethResultKey)) {
       if (res.result != null) {
-        return res.result;
+        return EthereumUtilities.hexToInt(res.result);
       } else {
-        return "0";
+        return 0;
       }
     }
     _processError(method, res);

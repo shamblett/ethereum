@@ -77,8 +77,8 @@ class EthereumCommon {
       if (address != null) {
         print("Coinbase address is ${EthereumUtilities.intToHex(address)}");
       } else {
-        expect(client.lastErrorCode, -32000);
-        expect(client.lastErrorMessage,
+        expect(client.lastError.code, -32000);
+        expect(client.lastError.message,
             "etherbase address must be explicitly specified");
       }
     });
@@ -147,71 +147,71 @@ class EthereumCommon {
       print("Balance pending is $balance");
     });
     test("Get storage at - latest", () async {
-      final String storage = await client.getStorageAt(
-          "0x295a70b2de5e3953354a6a8344e616ed314d7251",
-          "0x0",
+      final int storage = await client.getStorageAt(
+          0x295a70b2de5e3953354a6a8344e616ed314d7251,
+          0x0,
           Ethereum.ethLatest);
       expect(storage, isNotNull);
       expect(client.rpcClient.id, ++id);
       print("Storage at latest is $storage");
     });
     test("Get storage at - earliest", () async {
-      final String storage = await client.getStorageAt(
-          "0x295a70b2de5e3953354a6a8344e616ed314d7251",
-          "0x0",
+      final int storage = await client.getStorageAt(
+          0x295a70b2de5e3953354a6a8344e616ed314d7251,
+          0x0,
           Ethereum.ethEarliest);
       expect(storage, isNotNull);
       expect(client.rpcClient.id, ++id);
       print("Storage at earliest is $storage");
     });
     test("Get storage at - pending", () async {
-      final String storage = await client.getStorageAt(
-          "0x295a70b2de5e3953354a6a8344e616ed314d7251",
-          "0x0",
+      final int storage = await client.getStorageAt(
+          0x295a70b2de5e3953354a6a8344e616ed314d7251,
+          0x0,
           Ethereum.ethPending);
       expect(storage, isNotNull);
       expect(client.rpcClient.id, ++id);
       print("Storage at pending is $storage");
     });
     test("Get storage at - block", () async {
-      final String storage = await client.getStorageAt(
-          "0x295a70b2de5e3953354a6a8344e616ed314d7251", "0x0", "0x4b7");
-      expect(storage, isNotNull);
+      final int storage = await client.getStorageAt(
+          0x295a70b2de5e3953354a6a8344e616ed314d7251, 0x0, 0x4b7);
+      expect(storage, isNull);
       expect(client.rpcClient.id, ++id);
       print("Storage at block is $storage");
     });
     test("Transaction count - number", () async {
-      final String count = await client.getTransactionCount(
-          "0x407d73d8a49eeb85d32cf465507dd71d507100c1", "0x0");
+      final int count = await client.getTransactionCount(
+          0x407d73d8a49eeb85d32cf465507dd71d507100c1, 0x0);
       expect(count, isNotNull);
       expect(client.rpcClient.id, ++id);
       print("Transaction count is $count");
     });
     test("Transaction count - earliest", () async {
-      final String count = await client.getTransactionCount(
-          "0x407d73d8a49eeb85d32cf465507dd71d507100c1", Ethereum.ethEarliest);
+      final int count = await client.getTransactionCount(
+          0x407d73d8a49eeb85d32cf465507dd71d507100c1, Ethereum.ethEarliest);
       expect(count, isNotNull);
       expect(client.rpcClient.id, ++id);
       print("Transaction count  is $count");
     });
     test("Transaction count - pending", () async {
-      final String count = await client.getTransactionCount(
-          "0x407d73d8a49eeb85d32cf465507dd71d507100c1", Ethereum.ethPending);
+      final int count = await client.getTransactionCount(
+          0x407d73d8a49eeb85d32cf465507dd71d507100c1, Ethereum.ethPending);
       expect(count, isNotNull);
       expect(client.rpcClient.id, ++id);
       print("Transaction count  is $count");
     });
     test("Transaction count - latest", () async {
-      final String count = await client.getTransactionCount(
-          "0x407d73d8a49eeb85d32cf465507dd71d507100c1", Ethereum.ethLatest);
+      final int count = await client.getTransactionCount(
+          0x407d73d8a49eeb85d32cf465507dd71d507100c1, Ethereum.ethLatest);
       expect(count, isNotNull);
       expect(client.rpcClient.id, ++id);
       print("Transaction count  is $count");
     });
     test("Block transaction count by hash", () async {
-      final String count = await client.getBlockTransactionCountByHash(
-          "0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238");
-      expect(count, "0");
+      final int count = await client.getBlockTransactionCountByHash(
+          0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238);
+      expect(count, 0);
       expect(client.rpcClient.id, ++id);
     });
     test("Block transaction count by number - number", () async {
@@ -305,7 +305,7 @@ class EthereumCommon {
       }
       expect(client.rpcClient.id, ++id);
     });
-    test("Sendt transaction", () async {
+    test("Send transaction", () async {
       final String hash = await client.sendTransaction(
           TestConfiguration.defaultAccount,
           "0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675",
