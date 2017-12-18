@@ -41,6 +41,6 @@ class EthereumError {
   }
 
   String toString() {
-    return "Code : $_code Message : $_message Id : $_id";
+    return "Code : $_code <> Message : $_message <> Id : $_id";
   }
 }

@@ -329,5 +329,17 @@ void main() {
       }
       expect(thrown, isTrue);
     });
+    test("Send raw transaction", () async {
+      bool thrown = false;
+      try {
+        await client.sendRawTransaction(null);
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::sendRawTransaction - signedTransaction): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
   });
 }

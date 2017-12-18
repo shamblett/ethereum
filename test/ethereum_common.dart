@@ -318,6 +318,7 @@ class EthereumCommon {
         print(hash);
       }
       expect(client.rpcClient.id, ++id);
+      expect(client.lastError.id, id);
     });
     test("Send transaction - some null", () async {
       final int hash = await client.sendTransaction(
@@ -329,7 +330,16 @@ class EthereumCommon {
         print(hash);
       }
       expect(client.rpcClient.id, ++id);
+      expect(client.lastError.id, id);
     });
-
+    test("Send raw transaction", () async {
+      final int hash = await client.sendRawTransaction(
+          0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675);
+      if (hash != null) {
+        print(hash);
+      }
+      expect(client.rpcClient.id, ++id);
+      expect(client.lastError.id, id);
+    });
   }
 }

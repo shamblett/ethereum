@@ -428,7 +428,7 @@ class Ethereum {
       throw new ArgumentError.notNull(
           "Ethereum::getUncleCountByHash - blockHash");
     }
-    final String method = EthereumRpcMethods.blockUncleCountByHash;
+    final String method = EthereumRpcMethods.blockUncleCountByBlockHash;
     final List params = [EthereumUtilities.intToHex(blockHash)];
     final res = await rpcClient.request(method, params);
     if (res.containsKey(ethResultKey)) {
@@ -453,7 +453,7 @@ class Ethereum {
       throw new ArgumentError.notNull(
           "Ethereum::getUncleCountByNumber - blockNumber");
     }
-    final String method = EthereumRpcMethods.blockUncleCountByNumber;
+    final String method = EthereumRpcMethods.blockUncleCountByBlockNumber;
     String blockString;
     if (blockNumber is int) {
       blockString = EthereumUtilities.intToHex(blockNumber);
@@ -490,9 +490,7 @@ class Ethereum {
     } else {
       blockString = block;
     }
-    final List params = [EthereumUtilities.intToHex(address),
-    blockString
-    ];
+    final List params = [EthereumUtilities.intToHex(address), blockString];
     final res = await rpcClient.request(method, params);
     if (res.containsKey(ethResultKey)) {
       return EthereumUtilities.hexToInt(res.result);
@@ -513,8 +511,9 @@ class Ethereum {
       throw new ArgumentError.notNull("Ethereum::sign - message");
     }
     final String method = EthereumRpcMethods.sign;
-    final List params = [EthereumUtilities.intToHex(account),
-    EthereumUtilities.intToHex(message)
+    final List params = [
+      EthereumUtilities.intToHex(account),
+      EthereumUtilities.intToHex(message)
     ];
     final res = await rpcClient.request(method, params);
     if (res.containsKey(ethResultKey)) {
@@ -545,16 +544,35 @@ class Ethereum {
     final String method = EthereumRpcMethods.sendTransaction;
     final dynamic params = [
       {
-        "from": address,
+        "from": EthereumUtilities.intToHex(address),
         "to": to == null ? null : EthereumUtilities.intToHex(to),
         "gas": EthereumUtilities.intToHex(gas),
-        "gasPrice": gasPrice == null ? null : EthereumUtilities.intToHex(
-            gasPrice),
+        "gasPrice":
+        gasPrice == null ? null : EthereumUtilities.intToHex(gasPrice),
         "value": value == null ? null : EthereumUtilities.intToHex(value),
         "data": EthereumUtilities.intToHex(data),
         "nonce": nonce == null ? null : EthereumUtilities.intToHex(nonce)
       }
     ];
+    final res = await rpcClient.request(method, params);
+    if (res.containsKey(ethResultKey)) {
+      return EthereumUtilities.hexToInt(res.result);
+    }
+    _processError(method, res);
+    return null;
+  }
+
+  /// Send raw transaction
+  /// Creates new message call transaction or a contract creation for signed transactions.
+  /// Takes the signed transaction data.
+  /// Returns the transaction hash, or the zero hash if the transaction is not yet available.
+  Future<int> sendRawTransaction(int signedTransaction) async {
+    if (signedTransaction == null) {
+      throw new ArgumentError.notNull(
+          "Ethereum::sendRawTransaction - signedTransaction");
+    }
+    final String method = EthereumRpcMethods.sendRawTransaction;
+    final dynamic params = [ EthereumUtilities.intToHex(signedTransaction)];
     final res = await rpcClient.request(method, params);
     if (res.containsKey(ethResultKey)) {
       return EthereumUtilities.hexToInt(res.result);

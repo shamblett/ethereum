@@ -29,9 +29,10 @@ class EthereumRpcMethods {
   static const String transactionCount = 'eth_getTransactionCount';
   static const String blockTransactionCountByHash = 'eth_getBlockTransactionCountByHash';
   static const String blockTransactionCountByNumber = 'eth_getBlockTransactionCountByNumber';
-  static const String blockUncleCountByHash = 'eth_getUncleCountByBlockHash';
-  static const String blockUncleCountByNumber = 'eth_getUncleCountByBlockNumber';
+  static const String blockUncleCountByBlockHash = 'eth_getUncleCountByBlockHash';
+  static const String blockUncleCountByBlockNumber = 'eth_getUncleCountByBlockNumber';
   static const String code = 'eth_getCode';
   static const String sign = 'eth_sign';
   static const String sendTransaction = 'eth_sendTransaction';
+  static const String sendRawTransaction = 'eth_sendRawTransaction';
 }
