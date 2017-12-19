@@ -915,4 +915,5 @@ class Ethereum {
     _processError(method, res);
     return null;
   }
+
 }
