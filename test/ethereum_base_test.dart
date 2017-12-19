@@ -365,7 +365,7 @@ void main() {
       }
       expect(thrown, isTrue);
     });
-    test("get block by hash", () async {
+    test("Get block by hash", () async {
       bool thrown = false;
       try {
         await client.getBlockByHash(null);
@@ -373,6 +373,18 @@ void main() {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
             "Invalid argument(s) (Ethereum::getBlockByHash - blockHash): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
+    test("Get block by number", () async {
+      bool thrown = false;
+      try {
+        await client.getBlockByNumber(null);
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::getBlockByNumber - blockNumber): Must not be null");
         thrown = true;
       }
       expect(thrown, isTrue);

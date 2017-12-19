@@ -394,5 +394,12 @@ class EthereumCommon {
       }
       expect(client.rpcClient.id, ++id);
     });
+    test("Get block by number", () async {
+      final JsonObjectLite ret = await client.getBlockByNumber(0x01);
+      if (ret != null) {
+        print(ret);
+      }
+      expect(client.rpcClient.id, ++id);
+    });
   }
 }

@@ -38,4 +38,5 @@ class EthereumRpcMethods {
   static const String call = 'eth_call';
   static const String estimateGas = 'eth_estimateGas';
   static const String getBlockByHash = 'eth_getBlockByHash';
+  static const String getBlockByNumber = 'eth_getBlockByNumber';
 }

@@ -698,4 +698,33 @@ class Ethereum {
     _processError(method, res);
     return null;
   }
+
+  /// Get block by number
+  /// Returns information about a block by block number.
+  /// blockNumber - integer of a block number, or the string "earliest", "latest" or "pending",
+  /// as in the default block parameter.
+  /// A boolean, if true it returns the full transaction objects,
+  /// if false only the hashes of the transactions, defaults to true.
+  /// Returns See getBlockByHash
+  Future<JsonObjectLite> getBlockByNumber(dynamic blockNumber,
+      [full = true]) async {
+    if (blockNumber == null) {
+      throw new ArgumentError.notNull(
+          "Ethereum::getBlockByNumber - blockNumber");
+    }
+    String blockString;
+    if (blockNumber is int) {
+      blockString = EthereumUtilities.intToHex(blockNumber);
+    } else {
+      blockString = blockNumber;
+    }
+    final dynamic params = [blockString, full];
+    final String method = EthereumRpcMethods.getBlockByNumber;
+    final res = await rpcClient.request(method, params);
+    if (res.containsKey(ethResultKey)) {
+      return res.result;
+    }
+    _processError(method, res);
+    return null;
+  }
 }
