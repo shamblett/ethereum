@@ -48,4 +48,5 @@ class EthereumRpcMethods {
       'eth_getTransactionByBlockHashAndIndex';
   static const String getTransactionByBlockNumberAndIndex =
       'eth_getTransactionByBlockNumberAndIndex';
+  static const String getTransactionReceipt = 'eth_getTransactionReceipt';
 }

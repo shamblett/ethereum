@@ -773,7 +773,9 @@ class Ethereum {
           "Ethereum::getTransactionByBlockHashAndIndex - index");
     }
     final dynamic params = [
-      EthereumUtilities.intToHex(blockHash), EthereumUtilities.intToHex(index)];
+      EthereumUtilities.intToHex(blockHash),
+      EthereumUtilities.intToHex(index)
+    ];
     final String method = EthereumRpcMethods.getTransactionByBlockHashAndIndex;
     final res = await rpcClient.request(method, params);
     if (res.containsKey(ethResultKey)) {
@@ -803,10 +805,46 @@ class Ethereum {
     } else {
       blockNumberString = blockNumber;
     }
-    final dynamic params = [blockNumberString, EthereumUtilities.intToHex(index)
+    final dynamic params = [
+      blockNumberString,
+      EthereumUtilities.intToHex(index)
     ];
-    final String method = EthereumRpcMethods
-        .getTransactionByBlockNumberAndIndex;
+    final String method =
+        EthereumRpcMethods.getTransactionByBlockNumberAndIndex;
+    final res = await rpcClient.request(method, params);
+    if (res.containsKey(ethResultKey)) {
+      return res.result;
+    }
+    _processError(method, res);
+    return null;
+  }
+
+  /// Get transaction receipt
+  /// Returns the receipt of a transaction by transaction hash.
+  /// Note That the receipt is not available for pending transactions.
+  /// Hash of a transaction
+  /// A transaction receipt object, or null when no receipt was found:
+  /// Returns :
+  ///
+  /// transactionHash: - hash of the transaction.
+  /// transactionIndex: - integer of the transactions index position in the block.
+  /// blockHash: - hash of the block where this transaction was in.
+  /// blockNumber: - block number where this transaction was in.
+  /// cumulativeGasUsed: - The total amount of gas used when this transaction was executed in the block.
+  /// gasUsed: - The amount of gas used by this specific transaction alone.
+  /// contractAddress: - The contract address created, if the transaction was a contract creation, otherwise null.
+  /// logs: - Array of log objects, which this transaction generated.
+  /// It also returns either :
+  ///
+  /// root : 32 bytes of post-transaction stateroot (pre Byzantium)
+  /// status: either 1 (success) or 0 (failure).
+  Future<JsonObjectLite> getTransactionReceipt(int transactionHash) async {
+    if (transactionHash == null) {
+      throw new ArgumentError.notNull(
+          "Ethereum::getTransactionReceipt - transactionHash");
+    }
+    final dynamic params = [EthereumUtilities.intToHex(transactionHash)];
+    final String method = EthereumRpcMethods.getTransactionReceipt;
     final res = await rpcClient.request(method, params);
     if (res.containsKey(ethResultKey)) {
       return res.result;

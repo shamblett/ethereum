@@ -426,5 +426,13 @@ class EthereumCommon {
       }
       expect(client.rpcClient.id, ++id);
     });
+    test("Get transaction receipt", () async {
+      final JsonObjectLite ret = await client.getTransactionReceipt(
+          0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8);
+      if (ret != null) {
+        print(ret);
+      }
+      expect(client.rpcClient.id, ++id);
+    });
   }
 }

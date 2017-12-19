@@ -449,5 +449,17 @@ void main() {
       }
       expect(thrown, isTrue);
     });
+    test("Get transaction receipt", () async {
+      bool thrown = false;
+      try {
+        await client.getTransactionReceipt(null);
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::getTransactionReceipt - transactionHash): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
   });
 }
