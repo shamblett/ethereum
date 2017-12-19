@@ -27,10 +27,14 @@ class EthereumRpcMethods {
   static const String balance = 'eth_getBalance';
   static const String storageAt = 'eth_getStorageAt';
   static const String transactionCount = 'eth_getTransactionCount';
-  static const String blockTransactionCountByHash = 'eth_getBlockTransactionCountByHash';
-  static const String blockTransactionCountByNumber = 'eth_getBlockTransactionCountByNumber';
-  static const String blockUncleCountByBlockHash = 'eth_getUncleCountByBlockHash';
-  static const String blockUncleCountByBlockNumber = 'eth_getUncleCountByBlockNumber';
+  static const String blockTransactionCountByHash =
+      'eth_getBlockTransactionCountByHash';
+  static const String blockTransactionCountByNumber =
+      'eth_getBlockTransactionCountByNumber';
+  static const String blockUncleCountByBlockHash =
+      'eth_getUncleCountByBlockHash';
+  static const String blockUncleCountByBlockNumber =
+      'eth_getUncleCountByBlockNumber';
   static const String code = 'eth_getCode';
   static const String sign = 'eth_sign';
   static const String sendTransaction = 'eth_sendTransaction';
@@ -39,4 +43,9 @@ class EthereumRpcMethods {
   static const String estimateGas = 'eth_estimateGas';
   static const String getBlockByHash = 'eth_getBlockByHash';
   static const String getBlockByNumber = 'eth_getBlockByNumber';
+  static const String getTransactionByHash = 'eth_getTransactionByHash';
+  static const String getTransactionByBlockHashAndIndex =
+      'eth_getTransactionByBlockHashAndIndex';
+  static const String getTransactionByBlockNumberAndIndex =
+      'eth_getTransactionByBlockNumberAndIndex';
 }

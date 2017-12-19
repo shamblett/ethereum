@@ -389,5 +389,65 @@ void main() {
       }
       expect(thrown, isTrue);
     });
+    test("Get transaction by hash", () async {
+      bool thrown = false;
+      try {
+        await client.getTransactionByHash(null);
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::getTransactionByHash - hash): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
+    test("Get transaction by block hash and index - block hash", () async {
+      bool thrown = false;
+      try {
+        await client.getTransactionByBlockHashAndIndex(null, 0);
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::getTransactionByBlockHashAndIndex - blockHash): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
+    test("Get transaction by block hash and index - index", () async {
+      bool thrown = false;
+      try {
+        await client.getTransactionByBlockHashAndIndex(0, null);
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::getTransactionByBlockHashAndIndex - index): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
+    test("Get transaction by block number and index - block number", () async {
+      bool thrown = false;
+      try {
+        await client.getTransactionByBlockNumberAndIndex(null, 0);
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::getTransactionByBlockNumberAndIndex - blockNumber): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
+    test("Get transaction by block number and index - index", () async {
+      bool thrown = false;
+      try {
+        await client.getTransactionByBlockNumberAndIndex(0, null);
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::getTransactionByBlockNumberAndIndex - index): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
   });
 }

@@ -401,5 +401,30 @@ class EthereumCommon {
       }
       expect(client.rpcClient.id, ++id);
     });
+    test("Get transaction by hash", () async {
+      final JsonObjectLite ret = await client.getTransactionByHash(
+          0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8);
+      if (ret != null) {
+        print(ret);
+      }
+      expect(client.rpcClient.id, ++id);
+    });
+    test("Get transaction by block hash and index", () async {
+      final JsonObjectLite ret = await client.getTransactionByBlockHashAndIndex(
+          0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8,
+          0);
+      if (ret != null) {
+        print(ret);
+      }
+      expect(client.rpcClient.id, ++id);
+    });
+    test("Get transaction by block number and index", () async {
+      final JsonObjectLite ret =
+      await client.getTransactionByBlockNumberAndIndex(0x100, 0);
+      if (ret != null) {
+        print(ret);
+      }
+      expect(client.rpcClient.id, ++id);
+    });
   }
 }
