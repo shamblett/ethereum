@@ -461,5 +461,53 @@ void main() {
       }
       expect(thrown, isTrue);
     });
+    test("Get uncle by block hash and index - block hash", () async {
+      bool thrown = false;
+      try {
+        await client.getUncleByBlockHashAndIndex(null, 0);
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::getUncleByBlockHashAndIndex - blockHash): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
+    test("Get uncle by block hash and index - index", () async {
+      bool thrown = false;
+      try {
+        await client.getUncleByBlockHashAndIndex(0, null);
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::getUncleByBlockHashAndIndex - index): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
+    test("Get uncle by block number and index - block number", () async {
+      bool thrown = false;
+      try {
+        await client.getUncleByBlockNumberAndIndex(null, 0);
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::getUncleByBlockNumberAndIndex - blockNumber): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
+    test("Get uncle by block number and index - index", () async {
+      bool thrown = false;
+      try {
+        await client.getUncleByBlockNumberAndIndex(0, null);
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::getUncleByBlockNumberAndIndex - index): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
   });
 }

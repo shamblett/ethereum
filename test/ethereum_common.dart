@@ -14,7 +14,6 @@ import 'test_configuration.dart';
 class EthereumCommon {
   static void run(Ethereum client) {
     int id = 0;
-    int blockHash;
     test("Protocol version 1", () async {
       final String version = await client.protocolVersion();
       expect(version, isNotNull);
@@ -310,7 +309,6 @@ class EthereumCommon {
           nonce: 2);
       if (hash != null) {
         print(hash);
-        blockHash = hash;
       }
       expect(client.rpcClient.id, ++id);
       expect(client.lastError.id, id);
@@ -429,6 +427,23 @@ class EthereumCommon {
     test("Get transaction receipt", () async {
       final JsonObjectLite ret = await client.getTransactionReceipt(
           0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8);
+      if (ret != null) {
+        print(ret);
+      }
+      expect(client.rpcClient.id, ++id);
+    });
+    test("Get uncle by block hash and index", () async {
+      final JsonObjectLite ret = await client.getUncleByBlockHashAndIndex(
+          0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8,
+          0);
+      if (ret != null) {
+        print(ret);
+      }
+      expect(client.rpcClient.id, ++id);
+    });
+    test("Get uncle by block number and index", () async {
+      final JsonObjectLite ret =
+      await client.getUncleByBlockNumberAndIndex(0x100, 0);
       if (ret != null) {
         print(ret);
       }

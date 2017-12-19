@@ -685,7 +685,8 @@ class Ethereum {
   /// timestamp: - the unix timestamp for when the block was collated.
   /// transactions: - Array of transaction objects, or 32 Bytes transaction hashes depending on the last given parameter.
   /// uncles: - Array of uncle hashes.
-  Future<JsonObjectLite> getBlockByHash(int blockHash, [full = true]) async {
+  Future<JsonObjectLite> getBlockByHash(int blockHash,
+      [bool full = true]) async {
     if (blockHash == null) {
       throw new ArgumentError.notNull("Ethereum::getBlockByHash - blockHash");
     }
@@ -707,7 +708,7 @@ class Ethereum {
   /// if false only the hashes of the transactions, defaults to true.
   /// Returns See getBlockByHash
   Future<JsonObjectLite> getBlockByNumber(dynamic blockNumber,
-      [full = true]) async {
+      [bool full = true]) async {
     if (blockNumber == null) {
       throw new ArgumentError.notNull(
           "Ethereum::getBlockByNumber - blockNumber");
@@ -845,6 +846,68 @@ class Ethereum {
     }
     final dynamic params = [EthereumUtilities.intToHex(transactionHash)];
     final String method = EthereumRpcMethods.getTransactionReceipt;
+    final res = await rpcClient.request(method, params);
+    if (res.containsKey(ethResultKey)) {
+      return res.result;
+    }
+    _processError(method, res);
+    return null;
+  }
+
+  /// Get uncle by block hash and index.
+  /// Returns information about an uncle by block hash and uncle index position.
+  /// Note: An uncle doesn't contain individual transactions.
+  /// Hash of a block and integer of the uncle index position.
+  /// Returns see getBlockByHash.
+  Future<JsonObjectLite> getUncleByBlockHashAndIndex(int blockHash,
+      int index) async {
+    if (blockHash == null) {
+      throw new ArgumentError.notNull(
+          "Ethereum::getUncleByBlockHashAndIndex - blockHash");
+    }
+    if (index == null) {
+      throw new ArgumentError.notNull(
+          "Ethereum::getUncleByBlockHashAndIndex - index");
+    }
+    final dynamic params = [
+      EthereumUtilities.intToHex(blockHash),
+      EthereumUtilities.intToHex(index)
+    ];
+    final String method = EthereumRpcMethods.getUncleByBlockHashAndIndex;
+    final res = await rpcClient.request(method, params);
+    if (res.containsKey(ethResultKey)) {
+      return res.result;
+    }
+    _processError(method, res);
+    return null;
+  }
+
+  /// Get uncle by block number and index.
+  /// Returns information about an uncle by block number and uncle index position.
+  /// Note: An uncle doesn't contain individual transactions.
+  /// A block number, or the string "earliest", "latest" or "pending", as in the default block parameter.
+  /// Returns see getBlockByHash.
+  Future<JsonObjectLite> getUncleByBlockNumberAndIndex(dynamic blockNumber,
+      int index) async {
+    if (blockNumber == null) {
+      throw new ArgumentError.notNull(
+          "Ethereum::getUncleByBlockNumberAndIndex - blockNumber");
+    }
+    if (index == null) {
+      throw new ArgumentError.notNull(
+          "Ethereum::getUncleByBlockNumberAndIndex - index");
+    }
+    String blockNumberString;
+    if (blockNumber is int) {
+      blockNumberString = EthereumUtilities.intToHex(blockNumber);
+    } else {
+      blockNumberString = blockNumber;
+    }
+    final dynamic params = [
+      blockNumberString,
+      EthereumUtilities.intToHex(index)
+    ];
+    final String method = EthereumRpcMethods.getUncleByBlockNumberAndIndex;
     final res = await rpcClient.request(method, params);
     if (res.containsKey(ethResultKey)) {
       return res.result;
