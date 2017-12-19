@@ -365,5 +365,17 @@ void main() {
       }
       expect(thrown, isTrue);
     });
+    test("get block by hash", () async {
+      bool thrown = false;
+      try {
+        await client.getBlockByHash(null);
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::getBlockByHash - blockHash): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
   });
 }

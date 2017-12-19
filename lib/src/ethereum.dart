@@ -659,4 +659,43 @@ class Ethereum {
     _processError(method, res);
     return null;
   }
+
+  /// Get block by hash
+  /// Returns information about a block by hash
+  /// Hash of a block and a boolean, if true it returns the full transaction objects,
+  /// if false only the hashes of the transactions, defaults to true.
+  /// Returns A block object, or null when no block was found :
+  ///
+  /// number: QUANTITY - the block number. null when its pending block.
+  /// hash: - hash of the block. null when its pending block.
+  /// parentHash: - hash of the parent block.
+  /// nonce: DATA, hash of the generated proof-of-work. null when its pending block.
+  /// sha3Uncles: - SHA3 of the uncles data in the block.
+  /// logsBloom: - the bloom filter for the logs of the block. null when its pending block.
+  /// transactionsRoot: - the root of the transaction trie of the block.
+  /// stateRoot: - the root of the final state trie of the block.
+  /// receiptsRoot: - the root of the receipts trie of the block.
+  /// miner: DATA, - the address of the beneficiary to whom the mining rewards were given.
+  /// difficulty: - integer of the difficulty for this block.
+  /// totalDifficulty: - integer of the total difficulty of the chain until this block.
+  /// extraData: - the "extra data" field of this block.
+  /// size: - integer the size of this block in bytes.
+  /// gasLimit: - the maximum gas allowed in this block.
+  /// gasUsed: - the total used gas by all transactions in this block.
+  /// timestamp: - the unix timestamp for when the block was collated.
+  /// transactions: - Array of transaction objects, or 32 Bytes transaction hashes depending on the last given parameter.
+  /// uncles: - Array of uncle hashes.
+  Future<JsonObjectLite> getBlockByHash(int blockHash, [full = true]) async {
+    if (blockHash == null) {
+      throw new ArgumentError.notNull("Ethereum::getBlockByHash - blockHash");
+    }
+    final dynamic params = [EthereumUtilities.intToHex(blockHash), full];
+    final String method = EthereumRpcMethods.getBlockByHash;
+    final res = await rpcClient.request(method, params);
+    if (res.containsKey(ethResultKey)) {
+      return res.result;
+    }
+    _processError(method, res);
+    return null;
+  }
 }
