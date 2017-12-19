@@ -33,4 +33,18 @@ class EthereumUtilities {
     return new List<String>.generate(
         val.length, (int index) => intToHex(val[index]));
   }
+
+  /// Remove null values from a map
+  static Map removeNull(Map theMap) {
+    final List values = theMap.values.toList();
+    final List keys = theMap.keys.toList();
+    int index = 0;
+    for (dynamic val in values) {
+      if (val == null) {
+        theMap.remove(keys[index]);
+      }
+      index++;
+    }
+    return theMap;
+  }
 }

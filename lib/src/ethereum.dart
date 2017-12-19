@@ -525,7 +525,7 @@ class Ethereum {
 
   /// Send transaction
   /// Creates new message call transaction or a contract creation, if the data field contains code.
-  /// from: The address the transaction is send from.
+  /// address: The address the transaction is sent from.
   /// to: (optional when creating new contract) The address the transaction is directed to.
   /// gas: (optional, default: 90000) Integer of the gas provided for the transaction execution. It will return unused gas.
   /// gasPrice: (optional, default: To-Be-Determined) Integer of the gasPrice used for each paid gas
@@ -542,18 +542,18 @@ class Ethereum {
       throw new ArgumentError.notNull("Ethereum::sendTransaction - data");
     }
     final String method = EthereumRpcMethods.sendTransaction;
-    final dynamic params = [
-      {
-        "from": EthereumUtilities.intToHex(address),
-        "to": to == null ? null : EthereumUtilities.intToHex(to),
-        "gas": EthereumUtilities.intToHex(gas),
-        "gasPrice":
-        gasPrice == null ? null : EthereumUtilities.intToHex(gasPrice),
-        "value": value == null ? null : EthereumUtilities.intToHex(value),
-        "data": EthereumUtilities.intToHex(data),
-        "nonce": nonce == null ? null : EthereumUtilities.intToHex(nonce)
-      }
-    ];
+    Map<String, String> paramBlock = {
+      "from": EthereumUtilities.intToHex(address),
+      "to": to == null ? null : EthereumUtilities.intToHex(to),
+      "gas": EthereumUtilities.intToHex(gas),
+      "gasPrice":
+      gasPrice == null ? null : EthereumUtilities.intToHex(gasPrice),
+      "value": value == null ? null : EthereumUtilities.intToHex(value),
+      "data": EthereumUtilities.intToHex(data),
+      "nonce": nonce == null ? null : EthereumUtilities.intToHex(nonce)
+    };
+    paramBlock = EthereumUtilities.removeNull(paramBlock);
+    final dynamic params = [paramBlock];
     final res = await rpcClient.request(method, params);
     if (res.containsKey(ethResultKey)) {
       return EthereumUtilities.hexToInt(res.result);
@@ -572,7 +572,52 @@ class Ethereum {
           "Ethereum::sendRawTransaction - signedTransaction");
     }
     final String method = EthereumRpcMethods.sendRawTransaction;
-    final dynamic params = [ EthereumUtilities.intToHex(signedTransaction)];
+    final dynamic params = [EthereumUtilities.intToHex(signedTransaction)];
+    final res = await rpcClient.request(method, params);
+    if (res.containsKey(ethResultKey)) {
+      return EthereumUtilities.hexToInt(res.result);
+    }
+    _processError(method, res);
+    return null;
+  }
+
+  /// Call
+  /// Executes a new message call immediately without creating a transaction on the block chain.
+  /// address: The address the transaction is sent to.
+  /// from: (optional) The address the transaction is sent from.
+  /// gas: (optional) Integer of the gas provided for the transaction execution. eth_call consumes zero gas,
+  /// but this parameter may be needed by some executions.
+  /// gasPrice: (optional) Integer of the gasPrice used for each paid gas
+  /// value: (optional) Integer of the value send with this transaction
+  /// data: (optional) Hash of the method signature and encoded parameters. For details see Ethereum Contract ABI
+  /// block: integer block number, or the string "latest", "earliest" or "pending"
+  /// Returns the return value of executed contract.
+  Future<int> call(int address, dynamic block,
+      {int from, int gas, int gasPrice, int value, int data}) async {
+    if (address == null) {
+      throw new ArgumentError.notNull("Ethereum::call - address");
+    }
+    if (block == null) {
+      throw new ArgumentError.notNull("Ethereum::call - block");
+    }
+    final String method = EthereumRpcMethods.call;
+    String blockString;
+    if (block is int) {
+      blockString = EthereumUtilities.intToHex(block);
+    } else {
+      blockString = block;
+    }
+    Map<String, String> paramBlock = {
+      "from": from == null ? null : EthereumUtilities.intToHex(from),
+      "to": EthereumUtilities.intToHex(address),
+      "gas": gas == null ? null : EthereumUtilities.intToHex(gas),
+      "gasPrice":
+      gasPrice == null ? null : EthereumUtilities.intToHex(gasPrice),
+      "value": value == null ? null : EthereumUtilities.intToHex(value),
+      "data": data == null ? null : EthereumUtilities.intToHex(data)
+    };
+    paramBlock = EthereumUtilities.removeNull(paramBlock);
+    final dynamic params = [paramBlock, blockString];
     final res = await rpcClient.request(method, params);
     if (res.containsKey(ethResultKey)) {
       return EthereumUtilities.hexToInt(res.result);

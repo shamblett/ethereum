@@ -35,4 +35,5 @@ class EthereumRpcMethods {
   static const String sign = 'eth_sign';
   static const String sendTransaction = 'eth_sendTransaction';
   static const String sendRawTransaction = 'eth_sendRawTransaction';
+  static const String call = 'eth_call';
 }

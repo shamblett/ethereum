@@ -341,5 +341,31 @@ class EthereumCommon {
       expect(client.rpcClient.id, ++id);
       expect(client.lastError.id, id);
     });
+    test("Call ", () async {
+      final int ret = await client.call(
+          TestConfiguration.defaultAccount,
+          0x10,
+          from: 0xd10de988e845d33859c3f96c7f1fc723b7b56f4c,
+          gas: 0x2000,
+          gasPrice: 0x1000,
+          value: 0x2000,
+          data: 0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675);
+      if (ret != null) {
+        print(ret);
+      }
+      expect(client.rpcClient.id, ++id);
+    });
+    test("Call - some null", () async {
+      final int ret = await client.call(
+          TestConfiguration.defaultAccount,
+          "latest",
+          from: 0xd10de988e845d33859c3f96c7f1fc723b7b56f4c,
+          gasPrice: 0x1000,
+          data: 0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675);
+      if (ret != null) {
+        print(ret);
+      }
+      expect(client.rpcClient.id, ++id);
+    });
   }
 }

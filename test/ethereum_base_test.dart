@@ -341,5 +341,29 @@ void main() {
       }
       expect(thrown, isTrue);
     });
+    test("Call - address", () async {
+      bool thrown = false;
+      try {
+        await client.call(null, "");
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::call - address): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
+    test("Call - block", () async {
+      bool thrown = false;
+      try {
+        await client.call(0, null);
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::call - block): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
   });
 }
