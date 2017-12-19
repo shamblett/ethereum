@@ -148,9 +148,7 @@ class EthereumCommon {
     });
     test("Get storage at - latest", () async {
       final int storage = await client.getStorageAt(
-          0x295a70b2de5e3953354a6a8344e616ed314d7251,
-          0x0,
-          Ethereum.ethLatest);
+          0x295a70b2de5e3953354a6a8344e616ed314d7251, 0x0, Ethereum.ethLatest);
       expect(storage, isNotNull);
       expect(client.rpcClient.id, ++id);
       print("Storage at latest is $storage");
@@ -166,9 +164,7 @@ class EthereumCommon {
     });
     test("Get storage at - pending", () async {
       final int storage = await client.getStorageAt(
-          0x295a70b2de5e3953354a6a8344e616ed314d7251,
-          0x0,
-          Ethereum.ethPending);
+          0x295a70b2de5e3953354a6a8344e616ed314d7251, 0x0, Ethereum.ethPending);
       expect(storage, isNotNull);
       expect(client.rpcClient.id, ++id);
       print("Storage at pending is $storage");
@@ -215,8 +211,7 @@ class EthereumCommon {
       expect(client.rpcClient.id, ++id);
     });
     test("Block transaction count by number - number", () async {
-      final int count =
-      await client.getBlockTransactionCountByNumber(0xe8);
+      final int count = await client.getBlockTransactionCountByNumber(0xe8);
       expect(count, isNotNull);
       expect(client.rpcClient.id, ++id);
     });
@@ -250,14 +245,12 @@ class EthereumCommon {
       expect(client.rpcClient.id, ++id);
     });
     test("Block uncle count by number - latest", () async {
-      final int count =
-      await client.getUncleCountByNumber(Ethereum.ethLatest);
+      final int count = await client.getUncleCountByNumber(Ethereum.ethLatest);
       expect(count, isNotNull);
       expect(client.rpcClient.id, ++id);
     });
     test("Block uncle count by number - pending", () async {
-      final int count =
-      await client.getUncleCountByNumber(Ethereum.ethPending);
+      final int count = await client.getUncleCountByNumber(Ethereum.ethPending);
       expect(count, isNotNull);
       expect(client.rpcClient.id, ++id);
     });
@@ -268,8 +261,8 @@ class EthereumCommon {
       expect(client.rpcClient.id, ++id);
     });
     test("Code - address", () async {
-      final int code = await client.getCode(
-          0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b, 0);
+      final int code =
+      await client.getCode(0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b, 0);
       expect(code, isNull);
       expect(client.rpcClient.id, ++id);
       print("Code is $code");
@@ -342,14 +335,13 @@ class EthereumCommon {
       expect(client.lastError.id, id);
     });
     test("Call ", () async {
-      final int ret = await client.call(
-          TestConfiguration.defaultAccount,
-          0x10,
+      final int ret = await client.call(TestConfiguration.defaultAccount, 0x10,
           from: 0xd10de988e845d33859c3f96c7f1fc723b7b56f4c,
           gas: 0x2000,
           gasPrice: 0x1000,
           value: 0x2000,
-          data: 0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675);
+          data:
+          0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675);
       if (ret != null) {
         print(ret);
       }
@@ -357,11 +349,36 @@ class EthereumCommon {
     });
     test("Call - some null", () async {
       final int ret = await client.call(
-          TestConfiguration.defaultAccount,
-          "latest",
+          TestConfiguration.defaultAccount, "latest",
           from: 0xd10de988e845d33859c3f96c7f1fc723b7b56f4c,
           gasPrice: 0x1000,
-          data: 0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675);
+          data:
+          0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675);
+      if (ret != null) {
+        print(ret);
+      }
+      expect(client.rpcClient.id, ++id);
+    });
+    test("Estimate gas", () async {
+      final int ret = await client.estimateGas(
+          address: TestConfiguration.defaultAccount,
+          from: 0xd10de988e845d33859c3f96c7f1fc723b7b56f4c,
+          gas: 0x2000,
+          gasPrice: 0x1000,
+          value: 0x2000,
+          data:
+          0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675);
+      if (ret != null) {
+        print(ret);
+      }
+      expect(client.rpcClient.id, ++id);
+    });
+    test("Estimate gas - some null", () async {
+      final int ret = await client.estimateGas(
+          address: TestConfiguration.defaultAccount,
+          from: 0xd10de988e845d33859c3f96c7f1fc723b7b56f4c,
+          gas: 0x2000,
+          gasPrice: 0x1000);
       if (ret != null) {
         print(ret);
       }

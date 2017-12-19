@@ -625,4 +625,38 @@ class Ethereum {
     _processError(method, res);
     return null;
   }
+
+  /// Estimate gas
+  /// Makes a call or transaction, which won't be added to the blockchain and returns the used gas,
+  /// which can be used for estimating the used gas.
+  /// See eth_call parameters, expect that all properties are optional. If no gas limit is specified geth
+  /// uses the block gas limit from the pending block as an upper bound. As a result the returned estimate
+  /// might not be enough to executed the call/transaction when the amount of gas is higher than the
+  /// pending block gas limit.
+  /// Returns the amount of gas used.
+  Future<int> estimateGas({int address,
+    int from,
+    int gas,
+    int gasPrice,
+    int value,
+    int data}) async {
+    Map<String, String> paramBlock = {
+      "from": from == null ? null : EthereumUtilities.intToHex(from),
+      "to": address == null ? null : EthereumUtilities.intToHex(address),
+      "gas": gas == null ? null : EthereumUtilities.intToHex(gas),
+      "gasPrice":
+      gasPrice == null ? null : EthereumUtilities.intToHex(gasPrice),
+      "value": value == null ? null : EthereumUtilities.intToHex(value),
+      "data": data == null ? null : EthereumUtilities.intToHex(data)
+    };
+    paramBlock = EthereumUtilities.removeNull(paramBlock);
+    final dynamic params = [paramBlock];
+    final String method = EthereumRpcMethods.estimateGas;
+    final res = await rpcClient.request(method, params);
+    if (res.containsKey(ethResultKey)) {
+      return EthereumUtilities.hexToInt(res.result);
+    }
+    _processError(method, res);
+    return null;
+  }
 }
