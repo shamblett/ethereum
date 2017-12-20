@@ -916,4 +916,108 @@ class Ethereum {
     return null;
   }
 
+  /// New filter
+  /// Creates a filter object, based on filter options, to notify when the state changes (logs).
+  /// To check if the state has changed, call getFilterChanges.
+  /// note on specifying topic filters:
+  /// Topics are order-dependent. A transaction with a log with topics [A, B] will be matched by the following topic filters:
+  /// [] "anything"
+  /// [A] "A in first position (and anything after)"
+  /// [null, B] "anything in first position AND B in second position (and anything after)"
+  /// [A, B] "A in first position AND B in second position (and anything after)"
+  /// [[A, B], [A, B]] "(A OR B) in first position AND (A OR B) in second position (and anything after)"
+  /// fromBlock: - (optional, default: "latest") Integer block number, or "latest" for the last mined block or "pending",
+  /// "earliest" for not yet mined transactions.
+  /// toBlock: - (optional, default: "latest") Integer block number, or "latest" for the last mined block or "pending", "earliest" for not yet mined transactions.
+  /// address: - (optional) Contract address or a list of addresses from which logs should originate.
+  /// topics: - (optional) topics. Topics are order-dependent. Each topic can also be an array of DATA with "or" options.
+  /// Note: the user must build this structure using the utilities in the EthereumUtilities class. See the Ethereum
+  /// Wiki RPC page for examples.
+  /// Returns a filter id.
+  Future<int> newFilter({dynamic fromBlock: "latest",
+    dynamic toBlock: "latest",
+    dynamic address,
+    List topics}) async {
+    String fromBlockString;
+    if (fromBlock is int) {
+      fromBlockString = EthereumUtilities.intToHex(fromBlock);
+    } else {
+      fromBlockString = fromBlock;
+    }
+    String toBlockString;
+    if (toBlock is int) {
+      toBlockString = EthereumUtilities.intToHex(toBlock);
+    } else {
+      toBlockString = toBlock;
+    }
+    final Map params = {"toBlock": toBlockString, "fromBlock": fromBlockString};
+    if (address != null) {
+      if (address is List) {
+        final List<String> addresses = EthereumUtilities.intToHexList(address);
+        params["address"] = [addresses];
+      } else {
+        params["address"] = (EthereumUtilities.intToHex(address));
+      }
+    }
+    if (topics != null) {
+      params["topics"] = [topics];
+    }
+    final List paramBlock = [params];
+    final String method = EthereumRpcMethods.newFilter;
+    final res = await rpcClient.request(method, paramBlock);
+    if (res.containsKey(ethResultKey)) {
+      return EthereumUtilities.hexToInt(res.result);
+    }
+    _processError(method, res);
+    return null;
+  }
+
+  /// New block filter
+  /// Creates a filter in the node, to notify when a new block arrives.
+  /// To check if the state has changed, call getFilterChanges.
+  /// Returns a filter id.
+  Future<int> newBlockFilter() async {
+    final List params = [];
+    final String method = EthereumRpcMethods.newBlockFilter;
+    final res = await rpcClient.request(method, params);
+    if (res.containsKey(ethResultKey)) {
+      return EthereumUtilities.hexToInt(res.result);
+    }
+    _processError(method, res);
+    return null;
+  }
+
+  /// New pending transaction filter
+  /// Creates a filter in the node, to notify when a new pending transaction arrives.
+  /// To check if the state has changed, call getFilterChanges.
+  /// Returns a filter id.
+  Future<int> newPendingTransactionFilter() async {
+    final List params = [];
+    final String method = EthereumRpcMethods.newPendingTransactionFilter;
+    final res = await rpcClient.request(method, params);
+    if (res.containsKey(ethResultKey)) {
+      return EthereumUtilities.hexToInt(res.result);
+    }
+    _processError(method, res);
+    return null;
+  }
+
+  /// Uninstall filter
+  /// Uninstalls a filter with given id. Should always be called when watch is no longer needed.
+  /// Additionally Filters timeout when they aren't requested with getFilterChanges for a period of time.
+  /// Filter id
+  /// Returns true if the filter was successfully uninstalled, otherwise false.
+  Future<bool> uninstallFilter(int filterId) async {
+    if (filterId == null) {
+      throw new ArgumentError.notNull("Ethereum::uninstallFilter - filterId");
+    }
+    List params = [EthereumUtilities.intToHex(filterId)];
+    final String method = EthereumRpcMethods.uninstallFilter;
+    final res = await rpcClient.request(method, params);
+    if (res.containsKey(ethResultKey)) {
+      return res.result;
+    }
+    _processError(method, res);
+    return null;
+  }
 }

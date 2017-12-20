@@ -509,5 +509,17 @@ void main() {
       }
       expect(thrown, isTrue);
     });
+    test("uninstall filter", () async {
+      bool thrown = false;
+      try {
+        await client.uninstallFilter(null);
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::uninstallFilter - filterId): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
   });
 }

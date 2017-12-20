@@ -53,6 +53,9 @@ class EthereumRpcMethods {
       'eth_getUncleByBlockHashAndIndex';
   static const String getUncleByBlockNumberAndIndex =
       'eth_getUncleByBlockNumberAndIndex';
-  static const String compileLLL = 'eth_compileLLL';
-
+  static const String newFilter = 'eth_newFilter';
+  static const String newBlockFilter = 'eth_newBlockFilter';
+  static const String newPendingTransactionFilter =
+      'eth_newPendingTransactionFilter';
+  static const String uninstallFilter = 'eth_uninstallFilter';
 }
