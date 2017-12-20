@@ -503,5 +503,29 @@ class EthereumCommon {
       }
       expect(client.rpcClient.id, ++id);
     });
+    test("Get logs", () async {
+      final List ret = await client.getLogs(topics: [
+        "0x000000000000000000000000a94f5374fce5edbc8e2a8697c15331677e6ebf0b"
+      ]);
+      if (ret != null) {
+        print(ret);
+      }
+      expect(client.rpcClient.id, ++id);
+    });
+    test("Get work", () async {
+      final List ret = await client.getWork();
+      if (ret != null) {
+        print(ret);
+      }
+      expect(client.rpcClient.id, ++id);
+    });
+    test("Submit work", () async {
+      final bool ret = await client.submitWork(
+          0x1000000000000001,
+          0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef,
+          0xD1FE5700000000000000000000000000D1FE5700000000000000000000000000);
+      expect(ret, isFalse);
+      expect(client.rpcClient.id, ++id);
+    });
   }
 }

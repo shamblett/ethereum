@@ -545,5 +545,41 @@ void main() {
       }
       expect(thrown, isTrue);
     });
+    test("Submit work - nonce", () async {
+      bool thrown = false;
+      try {
+        await client.submitWork(null, 1, 2);
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::submitWork - nonce): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
+    test("Submit work - powHash", () async {
+      bool thrown = false;
+      try {
+        await client.submitWork(1, null, 2);
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::submitWork - powHash): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
+    test("Submit work - digest", () async {
+      bool thrown = false;
+      try {
+        await client.submitWork(1, 1, null);
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::submitWork - digest): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
   });
 }

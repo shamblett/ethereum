@@ -60,4 +60,7 @@ class EthereumRpcMethods {
   static const String uninstallFilter = 'eth_uninstallFilter';
   static const String getFilterChanges = 'eth_getFilterChanges';
   static const String getFilterLogs = 'eth_getFilterLogs';
+  static const String getLogs = 'eth_getLogs';
+  static const String getWork = 'eth_getWork';
+  static const String submitWork = 'eth_submitWork';
 }

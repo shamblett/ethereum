@@ -1072,4 +1072,93 @@ class Ethereum {
     _processError(method, res);
     return null;
   }
+
+  /// Get logs
+  /// Returns a list of all logs matching a given filter object.
+  /// The filter definition, see newFilter parameters.
+  Future<List> getLogs({dynamic fromBlock: "latest",
+    dynamic toBlock: "latest",
+    dynamic address,
+    List topics}) async {
+    String fromBlockString;
+    if (fromBlock is int) {
+      fromBlockString = EthereumUtilities.intToHex(fromBlock);
+    } else {
+      fromBlockString = fromBlock;
+    }
+    String toBlockString;
+    if (toBlock is int) {
+      toBlockString = EthereumUtilities.intToHex(toBlock);
+    } else {
+      toBlockString = toBlock;
+    }
+    final Map params = {"toBlock": toBlockString, "fromBlock": fromBlockString};
+    if (address != null) {
+      if (address is List) {
+        final List<String> addresses = EthereumUtilities.intToHexList(address);
+        params["address"] = [addresses];
+      } else {
+        params["address"] = (EthereumUtilities.intToHex(address));
+      }
+    }
+    if (topics != null) {
+      params["topics"] = [topics];
+    }
+    final List paramBlock = [params];
+    final String method = EthereumRpcMethods.getLogs;
+    final res = await rpcClient.request(method, paramBlock);
+    if (res.containsKey(ethResultKey)) {
+      return res.result;
+    }
+    _processError(method, res);
+    return null;
+  }
+
+  /// Get work
+  /// Returns the hash of the current block, the seedHash, and the boundary condition to be met ("target").
+  /// Returns - List with the following properties:
+  ///
+  /// current block header pow-hash
+  /// the seed hash used for the DAG.
+  /// the boundary condition ("target"), 2^256 / difficulty.
+  Future<List> getWork() async {
+    final List paramBlock = [];
+    final String method = EthereumRpcMethods.getWork;
+    final res = await rpcClient.request(method, paramBlock);
+    if (res.containsKey(ethResultKey)) {
+      return res.result;
+    }
+    _processError(method, res);
+    return null;
+  }
+
+  /// Submit work
+  /// Used for submitting a proof-of-work solution.
+  /// The nonce found
+  /// The header's pow-hash
+  /// The mix digest
+  /// Returns  true if the provided solution is valid, otherwise false.
+  Future<bool> submitWork(int nonce, int powHash, int digest) async {
+    if (nonce == null) {
+      throw new ArgumentError.notNull("Ethereum::submitWork - nonce");
+    }
+    if (powHash == null) {
+      throw new ArgumentError.notNull("Ethereum::submitWork - powHash");
+    }
+    if (digest == null) {
+      throw new ArgumentError.notNull("Ethereum::submitWork - digest");
+    }
+    final List params = [
+      EthereumUtilities.intToHex(nonce),
+      EthereumUtilities.intToHex(powHash),
+      EthereumUtilities.intToHex(digest)
+    ];
+    final String method = EthereumRpcMethods.submitWork;
+    final res = await rpcClient.request(method, params);
+    if (res.containsKey(ethResultKey)) {
+      return res.result;
+    }
+    _processError(method, res);
+    return null;
+  }
 }
