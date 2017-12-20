@@ -11,9 +11,25 @@ part of ethereum;
 
 /// General client support utilities
 class EthereumUtilities {
-  /// Integer to hex string with leading 0x, lowercase
-  static String intToHex(int val) {
-    return "0x" + val.toRadixString(16);
+  /// Integer to hex string with leading 0x, lowercase.
+  /// The optional pad value pads the string out to the number of bytes
+  /// specified, i.e if 8 is specified the string 0x1 becomes 0x0000000000000001
+  /// default is 0, no padding
+  static String intToHex(int val, [int pad = 0]) {
+    String ret = val.toRadixString(16);
+    if (pad != 0) {
+      if (ret.length.isOdd) {
+        ret = '0' + ret;
+      }
+      final int bytes = (ret.length / 2).round();
+      if (bytes != pad) {
+        final int zeroNum = (pad - bytes);
+        for (int i = 0; i < zeroNum; i++) {
+          ret = '00' + ret;
+        }
+      }
+    }
+    return '0x' + ret;
   }
 
   /// Hex string to integer, a value of null indicates an error.

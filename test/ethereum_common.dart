@@ -521,7 +521,7 @@ class EthereumCommon {
     });
     test("Submit work", () async {
       final bool ret = await client.submitWork(
-          0x1000000000000001,
+          0x1,
           0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef,
           0xD1FE5700000000000000000000000000D1FE5700000000000000000000000000);
       expect(ret, isFalse);

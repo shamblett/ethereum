@@ -15,9 +15,14 @@ import 'package:test/test.dart';
 void main() {
   group("Utilities", () {
     test("Int to hex", () {
-      final int testInt = 0xabcdef12345;
+      final int testInt = 0xabcdef123450;
       final String val = EthereumUtilities.intToHex(testInt);
-      expect(val, "0xabcdef12345");
+      expect(val, "0xabcdef123450");
+    });
+    test("Int to hex - pad", () {
+      final int testInt = 0x1;
+      final String val = EthereumUtilities.intToHex(testInt, 8);
+      expect(val, "0x0000000000000001");
     });
     test("Hex to int - valid", () {
       final String testString = "0xabcdef12345";

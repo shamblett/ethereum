@@ -1149,9 +1149,9 @@ class Ethereum {
       throw new ArgumentError.notNull("Ethereum::submitWork - digest");
     }
     final List params = [
-      EthereumUtilities.intToHex(nonce),
-      EthereumUtilities.intToHex(powHash),
-      EthereumUtilities.intToHex(digest)
+      EthereumUtilities.intToHex(nonce, 8),
+      EthereumUtilities.intToHex(powHash, 32),
+      EthereumUtilities.intToHex(digest, 32)
     ];
     final String method = EthereumRpcMethods.submitWork;
     final res = await rpcClient.request(method, params);
