@@ -509,7 +509,7 @@ void main() {
       }
       expect(thrown, isTrue);
     });
-    test("uninstall filter", () async {
+    test("Uninstall filter", () async {
       bool thrown = false;
       try {
         await client.uninstallFilter(null);
@@ -517,6 +517,30 @@ void main() {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
             "Invalid argument(s) (Ethereum::uninstallFilter - filterId): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
+    test("Get filter changes", () async {
+      bool thrown = false;
+      try {
+        await client.getFilterChanges(null);
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::getFilterChanges - filterId): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
+    test("Get filter logs", () async {
+      bool thrown = false;
+      try {
+        await client.getFilterLogs(null);
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::getFilterLogs - filterId): Must not be null");
         thrown = true;
       }
       expect(thrown, isTrue);

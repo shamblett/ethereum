@@ -683,8 +683,8 @@ class Ethereum {
   /// gasLimit: - the maximum gas allowed in this block.
   /// gasUsed: - the total used gas by all transactions in this block.
   /// timestamp: - the unix timestamp for when the block was collated.
-  /// transactions: - Array of transaction objects, or 32 Bytes transaction hashes depending on the last given parameter.
-  /// uncles: - Array of uncle hashes.
+  /// transactions: - List of transaction objects, or 32 Bytes transaction hashes depending on the last given parameter.
+  /// uncles: - List of uncle hashes.
   Future<JsonObjectLite> getBlockByHash(int blockHash,
       [bool full = true]) async {
     if (blockHash == null) {
@@ -834,7 +834,7 @@ class Ethereum {
   /// cumulativeGasUsed: - The total amount of gas used when this transaction was executed in the block.
   /// gasUsed: - The amount of gas used by this specific transaction alone.
   /// contractAddress: - The contract address created, if the transaction was a contract creation, otherwise null.
-  /// logs: - Array of log objects, which this transaction generated.
+  /// logs: - List of log objects, which this transaction generated.
   /// It also returns either :
   ///
   /// root : 32 bytes of post-transaction stateroot (pre Byzantium)
@@ -930,7 +930,7 @@ class Ethereum {
   /// "earliest" for not yet mined transactions.
   /// toBlock: - (optional, default: "latest") Integer block number, or "latest" for the last mined block or "pending", "earliest" for not yet mined transactions.
   /// address: - (optional) Contract address or a list of addresses from which logs should originate.
-  /// topics: - (optional) topics. Topics are order-dependent. Each topic can also be an array of DATA with "or" options.
+  /// topics: - (optional) topics. Topics are order-dependent. Each topic can also be an list of DATA with "or" options.
   /// Note: the user must build this structure using the utilities in the EthereumUtilities class. See the Ethereum
   /// Wiki RPC page for examples.
   /// Returns a filter id.
@@ -1011,8 +1011,60 @@ class Ethereum {
     if (filterId == null) {
       throw new ArgumentError.notNull("Ethereum::uninstallFilter - filterId");
     }
-    List params = [EthereumUtilities.intToHex(filterId)];
+    final List params = [EthereumUtilities.intToHex(filterId)];
     final String method = EthereumRpcMethods.uninstallFilter;
+    final res = await rpcClient.request(method, params);
+    if (res.containsKey(ethResultKey)) {
+      return res.result;
+    }
+    _processError(method, res);
+    return null;
+  }
+
+  /// Get filter changes
+  /// Polling method for a filter, which returns an list of logs which occurred since last poll.
+  /// Filter Id
+  /// Returns :
+  /// List - list of log objects, or an empty list if nothing has changed since last poll.
+  /// For filters created with newBlockFilter the returns are block hashes.
+  /// For filters created with eth_PendingTransactionFilter the returns are transaction hashes.
+  /// For filters created with eth_newFilter logs are objects with following params:
+  ///
+  /// removed: - true when the log was removed, due to a chain reorganization. false if its a valid log.
+  /// logIndex: - integer of the log index position in the block. null when its pending log.
+  /// transactionIndex: - integer of the transactions index position log was created from. null when its pending log.
+  /// transactionHash: - hash of the transactions this log was created from. null when its pending log.
+  //  blockHash: - hash of the block where this log was in. null when its pending. null when its pending log.
+  /// blockNumber: - the block number where this log was in. null when its pending. null when its pending log.
+  /// address: - address from which this log originated.
+  /// data: - contains one or more 32 Bytes non-indexed arguments of the log.
+  /// topics: - List of 0 to 4 32 Bytes DATA of indexed log arguments. (In solidity: The first topic is the
+  /// hash of the signature of the event (e.g. Deposit(address,bytes32,uint256)), unless you declared the event with
+  /// the anonymous specifier.)
+  Future<dynamic> getFilterChanges(int filterId) async {
+    if (filterId == null) {
+      throw new ArgumentError.notNull("Ethereum::getFilterChanges - filterId");
+    }
+    final List params = [EthereumUtilities.intToHex(filterId)];
+    final String method = EthereumRpcMethods.getFilterChanges;
+    final res = await rpcClient.request(method, params);
+    if (res.containsKey(ethResultKey)) {
+      return res.result;
+    }
+    _processError(method, res);
+    return null;
+  }
+
+  /// Get filter logs
+  /// Returns an array of all logs matching filter with given id.
+  /// Filter Id
+  /// Returns see getFilterChanges
+  Future<dynamic> getFilterLogs(int filterId) async {
+    if (filterId == null) {
+      throw new ArgumentError.notNull("Ethereum::getFilterLogs - filterId");
+    }
+    final List params = [EthereumUtilities.intToHex(filterId)];
+    final String method = EthereumRpcMethods.getFilterLogs;
     final res = await rpcClient.request(method, params);
     if (res.containsKey(ethResultKey)) {
       return res.result;

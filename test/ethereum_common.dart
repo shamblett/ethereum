@@ -476,16 +476,31 @@ class EthereumCommon {
       }
       expect(client.rpcClient.id, ++id);
     });
+    int pendFilterId = 0;
     test("New pending transaction filter", () async {
-      final int filterId = await client.newPendingTransactionFilter();
+      pendFilterId = await client.newPendingTransactionFilter();
       if (filterId != null) {
         print(filterId);
       }
       expect(client.rpcClient.id, ++id);
     });
     test("Uninstall filter", () async {
-      final bool res = await client.uninstallFilter(filterId);
+      final bool res = await client.uninstallFilter(pendFilterId);
       expect(res, isTrue);
+      expect(client.rpcClient.id, ++id);
+    });
+    test("Get filter changes", () async {
+      final dynamic ret = await client.getFilterChanges(filterId);
+      if (ret != null) {
+        print(ret);
+      }
+      expect(client.rpcClient.id, ++id);
+    });
+    test("Get filter logs", () async {
+      final dynamic ret = await client.getFilterLogs(filterId);
+      if (ret != null) {
+        print(ret);
+      }
       expect(client.rpcClient.id, ++id);
     });
   }

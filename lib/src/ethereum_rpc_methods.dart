@@ -58,4 +58,6 @@ class EthereumRpcMethods {
   static const String newPendingTransactionFilter =
       'eth_newPendingTransactionFilter';
   static const String uninstallFilter = 'eth_uninstallFilter';
+  static const String getFilterChanges = 'eth_getFilterChanges';
+  static const String getFilterLogs = 'eth_getFilterLogs';
 }
