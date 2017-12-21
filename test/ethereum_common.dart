@@ -5,7 +5,6 @@
  * Copyright :  S.Hamblett
  */
 
-import 'dart:typed_data';
 import 'package:ethereum/ethereum.dart';
 import 'package:json_object_lite/json_object_lite.dart';
 import 'package:test/test.dart';

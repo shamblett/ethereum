@@ -922,7 +922,7 @@ class Ethereum {
   /// note on specifying topic filters:
   /// Topics are order-dependent. A transaction with a log with topics [A, B] will be matched by the following topic filters:
   /// [] "anything"
-  /// [A] "A in first position (and anything after)"
+  /// ['A'] "A in first position (and anything after)"
   /// [null, B] "anything in first position AND B in second position (and anything after)"
   /// [A, B] "A in first position AND B in second position (and anything after)"
   /// [[A, B], [A, B]] "(A OR B) in first position AND (A OR B) in second position (and anything after)"
@@ -1233,7 +1233,7 @@ class Ethereum {
       "from": EthereumUtilities.intToHex(from)
     };
     params = EthereumUtilities.removeNull(params);
-    List paramBlock = [params];
+    final List paramBlock = [params];
     final String method = EthereumRpcMethods.shhPost;
     final res = await rpcClient.request(method, paramBlock);
     if (res.containsKey(ethResultKey)) {
