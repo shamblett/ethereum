@@ -552,10 +552,5 @@ class EthereumCommon {
       expect(ret, isNull);
       expect(client.rpcClient.id, ++id);
     });
-    test("SHH new identity", () async {
-      final int identity = await client.shhNewIdentity();
-      print("SHH id is $identity");
-      expect(client.rpcClient.id, ++id);
-    });
   }
 }

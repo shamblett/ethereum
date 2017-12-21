@@ -1242,18 +1242,4 @@ class Ethereum {
     _processError(method, res);
     return null;
   }
-
-  /// SHH new identity
-  /// Creates new whisper identity in the client.
-  /// Returns the address of the new identity
-  Future<int> shhNewIdentity() async {
-    List params = [];
-    final String method = EthereumRpcMethods.shhNewIdentity;
-    final res = await rpcClient.request(method, params);
-    if (res.containsKey(ethResultKey)) {
-      return EthereumUtilities.hexToInt(res.result);
-    }
-    _processError(method, res);
-    return null;
-  }
 }
