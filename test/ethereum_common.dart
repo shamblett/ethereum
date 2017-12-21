@@ -527,5 +527,35 @@ class EthereumCommon {
       expect(ret, isFalse);
       expect(client.rpcClient.id, ++id);
     });
+    test("Submit hash rate", () async {
+      final bool ret = await client.submitHashrate(0x500000,
+          0x59daa26581d0acd1fce254fb7e85952f4c09d0915afd33d3886cd914bc7d283c);
+      expect(ret, isTrue);
+      expect(client.rpcClient.id, ++id);
+    });
+    test("SHH version", () async {
+      final String version = await client.shhVersion();
+      expect(version, isNotNull);
+      expect(version, "5.0");
+      print("SHH version is $version");
+      expect(client.rpcClient.id, ++id);
+    });
+    test("SHH post", () async {
+      final bool ret = await client.shhPost([
+        0x776869737065722d636861742d636c69656e74,
+        0x4d5a695276454c39425154466b61693532
+      ], 0x7b2274797065223a226d60, 0x64, 0x64,
+          to:
+          0x3e245533f97284d442460f2998cd41858798ddf04f96a5e25610293e42a73908e93ccc8c4d4dc0edcfa9fa872f50cb214e08ebf61a0d4d661997d3940272b717b1,
+          from:
+          0x04f96a5e25610293e42a73908e93ccc8c4d4dc0edcfa9fa872f50cb214e08ebf61a03e245533f97284d442460f2998cd41858798ddfd4d661997d3940272b717b1);
+      expect(ret, isNull);
+      expect(client.rpcClient.id, ++id);
+    });
+    test("SHH new identity", () async {
+      final int identity = await client.shhNewIdentity();
+      print("SHH id is $identity");
+      expect(client.rpcClient.id, ++id);
+    });
   }
 }

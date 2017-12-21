@@ -63,4 +63,9 @@ class EthereumRpcMethods {
   static const String getLogs = 'eth_getLogs';
   static const String getWork = 'eth_getWork';
   static const String submitWork = 'eth_submitWork';
+  static const String submitHashrate = 'eth_submitHashrate';
+  static const String shhVersion = 'shh_version';
+  static const String shhPost = 'shh_post';
+  static const String shhNewIdentity = 'shh_newIdentity';
+
 }

@@ -610,5 +610,77 @@ void main() {
       }
       expect(thrown, isTrue);
     });
+    test("Submit hash rate - hash rate", () async {
+      bool thrown = false;
+      try {
+        await client.submitHashrate(null, 2);
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::submitHashRate - hashRate): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
+    test("Submit hash rate - id", () async {
+      bool thrown = false;
+      try {
+        await client.submitHashrate(1, null);
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::submitHashRate - id): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
+    test("Shh Post - topics", () async {
+      bool thrown = false;
+      try {
+        await client.shhPost(null, 1, 2, 3);
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::shhPost - topics): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
+    test("Shh Post - payload", () async {
+      bool thrown = false;
+      try {
+        await client.shhPost([1], null, 2, 3);
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::shhPost - payload): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
+    test("Shh Post - priority", () async {
+      bool thrown = false;
+      try {
+        await client.shhPost([1], 1, null, 3);
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::shhPost - priority): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
+    test("Shh Post - ttl", () async {
+      bool thrown = false;
+      try {
+        await client.shhPost([1], 1, 2, null);
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::shhPost - ttl): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
   });
 }

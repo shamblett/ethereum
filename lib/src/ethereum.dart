@@ -1161,4 +1161,99 @@ class Ethereum {
     _processError(method, res);
     return null;
   }
+
+  /// Submit hash rate
+  /// Used for submitting mining hashrate.
+  /// Hash rate
+  /// Id, a random id identifying the client
+  /// Returns true if submitting went through successfully and false otherwise.
+  Future<bool> submitHashrate(int hashRate, int id) async {
+    if (hashRate == null) {
+      throw new ArgumentError.notNull("Ethereum::submitHashRate - hashRate");
+    }
+    if (id == null) {
+      throw new ArgumentError.notNull("Ethereum::submitHashRate - id");
+    }
+    final List params = [
+      EthereumUtilities.intToHex(hashRate),
+      EthereumUtilities.intToHex(id, EthereumUtilities.pad32)
+    ];
+    final String method = EthereumRpcMethods.submitHashrate;
+    final res = await rpcClient.request(method, params);
+    if (res.containsKey(ethResultKey)) {
+      return res.result;
+    }
+    _processError(method, res);
+    return null;
+  }
+
+  /// SHH version
+  /// Returns the current whisper protocol version.
+  Future<String> shhVersion() async {
+    final List params = [];
+    final String method = EthereumRpcMethods.shhVersion;
+    final res = await rpcClient.request(method, params);
+    if (res.containsKey(ethResultKey)) {
+      return res.result;
+    }
+    _processError(method, res);
+    return null;
+  }
+
+  /// SHH post
+  /// Sends a whisper message
+  /// from: - (optional) The identity of the sender.
+  /// to: - (optional) The identity of the receiver. When present whisper will encrypt the message so that only
+  ///  the receiver can decrypt it.
+  /// topics: - List of topics, for the receiver to identify messages.
+  /// payload: - The payload of the message.
+  /// priority: - The integer of the priority in a range from ... (?).
+  /// ttl: - integer of the time to live in seconds.
+  /// Returns true if the message was send, otherwise false.
+  Future<bool> shhPost(List<int> topics, int payload, int priority, int ttl,
+      {int to, int from}) async {
+    if (topics == null) {
+      throw new ArgumentError.notNull("Ethereum::shhPost - topics");
+    }
+    if (payload == null) {
+      throw new ArgumentError.notNull("Ethereum::shhPost - payload");
+    }
+    if (priority == null) {
+      throw new ArgumentError.notNull("Ethereum::shhPost - priority");
+    }
+    if (ttl == null) {
+      throw new ArgumentError.notNull("Ethereum::shhPost - ttl");
+    }
+    Map<String, dynamic> params = {
+      "topics": EthereumUtilities.intToHexList(topics),
+      "payload": EthereumUtilities.intToHex(payload),
+      "priority": EthereumUtilities.intToHex(priority),
+      "ttl": ttl,
+      "to": EthereumUtilities.intToHex(to),
+      "from": EthereumUtilities.intToHex(from)
+    };
+    params = EthereumUtilities.removeNull(params);
+    List paramBlock = [params];
+    final String method = EthereumRpcMethods.shhPost;
+    final res = await rpcClient.request(method, paramBlock);
+    if (res.containsKey(ethResultKey)) {
+      return res.result;
+    }
+    _processError(method, res);
+    return null;
+  }
+
+  /// SHH new identity
+  /// Creates new whisper identity in the client.
+  /// Returns the address of the new identity
+  Future<int> shhNewIdentity() async {
+    List params = [];
+    final String method = EthereumRpcMethods.shhNewIdentity;
+    final res = await rpcClient.request(method, params);
+    if (res.containsKey(ethResultKey)) {
+      return EthereumUtilities.hexToInt(res.result);
+    }
+    _processError(method, res);
+    return null;
+  }
 }
