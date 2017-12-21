@@ -24,6 +24,30 @@ void main() {
       final String val = EthereumUtilities.intToHex(testInt, 8);
       expect(val, "0x0000000000000001");
     });
+    test("Int to hex  - pad negative", () {
+      bool thrown = false;
+      try {
+        EthereumUtilities.intToHex(1, -2);
+      } catch (e) {
+        expect((e is FormatException), isTrue);
+        expect(e.toString(),
+            "FormatException: EthereumUtilities:: intToHex - invalid pad value, -2");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
+    test("Int to hex  - pad odd", () {
+      bool thrown = false;
+      try {
+        EthereumUtilities.intToHex(1, 3);
+      } catch (e) {
+        expect((e is FormatException), isTrue);
+        expect(e.toString(),
+            "FormatException: EthereumUtilities:: intToHex - invalid pad value, 3");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
     test("Hex to int - valid", () {
       final String testString = "0xabcdef12345";
       final int val = EthereumUtilities.hexToInt(testString);

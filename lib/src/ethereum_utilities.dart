@@ -11,13 +11,23 @@ part of ethereum;
 
 /// General client support utilities
 class EthereumUtilities {
+  /// Common pad values for intToHex
+  static const int pad4 = 4;
+  static const int pad8 = 8;
+  static const int pad16 = 16;
+  static const int pad32 = 32;
+
   /// Integer to hex string with leading 0x, lowercase.
   /// The optional pad value pads the string out to the number of bytes
   /// specified, i.e if 8 is specified the string 0x1 becomes 0x0000000000000001
-  /// default is 0, no padding
+  /// default is 0, no padding.The pad value must be even and positive.
   static String intToHex(int val, [int pad = 0]) {
     String ret = val.toRadixString(16);
     if (pad != 0) {
+      if (pad.isNegative || pad.isOdd) {
+        throw new FormatException(
+            "EthereumUtilities:: intToHex - invalid pad value, $pad");
+      }
       if (ret.length.isOdd) {
         ret = '0' + ret;
       }
