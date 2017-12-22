@@ -24,4 +24,4 @@ web:
 
 transformers:
 - test/pub_serve:
-    $include: test/ethereum_browser_test.dart
+    $include: test/ethereum_browser_*_test.dart

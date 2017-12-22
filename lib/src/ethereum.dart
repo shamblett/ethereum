@@ -20,7 +20,7 @@ class Ethereum {
 
   Ethereum.withConnectionParameters(EthereumINetworkAdapter adapter,
       String hostname, String scheme,
-      [port = defaultPort])
+      [port = defaultHttpPort])
       : _networkAdapter = adapter {
     rpcClient = new EthereumRpcClient(_networkAdapter);
     connectParameters(scheme, hostname, port);
@@ -31,10 +31,11 @@ class Ethereum {
   static const String rpcWsScheme = 'ws';
 
   /// Defaults
-  static const int defaultPort = 8545;
+  static const int defaultHttpPort = 8545;
+  static const int defaultWsPort = 8546;
 
   /// Connection parameters
-  int port = defaultPort;
+  int port = defaultHttpPort;
   String host;
   Uri _uri;
 
@@ -81,7 +82,7 @@ class Ethereum {
       throw new FormatException(
           "Ethereum::connectParameters - invalid scheme $scheme");
     }
-    int uriPort = defaultPort;
+    int uriPort;
     if (port != null) {
       uriPort = port;
     }
@@ -99,7 +100,11 @@ class Ethereum {
     }
     Uri newUri = puri;
     if (!puri.hasPort) {
-      newUri = puri.replace(port: defaultPort);
+      if (puri.scheme == rpcHttpScheme) {
+        newUri = puri.replace(port: defaultHttpPort);
+      } else {
+        newUri = puri.replace(port: defaultWsPort);
+      }
     }
     port = newUri.port;
     _uri = newUri;

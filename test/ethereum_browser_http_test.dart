@@ -14,8 +14,7 @@ import 'ethereum_common.dart';
 void main() {
   // Run the common API tests
   final EthereumBrowserHTTPClient client =
-  new EthereumBrowserHTTPClient.withConnectionParameters(
-      Ethereum.rpcHttpScheme, "localhost");
+  new EthereumBrowserHTTPClient.withConnectionParameters("localhost");
   // Print errors
   client.printError = true;
   EthereumCommon.run(client);

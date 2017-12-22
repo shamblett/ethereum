@@ -84,7 +84,7 @@ void main() {
     test("connectString - OK no port", () {
       client.connectString("http://localhost1");
       expect(client.host, "localhost1");
-      expect(client.port, Ethereum.defaultPort);
+      expect(client.port, Ethereum.defaultHttpPort);
     });
 
     test("connectUri - Null", () {
@@ -111,7 +111,7 @@ void main() {
       final Uri uri = Uri.parse("http://localhost");
       client.connectUri(uri);
       expect(client.host, "localhost");
-      expect(client.port, Ethereum.defaultPort);
+      expect(client.port, Ethereum.defaultHttpPort);
     });
 
     test("connectParameters - Hostname Null", () {
@@ -146,10 +146,15 @@ void main() {
       expect(client.port, 3000);
     });
 
-    test("connectParameters - OK no port", () {
+    test("connectParameters - OK no port - http", () {
       client.connectParameters(Ethereum.rpcHttpScheme, "localhost");
       expect(client.host, "localhost");
-      expect(client.port, Ethereum.defaultPort);
+      expect(client.port, Ethereum.defaultHttpPort);
+    });
+    test("connectParameters - OK no port - ws", () {
+      client.connectParameters(Ethereum.rpcWsScheme, "localhost");
+      expect(client.host, "localhost");
+      expect(client.port, Ethereum.defaultWsPort);
     });
   });
 
