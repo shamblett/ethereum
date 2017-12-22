@@ -23,5 +23,6 @@ class EthereumServerClient extends Ethereum {
   EthereumServerClient() : super(serverHttpAdapter);
 
   EthereumServerClient.withConnectionParameters(hostname, [port])
-      : super.withConnectionParameters(serverHttpAdapter, hostname, port);
+      : super.withConnectionParameters(
+      serverHttpAdapter, hostname, Ethereum.rpcHttpScheme, port);
 }

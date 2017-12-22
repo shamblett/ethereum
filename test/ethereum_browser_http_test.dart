@@ -15,7 +15,7 @@ void main() {
   // Run the common API tests
   final EthereumBrowserHTTPClient client =
   new EthereumBrowserHTTPClient.withConnectionParameters(
-      Ethereum.rpcScheme, "localhost");
+      Ethereum.rpcHttpScheme, "localhost");
   // Print errors
   client.printError = true;
   EthereumCommon.run(client);

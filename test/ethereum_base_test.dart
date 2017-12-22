@@ -117,7 +117,7 @@ void main() {
     test("connectParameters - Hostname Null", () {
       bool thrown = false;
       try {
-        client.connectParameters(Ethereum.rpcScheme, null);
+        client.connectParameters(Ethereum.rpcHttpScheme, null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -141,13 +141,13 @@ void main() {
     });
 
     test("connectParameters - OK with port", () {
-      client.connectParameters(Ethereum.rpcScheme, "localhost", 3000);
+      client.connectParameters(Ethereum.rpcHttpScheme, "localhost", 3000);
       expect(client.host, "localhost");
       expect(client.port, 3000);
     });
 
     test("connectParameters - OK no port", () {
-      client.connectParameters(Ethereum.rpcScheme, "localhost");
+      client.connectParameters(Ethereum.rpcHttpScheme, "localhost");
       expect(client.host, "localhost");
       expect(client.port, Ethereum.defaultPort);
     });

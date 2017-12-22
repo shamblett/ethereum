@@ -19,15 +19,15 @@ class Ethereum {
   }
 
   Ethereum.withConnectionParameters(EthereumINetworkAdapter adapter,
-      String hostname,
+      String hostname, String scheme,
       [port = defaultPort])
       : _networkAdapter = adapter {
     rpcClient = new EthereumRpcClient(_networkAdapter);
-    connectParameters(hostname, port);
+    connectParameters(scheme, hostname, port);
   }
 
   /// Constants
-  static const String rpcScheme = 'http';
+  static const String rpcHttpScheme = 'http';
   static const String rpcWsScheme = 'ws';
 
   /// Defaults
@@ -77,7 +77,7 @@ class Ethereum {
     if (hostname == null) {
       throw new ArgumentError.notNull("Ethereum::connectParameters - hostname");
     }
-    if ((scheme != rpcScheme) && (scheme != rpcWsScheme)) {
+    if ((scheme != rpcHttpScheme) && (scheme != rpcWsScheme)) {
       throw new FormatException(
           "Ethereum::connectParameters - invalid scheme $scheme");
     }
