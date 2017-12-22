@@ -114,10 +114,10 @@ void main() {
       expect(client.port, Ethereum.defaultPort);
     });
 
-    test("connectParameters - Null", () {
+    test("connectParameters - Hostname Null", () {
       bool thrown = false;
       try {
-        client.connectParameters(null);
+        client.connectParameters(Ethereum.rpcScheme, null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -127,14 +127,27 @@ void main() {
       expect(thrown, isTrue);
     });
 
+    test("connectParameters - Invalid scheme", () {
+      bool thrown = false;
+      try {
+        client.connectParameters("Billy", "localhost");
+      } catch (e) {
+        expect((e is FormatException), isTrue);
+        expect(e.toString(),
+            "FormatException: Ethereum::connectParameters - invalid scheme Billy");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
+
     test("connectParameters - OK with port", () {
-      client.connectParameters("localhost", 3000);
+      client.connectParameters(Ethereum.rpcScheme, "localhost", 3000);
       expect(client.host, "localhost");
       expect(client.port, 3000);
     });
 
     test("connectParameters - OK no port", () {
-      client.connectParameters("localhost");
+      client.connectParameters(Ethereum.rpcScheme, "localhost");
       expect(client.host, "localhost");
       expect(client.port, Ethereum.defaultPort);
     });

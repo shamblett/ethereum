@@ -6,16 +6,16 @@
  */
 
 @TestOn("browser")
-import 'package:ethereum/ethereum_browser_http_client.dart';
+import 'package:ethereum/ethereum_browser_ws_client.dart';
 import 'package:ethereum/ethereum.dart';
 import 'package:test/test.dart';
 import 'ethereum_common.dart';
 
 void main() {
   // Run the common API tests
-  final EthereumBrowserHTTPClient client =
-  new EthereumBrowserHTTPClient.withConnectionParameters(
-      Ethereum.rpcScheme, "localhost");
+  final EthereumBrowserWSClient client =
+      new EthereumBrowserWSClient.withConnectionParameters(
+          Ethereum.rpcWsScheme, "localhost");
   // Print errors
   client.printError = true;
   EthereumCommon.run(client);

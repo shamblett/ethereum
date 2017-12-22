@@ -20,18 +20,15 @@ class EthereumBrowserHTTPAdapter implements EthereumINetworkAdapter {
   Future<JsonObjectLite> httpRequest(Uri uri, JsonObjectLite request) {
     final completer = new Completer();
     final String reqText = request.toString();
-    final Map<String, dynamic> headers = {
-      contentType: jsonMimeType,
-      contentLength: reqText.length
-    };
+    final Map<String, dynamic> headers = {contentType: jsonMimeType};
     HttpRequest.request(uri.toString(),
         method: 'POST',
         withCredentials: false,
         requestHeaders: headers,
         sendData: reqText)
       ..then((HttpRequest req) {
-        final JsonObjectLite resp = new JsonObjectLite().fromString(
-            req.responseText);
+        final JsonObjectLite resp =
+        new JsonObjectLite().fromString(req.responseText);
         completer.complete(resp);
       }, onError: (e) {
         print(e);

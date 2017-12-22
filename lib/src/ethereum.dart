@@ -14,20 +14,21 @@ part of ethereum;
 /// https://github.com/ethereum/wiki/wiki/JSON-RPC#web3_clientversion.
 /// The API calls return null if an ethereum error occurred.
 class Ethereum {
-  Ethereum(this._httpAdapter) {
-    rpcClient = new EthereumRpcClient(_httpAdapter);
+  Ethereum(this._networkAdapter) {
+    rpcClient = new EthereumRpcClient(_networkAdapter);
   }
 
   Ethereum.withConnectionParameters(EthereumINetworkAdapter adapter,
       String hostname,
       [port = defaultPort])
-      : _httpAdapter = adapter {
-    rpcClient = new EthereumRpcClient(_httpAdapter);
+      : _networkAdapter = adapter {
+    rpcClient = new EthereumRpcClient(_networkAdapter);
     connectParameters(hostname, port);
   }
 
   /// Constants
   static const String rpcScheme = 'http';
+  static const String rpcWsScheme = 'ws';
 
   /// Defaults
   static const int defaultPort = 8545;
@@ -40,9 +41,9 @@ class Ethereum {
   Uri get uri => _uri;
 
   /// HTTP Adapter
-  EthereumINetworkAdapter _httpAdapter;
+  EthereumINetworkAdapter _networkAdapter;
 
-  set httpAdapter(EthereumINetworkAdapter adapter) => _httpAdapter = adapter;
+  set httpAdapter(EthereumINetworkAdapter adapter) => _networkAdapter = adapter;
 
   /// Json RPC client
   EthereumRpcClient rpcClient;
@@ -53,7 +54,7 @@ class Ethereum {
   /// Connection methods
 
   //// Connect using a host string of the form http://thehost.com:1234,
-  /// port is optional. Scheme must be http
+  /// port is optional. Scheme must be http or ws
   void connectString(String hostname) {
     if (hostname == null) {
       throw new ArgumentError.notNull("Ethereum::connectString - hostname");
@@ -70,16 +71,21 @@ class Ethereum {
     _validateUri(uri);
   }
 
-  /// Connect by explicitly setting the connection parameters
-  void connectParameters(String hostname, [int port]) {
+  /// Connect by explicitly setting the connection parameters.
+  /// Scheme must be either rpcScheme or rpcWsScheme
+  void connectParameters(String scheme, String hostname, [int port]) {
     if (hostname == null) {
       throw new ArgumentError.notNull("Ethereum::connectParameters - hostname");
+    }
+    if ((scheme != rpcScheme) && (scheme != rpcWsScheme)) {
+      throw new FormatException(
+          "Ethereum::connectParameters - invalid scheme $scheme");
     }
     int uriPort = defaultPort;
     if (port != null) {
       uriPort = port;
     }
-    final Uri uri = new Uri(scheme: rpcScheme, host: hostname, port: uriPort);
+    final Uri uri = new Uri(scheme: scheme, host: hostname, port: uriPort);
     _validateUri(uri);
   }
 
@@ -91,9 +97,9 @@ class Ethereum {
       throw new ArgumentError.value(
           puri.host, "Ethereum::_validateUri - invalid host");
     }
-    Uri newUri = puri.replace(scheme: rpcScheme);
+    Uri newUri = puri;
     if (!puri.hasPort) {
-      newUri = newUri.replace(port: defaultPort);
+      newUri = puri.replace(port: defaultPort);
     }
     port = newUri.port;
     _uri = newUri;
