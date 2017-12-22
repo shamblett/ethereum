@@ -28,7 +28,7 @@ class EthereumBrowserWSAdapter implements EthereumINetworkAdapter {
     webSocket.onMessage.listen((MessageEvent e) {
       final String ret = e.data;
       webSocket.close();
-      completer.complete(new JsonObjectLite().fromString(ret));
+      completer.complete(new JsonObjectLite.fromJsonString(ret));
     });
     return completer.future;
   }

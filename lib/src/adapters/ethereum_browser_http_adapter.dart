@@ -28,7 +28,7 @@ class EthereumBrowserHTTPAdapter implements EthereumINetworkAdapter {
         sendData: reqText)
       ..then((HttpRequest req) {
         final JsonObjectLite resp =
-        new JsonObjectLite().fromString(req.responseText);
+        new JsonObjectLite.fromJsonString(req.responseText);
         completer.complete(resp);
       }, onError: (e) {
         print(e);
