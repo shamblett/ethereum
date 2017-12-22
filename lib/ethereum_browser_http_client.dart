@@ -16,12 +16,12 @@ import 'package:json_object_lite/json_object_lite.dart';
 
 part 'src/adapters/ethereum_browser_http_adapter.dart';
 
-class EthereumBrowserClient extends Ethereum {
+class EthereumBrowserHTTPClient extends Ethereum {
   static EthereumBrowserHTTPAdapter browserHttpAdapter =
   new EthereumBrowserHTTPAdapter();
 
-  EthereumBrowserClient() : super(browserHttpAdapter);
+  EthereumBrowserHTTPClient() : super(browserHttpAdapter);
 
-  EthereumBrowserClient.withConnectionParameters(hostname, [port])
+  EthereumBrowserHTTPClient.withConnectionParameters(hostname, [port])
       : super.withConnectionParameters(browserHttpAdapter, hostname, port);
 }

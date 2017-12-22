@@ -15,7 +15,7 @@ class EthereumRpcClient {
   EthereumRpcClient(this._adapter);
 
   /// The HTTP adapter
-  EthereumIHTTPAdapter _adapter;
+  EthereumINetworkAdapter _adapter;
 
   /// The transmission id
   int _id = 0;

@@ -10,8 +10,8 @@
 
 part of ethereum;
 
-abstract class EthereumIHTTPAdapter {
-  EthereumIHTTPAdapter();
+abstract class EthereumINetworkAdapter {
+  EthereumINetworkAdapter();
 
   /// Processes the HTTP request returning the  HTTP response as
   /// a JSON Object

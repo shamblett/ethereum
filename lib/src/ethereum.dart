@@ -18,7 +18,7 @@ class Ethereum {
     rpcClient = new EthereumRpcClient(_httpAdapter);
   }
 
-  Ethereum.withConnectionParameters(EthereumIHTTPAdapter adapter,
+  Ethereum.withConnectionParameters(EthereumINetworkAdapter adapter,
       String hostname,
       [port = defaultPort])
       : _httpAdapter = adapter {
@@ -40,9 +40,9 @@ class Ethereum {
   Uri get uri => _uri;
 
   /// HTTP Adapter
-  EthereumIHTTPAdapter _httpAdapter;
+  EthereumINetworkAdapter _httpAdapter;
 
-  set httpAdapter(EthereumIHTTPAdapter adapter) => _httpAdapter = adapter;
+  set httpAdapter(EthereumINetworkAdapter adapter) => _httpAdapter = adapter;
 
   /// Json RPC client
   EthereumRpcClient rpcClient;

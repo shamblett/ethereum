@@ -4,13 +4,13 @@
  * Date   : 10/011/2017
  * Copyright :  S.Hamblett
  *
- * Provides a common interface for Ethereum to connect over HTTP,
- * allowing for different HTTP adapters to be used.
+ * Provides a common interface for Ethereum to connect over HTTP
+ * on the server.
  */
 
 part of ethereum_server_client;
 
-class EthereumServerHTTPAdapter implements EthereumIHTTPAdapter {
+class EthereumServerHTTPAdapter implements EthereumINetworkAdapter {
   /// The HTTP client
   HttpClient _client = new HttpClient();
 

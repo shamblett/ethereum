@@ -4,13 +4,13 @@
  * Date   : 10/011/2017
  * Copyright :  S.Hamblett
  *
- * Provides a common interface for Ethereum to connect over HTTP,
- * allowing for different HTTP adapters to be used.
+ * Provides a common interface for Ethereum to connect over HTTP in the
+ * browser.
  */
 
 part of ethereum_browser_client;
 
-class EthereumBrowserHTTPAdapter implements EthereumIHTTPAdapter {
+class EthereumBrowserHTTPAdapter implements EthereumINetworkAdapter {
   static const String jsonMimeType = 'application/json';
   static const String contentType = "Content-Type";
   static const String contentLength = "Content-Length";
@@ -33,6 +33,8 @@ class EthereumBrowserHTTPAdapter implements EthereumIHTTPAdapter {
         final JsonObjectLite resp = new JsonObjectLite().fromString(
             req.responseText);
         completer.complete(resp);
+      }, onError: (e) {
+        print(e);
       });
     return completer.future;
   }
