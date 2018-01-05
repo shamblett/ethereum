@@ -8,7 +8,7 @@
 import 'package:ethereum/ethereum.dart';
 import 'package:json_object_lite/json_object_lite.dart';
 import 'package:test/test.dart';
-import 'test_configuration.dart';
+import 'ethereum_test_configuration.dart';
 
 /// Class to run the common Ethereum API tests
 class EthereumCommon {
@@ -106,7 +106,7 @@ class EthereumCommon {
       expect(client.rpcClient.id, ++id);
       if (accounts.length != 0) {
         print("Accounts are $accountsStr");
-        expect(accounts[0], TestConfiguration.defaultAccount);
+        expect(accounts[0], EthereumTestConfiguration.defaultAccount);
       } else {
         print("There are no accounts");
       }
@@ -289,7 +289,7 @@ class EthereumCommon {
     });
     test("Sign", () async {
       final int signature =
-      await client.sign(TestConfiguration.defaultAccount, 0xdeadbeaf);
+      await client.sign(EthereumTestConfiguration.defaultAccount, 0xdeadbeaf);
       if (signature != null) {
         print(signature);
       } else {
@@ -299,7 +299,7 @@ class EthereumCommon {
     });
     test("Send transaction", () async {
       final int hash = await client.sendTransaction(
-          TestConfiguration.defaultAccount,
+          EthereumTestConfiguration.defaultAccount,
           0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675,
           to: 0xd46e8dd67c5d32be8058bb8eb970870f07244567,
           gas: 0x100,
@@ -314,7 +314,7 @@ class EthereumCommon {
     });
     test("Send transaction - some null", () async {
       final int hash = await client.sendTransaction(
-          TestConfiguration.defaultAccount,
+          EthereumTestConfiguration.defaultAccount,
           0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675,
           to: 0xd46e8dd67c5d32be8058bb8eb970870f07244567,
           nonce: 2);
@@ -334,7 +334,8 @@ class EthereumCommon {
       expect(client.lastError.id, id);
     });
     test("Call ", () async {
-      final int ret = await client.call(TestConfiguration.defaultAccount, 0x10,
+      final int ret = await client.call(
+          EthereumTestConfiguration.defaultAccount, 0x10,
           from: 0xd10de988e845d33859c3f96c7f1fc723b7b56f4c,
           gas: 0x2000,
           gasPrice: 0x1000,
@@ -348,7 +349,7 @@ class EthereumCommon {
     });
     test("Call - some null", () async {
       final int ret = await client.call(
-          TestConfiguration.defaultAccount, "latest",
+          EthereumTestConfiguration.defaultAccount, "latest",
           from: 0xd10de988e845d33859c3f96c7f1fc723b7b56f4c,
           gasPrice: 0x1000,
           data:
@@ -360,7 +361,7 @@ class EthereumCommon {
     });
     test("Estimate gas", () async {
       final int ret = await client.estimateGas(
-          address: TestConfiguration.defaultAccount,
+          address: EthereumTestConfiguration.defaultAccount,
           from: 0xd10de988e845d33859c3f96c7f1fc723b7b56f4c,
           gas: 0x2000,
           gasPrice: 0x1000,
@@ -374,7 +375,7 @@ class EthereumCommon {
     });
     test("Estimate gas - some null", () async {
       final int ret = await client.estimateGas(
-          address: TestConfiguration.defaultAccount,
+          address: EthereumTestConfiguration.defaultAccount,
           from: 0xd10de988e845d33859c3f96c7f1fc723b7b56f4c,
           gas: 0x2000,
           gasPrice: 0x1000);

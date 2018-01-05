@@ -9,12 +9,17 @@
 import 'package:ethereum/ethereum_browser_ws_client.dart';
 import 'package:test/test.dart';
 import 'ethereum_common.dart';
+import 'ethereum_test_configuration.dart';
 
 void main() {
-  // Run the common API tests
-  final EthereumBrowserWSClient client =
-  new EthereumBrowserWSClient.withConnectionParameters("localhost", 8546);
-  // Print errors
-  client.printError = true;
-  EthereumCommon.run(client);
+  if (EthereumTestConfiguration.runBrowserWS) {
+    // Run the common API tests
+    final EthereumBrowserWSClient client =
+    new EthereumBrowserWSClient.withConnectionParameters("localhost", 8546);
+    // Print errors
+    client.printError = true;
+    EthereumCommon.run(client);
+  } else {
+    print("WS browser tests not selected");
+  }
 }

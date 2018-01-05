@@ -8,10 +8,20 @@
 /// Start geth as follows :-
 /// geth --unlock 0xd10de988e845d33859c3f96c7f1fc723b7b56f4c --rpc --shh
 /// If using websockets add --ws and --wsorigins="*" for CORS
+/// If running the HTTP tests add --rpccorsdomain=localhost
 /// The account above is the test account defined below, you must first create this account,
 /// see the geth documentation for details.
 ///
 /// Test configuration options
-class TestConfiguration {
+class EthereumTestConfiguration {
   static const int defaultAccount = 0xd10de988e845d33859c3f96c7f1fc723b7b56f4c;
+
+  /// True runs the browser HTTP tests, you will need CORS support for this as above
+  static bool runBrowserHttp = false;
+
+  /// True runs the browser WS tests, you should be OK with --wsorigins as above
+  static bool runBrowserWS = true;
+
+  /// True runs the server tests
+  static bool runServer = true;
 }
