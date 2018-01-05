@@ -11,8 +11,8 @@ library ethereum_browser_client;
 
 import 'dart:html';
 import 'dart:async';
+import 'dart:convert';
 import 'package:ethereum/ethereum.dart';
-import 'package:json_object_lite/json_object_lite.dart';
 
 part 'src/adapters/ethereum_browser_http_adapter.dart';
 
