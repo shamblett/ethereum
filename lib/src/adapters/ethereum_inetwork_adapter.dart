@@ -14,6 +14,6 @@ abstract class EthereumINetworkAdapter {
   EthereumINetworkAdapter();
 
   /// Processes the HTTP request returning the  HTTP response as
-  /// a JSON Object
-  Future<JsonObjectLite> httpRequest(Uri uri, JsonObjectLite request);
+  /// a map
+  Future<Map> httpRequest(Uri uri, Map request);
 }

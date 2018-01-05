@@ -17,18 +17,18 @@ class EthereumServerHTTPAdapter implements EthereumINetworkAdapter {
   static const String jsonMimeType = 'application/json';
 
   /// Processes the HTTP request returning the  HTTP response as
-  /// a JSON Object
-  Future<JsonObjectLite> httpRequest(Uri uri, JsonObjectLite request) {
+  /// a map
+  Future<Map> httpRequest(Uri uri, Map request) {
     final completer = new Completer();
     _client.postUrl(uri).then((HttpClientRequest req) {
-      final payload = request.toString();
+      final payload = JSON.encode(request);
       req.headers.add(HttpHeaders.CONTENT_TYPE, jsonMimeType);
       req.contentLength = payload.length;
       req.write(payload);
       req.close().then((HttpClientResponse resp) {
         resp.listen((data) {
-          final JsonObjectLite payload =
-          new JsonObjectLite.fromJsonString(new String.fromCharCodes(data));
+          final Map payload =
+          JSON.decode(new String.fromCharCodes(data));
           completer.complete(payload);
         }, onError: (e) {
           print(e);

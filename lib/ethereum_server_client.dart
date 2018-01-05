@@ -11,8 +11,8 @@ library ethereum_server_client;
 
 import 'dart:io';
 import 'dart:async';
+import 'dart:convert';
 import 'package:ethereum/ethereum.dart';
-import 'package:json_object_lite/json_object_lite.dart';
 
 part 'src/adapters/ethereum_server_http_adapter.dart';
 
