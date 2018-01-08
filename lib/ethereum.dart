@@ -8,6 +8,7 @@
 library ethereum;
 
 import 'dart:async';
+import 'package:bignum/bignum.dart';
 
 part 'src/ethereum.dart';
 
@@ -20,6 +21,8 @@ part 'src/ethereum_utilities.dart';
 part 'src/adapters/ethereum_inetwork_adapter.dart';
 
 part 'src/messages/ethereum_sync_status.dart';
+
+part 'src/messages/ethereum_block.dart';
 
 /// Constants
 const String ethResultKey = "result";

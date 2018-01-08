@@ -9,7 +9,7 @@
 
 part of ethereum;
 
-/// Sync status return message
+/// Sync status message
 class EthereumSyncStatus {
   EthereumSyncStatus();
 
