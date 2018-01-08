@@ -102,8 +102,15 @@ class EthereumBlock {
 
   DateTime get timestamp => _timestamp;
 
-  /// transactions: - List of transaction objects, or 32 Bytes transaction hashes depending on the last given parameter.
-  /// uncles: - List of uncle hashes.
+  /// Transactions. A list of transaction objects, or 32 Bytes transaction hashes depending on the last given parameter.
+  List<dynamic> _transactions;
+
+  List<dynamic> get transactions => _transactions;
+
+  /// Uncles. A list of uncle hashes.
+  List<BigInteger> _uncles;
+
+  List<BigInteger> get uncles => _uncles;
 
   /// Construct from the supplied Map, only check for the keys we need.
   void construct(Map data) {}
