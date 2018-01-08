@@ -201,7 +201,6 @@ class Ethereum {
   }
 
   /// Sync status, an object with data about the sync status if syncing or false if not.
-  /// Encoded as a JsonObject with a syncStatus, if true the sync status data is valid.
   Future<EthereumSyncStatus> syncStatus() async {
     final String method = EthereumRpcMethods.syncing;
     final res = await rpcClient.request(method);
