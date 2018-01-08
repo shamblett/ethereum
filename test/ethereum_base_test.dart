@@ -8,6 +8,7 @@
 @TestOn("vm")
 import 'package:ethereum/ethereum_server_client.dart';
 import 'package:ethereum/ethereum.dart';
+import 'package:bignum/bignum.dart';
 import 'package:test/test.dart';
 
 /// These test are common to both server and client, we use the server client for convenience.
@@ -187,7 +188,7 @@ void main() {
     test("Balance - block", () async {
       bool thrown = false;
       try {
-        await client.getBalance(0, null);
+        await client.getBalance(BigInteger.ZERO, null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -199,7 +200,7 @@ void main() {
     test("Storage at - block", () async {
       bool thrown = false;
       try {
-        await client.getStorageAt(1, 2, null);
+        await client.getStorageAt(BigInteger.ONE, 2, null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -211,7 +212,7 @@ void main() {
     test("Storage at - pos", () async {
       bool thrown = false;
       try {
-        await client.getStorageAt(1, null, "");
+        await client.getStorageAt(BigInteger.ONE, null, "");
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),

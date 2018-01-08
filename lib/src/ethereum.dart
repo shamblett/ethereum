@@ -687,16 +687,16 @@ class Ethereum {
   /// timestamp: - the unix timestamp for when the block was collated.
   /// transactions: - List of transaction objects, or 32 Bytes transaction hashes depending on the last given parameter.
   /// uncles: - List of uncle hashes.
-  Future<JsonObjectLite> getBlockByHash(int blockHash,
+  Future<EthereumBlock> getBlockByHash(BigInteger blockHash,
       [bool full = true]) async {
     if (blockHash == null) {
       throw new ArgumentError.notNull("Ethereum::getBlockByHash - blockHash");
     }
-    final dynamic params = [EthereumUtilities.intToHex(blockHash), full];
+    final dynamic params = [EthereumUtilities.bigIntegerToHex(blockHash), full];
     final String method = EthereumRpcMethods.getBlockByHash;
     final res = await rpcClient.request(method, params);
     if (res.containsKey(ethResultKey)) {
-      return res[ethResultKey];
+      return new EthereumBlock.fromMap(res[ethResultKey]);
     }
     _processError(method, res);
     return null;
