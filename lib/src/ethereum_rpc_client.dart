@@ -30,26 +30,26 @@ class EthereumRpcClient {
   set uri(Uri uri) => _uri = uri;
 
   /// The request method
-  Future<JsonObjectLite> request(String method, [dynamic parameters]) {
-    final JsonObjectLite packet = new JsonObjectLite();
-    packet.jsonrpc = jsonRPpcVersion;
-    packet.method = method;
+  Future<Map> request(String method, [dynamic parameters]) {
+    final Map packet = new Map();
+    packet['jsonrpc'] = jsonRPpcVersion;
+    packet['method'] = method;
     if (parameters != null) {
-      packet.params = parameters;
+      packet['params'] = parameters;
     }
-    packet.id = id;
+    packet['id'] = id;
     _id++;
     return _adapter.httpRequest(_uri, packet);
   }
 
   /// The notification method
-  Future<JsonObjectLite> notification(String method,
-      [JsonObjectLite parameters]) {
-    final JsonObjectLite packet = new JsonObjectLite();
-    packet.jsonrpc = jsonRPpcVersion;
-    packet.method = method;
+  Future<Map> notification(String method,
+      [dynamic parameters]) {
+    final Map packet = new Map();
+    packet['jsonrpc'] = jsonRPpcVersion;
+    packet['method'] = method;
     if (parameters != null) {
-      packet.params = parameters;
+      packet['params'] = parameters;
     }
     return _adapter.httpRequest(_uri, packet);
   }
