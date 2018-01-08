@@ -58,10 +58,10 @@ class EthereumCommon {
       print("Net peer count is $count");
     });
     test("Sync status", () async {
-      final JsonObjectLite res = await client.syncStatus();
+      final EthereumSyncStatus res = await client.syncStatus();
       expect(res, isNotNull);
       expect(client.rpcClient.id, ++id);
-      if (res.syncStatus) {
+      if (res.syncing) {
         print("Sync status is syncing");
         print("Starting Block is ${res.startingBlock}");
         print("Current Block is ${res.currentBlock}");

@@ -8,7 +8,6 @@
 library ethereum;
 
 import 'dart:async';
-import 'package:json_object_lite/json_object_lite.dart';
 
 part 'src/ethereum.dart';
 
@@ -19,3 +18,9 @@ part 'src/ethereum_error.dart';
 part 'src/ethereum_utilities.dart';
 
 part 'src/adapters/ethereum_inetwork_adapter.dart';
+
+part 'src/messages/ethereum_sync_status.dart';
+
+/// Constants
+const String ethResultKey = "result";
+const String ethErrorKey = "error";

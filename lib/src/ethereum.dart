@@ -118,8 +118,6 @@ class Ethereum {
   static const String ethEarliest = "earliest";
   static const String ethLatest = "latest";
   static const String ethPending = "pending";
-  static const String ethResultKey = "result";
-  static const String ethErrorKey = "error";
 
   /// Error processing helper
   void _processError(String method, Map res) {
@@ -204,23 +202,11 @@ class Ethereum {
 
   /// Sync status, an object with data about the sync status if syncing or false if not.
   /// Encoded as a JsonObject with a syncStatus, if true the sync status data is valid.
-  Future<JsonObjectLite> syncStatus() async {
+  Future<EthereumSyncStatus> syncStatus() async {
     final String method = EthereumRpcMethods.syncing;
     final res = await rpcClient.request(method);
     if (res.containsKey(ethResultKey)) {
-      final JsonObjectLite resp = new JsonObjectLite();
-      resp.syncStatus = false;
-      if (!(res[ethResultKey] is bool) &&
-          (res[ethResultKey].containsKey('startingBlock'))) {
-        resp.syncStatus = true;
-        resp.startingBlock =
-            EthereumUtilities.hexToInt(res[ethResultKey].startingBlock);
-        resp.currentBlock =
-            EthereumUtilities.hexToInt(res[ethResultKey].currentBlock);
-        resp.highestBlock =
-            EthereumUtilities.hexToInt(res[ethResultKey].highestBlock);
-      }
-      return resp;
+      return new EthereumSyncStatus.fromMap(res);
     }
     _processError(method, res);
     return null;

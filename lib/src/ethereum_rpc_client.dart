@@ -1,7 +1,7 @@
 /*
  * Package : Ethereum
  * Author : S. Hamblett <steve.hamblett@linux.com>
- * Date   : 06/011/2017
+ * Date   : 06/11/2017
  * Copyright :  S.Hamblett
  *
  * A JSON RPC 2.0 client for Ethereum
