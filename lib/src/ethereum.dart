@@ -142,15 +142,15 @@ class Ethereum {
   }
 
   /// Returns Keccak-256 (not the standardized SHA3-256) of the given data.
-  Future<int> sha3(int data) async {
+  Future<BigInteger> sha3(BigInteger data) async {
     if (data == null) {
       throw new ArgumentError.notNull("Ethereum::sha3 - data");
     }
     final String method = EthereumRpcMethods.web3Sha3;
-    final List params = [EthereumUtilities.intToHex(data)];
+    final List params = [data.toRadix(16)];
     final res = await rpcClient.request(method, params);
     if (res.containsKey(ethResultKey)) {
-      return EthereumUtilities.hexToInt(res[ethResultKey]);
+      return new BigInteger(res[ethResultKey]);
     }
     _processError(method, res);
     return null;
@@ -212,11 +212,11 @@ class Ethereum {
   }
 
   /// The client coinbase address.
-  Future<int> coinbaseAddress() async {
+  Future<BigInteger> coinbaseAddress() async {
     final String method = EthereumRpcMethods.coinbaseAddress;
     final res = await rpcClient.request(method);
     if (res.containsKey(ethResultKey)) {
-      return EthereumUtilities.hexToInt(res[ethResultKey]);
+      return new BigInteger(res[ethResultKey]);
     }
     _processError(method, res);
     return null;
@@ -256,11 +256,11 @@ class Ethereum {
   }
 
   /// Accounts,  a list of addresses owned by client.
-  Future<List<int>> accounts() async {
+  Future<List<BigInteger>> accounts() async {
     final String method = EthereumRpcMethods.accounts;
     final res = await rpcClient.request(method);
     if (res.containsKey(ethResultKey)) {
-      return EthereumUtilities.hexToIntList(res[ethResultKey]);
+      return EthereumUtilities.hexToBigIntegerList(res[ethResultKey]);
     }
     _processError(method, res);
     return null;
@@ -280,7 +280,7 @@ class Ethereum {
   /// Get balance, the balance of the account of the given address.
   /// The block can be an integer block number or the one of the strings
   /// "latest", "earliest" or "pending.
-  Future<int> getBalance(int accountNumber, dynamic block) async {
+  Future<int> getBalance(BigInteger accountNumber, dynamic block) async {
     if (accountNumber == null) {
       throw new ArgumentError.notNull("Ethereum::getBalance - accountNumber");
     }
@@ -295,7 +295,7 @@ class Ethereum {
       blockString = block;
     }
     final List params = [
-      EthereumUtilities.intToHex(accountNumber),
+      EthereumUtilities.bigIntegerToHex(accountNumber),
       blockString
     ];
     final res = await rpcClient.request(method, params);
@@ -309,7 +309,8 @@ class Ethereum {
   /// Get Storage at, the value from a storage position at a given address.
   /// Parameters are the address of the storage, the integer position of the storage and
   /// the block number, or the string "latest", "earliest" or "pending.
-  Future<int> getStorageAt(int address, int pos, dynamic block) async {
+  Future<BigInteger> getStorageAt(BigInteger address, int pos,
+      dynamic block) async {
     if (address == null) {
       throw new ArgumentError.notNull("Ethereum::getStorageAt - address");
     }
@@ -327,13 +328,13 @@ class Ethereum {
       blockString = block;
     }
     final List params = [
-      EthereumUtilities.intToHex(address),
+      EthereumUtilities.bigIntegerToHex(address),
       EthereumUtilities.intToHex(pos),
       blockString
     ];
     final res = await rpcClient.request(method, params);
     if (res.containsKey(ethResultKey)) {
-      return EthereumUtilities.hexToInt(res[ethResultKey]);
+      return new BigInteger(res[ethResultKey]);
     }
     _processError(method, res);
     return null;

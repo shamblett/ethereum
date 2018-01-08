@@ -42,6 +42,11 @@ class EthereumUtilities {
     return '0x' + ret;
   }
 
+  /// BigInteger to hex string
+  static String bigIntegerToHex(BigInteger val) {
+    return '0x' + val.toRadix(16);
+  }
+
   /// Hex string to integer, a value of null indicates an error.
   /// The string must start with 0x
   static int hexToInt(String val) {
@@ -52,6 +57,12 @@ class EthereumUtilities {
   static List<int> hexToIntList(List<String> val) {
     return new List<int>.generate(
         val.length, (int index) => hexToInt(val[index]));
+  }
+
+  /// Hex String list to BigInteger list
+  static List<BigInteger> hexToBigIntegerList(List<String> val) {
+    return new List<BigInteger>.generate(
+        val.length, (int index) => new BigInteger(val[index]));
   }
 
   /// Integer list to Hex String list
