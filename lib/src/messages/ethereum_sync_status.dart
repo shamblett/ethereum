@@ -39,18 +39,17 @@ class EthereumSyncStatus {
 
   /// Convert from the supplied Map, only check for the keys we need.
   void convert(Map data) {
-    if ((data[ethResultKey] is bool) && (data[ethResultKey])) {
+    if (!(data[ethResultKey] is bool)) {
       _syncing = true;
-      Map resultBlock = data[ethResultKey];
-      if (resultBlock.containsKey('startingBlock')) {
+      if (data.containsKey('startingBlock')) {
         _startingBlock =
-            EthereumUtilities.hexToInt(resultBlock['startingBlock']);
+            EthereumUtilities.hexToInt(data['startingBlock']);
       }
-      if (resultBlock.containsKey('currentBlock')) {
-        _currentBlock = EthereumUtilities.hexToInt(resultBlock['currentBlock']);
+      if (data.containsKey('currentBlock')) {
+        _currentBlock = EthereumUtilities.hexToInt(data['currentBlock']);
       }
-      if (resultBlock.containsKey('highestBlock')) {
-        _highestBlock = EthereumUtilities.hexToInt(resultBlock['highestBlock']);
+      if (data.containsKey('highestBlock')) {
+        _highestBlock = EthereumUtilities.hexToInt(data['highestBlock']);
       }
     }
   }

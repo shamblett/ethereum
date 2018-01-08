@@ -701,4 +701,27 @@ void main() {
       expect(thrown, isTrue);
     });
   });
+
+  group("Message tests", () {
+    test("Sync status - no sync", () {
+      final Map nosync = {"result": false};
+      final EthereumSyncStatus message = new EthereumSyncStatus.fromMap(nosync);
+      expect(message.syncing, isFalse);
+      expect(message.currentBlock, isNull);
+      expect(message.highestBlock, isNull);
+      expect(message.startingBlock, isNull);
+    });
+    test("Sync status - sync", () {
+      final Map sync = {
+        'startingBlock': '0x384',
+        'currentBlock': '0x386',
+        'highestBlock': '0x454'
+      };
+      final EthereumSyncStatus message = new EthereumSyncStatus.fromMap(sync);
+      expect(message.syncing, isTrue);
+      expect(message.currentBlock, 0x386);
+      expect(message.highestBlock, 0x454);
+      expect(message.startingBlock, 0x384);
+    });
+  });
 }
