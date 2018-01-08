@@ -14,7 +14,7 @@ class EthereumSyncStatus {
   EthereumSyncStatus();
 
   EthereumSyncStatus.fromMap(Map result) {
-    convert(result);
+    construct(result);
   }
 
   /// Syncing indicator, true if syncing
@@ -37,13 +37,12 @@ class EthereumSyncStatus {
 
   int get highestBlock => _highestBlock;
 
-  /// Convert from the supplied Map, only check for the keys we need.
-  void convert(Map data) {
+  /// Construct from the supplied Map, only check for the keys we need.
+  void construct(Map data) {
     if (!(data[ethResultKey] is bool)) {
       _syncing = true;
       if (data.containsKey('startingBlock')) {
-        _startingBlock =
-            EthereumUtilities.hexToInt(data['startingBlock']);
+        _startingBlock = EthereumUtilities.hexToInt(data['startingBlock']);
       }
       if (data.containsKey('currentBlock')) {
         _currentBlock = EthereumUtilities.hexToInt(data['currentBlock']);
