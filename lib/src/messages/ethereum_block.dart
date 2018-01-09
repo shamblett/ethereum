@@ -18,9 +18,9 @@ class EthereumBlock {
   }
 
   /// The block number. Null when its a pending block.
-  int _blockNumber;
+  int _number;
 
-  int get blockNumber => _blockNumber;
+  int get number => _number;
 
   /// Hash of the block. Null when its a pending block.
   BigInteger _hash;
@@ -97,12 +97,13 @@ class EthereumBlock {
 
   int get gasUsed => _gasUsed;
 
-  /// Timestamp: - the timestamp for when the block was collated.
+  /// Timestamp. The unix timestamp for when the block was collated.
   DateTime _timestamp;
 
   DateTime get timestamp => _timestamp;
 
-  /// Transactions. A list of transaction objects, or 32 Bytes transaction hashes depending on the last given parameter.
+  /// Transactions. A list of transaction objects, or 32 Bytes transaction hashes
+  /// depending on the last given parameter.
   List<dynamic> _transactions;
 
   List<dynamic> get transactions => _transactions;
@@ -113,5 +114,60 @@ class EthereumBlock {
   List<BigInteger> get uncles => _uncles;
 
   /// Construct from the supplied Map, only check for the keys we need.
-  void construct(Map data) {}
+  void construct(Map data) {
+    if (data.containsKey('number')) {
+      _number = EthereumUtilities.hexToInt(data['number']);
+    }
+    if (data.containsKey('hash')) {
+      _hash = new BigInteger(data['hash']);
+    }
+    if (data.containsKey('parentHash')) {
+      _parentHash = new BigInteger(data['parentHash']);
+    }
+    if (data.containsKey('nonce')) {
+      _nonce = new BigInteger(data['nonce']);
+    }
+    if (data.containsKey('sha3Uncles')) {
+      _sha3Uncles = new BigInteger(data['sha3Uncles']);
+    }
+    if (data.containsKey('logsBloom')) {
+      _logsBloom = new BigInteger(data['logsBloom']);
+    }
+    if (data.containsKey('transactionsRoot')) {
+      _transactionsRoot = new BigInteger(data['transactionsRoot']);
+    }
+    if (data.containsKey('stateRoot')) {
+      _stateRoot = new BigInteger(data['stateRoot']);
+    }
+    if (data.containsKey('receiptsRoot')) {
+      _receiptsRoot = new BigInteger(data['receiptsRoot']);
+    }
+    if (data.containsKey('miner')) {
+      _miner = new BigInteger(data['miner']);
+    }
+    if (data.containsKey('difficulty')) {
+      _difficulty = EthereumUtilities.hexToInt(data['difficulty']);
+    }
+    if (data.containsKey('totalDifficulty')) {
+      _totalDifficulty = EthereumUtilities.hexToInt(data['totalDifficulty']);
+    }
+    if (data.containsKey('extraData')) {
+      _extraData = new BigInteger(data['extraData']);
+    }
+    if (data.containsKey('size')) {
+      _size = EthereumUtilities.hexToInt(data['size']);
+    }
+    if (data.containsKey('gasLimit')) {
+      _gasLimit = EthereumUtilities.hexToInt(data['gasLimit']);
+    }
+    if (data.containsKey('gasUsed')) {
+      _gasUsed = EthereumUtilities.hexToInt(data['gasUsed']);
+    }
+    if (data.containsKey('timestamp')) {
+      _timestamp = new DateTime.fromMillisecondsSinceEpoch(data['gasUsed']);
+    }
+    if (data.containsKey('uncles')) {
+      _uncles = EthereumUtilities.hexToBigIntegerList(data['uncles']);
+    }
+  }
 }
