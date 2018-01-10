@@ -71,47 +71,49 @@ class EthereumTransaction {
   int get gas => _gas;
 
   /// Input. Data sent with the transaction.
-  BigInteger _data;
+  BigInteger _input;
 
-  BigInteger get data => _data;
+  BigInteger get input => _input;
 
   /// Construct from the supplied Map, only check for the keys we need.
   void construct(Map data) {
-    if (data == null) {
+    if (data[ethResultKey] == null) {
       return;
     }
-    if (data.containsKey('hash')) {
-      _hash = new BigInteger(data['hash']);
+    if (data[ethResultKey].containsKey('hash')) {
+      _hash = new BigInteger(data[ethResultKey]['hash']);
     }
-    if (data.containsKey('nonce')) {
-      _nonce = EthereumUtilities.hexToInt(data['nonce']);
+    if (data[ethResultKey].containsKey('nonce')) {
+      _nonce = EthereumUtilities.hexToInt(data[ethResultKey]['nonce']);
     }
-    if (data.containsKey('blockHash')) {
-      _blockHash = new BigInteger(data['blockHash']);
+    if (data[ethResultKey].containsKey('blockHash')) {
+      _blockHash = new BigInteger(data[ethResultKey]['blockHash']);
     }
-    if (data.containsKey('blockNumber')) {
-      _blockNumber = EthereumUtilities.hexToInt(data['blockNumber']);
+    if (data[ethResultKey].containsKey('blockNumber')) {
+      _blockNumber =
+          EthereumUtilities.hexToInt(data[ethResultKey]['blockNumber']);
     }
-    if (data.containsKey('transactionIndex')) {
-      _transactionIndex = EthereumUtilities.hexToInt(data['transactionIndex']);
+    if (data[ethResultKey].containsKey('transactionIndex')) {
+      _transactionIndex =
+          EthereumUtilities.hexToInt(data[ethResultKey]['transactionIndex']);
     }
-    if (data.containsKey('from')) {
-      _from = new BigInteger(data['from']);
+    if (data[ethResultKey].containsKey('from')) {
+      _from = new BigInteger(data[ethResultKey]['from']);
     }
-    if (data.containsKey('to')) {
-      _to = new BigInteger(data['to']);
+    if (data[ethResultKey].containsKey('to')) {
+      _to = new BigInteger(data[ethResultKey]['to']);
     }
-    if (data.containsKey('value')) {
-      _value = EthereumUtilities.hexToInt(data['value']);
+    if (data[ethResultKey].containsKey('value')) {
+      _value = EthereumUtilities.hexToInt(data[ethResultKey]['value']);
     }
-    if (data.containsKey('gasPrice')) {
-      _gasPrice = EthereumUtilities.hexToInt(data['gasPrice']);
+    if (data[ethResultKey].containsKey('gasPrice')) {
+      _gasPrice = EthereumUtilities.hexToInt(data[ethResultKey]['gasPrice']);
     }
-    if (data.containsKey('gas')) {
-      _gas = EthereumUtilities.hexToInt(data['gas']);
+    if (data[ethResultKey].containsKey('gas')) {
+      _gas = EthereumUtilities.hexToInt(data[ethResultKey]['gas']);
     }
-    if (data.containsKey('data')) {
-      _data = new BigInteger(data['data']);
+    if (data[ethResultKey].containsKey('input')) {
+      _input = new BigInteger(data[ethResultKey]['input']);
     }
   }
 }

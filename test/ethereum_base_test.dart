@@ -724,9 +724,64 @@ void main() {
       expect(message.highestBlock, 0x454);
       expect(message.startingBlock, 0x384);
     });
+    test("Transaction - null", () {
+      final Map transaction = {"result": null};
+
+      final EthereumTransaction message =
+      new EthereumTransaction.fromMap(transaction);
+      expect(message.hash, isNull);
+      expect(message.nonce, isNull);
+      expect(message.blockHash, isNull);
+      expect(message.blockNumber, isNull);
+      expect(message.transactionIndex, isNull);
+      expect(message.from, isNull);
+      expect(message.to, isNull);
+      expect(message.value, isNull);
+      expect(message.gas, isNull);
+      expect(message.gasPrice, isNull);
+      expect(message.input, isNull);
+    });
+
+    test("Transaction", () {
+      final Map transaction = {
+        "result": {
+          "hash":
+          "0xc6ef2fc5426d6ad6fd9e2a26abeab0aa2411b7ab17f30a99d3cb96aed1d1055b",
+          "nonce": "0x0",
+          "blockHash":
+          "0xbeab0aa2411b7ab17f30a99d3cb9c6ef2fc5426d6ad6fd9e2a26a6aed1d1055b",
+          "blockNumber": "0x15df", // 5599
+          "transactionIndex": "0x1", // 1
+          "from": "0x407d73d8a49eeb85d32cf465507dd71d507100c1",
+          "to": "0x85a43d8a49eeb85d32cf465507dd71d507100c1",
+          "value": "0x7f110", // 520464
+          "gas": "0x7f111", // 520465
+          "gasPrice": "0x09184e72a000",
+          "input":
+          "0x603880600c6000396000f300603880600c6000396000f3603880600c6000396000f360"
+        }
+      };
+
+      final EthereumTransaction message =
+      new EthereumTransaction.fromMap(transaction);
+      expect(message.hash.intValue(),
+          0xc6ef2fc5426d6ad6fd9e2a26abeab0aa2411b7ab17f30a99d3cb96aed1d1055b);
+      expect(message.nonce, 0);
+      expect(message.blockHash.intValue(),
+          0xbeab0aa2411b7ab17f30a99d3cb9c6ef2fc5426d6ad6fd9e2a26a6aed1d1055b);
+      expect(message.blockNumber, 5599);
+      expect(message.transactionIndex, 1);
+      expect(
+          message.from.intValue(), 0x407d73d8a49eeb85d32cf465507dd71d507100c1);
+      expect(message.to.intValue(), 0x85a43d8a49eeb85d32cf465507dd71d507100c1);
+      expect(message.value, 520464);
+      expect(message.gas, 520465);
+      expect(message.gasPrice, 0x09184e72a000);
+      expect(message.input.intValue(),
+          0x603880600c6000396000f300603880600c6000396000f3603880600c6000396000f360);
+    });
     test("Block - null", () {
-      final Map block = {
-        "result": null};
+      final Map block = {"result": null};
 
       final EthereumBlock message = new EthereumBlock.fromMap(block);
       expect(message.number, isNull);
@@ -747,6 +802,7 @@ void main() {
       expect(message.timestamp, isNull);
       expect(message.transactions, isNull);
       expect(message.uncles, isNull);
+      expect(message.transactionsAreHashes, isFalse);
     });
     test("Block - transactions are hashes", () {
       final Map block = {
@@ -818,6 +874,108 @@ void main() {
           0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527334);
       expect(message.uncles[1].intValue(),
           0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527335);
+      expect(message.transactionsAreHashes, isTrue);
+    });
+    test("Block - transactions are objects", () {
+      final Map block = {
+        "result": {
+          "number": "0x1b4", // 436
+          "hash":
+          "0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331",
+          "parentHash":
+          "0x9646252be9520f6e71339a8df9c55e4d7619deeb018d2a3f2d21fc165dde5eb5",
+          "nonce":
+          "0xe04d296d2460cfb8472af2c5fd05b5a214109c25688d3704aed5484f9a7792f2",
+          "sha3Uncles":
+          "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+          "logsBloom":
+          "0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331",
+          "transactionsRoot":
+          "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
+          "stateRoot":
+          "0xd5855eb08b3387c0af375e9cdb6acfc05eb8f519e419b874b6ff2ffda7ed1dff",
+          "miner": "0x4e65fda2159562a496f9f3522f89122a3088497a",
+          "difficulty": "0x027f07", // 163591
+          "totalDifficulty": "0x027f07", // 163591
+          "extraData":
+          "0x0000000000000000000000000000000000000000000000000000000000000000",
+          "size": "0x027f07", // 163591
+          "gasLimit": "0x9f759", // 653145
+          "gasUsed": "0x9f759", // 653145
+          "timestamp": "0x54e34e8e", // 1424182926
+          "transactions": [
+            {
+              "hash":
+              "0xc6ef2fc5426d6ad6fd9e2a26abeab0aa2411b7ab17f30a99d3cb96aed1d1055b",
+              "nonce": "0x0",
+              "blockHash":
+              "0xbeab0aa2411b7ab17f30a99d3cb9c6ef2fc5426d6ad6fd9e2a26a6aed1d1055b",
+              "blockNumber": "0x15df", // 5599
+              "transactionIndex": "0x1", // 1
+              "from": "0x407d73d8a49eeb85d32cf465507dd71d507100c1",
+              "to": "0x85a43d8a49eeb85d32cf465507dd71d507100c1",
+              "value": "0x7f110", // 520464
+              "gas": "0x7f111", // 520465
+              "gasPrice": "0x09184e72a000",
+              "input":
+              "0x603880600c6000396000f300603880600c6000396000f3603880600c6000396000f360"
+            },
+            {
+              "hash":
+              "0xc6ef2fc5426d6ad6fd9e2a26abeab0aa2411b7ab17f30a99d3cb96aed1d1055b",
+              "nonce": "0x1",
+              "blockHash":
+              "0xbeab0aa2411b7ab17f30a99d3cb9c6ef2fc5426d6ad6fd9e2a26a6aed1d1055b",
+              "blockNumber": "0x15df", // 5599
+              "transactionIndex": "0x1", // 1
+              "from": "0x407d73d8a49eeb85d32cf465507dd71d507100c1",
+              "to": "0x85a43d8a49eeb85d32cf465507dd71d507100c1",
+              "value": "0x7f110", // 520464
+              "gas": "0x7f111", // 520465
+              "gasPrice": "0x09184e72a000",
+              "input":
+              "0x603880600c6000396000f300603880600c6000396000f3603880600c6000396000f360"
+            }
+          ],
+          "uncles": [
+            "0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527334",
+            "0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527335"
+          ]
+        }
+      };
+      final EthereumBlock message = new EthereumBlock.fromMap(block);
+      expect(message.number, 436);
+      expect(message.hash.intValue(),
+          0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331);
+      expect(message.parentHash.intValue(),
+          0x9646252be9520f6e71339a8df9c55e4d7619deeb018d2a3f2d21fc165dde5eb5);
+      expect(message.nonce.intValue(),
+          0xe04d296d2460cfb8472af2c5fd05b5a214109c25688d3704aed5484f9a7792f2);
+      expect(message.sha3Uncles.intValue(),
+          0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347);
+      expect(message.logsBloom.intValue(),
+          0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331);
+      expect(message.transactionsRoot.intValue(),
+          0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421);
+      expect(message.stateRoot.intValue(),
+          0xd5855eb08b3387c0af375e9cdb6acfc05eb8f519e419b874b6ff2ffda7ed1dff);
+      expect(
+          message.miner.intValue(), 0x4e65fda2159562a496f9f3522f89122a3088497a);
+      expect(message.difficulty, 163591);
+      expect(message.totalDifficulty, 163591);
+      expect(message.extraData.intValue(), 0);
+      expect(message.size, 163591);
+      expect(message.gasLimit, 653145);
+      expect(message.gasUsed, 653145);
+      expect(message.timestamp.millisecondsSinceEpoch, 1424182926);
+      expect(message.transactions.length, 2);
+      expect(message.transactions[0].nonce, 0);
+      expect(message.transactions[1].nonce, 1);
+      expect(message.uncles[0].intValue(),
+          0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527334);
+      expect(message.uncles[1].intValue(),
+          0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527335);
+      expect(message.transactionsAreHashes, isFalse);
     });
   });
 }

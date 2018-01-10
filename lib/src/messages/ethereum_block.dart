@@ -111,6 +111,8 @@ class EthereumBlock {
   /// Indicates if the transactions are hashes or transaction objects
   bool _transactionsAreHashes = false;
 
+  bool get transactionsAreHashes => _transactionsAreHashes;
+
   /// Uncles. A list of uncle hashes.
   List<BigInteger> _uncles;
 
@@ -192,8 +194,9 @@ class EthereumBlock {
           // Transaction objects
           _transactions = new List<EthereumTransaction>();
           for (Map transaction in data[ethResultKey]['transactions']) {
+            Map buildTrans = { "result": transaction};
             final EthereumTransaction entry =
-            new EthereumTransaction.fromMap(transaction);
+            new EthereumTransaction.fromMap(buildTrans);
             _transactions.add(entry);
           }
         }
