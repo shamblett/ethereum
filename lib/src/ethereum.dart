@@ -689,7 +689,7 @@ class Ethereum {
   /// A boolean, if true it returns the full transaction objects,
   /// if false only the hashes of the transactions, defaults to true.
   /// Returns See getBlockByHash
-  Future<JsonObjectLite> getBlockByNumber(dynamic blockNumber,
+  Future<EthereumBlock> getBlockByNumber(dynamic blockNumber,
       [bool full = true]) async {
     if (blockNumber == null) {
       throw new ArgumentError.notNull(
@@ -705,7 +705,7 @@ class Ethereum {
     final String method = EthereumRpcMethods.getBlockByNumber;
     final res = await rpcClient.request(method, params);
     if (res.containsKey(ethResultKey)) {
-      return res[ethResultKey];
+      return new EthereumBlock.fromMap(res[ethResultKey]);
     }
     _processError(method, res);
     return null;
@@ -715,7 +715,7 @@ class Ethereum {
   /// Returns the information about a transaction requested by transaction hash.
   /// Hash of a transaction
   /// Returns a transaction object, or null when no transaction was found:
-  Future<JsonObjectLite> getTransactionByHash(int hash) async {
+  Future<EthereumTransaction> getTransactionByHash(int hash) async {
     if (hash == null) {
       throw new ArgumentError.notNull("Ethereum::getTransactionByHash - hash");
     }
@@ -723,7 +723,7 @@ class Ethereum {
     final String method = EthereumRpcMethods.getTransactionByHash;
     final res = await rpcClient.request(method, params);
     if (res.containsKey(ethResultKey)) {
-      return res[ethResultKey];
+      return new EthereumTransaction.fromMap(res[ethResultKey]);
     }
     _processError(method, res);
     return null;
@@ -733,7 +733,7 @@ class Ethereum {
   /// Returns information about a transaction by block hash and transaction index position.
   /// Hash of a block and integer of the transaction index position.
   /// Returns see getTransactionByHash.
-  Future<JsonObjectLite> getTransactionByBlockHashAndIndex(int blockHash,
+  Future<EthereumTransaction> getTransactionByBlockHashAndIndex(int blockHash,
       int index) async {
     if (blockHash == null) {
       throw new ArgumentError.notNull(
@@ -750,7 +750,7 @@ class Ethereum {
     final String method = EthereumRpcMethods.getTransactionByBlockHashAndIndex;
     final res = await rpcClient.request(method, params);
     if (res.containsKey(ethResultKey)) {
-      return res[ethResultKey];
+      return new EthereumTransaction.fromMap(res[ethResultKey]);
     }
     _processError(method, res);
     return null;
@@ -760,7 +760,7 @@ class Ethereum {
   /// Returns information about a transaction by block number and transaction index position.
   /// A block number, or the string "earliest", "latest" or "pending", as in the default block parameter.
   /// Returns see getTransactionByHash.
-  Future<JsonObjectLite> getTransactionByBlockNumberAndIndex(
+  Future<EthereumTransaction> getTransactionByBlockNumberAndIndex(
       dynamic blockNumber, int index) async {
     if (blockNumber == null) {
       throw new ArgumentError.notNull(
@@ -784,7 +784,7 @@ class Ethereum {
         EthereumRpcMethods.getTransactionByBlockNumberAndIndex;
     final res = await rpcClient.request(method, params);
     if (res.containsKey(ethResultKey)) {
-      return res[ethResultKey];
+      return new EthereumTransaction.fromMap(res[ethResultKey]);
     }
     _processError(method, res);
     return null;

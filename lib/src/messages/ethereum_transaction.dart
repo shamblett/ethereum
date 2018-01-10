@@ -77,6 +77,9 @@ class EthereumTransaction {
 
   /// Construct from the supplied Map, only check for the keys we need.
   void construct(Map data) {
+    if (data == null) {
+      return;
+    }
     if (data.containsKey('hash')) {
       _hash = new BigInteger(data['hash']);
     }

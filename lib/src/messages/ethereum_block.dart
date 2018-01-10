@@ -118,71 +118,81 @@ class EthereumBlock {
 
   /// Construct from the supplied Map, only check for the keys we need.
   void construct(Map data) {
-    if (data.containsKey('number')) {
-      _number = EthereumUtilities.hexToInt(data['number']);
+    if (data[ethResultKey] == null) {
+      return;
     }
-    if (data.containsKey('hash')) {
-      _hash = new BigInteger(data['hash']);
+    if (data[ethResultKey].containsKey('number')) {
+      _number = EthereumUtilities.hexToInt(data[ethResultKey]['number']);
     }
-    if (data.containsKey('parentHash')) {
-      _parentHash = new BigInteger(data['parentHash']);
+    if (data[ethResultKey].containsKey('hash')) {
+      _hash = new BigInteger(data[ethResultKey]['hash']);
     }
-    if (data.containsKey('nonce')) {
-      _nonce = new BigInteger(data['nonce']);
+    if (data[ethResultKey].containsKey('parentHash')) {
+      _parentHash = new BigInteger(data[ethResultKey]['parentHash']);
     }
-    if (data.containsKey('sha3Uncles')) {
-      _sha3Uncles = new BigInteger(data['sha3Uncles']);
+    if (data[ethResultKey].containsKey('nonce')) {
+      _nonce = new BigInteger(data[ethResultKey]['nonce']);
     }
-    if (data.containsKey('logsBloom')) {
-      _logsBloom = new BigInteger(data['logsBloom']);
+    if (data[ethResultKey].containsKey('sha3Uncles')) {
+      _sha3Uncles = new BigInteger(data[ethResultKey]['sha3Uncles']);
     }
-    if (data.containsKey('transactionsRoot')) {
-      _transactionsRoot = new BigInteger(data['transactionsRoot']);
+    if (data[ethResultKey].containsKey('logsBloom')) {
+      _logsBloom = new BigInteger(data[ethResultKey]['logsBloom']);
     }
-    if (data.containsKey('stateRoot')) {
-      _stateRoot = new BigInteger(data['stateRoot']);
+    if (data[ethResultKey].containsKey('transactionsRoot')) {
+      _transactionsRoot =
+      new BigInteger(data[ethResultKey]['transactionsRoot']);
     }
-    if (data.containsKey('receiptsRoot')) {
-      _receiptsRoot = new BigInteger(data['receiptsRoot']);
+    if (data[ethResultKey].containsKey('stateRoot')) {
+      _stateRoot = new BigInteger(data[ethResultKey]['stateRoot']);
     }
-    if (data.containsKey('miner')) {
-      _miner = new BigInteger(data['miner']);
+    if (data[ethResultKey].containsKey('receiptsRoot')) {
+      _receiptsRoot = new BigInteger(data[ethResultKey]['receiptsRoot']);
     }
-    if (data.containsKey('difficulty')) {
-      _difficulty = EthereumUtilities.hexToInt(data['difficulty']);
+    if (data[ethResultKey].containsKey('miner')) {
+      _miner = new BigInteger(data[ethResultKey]['miner']);
     }
-    if (data.containsKey('totalDifficulty')) {
-      _totalDifficulty = EthereumUtilities.hexToInt(data['totalDifficulty']);
+    if (data[ethResultKey].containsKey('difficulty')) {
+      _difficulty =
+          EthereumUtilities.hexToInt(data[ethResultKey]['difficulty']);
     }
-    if (data.containsKey('extraData')) {
-      _extraData = new BigInteger(data['extraData']);
+    if (data[ethResultKey].containsKey('totalDifficulty')) {
+      _totalDifficulty =
+          EthereumUtilities.hexToInt(data[ethResultKey]['totalDifficulty']);
     }
-    if (data.containsKey('size')) {
-      _size = EthereumUtilities.hexToInt(data['size']);
+    if (data[ethResultKey].containsKey('extraData')) {
+      _extraData = new BigInteger(data[ethResultKey]['extraData']);
     }
-    if (data.containsKey('gasLimit')) {
-      _gasLimit = EthereumUtilities.hexToInt(data['gasLimit']);
+    if (data[ethResultKey].containsKey('size')) {
+      _size = EthereumUtilities.hexToInt(data[ethResultKey]['size']);
     }
-    if (data.containsKey('gasUsed')) {
-      _gasUsed = EthereumUtilities.hexToInt(data['gasUsed']);
+    if (data[ethResultKey].containsKey('gasLimit')) {
+      _gasLimit = EthereumUtilities.hexToInt(data[ethResultKey]['gasLimit']);
     }
-    if (data.containsKey('timestamp')) {
-      _timestamp = new DateTime.fromMillisecondsSinceEpoch(data['gasUsed']);
+    if (data[ethResultKey].containsKey('gasUsed')) {
+      _gasUsed = EthereumUtilities.hexToInt(data[ethResultKey]['gasUsed']);
     }
-    if (data.containsKey('uncles')) {
-      _uncles = EthereumUtilities.hexToBigIntegerList(data['uncles']);
+    if (data[ethResultKey].containsKey('timestamp')) {
+      _timestamp = new DateTime.fromMillisecondsSinceEpoch(
+          EthereumUtilities.hexToInt(data[ethResultKey]['timestamp']));
     }
-    if (data.containsKey('transactions')) {
-      if ((data['transactions'] != null) && (data['transactions'].isNotEmpty)) {
-        if (data['transactions'][0] is String) {
+    if (data[ethResultKey].containsKey('uncles')) {
+      _uncles =
+          EthereumUtilities.hexToBigIntegerList(data[ethResultKey]['uncles']);
+    }
+    if (data[ethResultKey].containsKey('transactions')) {
+      if ((data[ethResultKey]['transactions'] != null) &&
+          (data[ethResultKey]['transactions'].isNotEmpty)) {
+        if (data[ethResultKey]['transactions'][0] is String) {
           // Hashes
           _transactionsAreHashes = true;
-          _transactions = EthereumUtilities.hexToIntList(data['transactions']);
+          _transactions = EthereumUtilities
+              .hexToBigIntegerList(data[ethResultKey]['transactions']);
         } else {
           // Transaction objects
           _transactions = new List<EthereumTransaction>();
-          for (Map transaction in data['transactions']) {
-            EthereumTransaction entry =
+          for (Map transaction in data[ethResultKey]['transactions']) {
+            final EthereumTransaction entry =
             new EthereumTransaction.fromMap(transaction);
             _transactions.add(entry);
           }
