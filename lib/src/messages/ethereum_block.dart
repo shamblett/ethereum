@@ -108,6 +108,9 @@ class EthereumBlock {
 
   List<dynamic> get transactions => _transactions;
 
+  /// Indicates if the transactions are hashes or transaction objects
+  bool _transactionsAreHashes = false;
+
   /// Uncles. A list of uncle hashes.
   List<BigInteger> _uncles;
 
@@ -168,6 +171,23 @@ class EthereumBlock {
     }
     if (data.containsKey('uncles')) {
       _uncles = EthereumUtilities.hexToBigIntegerList(data['uncles']);
+    }
+    if (data.containsKey('transactions')) {
+      if ((data['transactions'] != null) && (data['transactions'].isNotEmpty)) {
+        if (data['transactions'][0] is String) {
+          // Hashes
+          _transactionsAreHashes = true;
+          _transactions = EthereumUtilities.hexToIntList(data['transactions']);
+        } else {
+          // Transaction objects
+          _transactions = new List<EthereumTransaction>();
+          for (Map transaction in data['transactions']) {
+            EthereumTransaction entry =
+            new EthereumTransaction.fromMap(transaction);
+            _transactions.add(entry);
+          }
+        }
+      }
     }
   }
 }

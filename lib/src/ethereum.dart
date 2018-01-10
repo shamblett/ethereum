@@ -715,18 +715,6 @@ class Ethereum {
   /// Returns the information about a transaction requested by transaction hash.
   /// Hash of a transaction
   /// Returns a transaction object, or null when no transaction was found:
-  ///
-  /// hash: - hash of the transaction.
-  /// nonce: - the number of transactions made by the sender prior to this one.
-  /// blockHash: - hash of the block where this transaction was in. null when its pending.
-  /// blockNumber: - block number where this transaction was in. null when its pending.
-  /// transactionIndex: - integer of the transactions index position in the block. null when its pending.
-  /// from: - address of the sender.
-  /// to: - address of the receiver. null when its a contract creation transaction.
-  /// value: - value transferred in Wei.
-  /// gasPrice: - gas price provided by the sender in Wei.
-  /// gas: - gas provided by the sender.
-  /// input: - the data send along with the transaction.
   Future<JsonObjectLite> getTransactionByHash(int hash) async {
     if (hash == null) {
       throw new ArgumentError.notNull("Ethereum::getTransactionByHash - hash");
