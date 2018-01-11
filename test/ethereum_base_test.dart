@@ -1054,8 +1054,7 @@ void main() {
           // 13244
           "gasUsed": '0x4dc',
           // 1244
-          "contractAddress":
-          '0xb60e8dd61c5d32be8058bb8eb970870f07233155',
+          "contractAddress": '0xb60e8dd61c5d32be8058bb8eb970870f07233155',
           // or null, if none was created
           "logs": [
             {
@@ -1129,8 +1128,7 @@ void main() {
           // 13244
           "gasUsed": '0x4dc',
           // 1244
-          "contractAddress":
-          '0xb60e8dd61c5d32be8058bb8eb970870f07233155',
+          "contractAddress": '0xb60e8dd61c5d32be8058bb8eb970870f07233155',
           // or null, if none was created
           "logs": [
             {
@@ -1191,5 +1189,69 @@ void main() {
           0x59ebeb90bc63057b6515673c3ecf9438e5058bca0f92585014eced636878c9a5);
       expect(message.status, isNull);
     });
+  });
+  test("Filter - null", () {
+    final Map filter = {"result": {}};
+    final EthereumFilter message = new EthereumFilter.fromMap(filter);
+    expect(message.logs, isNull);
+    expect(message.hashes, isNull);
+  });
+  test("Filter - hashes", () {
+    final Map filter = {
+      "result": [
+        "0x8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcfdf829c5a142f1fccd7d",
+        "0x8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcfdf829c5a142f1fccd7e"
+      ]
+    };
+    final EthereumFilter message = new EthereumFilter.fromMap(filter);
+    expect(message.logs, isNull);
+    expect(message.hashes, isNotNull);
+    expect(message.hashes.length, 2);
+    expect(message.hashes[0].intValue(),
+        0x8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcfdf829c5a142f1fccd7d);
+    expect(message.hashes[1].intValue(),
+        0x8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcfdf829c5a142f1fccd7e);
+  });
+  test("Filter - logs", () {
+    final Map filter = {
+      "result": [
+        {
+          "logIndex": "0x1", // 1
+          "blockNumber": "0x1b4", // 436
+          "blockHash":
+          "0x8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcfdf829c5a142f1fccd7d",
+          "transactionHash":
+          "0xdf829c5a142f1fccd7d8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcf",
+          "transactionIndex": "0x0", // 0
+          "address": "0x16c5785ac562ff41e2dcfdf829c5a142f1fccd7d",
+          "data":
+          "0x0000000000000000000000000000000000000000000000000000000000000000",
+          "topics": [
+            "0x59ebeb90bc63057b6515673c3ecf9438e5058bca0f92585014eced636878c9a5"
+          ]
+        },
+        {
+          "logIndex": "0x2", // 1
+          "blockNumber": "0x1b4", // 436
+          "blockHash":
+          "0x8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcfdf829c5a142f1fccd7d",
+          "transactionHash":
+          "0xdf829c5a142f1fccd7d8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcf",
+          "transactionIndex": "0x0", // 0
+          "address": "0x16c5785ac562ff41e2dcfdf829c5a142f1fccd7d",
+          "data":
+          "0x0000000000000000000000000000000000000000000000000000000000000000",
+          "topics": [
+            "0x59ebeb90bc63057b6515673c3ecf9438e5058bca0f92585014eced636878c9a5"
+          ]
+        }
+      ]
+    };
+    final EthereumFilter message = new EthereumFilter.fromMap(filter);
+    expect(message.hashes, isNull);
+    expect(message.logs, isNotNull);
+    expect(message.logs.length, 2);
+    expect(message.logs[0].logIndex, 1);
+    expect(message.logs[1].logIndex, 2);
   });
 }

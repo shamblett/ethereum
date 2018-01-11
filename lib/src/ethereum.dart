@@ -895,7 +895,7 @@ class Ethereum {
   Future<int> newFilter({dynamic fromBlock: "latest",
     dynamic toBlock: "latest",
     dynamic address,
-    List topics}) async {
+    List<BigInteger> topics}) async {
     String fromBlockString;
     if (fromBlock is int) {
       fromBlockString = EthereumUtilities.intToHex(fromBlock);
@@ -911,14 +911,15 @@ class Ethereum {
     final Map params = {"toBlock": toBlockString, "fromBlock": fromBlockString};
     if (address != null) {
       if (address is List) {
-        final List<String> addresses = EthereumUtilities.intToHexList(address);
+        final List<String> addresses = EthereumUtilities.bigIntegerToHexList(
+            address);
         params["address"] = [addresses];
       } else {
-        params["address"] = (EthereumUtilities.intToHex(address));
+        params["address"] = (EthereumUtilities.bigIntegerToHex(address));
       }
     }
     if (topics != null) {
-      params["topics"] = [topics];
+      params["topics"] = EthereumUtilities.bigIntegerToHexList(topics);
     }
     final List paramBlock = [params];
     final String method = EthereumRpcMethods.newFilter;
@@ -982,24 +983,8 @@ class Ethereum {
   /// Get filter changes
   /// Polling method for a filter, which returns an list of logs which occurred since last poll.
   /// Filter Id
-  /// Returns :
-  /// List - list of log objects, or an empty list if nothing has changed since last poll.
-  /// For filters created with newBlockFilter the returns are block hashes.
-  /// For filters created with eth_PendingTransactionFilter the returns are transaction hashes.
-  /// For filters created with eth_newFilter logs are objects with following params:
-  ///
-  /// removed: - true when the log was removed, due to a chain reorganization. false if its a valid log.
-  /// logIndex: - integer of the log index position in the block. null when its pending log.
-  /// transactionIndex: - integer of the transactions index position log was created from. null when its pending log.
-  /// transactionHash: - hash of the transactions this log was created from. null when its pending log.
-  //  blockHash: - hash of the block where this log was in. null when its pending. null when its pending log.
-  /// blockNumber: - the block number where this log was in. null when its pending. null when its pending log.
-  /// address: - address from which this log originated.
-  /// data: - contains one or more 32 Bytes non-indexed arguments of the log.
-  /// topics: - List of 0 to 4 32 Bytes DATA of indexed log arguments. (In solidity: The first topic is the
-  /// hash of the signature of the event (e.g. Deposit(address,bytes32,uint256)), unless you declared the event with
-  /// the anonymous specifier.)
-  Future<dynamic> getFilterChanges(int filterId) async {
+  /// Returns an EthereumFilter object
+  Future<EthereumFilter> getFilterChanges(int filterId) async {
     if (filterId == null) {
       throw new ArgumentError.notNull("Ethereum::getFilterChanges - filterId");
     }
@@ -1007,7 +992,7 @@ class Ethereum {
     final String method = EthereumRpcMethods.getFilterChanges;
     final res = await rpcClient.request(method, params);
     if (res.containsKey(ethResultKey)) {
-      return res[ethResultKey];
+      return new EthereumFilter.fromMap(res[ethResultKey]);
     }
     _processError(method, res);
     return null;
