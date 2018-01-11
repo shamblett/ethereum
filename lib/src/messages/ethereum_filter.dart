@@ -45,8 +45,8 @@ class EthereumFilter {
         // Logs
         _logs = new List<EthereumLog>();
         for (Map log in data[ethResultKey]) {
-          Map buildLog = {ethResultKey: log};
-          EthereumLog entry = new EthereumLog.fromMap(buildLog);
+          final Map buildLog = {ethResultKey: log};
+          final EthereumLog entry = new EthereumLog.fromMap(buildLog);
           _logs.add(entry);
         }
       }

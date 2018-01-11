@@ -100,7 +100,7 @@ class EthereumLog {
           (data[ethResultKey]['topics'].isNotEmpty)) {
         _topics = new List<BigInteger>();
         for (String topic in data[ethResultKey]['topics']) {
-          BigInteger entry = new BigInteger(topic);
+          final BigInteger entry = new BigInteger(topic);
           _topics.add(entry);
         }
       }

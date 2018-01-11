@@ -27,8 +27,7 @@ class EthereumServerHTTPAdapter implements EthereumINetworkAdapter {
       req.write(payload);
       req.close().then((HttpClientResponse resp) {
         resp.listen((data) {
-          final Map payload =
-          JSON.decode(new String.fromCharCodes(data));
+          final Map payload = JSON.decode(new String.fromCharCodes(data));
           completer.complete(payload);
         }, onError: (e) {
           print(e);

@@ -734,8 +734,7 @@ class Ethereum {
   /// Hash of a block and integer of the transaction index position.
   /// Returns see getTransactionByHash.
   Future<EthereumTransaction> getTransactionByBlockHashAndIndex(
-      BigInteger blockHash,
-      int index) async {
+      BigInteger blockHash, int index) async {
     if (blockHash == null) {
       throw new ArgumentError.notNull(
           "Ethereum::getTransactionByBlockHashAndIndex - blockHash");
@@ -888,7 +887,7 @@ class Ethereum {
   /// "earliest" for not yet mined transactions.
   /// toBlock: - (optional, default: "latest") Integer block number, or "latest" for the last mined block or "pending", "earliest" for not yet mined transactions.
   /// address: - (optional) Contract address or a list of addresses from which logs should originate.
-  /// topics: - (optional) topics. Topics are order-dependent. Each topic can also be an list of DATA with "or" options.
+  /// topics: - (optional) topics. Topics are order-dependent.
   /// Note: the user must build this structure using the utilities in the EthereumUtilities class. See the Ethereum
   /// Wiki RPC page for examples.
   /// Returns a filter id.
@@ -911,8 +910,8 @@ class Ethereum {
     final Map params = {"toBlock": toBlockString, "fromBlock": fromBlockString};
     if (address != null) {
       if (address is List) {
-        final List<String> addresses = EthereumUtilities.bigIntegerToHexList(
-            address);
+        final List<String> addresses =
+        EthereumUtilities.bigIntegerToHexList(address);
         params["address"] = [addresses];
       } else {
         params["address"] = (EthereumUtilities.bigIntegerToHex(address));
@@ -1037,8 +1036,8 @@ class Ethereum {
     final Map params = {"toBlock": toBlockString, "fromBlock": fromBlockString};
     if (address != null) {
       if (address is List) {
-        final List<String> addresses = EthereumUtilities.bigIntegerToHexList(
-            address);
+        final List<String> addresses =
+        EthereumUtilities.bigIntegerToHexList(address);
         params["address"] = [addresses];
       } else {
         params["address"] = (EthereumUtilities.bigIntegerToHex(address));
@@ -1114,10 +1113,7 @@ class Ethereum {
     if (id == null) {
       throw new ArgumentError.notNull("Ethereum::submitHashRate - id");
     }
-    final List params = [
-      EthereumUtilities.bigIntegerToHex(hashRate),
-      id
-    ];
+    final List params = [EthereumUtilities.bigIntegerToHex(hashRate), id];
     final String method = EthereumRpcMethods.submitHashrate;
     final res = await rpcClient.request(method, params);
     if (res.containsKey(ethResultKey)) {

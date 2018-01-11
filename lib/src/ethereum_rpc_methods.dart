@@ -67,5 +67,4 @@ class EthereumRpcMethods {
   static const String shhVersion = 'shh_version';
   static const String shhPost = 'shh_post';
   static const String shhNewIdentity = 'shh_newIdentity';
-
 }

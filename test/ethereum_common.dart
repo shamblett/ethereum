@@ -102,8 +102,8 @@ class EthereumCommon {
     test("Accounts", () async {
       final List<BigInteger> accounts = await client.accounts();
       expect(accounts, isNotNull);
-      final List<String> accountsStr = EthereumUtilities.bigIntegerToHexList(
-          accounts);
+      final List<String> accountsStr =
+      EthereumUtilities.bigIntegerToHexList(accounts);
       expect(client.rpcClient.id, ++id);
       if (accounts.length != 0) {
         print("Accounts are $accountsStr");
@@ -151,7 +151,8 @@ class EthereumCommon {
     });
     test("Get storage at - latest", () async {
       final BigInteger storage = await client.getStorageAt(
-          new BigInteger(0x295a70b2de5e3953354a6a8344e616ed314d7251), 0x0,
+          new BigInteger(0x295a70b2de5e3953354a6a8344e616ed314d7251),
+          0x0,
           Ethereum.ethLatest);
       expect(storage, isNotNull);
       expect(client.rpcClient.id, ++id);
@@ -168,7 +169,8 @@ class EthereumCommon {
     });
     test("Get storage at - pending", () async {
       final BigInteger storage = await client.getStorageAt(
-          new BigInteger(0x295a70b2de5e3953354a6a8344e616ed314d7251), 0x0,
+          new BigInteger(0x295a70b2de5e3953354a6a8344e616ed314d7251),
+          0x0,
           Ethereum.ethPending);
       expect(storage, isNotNull);
       expect(client.rpcClient.id, ++id);
@@ -176,7 +178,8 @@ class EthereumCommon {
     });
     test("Get storage at - block", () async {
       final BigInteger storage = await client.getStorageAt(
-          new BigInteger(0x295a70b2de5e3953354a6a8344e616ed314d7251), 0x0,
+          new BigInteger(0x295a70b2de5e3953354a6a8344e616ed314d7251),
+          0x0,
           0x4b7);
       expect(storage, isNull);
       expect(client.rpcClient.id, ++id);
@@ -295,8 +298,8 @@ class EthereumCommon {
       print("Code is $code");
     });
     test("Sign", () async {
-      final int signature =
-      await client.sign(EthereumTestConfiguration.defaultAccount, 0xdeadbeaf);
+      final int signature = await client.sign(
+          EthereumTestConfiguration.defaultAccount, 0xdeadbeaf);
       if (signature != null) {
         print(signature);
       } else {
@@ -392,9 +395,8 @@ class EthereumCommon {
       expect(client.rpcClient.id, ++id);
     });
     test("Get block by hash", () async {
-      final EthereumBlock ret = await client.getBlockByHash(
-          new BigInteger(
-              0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8));
+      final EthereumBlock ret = await client.getBlockByHash(new BigInteger(
+          0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8));
       if (ret != null) {
         print(ret);
       }
@@ -417,8 +419,10 @@ class EthereumCommon {
       expect(client.rpcClient.id, ++id);
     });
     test("Get transaction by block hash and index", () async {
-      final JsonObjectLite ret = await client.getTransactionByBlockHashAndIndex(
-          0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8,
+      final EthereumTransaction ret =
+      await client.getTransactionByBlockHashAndIndex(
+          new BigInteger(
+              0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8),
           0);
       if (ret != null) {
         print(ret);
@@ -426,7 +430,7 @@ class EthereumCommon {
       expect(client.rpcClient.id, ++id);
     });
     test("Get transaction by block number and index", () async {
-      final JsonObjectLite ret =
+      final EthereumTransaction ret =
       await client.getTransactionByBlockNumberAndIndex(0x100, 0);
       if (ret != null) {
         print(ret);
@@ -434,16 +438,18 @@ class EthereumCommon {
       expect(client.rpcClient.id, ++id);
     });
     test("Get transaction receipt", () async {
-      final JsonObjectLite ret = await client.getTransactionReceipt(
-          0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8);
+      final EthereumTransactionReceipt ret = await client.getTransactionReceipt(
+          new BigInteger(
+              0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8));
       if (ret != null) {
         print(ret);
       }
       expect(client.rpcClient.id, ++id);
     });
     test("Get uncle by block hash and index", () async {
-      final JsonObjectLite ret = await client.getUncleByBlockHashAndIndex(
-          0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8,
+      final EthereumBlock ret = await client.getUncleByBlockHashAndIndex(
+          new BigInteger(
+              0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8),
           0);
       if (ret != null) {
         print(ret);
@@ -451,7 +457,7 @@ class EthereumCommon {
       expect(client.rpcClient.id, ++id);
     });
     test("Get uncle by block number and index", () async {
-      final JsonObjectLite ret =
+      final EthereumBlock ret =
       await client.getUncleByBlockNumberAndIndex(0x100, 0);
       if (ret != null) {
         print(ret);
@@ -465,12 +471,10 @@ class EthereumCommon {
           toBlock: 0x2,
           address: 0x8888f1f195afa192cfee860698584c030f4c9db1,
           topics: [
-            "0x000000000000000000000000a94f5374fce5edbc8e2a8697c15331677e6ebf0b",
-            null,
-            [
-              "0x000000000000000000000000a94f5374fce5edbc8e2a8697c15331677e6ebf0b",
-              "0x 0000000000000000000000000aff3454fce5edbc8cca8697c15331677e6ebccc"
-            ]
+            new BigInteger(
+                0x000000000000000000000000a94f5374fce5edbc8e2a8697c15331677e6ebf0b),
+            new BigInteger(
+                0x000000000000000000000000a94f5374fce5edbc8e2a8697c15331677e6ebf0b)
           ]);
       if (filterId != null) {
         print(filterId);
@@ -512,8 +516,9 @@ class EthereumCommon {
       expect(client.rpcClient.id, ++id);
     });
     test("Get logs", () async {
-      final List ret = await client.getLogs(topics: [
-        "0x000000000000000000000000a94f5374fce5edbc8e2a8697c15331677e6ebf0b"
+      final EthereumFilter ret = await client.getLogs(topics: [
+        new BigInteger(
+            0x000000000000000000000000a94f5374fce5edbc8e2a8697c15331677e6ebf0b)
       ]);
       if (ret != null) {
         print(ret);
@@ -521,7 +526,7 @@ class EthereumCommon {
       expect(client.rpcClient.id, ++id);
     });
     test("Get work", () async {
-      final List ret = await client.getWork();
+      final EthereumWork ret = await client.getWork();
       if (ret != null) {
         print(ret);
       }
@@ -529,15 +534,17 @@ class EthereumCommon {
     });
     test("Submit work", () async {
       final bool ret = await client.submitWork(
-          0x1,
-          0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef,
-          0xD1FE5700000000000000000000000000D1FE5700000000000000000000000000);
+          new BigInteger(0x1),
+          new BigInteger(
+              0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef),
+          new BigInteger(
+              0xD1FE5700000000000000000000000000D1FE5700000000000000000000000000));
       expect(ret, isFalse);
       expect(client.rpcClient.id, ++id);
     });
     test("Submit hash rate", () async {
-      final bool ret = await client.submitHashrate(0x500000,
-          0x59daa26581d0acd1fce254fb7e85952f4c09d0915afd33d3886cd914bc7d283c);
+      final bool ret = await client.submitHashrate(new BigInteger(0x500000),
+          "0x59daa26581d0acd1fce254fb7e85952f4c09d0915afd33d3886cd914bc7d283c");
       expect(ret, isTrue);
       expect(client.rpcClient.id, ++id);
     });
@@ -550,13 +557,13 @@ class EthereumCommon {
     });
     test("SHH post", () async {
       final bool ret = await client.shhPost([
-        0x776869737065722d636861742d636c69656e74,
-        0x4d5a695276454c39425154466b61693532
-      ], 0x7b2274797065223a226d60, 0x64, 0x64,
-          to:
-          0x3e245533f97284d442460f2998cd41858798ddf04f96a5e25610293e42a73908e93ccc8c4d4dc0edcfa9fa872f50cb214e08ebf61a0d4d661997d3940272b717b1,
-          from:
-          0x04f96a5e25610293e42a73908e93ccc8c4d4dc0edcfa9fa872f50cb214e08ebf61a03e245533f97284d442460f2998cd41858798ddfd4d661997d3940272b717b1);
+        new BigInteger(0x776869737065722d636861742d636c69656e74),
+        new BigInteger(0x4d5a695276454c39425154466b61693532)
+      ], new BigInteger(0x7b2274797065223a226d60), 0x64, 0x64,
+          to: new BigInteger(
+              0x3e245533f97284d442460f2998cd41858798ddf04f96a5e25610293e42a73908e93ccc8c4d4dc0edcfa9fa872f50cb214e08ebf61a0d4d661997d3940272b717b1),
+          from: new BigInteger(
+              0x04f96a5e25610293e42a73908e93ccc8c4d4dc0edcfa9fa872f50cb214e08ebf61a03e245533f97284d442460f2998cd41858798ddfd4d661997d3940272b717b1));
       expect(ret, isNull);
       expect(client.rpcClient.id, ++id);
     });

@@ -43,8 +43,7 @@ class EthereumRpcClient {
   }
 
   /// The notification method
-  Future<Map> notification(String method,
-      [dynamic parameters]) {
+  Future<Map> notification(String method, [dynamic parameters]) {
     final Map packet = new Map();
     packet['jsonrpc'] = jsonRPpcVersion;
     packet['method'] = method;
