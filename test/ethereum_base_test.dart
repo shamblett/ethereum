@@ -1023,5 +1023,173 @@ void main() {
       expect(message.topics[0].intValue(),
           0x59ebeb90bc63057b6515673c3ecf9438e5058bca0f92585014eced636878c9a5);
     });
+    test("Transaction receipt - null", () {
+      final Map tr = {"result": {}};
+      final EthereumTransactionReceipt message =
+      new EthereumTransactionReceipt.fromMap(tr);
+      expect(message.transactionHash, isNull);
+      expect(message.transactionIndex, isNull);
+      expect(message.blockNumber, isNull);
+      expect(message.blockHash, isNull);
+      expect(message.cumulativeGasUsed, isNull);
+      expect(message.gasUsed, isNull);
+      expect(message.contractAddress, isNull);
+      expect(message.logs, isNull);
+      expect(message.logsBloom, isNull);
+      expect(message.root, isNull);
+      expect(message.status, isNull);
+    });
+    test("Transaction receipt - status", () {
+      final Map tr = {
+        "result": {
+          "transactionHash":
+          '0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238',
+          "transactionIndex": '0x1',
+          // 1
+          "blockNumber": '0xb',
+          // 11
+          "blockHash":
+          '0xc6ef2fc5426d6ad6fd9e2a26abeab0aa2411b7ab17f30a99d3cb96aed1d1055b',
+          "cumulativeGasUsed": '0x33bc',
+          // 13244
+          "gasUsed": '0x4dc',
+          // 1244
+          "contractAddress":
+          '0xb60e8dd61c5d32be8058bb8eb970870f07233155',
+          // or null, if none was created
+          "logs": [
+            {
+              "logIndex": "0x1", // 1
+              "blockNumber": "0x1b4", // 436
+              "blockHash":
+              "0x8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcfdf829c5a142f1fccd7d",
+              "transactionHash":
+              "0xdf829c5a142f1fccd7d8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcf",
+              "transactionIndex": "0x0", // 0
+              "address": "0x16c5785ac562ff41e2dcfdf829c5a142f1fccd7d",
+              "data":
+              "0x0000000000000000000000000000000000000000000000000000000000000000",
+              "topics": [
+                "0x59ebeb90bc63057b6515673c3ecf9438e5058bca0f92585014eced636878c9a5"
+              ]
+            },
+            {
+              "logIndex": "0x2", // 1
+              "blockNumber": "0x1b4", // 436
+              "blockHash":
+              "0x8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcfdf829c5a142f1fccd7d",
+              "transactionHash":
+              "0xdf829c5a142f1fccd7d8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcf",
+              "transactionIndex": "0x0", // 0
+              "address": "0x16c5785ac562ff41e2dcfdf829c5a142f1fccd7d",
+              "data":
+              "0x0000000000000000000000000000000000000000000000000000000000000000",
+              "topics": [
+                "0x59ebeb90bc63057b6515673c3ecf9438e5058bca0f92585014eced636878c9a5"
+              ]
+            }
+          ],
+          "logsBloom": "0x0",
+          // 256 byte bloom filter
+          "status": '0x1'
+        }
+      };
+      final EthereumTransactionReceipt message =
+      new EthereumTransactionReceipt.fromMap(tr);
+      expect(message.transactionHash.intValue(),
+          0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238);
+      expect(message.transactionIndex, 1);
+      expect(message.blockNumber, 11);
+      expect(message.blockHash.intValue(),
+          0xc6ef2fc5426d6ad6fd9e2a26abeab0aa2411b7ab17f30a99d3cb96aed1d1055b);
+      expect(message.cumulativeGasUsed, 13244);
+      expect(message.gasUsed, 1244);
+      expect(message.contractAddress.intValue(),
+          0xb60e8dd61c5d32be8058bb8eb970870f07233155);
+      expect(message.logs, isNotNull);
+      expect(message.logs.length, 2);
+      expect(message.logs[0].logIndex, 1);
+      expect(message.logs[1].logIndex, 2);
+      expect(message.logsBloom.intValue(), 0);
+      expect(message.status, 1);
+      expect(message.root, isNull);
+    });
+    test("Transaction receipt - root", () {
+      final Map tr = {
+        "result": {
+          "transactionHash":
+          '0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238',
+          "transactionIndex": '0x1',
+          // 1
+          "blockNumber": '0xb',
+          // 11
+          "blockHash":
+          '0xc6ef2fc5426d6ad6fd9e2a26abeab0aa2411b7ab17f30a99d3cb96aed1d1055b',
+          "cumulativeGasUsed": '0x33bc',
+          // 13244
+          "gasUsed": '0x4dc',
+          // 1244
+          "contractAddress":
+          '0xb60e8dd61c5d32be8058bb8eb970870f07233155',
+          // or null, if none was created
+          "logs": [
+            {
+              "logIndex": "0x1", // 1
+              "blockNumber": "0x1b4", // 436
+              "blockHash":
+              "0x8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcfdf829c5a142f1fccd7d",
+              "transactionHash":
+              "0xdf829c5a142f1fccd7d8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcf",
+              "transactionIndex": "0x0", // 0
+              "address": "0x16c5785ac562ff41e2dcfdf829c5a142f1fccd7d",
+              "data":
+              "0x0000000000000000000000000000000000000000000000000000000000000000",
+              "topics": [
+                "0x59ebeb90bc63057b6515673c3ecf9438e5058bca0f92585014eced636878c9a5"
+              ]
+            },
+            {
+              "logIndex": "0x2", // 1
+              "blockNumber": "0x1b4", // 436
+              "blockHash":
+              "0x8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcfdf829c5a142f1fccd7d",
+              "transactionHash":
+              "0xdf829c5a142f1fccd7d8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcf",
+              "transactionIndex": "0x0", // 0
+              "address": "0x16c5785ac562ff41e2dcfdf829c5a142f1fccd7d",
+              "data":
+              "0x0000000000000000000000000000000000000000000000000000000000000000",
+              "topics": [
+                "0x59ebeb90bc63057b6515673c3ecf9438e5058bca0f92585014eced636878c9a5"
+              ]
+            }
+          ],
+          "logsBloom": "0x0",
+          // 256 byte bloom filter
+          "root":
+          '0x59ebeb90bc63057b6515673c3ecf9438e5058bca0f92585014eced636878c9a5'
+        }
+      };
+      final EthereumTransactionReceipt message =
+      new EthereumTransactionReceipt.fromMap(tr);
+      expect(message.transactionHash.intValue(),
+          0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238);
+      expect(message.transactionIndex, 1);
+      expect(message.blockNumber, 11);
+      expect(message.blockHash.intValue(),
+          0xc6ef2fc5426d6ad6fd9e2a26abeab0aa2411b7ab17f30a99d3cb96aed1d1055b);
+      expect(message.cumulativeGasUsed, 13244);
+      expect(message.gasUsed, 1244);
+      expect(message.contractAddress.intValue(),
+          0xb60e8dd61c5d32be8058bb8eb970870f07233155);
+      expect(message.logs, isNotNull);
+      expect(message.logs.length, 2);
+      expect(message.logs[0].logIndex, 1);
+      expect(message.logs[1].logIndex, 2);
+      expect(message.logsBloom.intValue(), 0);
+      expect(message.root.intValue(),
+          0x59ebeb90bc63057b6515673c3ecf9438e5058bca0f92585014eced636878c9a5);
+      expect(message.status, isNull);
+    });
   });
 }

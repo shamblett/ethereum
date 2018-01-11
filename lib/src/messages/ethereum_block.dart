@@ -194,7 +194,7 @@ class EthereumBlock {
           // Transaction objects
           _transactions = new List<EthereumTransaction>();
           for (Map transaction in data[ethResultKey]['transactions']) {
-            Map buildTrans = { "result": transaction};
+            final Map buildTrans = {ethResultKey: transaction};
             final EthereumTransaction entry =
             new EthereumTransaction.fromMap(buildTrans);
             _transactions.add(entry);

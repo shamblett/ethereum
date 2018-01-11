@@ -79,5 +79,49 @@ class EthereumTransactionReceipt {
     if (data[ethResultKey] == null) {
       return;
     }
+    if (data[ethResultKey].containsKey('transactionHash')) {
+      _transactionHash = new BigInteger(data[ethResultKey]['transactionHash']);
+    }
+    if (data[ethResultKey].containsKey('transactionIndex')) {
+      _transactionIndex =
+          EthereumUtilities.hexToInt(data[ethResultKey]['transactionIndex']);
+    }
+    if (data[ethResultKey].containsKey('blockHash')) {
+      _blockHash = new BigInteger(data[ethResultKey]['blockHash']);
+    }
+    if (data[ethResultKey].containsKey('blockNumber')) {
+      _blockNumber =
+          EthereumUtilities.hexToInt(data[ethResultKey]['blockNumber']);
+    }
+    if (data[ethResultKey].containsKey('cumulativeGasUsed')) {
+      _cumulativeGasUsed =
+          EthereumUtilities.hexToInt(data[ethResultKey]['cumulativeGasUsed']);
+    }
+    if (data[ethResultKey].containsKey('gasUsed')) {
+      _gasUsed = EthereumUtilities.hexToInt(data[ethResultKey]['gasUsed']);
+    }
+    if (data[ethResultKey].containsKey('contractAddress')) {
+      _contractAddress = new BigInteger(data[ethResultKey]['contractAddress']);
+    }
+    if (data[ethResultKey].containsKey('logsBloom')) {
+      _logsBloom = new BigInteger(data[ethResultKey]['logsBloom']);
+    }
+    if (data[ethResultKey].containsKey('root')) {
+      _root = new BigInteger(data[ethResultKey]['root']);
+    }
+    if (data[ethResultKey].containsKey('status')) {
+      _status = EthereumUtilities.hexToInt(data[ethResultKey]['status']);
+    }
+    if (data[ethResultKey].containsKey('logs')) {
+      if ((data[ethResultKey]['logs'] != null) &&
+          (data[ethResultKey]['logs'].isNotEmpty)) {
+        _logs = new List<EthereumLog>();
+        for (Map log in data[ethResultKey]['logs']) {
+          final Map buildLog = {ethResultKey: log};
+          final EthereumLog entry = new EthereumLog.fromMap(buildLog);
+          _logs.add(entry);
+        }
+      }
+    }
   }
 }
