@@ -76,7 +76,7 @@ class EthereumTransactionReceipt {
 
   /// Construct from the supplied Map, only check for the keys we need.
   void construct(Map data) {
-    if (data[ethResultKey] == null) {
+    if ((data == null) || (data[ethResultKey] == null)) {
       return;
     }
     if (data[ethResultKey].containsKey('transactionHash')) {

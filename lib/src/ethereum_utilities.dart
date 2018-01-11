@@ -74,7 +74,7 @@ class EthereumUtilities {
   /// BigInteger list to Hex String list
   static List<String> bigIntegerToHexList(List<BigInteger> val) {
     return new List<String>.generate(
-        val.length, (int index) => val[index].toRadix(16));
+        val.length, (int index) => '0x' + val[index].toRadix(16));
   }
 
   /// Remove null values from a map

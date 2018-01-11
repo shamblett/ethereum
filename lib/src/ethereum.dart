@@ -147,7 +147,7 @@ class Ethereum {
       throw new ArgumentError.notNull("Ethereum::sha3 - data");
     }
     final String method = EthereumRpcMethods.web3Sha3;
-    final List params = [data.toRadix(16)];
+    final List params = [EthereumUtilities.bigIntegerToHex(data)];
     final res = await rpcClient.request(method, params);
     if (res.containsKey(ethResultKey)) {
       return new BigInteger(res[ethResultKey]);
@@ -1064,7 +1064,7 @@ class Ethereum {
     final String method = EthereumRpcMethods.getWork;
     final res = await rpcClient.request(method, paramBlock);
     if (res.containsKey(ethResultKey)) {
-      return new EthereumWork.fromMap(res[ethResultKey]);
+      return new EthereumWork.fromList(res[ethResultKey]);
     }
     _processError(method, res);
     return null;

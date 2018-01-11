@@ -14,7 +14,7 @@ part of ethereum;
 class EthereumWork {
   EthereumWork();
 
-  EthereumWork.fromMap(Map result) {
+  EthereumWork.fromList(List result) {
     construct(result);
   }
 
@@ -34,16 +34,16 @@ class EthereumWork {
   BigInteger get boundaryCondition => _boundaryCondition;
 
   /// Construct from the supplied Map, only check for the keys we need.
-  void construct(Map data) {
-    if (data[ethResultKey] == null) {
+  void construct(List data) {
+    if (data == null) {
       return;
     }
-    if (data[ethResultKey].length != 3) {
+    if (data.length != 3) {
       return;
     }
-    _powHash = new BigInteger(data[ethResultKey][0]);
-    _seedHash = new BigInteger(data[ethResultKey][1]);
-    _boundaryCondition = new BigInteger(data[ethResultKey][2]);
+    _powHash = new BigInteger(data[0]);
+    _seedHash = new BigInteger(data[1]);
+    _boundaryCondition = new BigInteger(data[2]);
   }
 
   // To string

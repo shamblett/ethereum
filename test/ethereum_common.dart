@@ -107,7 +107,8 @@ class EthereumCommon {
       expect(client.rpcClient.id, ++id);
       if (accounts.length != 0) {
         print("Accounts are $accountsStr");
-        expect(accounts[0], EthereumTestConfiguration.defaultAccount);
+        expect(
+            accounts[0].intValue(), EthereumTestConfiguration.defaultAccount);
       } else {
         print("There are no accounts");
       }
@@ -181,7 +182,7 @@ class EthereumCommon {
           new BigInteger(0x295a70b2de5e3953354a6a8344e616ed314d7251),
           0x0,
           0x4b7);
-      expect(storage, isNull);
+      expect(storage.intValue(), 0);
       expect(client.rpcClient.id, ++id);
       print("Storage at block is $storage");
     });
@@ -469,7 +470,7 @@ class EthereumCommon {
       filterId = await client.newFilter(
           fromBlock: 0x1,
           toBlock: 0x2,
-          address: 0x8888f1f195afa192cfee860698584c030f4c9db1,
+          address: new BigInteger(0x8888f1f195afa192cfee860698584c030f4c9db1),
           topics: [
             new BigInteger(
                 0x000000000000000000000000a94f5374fce5edbc8e2a8697c15331677e6ebf0b),
@@ -502,14 +503,14 @@ class EthereumCommon {
       expect(client.rpcClient.id, ++id);
     });
     test("Get filter changes", () async {
-      final dynamic ret = await client.getFilterChanges(filterId);
+      final dynamic ret = await client.getFilterChanges(0);
       if (ret != null) {
         print(ret);
       }
       expect(client.rpcClient.id, ++id);
     });
     test("Get filter logs", () async {
-      final dynamic ret = await client.getFilterLogs(filterId);
+      final dynamic ret = await client.getFilterLogs(0);
       if (ret != null) {
         print(ret);
       }
@@ -534,7 +535,7 @@ class EthereumCommon {
     });
     test("Submit work", () async {
       final bool ret = await client.submitWork(
-          new BigInteger(0x1),
+          new BigInteger(0x123456789abcdef0),
           new BigInteger(
               0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef),
           new BigInteger(
