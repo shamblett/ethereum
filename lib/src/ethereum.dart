@@ -1150,8 +1150,9 @@ class Ethereum {
   /// priority: - The integer of the priority in a range from ... (?).
   /// ttl: - integer of the time to live in seconds.
   /// Returns true if the message was send, otherwise false.
-  Future<bool> shhPost(List<int> topics, int payload, int priority, int ttl,
-      {int to, int from}) async {
+  Future<bool> shhPost(List<BigInteger> topics, BigInteger payload,
+      int priority, int ttl,
+      {BigInteger to, BigInteger from}) async {
     if (topics == null) {
       throw new ArgumentError.notNull("Ethereum::shhPost - topics");
     }
@@ -1165,12 +1166,12 @@ class Ethereum {
       throw new ArgumentError.notNull("Ethereum::shhPost - ttl");
     }
     Map<String, dynamic> params = {
-      "topics": EthereumUtilities.intToHexList(topics),
-      "payload": EthereumUtilities.intToHex(payload),
+      "topics": EthereumUtilities.bigIntegerToHexList(topics),
+      "payload": EthereumUtilities.bigIntegerToHex(payload),
       "priority": EthereumUtilities.intToHex(priority),
       "ttl": ttl,
-      "to": EthereumUtilities.intToHex(to),
-      "from": EthereumUtilities.intToHex(from)
+      "to": EthereumUtilities.bigIntegerToHex(to),
+      "from": EthereumUtilities.bigIntegerToHex(from)
     };
     params = EthereumUtilities.removeNull(params);
     final List paramBlock = [params];

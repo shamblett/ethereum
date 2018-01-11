@@ -656,7 +656,7 @@ void main() {
     test("Shh Post - topics", () async {
       bool thrown = false;
       try {
-        await client.shhPost(null, 1, 2, 3);
+        await client.shhPost(null, BigInteger.ONE, 2, 3);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -668,7 +668,7 @@ void main() {
     test("Shh Post - payload", () async {
       bool thrown = false;
       try {
-        await client.shhPost([1], null, 2, 3);
+        await client.shhPost([BigInteger.ONE], null, 2, 3);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -680,7 +680,7 @@ void main() {
     test("Shh Post - priority", () async {
       bool thrown = false;
       try {
-        await client.shhPost([1], 1, null, 3);
+        await client.shhPost([BigInteger.ONE], BigInteger.ONE, null, 3);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -692,7 +692,7 @@ void main() {
     test("Shh Post - ttl", () async {
       bool thrown = false;
       try {
-        await client.shhPost([1], 1, 2, null);
+        await client.shhPost([BigInteger.ONE], BigInteger.ONE, 2, null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
