@@ -596,7 +596,7 @@ void main() {
     test("Submit work - nonce", () async {
       bool thrown = false;
       try {
-        await client.submitWork(null, 1, 2);
+        await client.submitWork(null, BigInteger.ONE, BigInteger.TWO);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -608,7 +608,7 @@ void main() {
     test("Submit work - powHash", () async {
       bool thrown = false;
       try {
-        await client.submitWork(1, null, 2);
+        await client.submitWork(BigInteger.ONE, null, BigInteger.TWO);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -620,7 +620,7 @@ void main() {
     test("Submit work - digest", () async {
       bool thrown = false;
       try {
-        await client.submitWork(1, 1, null);
+        await client.submitWork(BigInteger.ONE, BigInteger.TWO, null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -632,7 +632,7 @@ void main() {
     test("Submit hash rate - hash rate", () async {
       bool thrown = false;
       try {
-        await client.submitHashrate(null, 2);
+        await client.submitHashrate(null, "id");
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -644,7 +644,7 @@ void main() {
     test("Submit hash rate - id", () async {
       bool thrown = false;
       try {
-        await client.submitHashrate(1, null);
+        await client.submitHashrate(BigInteger.ONE, null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),

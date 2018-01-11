@@ -1077,7 +1077,8 @@ class Ethereum {
   /// The header's pow-hash
   /// The mix digest
   /// Returns  true if the provided solution is valid, otherwise false.
-  Future<bool> submitWork(int nonce, int powHash, int digest) async {
+  Future<bool> submitWork(BigInteger nonce, BigInteger powHash,
+      BigInteger digest) async {
     if (nonce == null) {
       throw new ArgumentError.notNull("Ethereum::submitWork - nonce");
     }
@@ -1088,9 +1089,9 @@ class Ethereum {
       throw new ArgumentError.notNull("Ethereum::submitWork - digest");
     }
     final List params = [
-      EthereumUtilities.intToHex(nonce, EthereumUtilities.pad8),
-      EthereumUtilities.intToHex(powHash, EthereumUtilities.pad32),
-      EthereumUtilities.intToHex(digest, EthereumUtilities.pad32)
+      EthereumUtilities.bigIntegerToHex(nonce),
+      EthereumUtilities.bigIntegerToHex(powHash),
+      EthereumUtilities.bigIntegerToHex(digest)
     ];
     final String method = EthereumRpcMethods.submitWork;
     final res = await rpcClient.request(method, params);
@@ -1104,9 +1105,9 @@ class Ethereum {
   /// Submit hash rate
   /// Used for submitting mining hashrate.
   /// Hash rate
-  /// Id, a random id identifying the client
+  /// Id, a random hexadecimal(32 bytes) string identifying the client
   /// Returns true if submitting went through successfully and false otherwise.
-  Future<bool> submitHashrate(int hashRate, int id) async {
+  Future<bool> submitHashrate(BigInteger hashRate, String id) async {
     if (hashRate == null) {
       throw new ArgumentError.notNull("Ethereum::submitHashRate - hashRate");
     }
@@ -1114,8 +1115,8 @@ class Ethereum {
       throw new ArgumentError.notNull("Ethereum::submitHashRate - id");
     }
     final List params = [
-      EthereumUtilities.intToHex(hashRate),
-      EthereumUtilities.intToHex(id, EthereumUtilities.pad32)
+      EthereumUtilities.bigIntegerToHex(hashRate),
+      id
     ];
     final String method = EthereumRpcMethods.submitHashrate;
     final res = await rpcClient.request(method, params);
