@@ -124,4 +124,24 @@ class EthereumTransactionReceipt {
       }
     }
   }
+
+  // To string
+  String toString() {
+    final String ret = "Ethereum Transaction Receipt:" +
+        "\n" +
+        "  Transaction Hash : $transactionHash" +
+        "\n" +
+        "  Block Number: $blockNumber" +
+        "\n" +
+        "  Block Hash : $blockHash" +
+        "\n" +
+        "  Transaction Index : $transactionIndex" +
+        "\n" +
+        "  Contract Address : $contractAddress" +
+        "\n" +
+        "  Gas used : $gasUsed" +
+        "\n";
+
+    return ret;
+  }
 }

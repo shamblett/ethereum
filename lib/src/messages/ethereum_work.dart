@@ -45,4 +45,18 @@ class EthereumWork {
     _seedHash = new BigInteger(data[ethResultKey][1]);
     _boundaryCondition = new BigInteger(data[ethResultKey][2]);
   }
+
+  // To string
+  String toString() {
+    final String ret = "Ethereum Work :" +
+        "\n" +
+        "  Pow Hash : $powHash" +
+        "\n" +
+        "  Seed Hash : $seedHash" +
+        "\n" +
+        "  Boundary Condition : $boundaryCondition" +
+        "\n";
+
+    return ret;
+  }
 }

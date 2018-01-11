@@ -6,7 +6,7 @@
  */
 
 import 'package:ethereum/ethereum.dart';
-import 'package:json_object_lite/json_object_lite.dart';
+import 'package:bignum/bignum.dart';
 import 'package:test/test.dart';
 import 'ethereum_test_configuration.dart';
 
@@ -33,8 +33,8 @@ class EthereumCommon {
       print("Client Version is $version");
     });
     test("SHA3", () async {
-      final int data = 0x68656c6c6f20776f726c64;
-      final int hash = await client.sha3(data);
+      final BigInteger data = new BigInteger(0x68656c6c6f20776f726c64);
+      final BigInteger hash = await client.sha3(data);
       expect(hash, isNotNull);
       print(hash);
       expect(client.rpcClient.id, ++id);
@@ -71,10 +71,10 @@ class EthereumCommon {
       }
     });
     test("Coinbase address", () async {
-      final int address = await client.coinbaseAddress();
+      final BigInteger address = await client.coinbaseAddress();
       expect(client.rpcClient.id, ++id);
       if (address != null) {
-        print("Coinbase address is ${EthereumUtilities.intToHex(address)}");
+        print("Coinbase address is $address");
       } else {
         expect(client.lastError.code, -32000);
         expect(client.lastError.message,
@@ -100,9 +100,10 @@ class EthereumCommon {
       print("Gas price is $price");
     });
     test("Accounts", () async {
-      final List<int> accounts = await client.accounts();
+      final List<BigInteger> accounts = await client.accounts();
       expect(accounts, isNotNull);
-      final List<String> accountsStr = EthereumUtilities.intToHexList(accounts);
+      final List<String> accountsStr = EthereumUtilities.bigIntegerToHexList(
+          accounts);
       expect(client.rpcClient.id, ++id);
       if (accounts.length != 0) {
         print("Accounts are $accountsStr");
@@ -119,42 +120,46 @@ class EthereumCommon {
     });
     test("Balance - number", () async {
       final int balance = await client.getBalance(
-          0x407d73d8a49eeb85d32cf465507dd71d507100c1, 0);
+          new BigInteger(0x407d73d8a49eeb85d32cf465507dd71d507100c1), 0);
       expect(balance, isNotNull);
       expect(client.rpcClient.id, ++id);
       print("Balance number is $balance");
     });
     test("Balance - latest", () async {
       final int balance = await client.getBalance(
-          0x407d73d8a49eeb85d32cf465507dd71d507100c1, Ethereum.ethLatest);
+          new BigInteger(0x407d73d8a49eeb85d32cf465507dd71d507100c1),
+          Ethereum.ethLatest);
       expect(balance, isNotNull);
       expect(client.rpcClient.id, ++id);
       print("Balance latest is $balance");
     });
     test("Balance - earliest", () async {
       final int balance = await client.getBalance(
-          0x407d73d8a49eeb85d32cf465507dd71d507100c1, Ethereum.ethEarliest);
+          new BigInteger(0x407d73d8a49eeb85d32cf465507dd71d507100c1),
+          Ethereum.ethEarliest);
       expect(balance, isNotNull);
       expect(client.rpcClient.id, ++id);
       print("Balance earliest is $balance");
     });
     test("Balance - pending", () async {
       final int balance = await client.getBalance(
-          0x407d73d8a49eeb85d32cf465507dd71d507100c1, Ethereum.ethPending);
+          new BigInteger(0x407d73d8a49eeb85d32cf465507dd71d507100c1),
+          Ethereum.ethPending);
       expect(balance, isNotNull);
       expect(client.rpcClient.id, ++id);
       print("Balance pending is $balance");
     });
     test("Get storage at - latest", () async {
-      final int storage = await client.getStorageAt(
-          0x295a70b2de5e3953354a6a8344e616ed314d7251, 0x0, Ethereum.ethLatest);
+      final BigInteger storage = await client.getStorageAt(
+          new BigInteger(0x295a70b2de5e3953354a6a8344e616ed314d7251), 0x0,
+          Ethereum.ethLatest);
       expect(storage, isNotNull);
       expect(client.rpcClient.id, ++id);
       print("Storage at latest is $storage");
     });
     test("Get storage at - earliest", () async {
-      final int storage = await client.getStorageAt(
-          0x295a70b2de5e3953354a6a8344e616ed314d7251,
+      final BigInteger storage = await client.getStorageAt(
+          new BigInteger(0x295a70b2de5e3953354a6a8344e616ed314d7251),
           0x0,
           Ethereum.ethEarliest);
       expect(storage, isNotNull);
@@ -162,15 +167,17 @@ class EthereumCommon {
       print("Storage at earliest is $storage");
     });
     test("Get storage at - pending", () async {
-      final int storage = await client.getStorageAt(
-          0x295a70b2de5e3953354a6a8344e616ed314d7251, 0x0, Ethereum.ethPending);
+      final BigInteger storage = await client.getStorageAt(
+          new BigInteger(0x295a70b2de5e3953354a6a8344e616ed314d7251), 0x0,
+          Ethereum.ethPending);
       expect(storage, isNotNull);
       expect(client.rpcClient.id, ++id);
       print("Storage at pending is $storage");
     });
     test("Get storage at - block", () async {
-      final int storage = await client.getStorageAt(
-          0x295a70b2de5e3953354a6a8344e616ed314d7251, 0x0, 0x4b7);
+      final BigInteger storage = await client.getStorageAt(
+          new BigInteger(0x295a70b2de5e3953354a6a8344e616ed314d7251), 0x0,
+          0x4b7);
       expect(storage, isNull);
       expect(client.rpcClient.id, ++id);
       print("Storage at block is $storage");
@@ -385,23 +392,25 @@ class EthereumCommon {
       expect(client.rpcClient.id, ++id);
     });
     test("Get block by hash", () async {
-      final JsonObjectLite ret = await client.getBlockByHash(
-          0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8);
+      final EthereumBlock ret = await client.getBlockByHash(
+          new BigInteger(
+              0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8));
       if (ret != null) {
         print(ret);
       }
       expect(client.rpcClient.id, ++id);
     });
     test("Get block by number", () async {
-      final JsonObjectLite ret = await client.getBlockByNumber(0x01);
+      final EthereumBlock ret = await client.getBlockByNumber(0x01);
       if (ret != null) {
         print(ret);
       }
       expect(client.rpcClient.id, ++id);
     });
     test("Get transaction by hash", () async {
-      final JsonObjectLite ret = await client.getTransactionByHash(
-          0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8);
+      final EthereumTransaction ret = await client.getTransactionByHash(
+          new BigInteger(
+              0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8));
       if (ret != null) {
         print(ret);
       }

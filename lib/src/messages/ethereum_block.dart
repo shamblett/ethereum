@@ -203,4 +203,25 @@ class EthereumBlock {
       }
     }
   }
+
+  // To string
+  String toString() {
+    final String ret = "Ethereum Block :" +
+        "\n" +
+        "  Number : $number" +
+        "\n" +
+        "  Hash : $hash" +
+        "\n" +
+        "  Parent Hash : $parentHash" +
+        "\n" +
+        "  Miner : $miner" +
+        "\n" +
+        "  Difficulty : $difficulty" +
+        "\n" +
+        "  Gas Used : $gasUsed" +
+        "\n" +
+        "  Time : $timestamp" +
+        "\n";
+    return ret;
+  }
 }

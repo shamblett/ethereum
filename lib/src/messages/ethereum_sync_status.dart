@@ -52,4 +52,20 @@ class EthereumSyncStatus {
       }
     }
   }
+
+  // To string
+  String toString() {
+    String ret =
+        "Ethereum Sync Status :" + "\n" + "  Syncing : $syncing" + "\n";
+    if (syncing) {
+      ret += "  Starting Block : $startingBlock" +
+          "\n" +
+          "  Current Block : $currentBlock" +
+          "\n" +
+          "  Highest Block : $highestBlock" +
+          "\n";
+    }
+
+    return ret;
+  }
 }

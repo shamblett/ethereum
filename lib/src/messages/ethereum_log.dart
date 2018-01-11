@@ -106,4 +106,25 @@ class EthereumLog {
       }
     }
   }
+
+  // To string
+  String toString() {
+    final String ret = "Ethereum Log :" +
+        "\n" +
+        "  Removed : $removed" +
+        "\n" +
+        "  Log Index : $logIndex" +
+        "\n" +
+        "  Transaction Index : $transactionIndex" +
+        "\n" +
+        "  Transaction Hash: $transactionHash" +
+        "\n" +
+        "  Block Number: $blockNumber" +
+        "\n" +
+        "  Block Hash : $blockHash" +
+        "\n" +
+        "  Address : $address" +
+        "\n";
+    return ret;
+  }
 }

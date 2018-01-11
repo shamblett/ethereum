@@ -116,4 +116,28 @@ class EthereumTransaction {
       _input = new BigInteger(data[ethResultKey]['input']);
     }
   }
+
+  // To string
+  String toString() {
+    final String ret = "Ethereum Transaction :" +
+        "\n" +
+        "  Hash : $hash" +
+        "\n" +
+        "  Block Number: $blockNumber" +
+        "\n" +
+        "  Block Hash : $blockHash" +
+        "\n" +
+        "  Transaction Index : $transactionIndex" +
+        "\n" +
+        "  From : $from" +
+        "\n" +
+        "  To : $to " +
+        "\n" +
+        "  Value : $value" +
+        "\n" +
+        "  Gas : $gas" +
+        "\n";
+
+    return ret;
+  }
 }

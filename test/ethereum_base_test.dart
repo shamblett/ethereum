@@ -711,6 +711,7 @@ void main() {
       expect(message.currentBlock, isNull);
       expect(message.highestBlock, isNull);
       expect(message.startingBlock, isNull);
+      print(message);
     });
     test("Sync status - sync", () {
       final Map sync = {
@@ -723,6 +724,7 @@ void main() {
       expect(message.currentBlock, 0x386);
       expect(message.highestBlock, 0x454);
       expect(message.startingBlock, 0x384);
+      print(message);
     });
     test("Transaction - null", () {
       final Map transaction = {"result": null};
@@ -779,6 +781,7 @@ void main() {
       expect(message.gasPrice, 0x09184e72a000);
       expect(message.input.intValue(),
           0x603880600c6000396000f300603880600c6000396000f3603880600c6000396000f360);
+      print(message);
     });
     test("Block - null", () {
       final Map block = {"result": {}};
@@ -875,6 +878,7 @@ void main() {
       expect(message.uncles[1].intValue(),
           0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527335);
       expect(message.transactionsAreHashes, isTrue);
+      print(message);
     });
     test("Block - transactions are objects", () {
       final Map block = {
@@ -1022,6 +1026,7 @@ void main() {
       expect(message.topics.length, 1);
       expect(message.topics[0].intValue(),
           0x59ebeb90bc63057b6515673c3ecf9438e5058bca0f92585014eced636878c9a5);
+      print(message);
     });
     test("Transaction receipt - null", () {
       final Map tr = {"result": {}};
@@ -1112,6 +1117,7 @@ void main() {
       expect(message.logsBloom.intValue(), 0);
       expect(message.status, 1);
       expect(message.root, isNull);
+      print(message);
     });
     test("Transaction receipt - root", () {
       final Map tr = {
@@ -1276,6 +1282,7 @@ void main() {
         0x5EED00000000000000000000000000005EED0000000000000000000000000000);
     expect(message.boundaryCondition.intValue(),
         0xd1ff1c01710000000000000000000000d1ff1c01710000000000000000000000);
+    print(message);
   });
   test("Work - insufficient elements", () {
     final Map work = {
