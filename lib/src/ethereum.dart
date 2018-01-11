@@ -983,7 +983,7 @@ class Ethereum {
   /// Get filter changes
   /// Polling method for a filter, which returns an list of logs which occurred since last poll.
   /// Filter Id
-  /// Returns an EthereumFilter object
+  /// Returns an EthereumFilter object or null
   Future<EthereumFilter> getFilterChanges(int filterId) async {
     if (filterId == null) {
       throw new ArgumentError.notNull("Ethereum::getFilterChanges - filterId");
@@ -999,10 +999,9 @@ class Ethereum {
   }
 
   /// Get filter logs
-  /// Returns an array of all logs matching filter with given id.
   /// Filter Id
   /// Returns see getFilterChanges
-  Future<dynamic> getFilterLogs(int filterId) async {
+  Future<EthereumFilter> getFilterLogs(int filterId) async {
     if (filterId == null) {
       throw new ArgumentError.notNull("Ethereum::getFilterLogs - filterId");
     }
@@ -1010,16 +1009,16 @@ class Ethereum {
     final String method = EthereumRpcMethods.getFilterLogs;
     final res = await rpcClient.request(method, params);
     if (res.containsKey(ethResultKey)) {
-      return res[ethResultKey];
+      return new EthereumFilter.fromMap(res[ethResultKey]);
     }
     _processError(method, res);
     return null;
   }
 
   /// Get logs
-  /// Returns a list of all logs matching a given filter object.
   /// The filter definition, see newFilter parameters.
-  Future<List> getLogs({dynamic fromBlock: "latest",
+  /// Returns see getFilterChanges
+  Future<EthereumFilter> getLogs({dynamic fromBlock: "latest",
     dynamic toBlock: "latest",
     dynamic address,
     List topics}) async {
@@ -1038,20 +1037,21 @@ class Ethereum {
     final Map params = {"toBlock": toBlockString, "fromBlock": fromBlockString};
     if (address != null) {
       if (address is List) {
-        final List<String> addresses = EthereumUtilities.intToHexList(address);
+        final List<String> addresses = EthereumUtilities.bigIntegerToHexList(
+            address);
         params["address"] = [addresses];
       } else {
-        params["address"] = (EthereumUtilities.intToHex(address));
+        params["address"] = (EthereumUtilities.bigIntegerToHex(address));
       }
     }
     if (topics != null) {
-      params["topics"] = [topics];
+      params["topics"] = EthereumUtilities.bigIntegerToHexList(topics);
     }
     final List paramBlock = [params];
     final String method = EthereumRpcMethods.getLogs;
     final res = await rpcClient.request(method, paramBlock);
     if (res.containsKey(ethResultKey)) {
-      return res[ethResultKey];
+      return new EthereumFilter.fromMap(res[ethResultKey]);
     }
     _processError(method, res);
     return null;
@@ -1059,17 +1059,13 @@ class Ethereum {
 
   /// Get work
   /// Returns the hash of the current block, the seedHash, and the boundary condition to be met ("target").
-  /// Returns - List with the following properties:
-  ///
-  /// current block header pow-hash
-  /// the seed hash used for the DAG.
-  /// the boundary condition ("target"), 2^256 / difficulty.
-  Future<List> getWork() async {
+  /// Returns an EthereumWork object or null
+  Future<EthereumWork> getWork() async {
     final List paramBlock = [];
     final String method = EthereumRpcMethods.getWork;
     final res = await rpcClient.request(method, paramBlock);
     if (res.containsKey(ethResultKey)) {
-      return res[ethResultKey];
+      return new EthereumWork.fromMap(res[ethResultKey]);
     }
     _processError(method, res);
     return null;

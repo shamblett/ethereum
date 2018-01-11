@@ -1254,4 +1254,39 @@ void main() {
     expect(message.logs[0].logIndex, 1);
     expect(message.logs[1].logIndex, 2);
   });
+  test("Work - null", () {
+    final Map work = {"result": {}};
+    final EthereumWork message = new EthereumWork.fromMap(work);
+    expect(message.powHash, isNull);
+    expect(message.seedHash, isNull);
+    expect(message.boundaryCondition, isNull);
+  });
+  test("Work", () {
+    final Map work = {
+      "result": [
+        "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef",
+        "0x5EED00000000000000000000000000005EED0000000000000000000000000000",
+        "0xd1ff1c01710000000000000000000000d1ff1c01710000000000000000000000"
+      ]
+    };
+    final EthereumWork message = new EthereumWork.fromMap(work);
+    expect(message.powHash.intValue(),
+        0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef);
+    expect(message.seedHash.intValue(),
+        0x5EED00000000000000000000000000005EED0000000000000000000000000000);
+    expect(message.boundaryCondition.intValue(),
+        0xd1ff1c01710000000000000000000000d1ff1c01710000000000000000000000);
+  });
+  test("Work - insufficient elements", () {
+    final Map work = {
+      "result": [
+        "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef",
+        "0x5EED00000000000000000000000000005EED0000000000000000000000000000"
+      ]
+    };
+    final EthereumWork message = new EthereumWork.fromMap(work);
+    expect(message.powHash, isNull);
+    expect(message.seedHash, isNull);
+    expect(message.boundaryCondition, isNull);
+  });
 }

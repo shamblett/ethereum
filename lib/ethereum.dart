@@ -32,6 +32,8 @@ part 'src/messages/ethereum_log.dart';
 
 part 'src/messages/ethereum_filter.dart';
 
+part 'src/messages/ethereum_work.dart';
+
 /// Constants
 const String ethResultKey = "result";
 const String ethErrorKey = "error";
