@@ -715,11 +715,11 @@ class Ethereum {
   /// Returns the information about a transaction requested by transaction hash.
   /// Hash of a transaction
   /// Returns a transaction object, or null when no transaction was found:
-  Future<EthereumTransaction> getTransactionByHash(int hash) async {
+  Future<EthereumTransaction> getTransactionByHash(BigInteger hash) async {
     if (hash == null) {
       throw new ArgumentError.notNull("Ethereum::getTransactionByHash - hash");
     }
-    final dynamic params = [EthereumUtilities.intToHex(hash)];
+    final dynamic params = [EthereumUtilities.bigIntegerToHex(hash)];
     final String method = EthereumRpcMethods.getTransactionByHash;
     final res = await rpcClient.request(method, params);
     if (res.containsKey(ethResultKey)) {
@@ -733,7 +733,8 @@ class Ethereum {
   /// Returns information about a transaction by block hash and transaction index position.
   /// Hash of a block and integer of the transaction index position.
   /// Returns see getTransactionByHash.
-  Future<EthereumTransaction> getTransactionByBlockHashAndIndex(int blockHash,
+  Future<EthereumTransaction> getTransactionByBlockHashAndIndex(
+      BigInteger blockHash,
       int index) async {
     if (blockHash == null) {
       throw new ArgumentError.notNull(
@@ -744,7 +745,7 @@ class Ethereum {
           "Ethereum::getTransactionByBlockHashAndIndex - index");
     }
     final dynamic params = [
-      EthereumUtilities.intToHex(blockHash),
+      EthereumUtilities.bigIntegerToHex(blockHash),
       EthereumUtilities.intToHex(index)
     ];
     final String method = EthereumRpcMethods.getTransactionByBlockHashAndIndex;
@@ -794,31 +795,18 @@ class Ethereum {
   /// Returns the receipt of a transaction by transaction hash.
   /// Note That the receipt is not available for pending transactions.
   /// Hash of a transaction
-  /// A transaction receipt object, or null when no receipt was found:
-  /// Returns :
-  ///
-  /// transactionHash: - hash of the transaction.
-  /// transactionIndex: - integer of the transactions index position in the block.
-  /// blockHash: - hash of the block where this transaction was in.
-  /// blockNumber: - block number where this transaction was in.
-  /// cumulativeGasUsed: - The total amount of gas used when this transaction was executed in the block.
-  /// gasUsed: - The amount of gas used by this specific transaction alone.
-  /// contractAddress: - The contract address created, if the transaction was a contract creation, otherwise null.
-  /// logs: - List of log objects, which this transaction generated.
-  /// It also returns either :
-  ///
-  /// root : 32 bytes of post-transaction stateroot (pre Byzantium)
-  /// status: either 1 (success) or 0 (failure).
-  Future<JsonObjectLite> getTransactionReceipt(int transactionHash) async {
+  /// Returns a transaction receipt object, or null when no receipt was found:
+  Future<EthereumTransactionReceipt> getTransactionReceipt(
+      BigInteger transactionHash) async {
     if (transactionHash == null) {
       throw new ArgumentError.notNull(
           "Ethereum::getTransactionReceipt - transactionHash");
     }
-    final dynamic params = [EthereumUtilities.intToHex(transactionHash)];
+    final dynamic params = [EthereumUtilities.bigIntegerToHex(transactionHash)];
     final String method = EthereumRpcMethods.getTransactionReceipt;
     final res = await rpcClient.request(method, params);
     if (res.containsKey(ethResultKey)) {
-      return res[ethResultKey];
+      return new EthereumTransactionReceipt.fromMap(res[ethResultKey]);
     }
     _processError(method, res);
     return null;
@@ -829,7 +817,7 @@ class Ethereum {
   /// Note: An uncle doesn't contain individual transactions.
   /// Hash of a block and integer of the uncle index position.
   /// Returns see getBlockByHash.
-  Future<JsonObjectLite> getUncleByBlockHashAndIndex(int blockHash,
+  Future<EthereumBlock> getUncleByBlockHashAndIndex(BigInteger blockHash,
       int index) async {
     if (blockHash == null) {
       throw new ArgumentError.notNull(
@@ -840,13 +828,13 @@ class Ethereum {
           "Ethereum::getUncleByBlockHashAndIndex - index");
     }
     final dynamic params = [
-      EthereumUtilities.intToHex(blockHash),
+      EthereumUtilities.bigIntegerToHex(blockHash),
       EthereumUtilities.intToHex(index)
     ];
     final String method = EthereumRpcMethods.getUncleByBlockHashAndIndex;
     final res = await rpcClient.request(method, params);
     if (res.containsKey(ethResultKey)) {
-      return res[ethResultKey];
+      return new EthereumBlock.fromMap(res[ethResultKey]);
     }
     _processError(method, res);
     return null;
@@ -857,7 +845,7 @@ class Ethereum {
   /// Note: An uncle doesn't contain individual transactions.
   /// A block number, or the string "earliest", "latest" or "pending", as in the default block parameter.
   /// Returns see getBlockByHash.
-  Future<JsonObjectLite> getUncleByBlockNumberAndIndex(dynamic blockNumber,
+  Future<EthereumBlock> getUncleByBlockNumberAndIndex(dynamic blockNumber,
       int index) async {
     if (blockNumber == null) {
       throw new ArgumentError.notNull(
@@ -880,7 +868,7 @@ class Ethereum {
     final String method = EthereumRpcMethods.getUncleByBlockNumberAndIndex;
     final res = await rpcClient.request(method, params);
     if (res.containsKey(ethResultKey)) {
-      return res[ethResultKey];
+      return new EthereumBlock.fromMap(res[ethResultKey]);
     }
     _processError(method, res);
     return null;

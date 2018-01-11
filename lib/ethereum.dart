@@ -26,6 +26,10 @@ part 'src/messages/ethereum_block.dart';
 
 part 'src/messages/ethereum_transaction.dart';
 
+part 'src/messages/ethereum_transaction_receipt.dart';
+
+part 'src/messages/ethereum_log.dart';
+
 /// Constants
 const String ethResultKey = "result";
 const String ethErrorKey = "error";

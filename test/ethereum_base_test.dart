@@ -464,7 +464,7 @@ void main() {
     test("Get transaction by block hash and index - index", () async {
       bool thrown = false;
       try {
-        await client.getTransactionByBlockHashAndIndex(0, null);
+        await client.getTransactionByBlockHashAndIndex(BigInteger.ZERO, null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -524,7 +524,7 @@ void main() {
     test("Get uncle by block hash and index - index", () async {
       bool thrown = false;
       try {
-        await client.getUncleByBlockHashAndIndex(0, null);
+        await client.getUncleByBlockHashAndIndex(BigInteger.ZERO, null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -781,7 +781,7 @@ void main() {
           0x603880600c6000396000f300603880600c6000396000f3603880600c6000396000f360);
     });
     test("Block - null", () {
-      final Map block = {"result": null};
+      final Map block = {"result": {}};
 
       final EthereumBlock message = new EthereumBlock.fromMap(block);
       expect(message.number, isNull);
@@ -976,6 +976,52 @@ void main() {
       expect(message.uncles[1].intValue(),
           0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527335);
       expect(message.transactionsAreHashes, isFalse);
+    });
+    test("Log - null", () {
+      final Map log = {"result": {}};
+      final EthereumLog message = new EthereumLog.fromMap(log);
+      expect(message.logIndex, isNull);
+      expect(message.blockNumber, isNull);
+      expect(message.blockHash, isNull);
+      expect(message.transactionHash, isNull);
+      expect(message.transactionIndex, isNull);
+      expect(message.address, isNull);
+      expect(message.data, isNull);
+      expect(message.topics, isNull);
+    });
+    test("Log", () {
+      final Map log = {
+        "result": {
+          "logIndex": "0x1", // 1
+          "blockNumber": "0x1b4", // 436
+          "blockHash":
+          "0x8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcfdf829c5a142f1fccd7d",
+          "transactionHash":
+          "0xdf829c5a142f1fccd7d8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcf",
+          "transactionIndex": "0x0", // 0
+          "address": "0x16c5785ac562ff41e2dcfdf829c5a142f1fccd7d",
+          "data":
+          "0x0000000000000000000000000000000000000000000000000000000000000000",
+          "topics": [
+            "0x59ebeb90bc63057b6515673c3ecf9438e5058bca0f92585014eced636878c9a5"
+          ]
+        }
+      };
+      final EthereumLog message = new EthereumLog.fromMap(log);
+      expect(message.logIndex, 1);
+      expect(message.blockNumber, 436);
+      expect(message.blockHash.intValue(),
+          0x8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcfdf829c5a142f1fccd7d);
+      expect(message.transactionHash.intValue(),
+          0xdf829c5a142f1fccd7d8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcf);
+      expect(message.transactionIndex, 0);
+      expect(message.address.intValue(),
+          0x16c5785ac562ff41e2dcfdf829c5a142f1fccd7d);
+      expect(message.data.intValue(), 0);
+      expect(message.topics, isNotNull);
+      expect(message.topics.length, 1);
+      expect(message.topics[0].intValue(),
+          0x59ebeb90bc63057b6515673c3ecf9438e5058bca0f92585014eced636878c9a5);
     });
   });
 }
