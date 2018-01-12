@@ -25,3 +25,12 @@ web:
 transformers:
 - test/pub_serve:
     $include: test/ethereum_browser_*_test.dart
+- $dart2js:
+    checked: true
+    csp: true
+    minify: true
+    sourceMaps: true
+    suppressHints: true
+    suppressWarnings: true
+    terse: true
+    verbose: true
