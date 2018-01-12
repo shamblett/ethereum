@@ -1,2 +1,2 @@
 # ethereum
-An ethereum RPC client for Dart
+An ethereum RPC 2 client for Dart

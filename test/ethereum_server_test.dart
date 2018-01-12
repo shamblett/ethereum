@@ -10,16 +10,32 @@ import 'package:ethereum/ethereum_server_client.dart';
 import 'package:test/test.dart';
 import 'ethereum_common.dart';
 import 'ethereum_test_configuration.dart';
+import 'dart:io';
+
+/// Don't run server tests on Travis
+bool skipIfTravis() {
+  bool ret = false;
+  final Map<String, String> envVars = Platform.environment;
+  if (envVars['TRAVIS'] == 'true') {
+    // Skip
+    ret = true;
+  }
+  return ret;
+}
 
 void main() {
-  if (EthereumTestConfiguration.runServer) {
-    // Run the common API tests
-    final EthereumServerClient client =
-    new EthereumServerClient.withConnectionParameters("localhost");
-    // Print errors
-    client.printError = true;
-    EthereumCommon.run(client);
+  if (!skipIfTravis()) {
+    if (EthereumTestConfiguration.runServer) {
+      // Run the common API tests
+      final EthereumServerClient client =
+      new EthereumServerClient.withConnectionParameters("localhost");
+      // Print errors
+      client.printError = true;
+      EthereumCommon.run(client);
+    } else {
+      print("Server tests not selected");
+    }
   } else {
-    print("Server tests not selected");
+    print("On Travis - skipping");
   }
 }
