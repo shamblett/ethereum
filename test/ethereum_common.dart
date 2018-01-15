@@ -182,7 +182,9 @@ class EthereumCommon {
           new BigInteger(0x295a70b2de5e3953354a6a8344e616ed314d7251),
           0x0,
           0x4b7);
-      expect(storage.intValue(), 0);
+      if (storage != null) {
+        expect(storage.intValue(), 0);
+      }
       expect(client.rpcClient.id, ++id);
       print("Storage at block is $storage");
     });
