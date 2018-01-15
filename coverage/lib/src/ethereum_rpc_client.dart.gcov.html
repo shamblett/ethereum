@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - coverage.lcov - lib/src/ethereum_rpc_client.dart</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">lib/src</a> - ethereum_rpc_client.dart<span style="font-size: 80%;"> (source / <a href="ethereum_rpc_client.dart.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">coverage.lcov</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">10</td>
+            <td class="headerCovTableEntry">18</td>
+            <td class="headerCovTableEntryLo">55.6 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2018-01-15 11:32:25</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntryHi">-</td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : /*</a>
+<span class="lineNum">       2 </span>            :  * Package : Ethereum
+<span class="lineNum">       3 </span>            :  * Author : S. Hamblett &lt;steve.hamblett@linux.com&gt;
+<span class="lineNum">       4 </span>            :  * Date   : 06/11/2017
+<span class="lineNum">       5 </span>            :  * Copyright :  S.Hamblett
+<span class="lineNum">       6 </span>            :  *
+<span class="lineNum">       7 </span>            :  * A JSON RPC 2.0 client for Ethereum
+<span class="lineNum">       8 </span>            :  */
+<span class="lineNum">       9 </span>            : 
+<span class="lineNum">      10 </span>            : part of ethereum;
+<span class="lineNum">      11 </span>            : 
+<span class="lineNum">      12 </span>            : class EthereumRpcClient {
+<span class="lineNum">      13 </span>            :   static const String jsonRPpcVersion = '2.0';
+<span class="lineNum">      14 </span>            : 
+<span class="lineNum">      15 </span><span class="lineCov">          2 :   EthereumRpcClient(this._adapter);</span>
+<span class="lineNum">      16 </span>            : 
+<span class="lineNum">      17 </span>            :   /// The HTTP adapter
+<span class="lineNum">      18 </span>            :   EthereumINetworkAdapter _adapter;
+<span class="lineNum">      19 </span>            : 
+<span class="lineNum">      20 </span>            :   /// The transmission id
+<span class="lineNum">      21 </span>            :   int _id = 0;
+<span class="lineNum">      22 </span>            : 
+<span class="lineNum">      23 </span><span class="lineCov">          1 :   int get id =&gt; _id;</span>
+<span class="lineNum">      24 </span>            : 
+<span class="lineNum">      25 </span>            :   /// The Uri
+<span class="lineNum">      26 </span>            :   Uri _uri;
+<span class="lineNum">      27 </span>            : 
+<span class="lineNum">      28 </span><span class="lineNoCov">          0 :   Uri get uri =&gt; _uri;</span>
+<span class="lineNum">      29 </span>            : 
+<span class="lineNum">      30 </span><span class="lineCov">          2 :   set uri(Uri uri) =&gt; _uri = uri;</span>
+<span class="lineNum">      31 </span>            : 
+<span class="lineNum">      32 </span>            :   /// The request method
+<span class="lineNum">      33 </span>            :   Future&lt;Map&gt; request(String method, [dynamic parameters]) {
+<span class="lineNum">      34 </span><span class="lineCov">          1 :     final Map packet = new Map();</span>
+<span class="lineNum">      35 </span><span class="lineCov">          1 :     packet['jsonrpc'] = jsonRPpcVersion;</span>
+<span class="lineNum">      36 </span><span class="lineCov">          1 :     packet['method'] = method;</span>
+<span class="lineNum">      37 </span>            :     if (parameters != null) {
+<span class="lineNum">      38 </span><span class="lineCov">          1 :       packet['params'] = parameters;</span>
+<span class="lineNum">      39 </span>            :     }
+<span class="lineNum">      40 </span><span class="lineCov">          2 :     packet['id'] = id;</span>
+<span class="lineNum">      41 </span><span class="lineCov">          2 :     _id++;</span>
+<span class="lineNum">      42 </span><span class="lineCov">          3 :     return _adapter.httpRequest(_uri, packet);</span>
+<span class="lineNum">      43 </span>            :   }
+<span class="lineNum">      44 </span>            : 
+<span class="lineNum">      45 </span>            :   /// The notification method
+<span class="lineNum">      46 </span>            :   Future&lt;Map&gt; notification(String method, [dynamic parameters]) {
+<span class="lineNum">      47 </span><span class="lineNoCov">          0 :     final Map packet = new Map();</span>
+<span class="lineNum">      48 </span><span class="lineNoCov">          0 :     packet['jsonrpc'] = jsonRPpcVersion;</span>
+<span class="lineNum">      49 </span><span class="lineNoCov">          0 :     packet['method'] = method;</span>
+<span class="lineNum">      50 </span>            :     if (parameters != null) {
+<span class="lineNum">      51 </span><span class="lineNoCov">          0 :       packet['params'] = parameters;</span>
+<span class="lineNum">      52 </span>            :     }
+<span class="lineNum">      53 </span><span class="lineNoCov">          0 :     return _adapter.httpRequest(_uri, packet);</span>
+<span class="lineNum">      54 </span>            :   }
+<span class="lineNum">      55 </span>            : 
+<span class="lineNum">      56 </span>            :   /// Reset the transmission id
+<span class="lineNum">      57 </span>            :   void resetTransmissionId([int value]) {
+<span class="lineNum">      58 </span>            :     if (value == null) {
+<span class="lineNum">      59 </span><span class="lineNoCov">          0 :       _id = 0;</span>
+<span class="lineNum">      60 </span>            :     } else {
+<span class="lineNum">      61 </span><span class="lineNoCov">          0 :       _id = value;</span>
+<span class="lineNum">      62 </span>            :     }
+<span class="lineNum">      63 </span>            :   }
+<span class="lineNum">      64 </span>            : }
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.12</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>
