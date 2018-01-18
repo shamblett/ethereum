@@ -843,28 +843,19 @@ class Ethereum {
   /// [[A, B], [A, B]] "(A OR B) in first position AND (A OR B) in second position (and anything after)"
   /// fromBlock: - (optional, default: "latest") Integer block number, or "latest" for the last mined block or "pending",
   /// "earliest" for not yet mined transactions.
-  /// toBlock: - (optional, default: "latest") Integer block number, or "latest" for the last mined block or "pending", "earliest" for not yet mined transactions.
+  /// toBlock: - (optional, default: "latest") Integer block number, or "latest" for the last mined block or "pending", "earliest" for not
+  /// yet mined transactions.
   /// address: - (optional) Contract address or a list of addresses from which logs should originate.
   /// topics: - (optional) topics. Topics are order-dependent.
   /// Note: the user must build this structure using the utilities in the EthereumUtilities class. See the Ethereum
   /// Wiki RPC page for examples.
   /// Returns a filter id.
-  Future<int> newFilter({dynamic fromBlock: "latest",
-    dynamic toBlock: "latest",
+  Future<int> newFilter({EthereumDefaultBlock fromBlock,
+    EthereumDefaultBlock toBlock,
     dynamic address,
     List<BigInteger> topics}) async {
-    String fromBlockString;
-    if (fromBlock is int) {
-      fromBlockString = EthereumUtilities.intToHex(fromBlock);
-    } else {
-      fromBlockString = fromBlock;
-    }
-    String toBlockString;
-    if (toBlock is int) {
-      toBlockString = EthereumUtilities.intToHex(toBlock);
-    } else {
-      toBlockString = toBlock;
-    }
+    final String fromBlockString = fromBlock.getSelection();
+    final String toBlockString = toBlock.getSelection();
     final Map params = {"toBlock": toBlockString, "fromBlock": fromBlockString};
     if (address != null) {
       if (address is List) {

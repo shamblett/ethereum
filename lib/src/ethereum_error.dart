@@ -11,6 +11,11 @@ part of ethereum;
 
 /// Manages Ethereum client errors
 class EthereumError {
+
+  /// Constants
+  static const String noError = "No Error";
+  static const int noId = -1;
+
   EthereumError();
 
   /// Error code
@@ -19,12 +24,12 @@ class EthereumError {
   int get code => _code;
 
   /// Error message
-  String _message = "No Error";
+  String _message = noError;
 
   String get message => _message;
 
   /// Error transaction id
-  int _id = -1;
+  int _id = noId;
 
   int get id => _id;
 

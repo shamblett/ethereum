@@ -509,11 +509,37 @@ class EthereumCommon {
       expect(client.rpcClient.id, ++id);
     });
     int filterId = 0;
-    test("New filter", () async {
+    test("New filter - address", () async {
+      EthereumDefaultBlock from = new EthereumDefaultBlock();
+      from.blockNumber = 1;
+      EthereumDefaultBlock to = new EthereumDefaultBlock();
+      from.blockNumber = 2;
       filterId = await client.newFilter(
-          fromBlock: 0x1,
-          toBlock: 0x2,
+          fromBlock: from,
+          toBlock: to,
           address: new BigInteger(0x8888f1f195afa192cfee860698584c030f4c9db1),
+          topics: [
+            new BigInteger(
+                0x000000000000000000000000a94f5374fce5edbc8e2a8697c15331677e6ebf0b),
+            new BigInteger(
+                0x000000000000000000000000a94f5374fce5edbc8e2a8697c15331677e6ebf0b)
+          ]);
+      if (filterId != null) {
+        print(filterId);
+      }
+      expect(client.rpcClient.id, ++id);
+    });
+    test("New filter - address list", () async {
+      EthereumDefaultBlock from = new EthereumDefaultBlock();
+      from.blockNumber = 1;
+      EthereumDefaultBlock to = new EthereumDefaultBlock();
+      from.blockNumber = 2;
+      filterId = await client.newFilter(
+          fromBlock: from,
+          toBlock: to,
+          address: [new BigInteger(0x8888f1f195afa192cfee860698584c030f4c9db1),
+          new BigInteger(0x8888f1f195afa192cfee860698584c030f4c9db2)
+          ],
           topics: [
             new BigInteger(
                 0x000000000000000000000000a94f5374fce5edbc8e2a8697c15331677e6ebf0b),

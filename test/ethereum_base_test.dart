@@ -1133,7 +1133,8 @@ void main() {
       expect(message.status, 1);
       expect(message.root, isNull);
       print(message);
-      final EthereumTransactionReceipt message1 = new EthereumTransactionReceipt();
+      final EthereumTransactionReceipt message1 =
+      new EthereumTransactionReceipt();
       print(message1);
     });
     test("Transaction receipt - root", () {
@@ -1358,6 +1359,26 @@ void main() {
       expect(block.pending, isFalse);
       expect(block.blockNumber, 0x1b4);
       expect(block.getSelection(), "0x1b4");
+    });
+  });
+
+  group("Error tests", () {
+    test("Default", () {
+      EthereumError error = new EthereumError();
+      expect(error.code, 0);
+      expect(error.message, EthereumError.noError);
+      expect(error.id, EthereumError.noId);
+      expect(error.timestamp, isNull);
+      expect(error.toString(), "Code : 0 <> Message : No Error <> Id : -1");
+    });
+    test("Update", () {
+      EthereumError error = new EthereumError();
+      error.updateError(10, "An Error", 50);
+      expect(error.code, 10);
+      expect(error.message, "An Error");
+      expect(error.id, 50);
+      expect(error.timestamp, new DateTime.now());
+      expect(error.toString(), "Code : 10 <> Message : An Error <> Id : 50");
     });
   });
 }
