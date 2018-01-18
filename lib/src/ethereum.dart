@@ -114,11 +114,6 @@ class Ethereum {
   /// Print errors, default is off
   bool printError = false;
 
-  /// API constants
-  static const String ethEarliest = "earliest";
-  static const String ethLatest = "latest";
-  static const String ethPending = "pending";
-
   /// Error processing helper
   void _processError(String method, Map res) {
     final Map error = res[ethErrorKey];
