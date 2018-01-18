@@ -273,9 +273,8 @@ class Ethereum {
   }
 
   /// Get balance, the balance of the account of the given address.
-  /// The block can be an integer block number or the one of the strings
-  /// "latest", "earliest" or "pending.
-  Future<int> getBalance(BigInteger accountNumber, dynamic block) async {
+  Future<int> getBalance(BigInteger accountNumber,
+      EthereumDefaultBlock block) async {
     if (accountNumber == null) {
       throw new ArgumentError.notNull("Ethereum::getBalance - accountNumber");
     }
@@ -283,12 +282,7 @@ class Ethereum {
       throw new ArgumentError.notNull("Ethereum::getBalance - block");
     }
     final String method = EthereumRpcMethods.balance;
-    String blockString;
-    if (block is int) {
-      blockString = EthereumUtilities.intToHex(block);
-    } else {
-      blockString = block;
-    }
+    final String blockString = block.getSelection();
     final List params = [
       EthereumUtilities.bigIntegerToHex(accountNumber),
       blockString
@@ -303,9 +297,9 @@ class Ethereum {
 
   /// Get Storage at, the value from a storage position at a given address.
   /// Parameters are the address of the storage, the integer position of the storage and
-  /// the block number, or the string "latest", "earliest" or "pending.
+  // the default block parameter.
   Future<BigInteger> getStorageAt(BigInteger address, int pos,
-      dynamic block) async {
+      EthereumDefaultBlock block) async {
     if (address == null) {
       throw new ArgumentError.notNull("Ethereum::getStorageAt - address");
     }
@@ -316,12 +310,7 @@ class Ethereum {
       throw new ArgumentError.notNull("Ethereum::getStorageAt - block");
     }
     final String method = EthereumRpcMethods.storageAt;
-    String blockString;
-    if (block is int) {
-      blockString = EthereumUtilities.intToHex(block);
-    } else {
-      blockString = block;
-    }
+    final String blockString = block.getSelection();
     final List params = [
       EthereumUtilities.bigIntegerToHex(address),
       EthereumUtilities.intToHex(pos),
@@ -336,9 +325,8 @@ class Ethereum {
   }
 
   /// Transaction count, returns the number of transactions sent from an address.
-  /// The block can be an integer block number or the one of the strings
-  /// "latest", "earliest" or "pending.
-  Future<int> getTransactionCount(int address, dynamic block) async {
+  Future<int> getTransactionCount(int address,
+      EthereumDefaultBlock block) async {
     if (address == null) {
       throw new ArgumentError.notNull(
           "Ethereum::getTransactionCount - address");
@@ -347,12 +335,7 @@ class Ethereum {
       throw new ArgumentError.notNull("Ethereum::getTransactionCount - block");
     }
     final String method = EthereumRpcMethods.transactionCount;
-    String blockString;
-    if (block is int) {
-      blockString = EthereumUtilities.intToHex(block);
-    } else {
-      blockString = block;
-    }
+    final String blockString = block.getSelection();
     final List params = [EthereumUtilities.intToHex(address), blockString];
     final res = await rpcClient.request(method, params);
     if (res.containsKey(ethResultKey)) {
@@ -387,22 +370,16 @@ class Ethereum {
 
   /// Block Transaction Count By Number
   /// The number of transactions in a block matching the given block number.
-  /// The block can be an integer block number or the one of the strings
-  /// "latest", "earliest" or "pending.
   /// If the method returns null a count of 0 is returned, this is to distinguish between
   /// this and an error.
-  Future<int> getBlockTransactionCountByNumber(dynamic blockNumber) async {
+  Future<int> getBlockTransactionCountByNumber(
+      EthereumDefaultBlock blockNumber) async {
     if (blockNumber == null) {
       throw new ArgumentError.notNull(
           "Ethereum::getBlockTransactionCountByNumber - blockNumber");
     }
     final String method = EthereumRpcMethods.blockTransactionCountByNumber;
-    String blockString;
-    if (blockNumber is int) {
-      blockString = EthereumUtilities.intToHex(blockNumber);
-    } else {
-      blockString = blockNumber;
-    }
+    final String blockString = blockNumber.getSelection();
     final List params = [blockString];
     final res = await rpcClient.request(method, params);
     if (res.containsKey(ethResultKey)) {
@@ -441,22 +418,15 @@ class Ethereum {
 
   /// Block Uncle Count By Number
   /// The number of uncles in a block matching the given block number.
-  /// The block number can be an integer block number or the one of the strings
-  /// "latest", "earliest" or "pending.
   /// If the method returns null a count of 0 is returned, this is to distinguish between
   /// this and an error.
-  Future<int> getUncleCountByNumber(dynamic blockNumber) async {
+  Future<int> getUncleCountByNumber(EthereumDefaultBlock blockNumber) async {
     if (blockNumber == null) {
       throw new ArgumentError.notNull(
           "Ethereum::getUncleCountByNumber - blockNumber");
     }
     final String method = EthereumRpcMethods.blockUncleCountByBlockNumber;
-    String blockString;
-    if (blockNumber is int) {
-      blockString = EthereumUtilities.intToHex(blockNumber);
-    } else {
-      blockString = blockNumber;
-    }
+    final String blockString = blockNumber.getSelection();
     final List params = [blockString];
     final res = await rpcClient.request(method, params);
     if (res.containsKey(ethResultKey)) {
@@ -471,9 +441,7 @@ class Ethereum {
   }
 
   /// Get code, the code at the given address.
-  /// The block can be an integer block number or the one of the strings
-  /// "latest", "earliest" or "pending.
-  Future<int> getCode(int address, dynamic block) async {
+  Future<int> getCode(int address, EthereumDefaultBlock block) async {
     if (address == null) {
       throw new ArgumentError.notNull("Ethereum::getCode - address");
     }
@@ -481,12 +449,7 @@ class Ethereum {
       throw new ArgumentError.notNull("Ethereum::getCode - block");
     }
     final String method = EthereumRpcMethods.code;
-    String blockString;
-    if (block is int) {
-      blockString = EthereumUtilities.intToHex(block);
-    } else {
-      blockString = block;
-    }
+    final String blockString = block.getSelection();
     final List params = [EthereumUtilities.intToHex(address), blockString];
     final res = await rpcClient.request(method, params);
     if (res.containsKey(ethResultKey)) {

@@ -18,8 +18,8 @@ class EthereumDefaultBlock {
   static const String ethLatest = "latest";
   static const String ethPending = "pending";
 
-  /// Latest indicator
-  bool _latest = false;
+  /// Latest indicator. Default
+  bool _latest = true;
 
   bool get latest => _latest;
 
@@ -55,15 +55,15 @@ class EthereumDefaultBlock {
   }
 
   /// Block number
-  BigInteger _blockNumber;
+  int _blockNumber;
 
-  BigInteger get blockNumber => _blockNumber;
+  int get blockNumber => _blockNumber;
 
-  set blockNumber(BigInteger value) {
+  set blockNumber(int value) {
     _blockNumber = value;
-    _earliest = null;
-    _latest = null;
-    _pending = null;
+    _earliest = false;
+    _latest = false;
+    _pending = false;
   }
 
   /// Get the selected parameter as a string
@@ -78,8 +78,7 @@ class EthereumDefaultBlock {
       return ethPending;
     }
     if (_blockNumber != null) {
-      return EthereumUtilities.bigIntegerToHex(_blockNumber);
+      return EthereumUtilities.intToHex(_blockNumber);
     }
-    return null;
   }
 }

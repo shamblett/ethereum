@@ -176,7 +176,7 @@ void main() {
     test("Balance - account number", () async {
       bool thrown = false;
       try {
-        await client.getBalance(null, "");
+        await client.getBalance(null, null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -212,7 +212,8 @@ void main() {
     test("Storage at - pos", () async {
       bool thrown = false;
       try {
-        await client.getStorageAt(BigInteger.ONE, null, "");
+        await client.getStorageAt(
+            BigInteger.ONE, null, new EthereumDefaultBlock());
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -224,7 +225,7 @@ void main() {
     test("Storage at - address", () async {
       bool thrown = false;
       try {
-        await client.getStorageAt(null, 1, "");
+        await client.getStorageAt(null, 1, new EthereumDefaultBlock());
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -236,7 +237,7 @@ void main() {
     test("Block transaction count - address", () async {
       bool thrown = false;
       try {
-        await client.getTransactionCount(null, "");
+        await client.getTransactionCount(null, new EthereumDefaultBlock());
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -308,7 +309,7 @@ void main() {
     test("Code - address", () async {
       bool thrown = false;
       try {
-        await client.getCode(null, "");
+        await client.getCode(null, new EthereumDefaultBlock());
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -1269,9 +1270,9 @@ void main() {
   });
   test("Work", () {
     final List work = [
-        "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef",
-        "0x5EED00000000000000000000000000005EED0000000000000000000000000000",
-        "0xd1ff1c01710000000000000000000000d1ff1c01710000000000000000000000"
+      "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef",
+      "0x5EED00000000000000000000000000005EED0000000000000000000000000000",
+      "0xd1ff1c01710000000000000000000000d1ff1c01710000000000000000000000"
     ];
     final EthereumWork message = new EthereumWork.fromList(work);
     expect(message.powHash.intValue(),
@@ -1284,12 +1285,59 @@ void main() {
   });
   test("Work - insufficient elements", () {
     final List work = [
-        "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef",
-        "0x5EED00000000000000000000000000005EED0000000000000000000000000000"
+      "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef",
+      "0x5EED00000000000000000000000000005EED0000000000000000000000000000"
     ];
     final EthereumWork message = new EthereumWork.fromList(work);
     expect(message.powHash, isNull);
     expect(message.seedHash, isNull);
     expect(message.boundaryCondition, isNull);
+  });
+
+  group("Parameter tests", () {
+    test("Default block - default", () {
+      EthereumDefaultBlock block = new EthereumDefaultBlock();
+      expect(block.earliest, isFalse);
+      expect(block.latest, isTrue);
+      expect(block.pending, isFalse);
+      expect(block.blockNumber, isNull);
+      expect(block.getSelection(), EthereumDefaultBlock.ethLatest);
+    });
+    test("Default block - earliest", () {
+      EthereumDefaultBlock block = new EthereumDefaultBlock();
+      block.earliest = false;
+      expect(block.earliest, isTrue);
+      expect(block.latest, isFalse);
+      expect(block.pending, isFalse);
+      expect(block.blockNumber, isNull);
+      expect(block.getSelection(), EthereumDefaultBlock.ethEarliest);
+    });
+    test("Default block - latest", () {
+      EthereumDefaultBlock block = new EthereumDefaultBlock();
+      block.latest = false;
+      expect(block.earliest, isFalse);
+      expect(block.latest, isTrue);
+      expect(block.pending, isFalse);
+      expect(block.blockNumber, isNull);
+      expect(block.getSelection(), EthereumDefaultBlock.ethLatest);
+    });
+    test("Default block - pending", () {
+      EthereumDefaultBlock block = new EthereumDefaultBlock();
+      block.pending = false;
+      expect(block.earliest, isFalse);
+      expect(block.latest, isFalse);
+      expect(block.pending, isTrue);
+      expect(block.blockNumber, isNull);
+      expect(block.getSelection(), EthereumDefaultBlock.ethPending);
+    });
+    test("Default block - blockNumber", () {
+      EthereumDefaultBlock block = new EthereumDefaultBlock();
+      block.blockNumber = 0x1b4;
+      expect(block.earliest, isFalse);
+      expect(block.latest, isFalse);
+      expect(block.pending, isFalse);
+      expect(block.blockNumber, 0x1b4);
+      expect(block.getSelection(), "0x1b4");
+    });
   });
 }
