@@ -713,6 +713,8 @@ void main() {
       expect(message.highestBlock, isNull);
       expect(message.startingBlock, isNull);
       print(message);
+      final EthereumSyncStatus message1 = new EthereumSyncStatus();
+      print(message1);
     });
     test("Sync status - sync", () {
       final Map sync = {
@@ -743,6 +745,8 @@ void main() {
       expect(message.gas, isNull);
       expect(message.gasPrice, isNull);
       expect(message.input, isNull);
+      final EthereumTransaction message1 = new EthereumTransaction();
+      print(message1);
     });
 
     test("Transaction", () {
@@ -786,7 +790,6 @@ void main() {
     });
     test("Block - null", () {
       final Map block = {"result": {}};
-
       final EthereumBlock message = new EthereumBlock.fromMap(block);
       expect(message.number, isNull);
       expect(message.hash, isNull);
@@ -796,6 +799,7 @@ void main() {
       expect(message.logsBloom, isNull);
       expect(message.transactionsRoot, isNull);
       expect(message.stateRoot, isNull);
+      expect(message.receiptsRoot, isNull);
       expect(message.miner, isNull);
       expect(message.difficulty, isNull);
       expect(message.totalDifficulty, isNull);
@@ -807,6 +811,8 @@ void main() {
       expect(message.transactions, isNull);
       expect(message.uncles, isNull);
       expect(message.transactionsAreHashes, isFalse);
+      final EthereumBlock messageDefault = new EthereumBlock();
+      print(messageDefault);
     });
     test("Block - transactions are hashes", () {
       final Map block = {
@@ -825,6 +831,8 @@ void main() {
           "transactionsRoot":
           "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
           "stateRoot":
+          "0xd5855eb08b3387c0af375e9cdb6acfc05eb8f519e419b874b6ff2ffda7ed1dff",
+          "receiptsRoot":
           "0xd5855eb08b3387c0af375e9cdb6acfc05eb8f519e419b874b6ff2ffda7ed1dff",
           "miner": "0x4e65fda2159562a496f9f3522f89122a3088497a",
           "difficulty": "0x027f07", // 163591
@@ -860,6 +868,8 @@ void main() {
       expect(message.transactionsRoot.intValue(),
           0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421);
       expect(message.stateRoot.intValue(),
+          0xd5855eb08b3387c0af375e9cdb6acfc05eb8f519e419b874b6ff2ffda7ed1dff);
+      expect(message.receiptsRoot.intValue(),
           0xd5855eb08b3387c0af375e9cdb6acfc05eb8f519e419b874b6ff2ffda7ed1dff);
       expect(
           message.miner.intValue(), 0x4e65fda2159562a496f9f3522f89122a3088497a);
@@ -993,10 +1003,13 @@ void main() {
       expect(message.address, isNull);
       expect(message.data, isNull);
       expect(message.topics, isNull);
+      final EthereumLog message1 = new EthereumLog();
+      print(message1);
     });
     test("Log", () {
       final Map log = {
         "result": {
+          "removed": false,
           "logIndex": "0x1", // 1
           "blockNumber": "0x1b4", // 436
           "blockHash":
@@ -1013,6 +1026,7 @@ void main() {
         }
       };
       final EthereumLog message = new EthereumLog.fromMap(log);
+      expect(message.removed, false);
       expect(message.logIndex, 1);
       expect(message.blockNumber, 436);
       expect(message.blockHash.intValue(),
@@ -1119,6 +1133,8 @@ void main() {
       expect(message.status, 1);
       expect(message.root, isNull);
       print(message);
+      final EthereumTransactionReceipt message1 = new EthereumTransactionReceipt();
+      print(message1);
     });
     test("Transaction receipt - root", () {
       final Map tr = {
@@ -1202,6 +1218,8 @@ void main() {
     final EthereumFilter message = new EthereumFilter.fromMap(filter);
     expect(message.logs, isNull);
     expect(message.hashes, isNull);
+    final EthereumFilter message1 = new EthereumFilter();
+    print(message1);
   });
   test("Filter - hashes", () {
     final Map filter = {
@@ -1282,6 +1300,8 @@ void main() {
     expect(message.boundaryCondition.intValue(),
         0xd1ff1c01710000000000000000000000d1ff1c01710000000000000000000000);
     print(message);
+    final EthereumWork message1 = new EthereumWork();
+    print(message1);
   });
   test("Work - insufficient elements", () {
     final List work = [
