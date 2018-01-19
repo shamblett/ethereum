@@ -1377,7 +1377,8 @@ void main() {
       expect(error.code, 10);
       expect(error.message, "An Error");
       expect(error.id, 50);
-      expect(error.timestamp, new DateTime.now());
+      expect(error.timestamp.millisecondsSinceEpoch <=
+          new DateTime.now().millisecondsSinceEpoch, isTrue);
       expect(error.toString(), "Code : 10 <> Message : An Error <> Id : 50");
     });
   });
