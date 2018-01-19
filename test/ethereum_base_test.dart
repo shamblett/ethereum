@@ -59,6 +59,16 @@ void main() {
       final int val = EthereumUtilities.hexToInt(testString);
       expect(val, isNull);
     });
+    test("Hex to int list", () {
+      final List<String> testString = ["0xabcdef12345", "0xaabbcc"];
+      final List<int> val = EthereumUtilities.hexToIntList(testString);
+      expect(val, [0xabcdef12345, 0xaabbcc]);
+    });
+    test("Int to hex list", () {
+      final List<int> testList = [0xabcdef12345, 0xaabbcc];
+      final List<String> val = EthereumUtilities.intToHexList(testList);
+      expect(val, ["0xabcdef12345", "0xaabbcc"]);
+    });
   });
 
   group("Connection tests", () {
@@ -106,7 +116,6 @@ void main() {
       client.connectUri(uri);
       expect(client.host, "localhost");
       expect(client.port, 2000);
-
     });
 
     test("connectUri - OK no port", () {
@@ -165,7 +174,6 @@ void main() {
       client.id = null;
       expect(client.id, 0);
     });
-
   });
 
   group("Null parameter tests", () {
@@ -1386,8 +1394,10 @@ void main() {
       expect(error.code, 10);
       expect(error.message, "An Error");
       expect(error.id, 50);
-      expect(error.timestamp.millisecondsSinceEpoch <=
-          new DateTime.now().millisecondsSinceEpoch, isTrue);
+      expect(
+          error.timestamp.millisecondsSinceEpoch <=
+              new DateTime.now().millisecondsSinceEpoch,
+          isTrue);
       expect(error.toString(), "Code : 10 <> Message : An Error <> Id : 50");
     });
   });
