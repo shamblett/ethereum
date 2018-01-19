@@ -80,5 +80,6 @@ class EthereumDefaultBlock {
     if (_blockNumber != null) {
       return EthereumUtilities.intToHex(_blockNumber);
     }
+    return null;
   }
 }

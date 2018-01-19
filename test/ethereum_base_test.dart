@@ -106,6 +106,7 @@ void main() {
       client.connectUri(uri);
       expect(client.host, "localhost");
       expect(client.port, 2000);
+
     });
 
     test("connectUri - OK no port", () {
@@ -157,6 +158,14 @@ void main() {
       expect(client.host, "localhost");
       expect(client.port, Ethereum.defaultWsPort);
     });
+    test("Transmission id", () {
+      expect(client.id, 0);
+      client.id = 5;
+      expect(client.id, 5);
+      client.id = null;
+      expect(client.id, 0);
+    });
+
   });
 
   group("Null parameter tests", () {
@@ -1317,7 +1326,7 @@ void main() {
 
   group("Parameter tests", () {
     test("Default block - default", () {
-      EthereumDefaultBlock block = new EthereumDefaultBlock();
+      final EthereumDefaultBlock block = new EthereumDefaultBlock();
       expect(block.earliest, isFalse);
       expect(block.latest, isTrue);
       expect(block.pending, isFalse);
@@ -1325,7 +1334,7 @@ void main() {
       expect(block.getSelection(), EthereumDefaultBlock.ethLatest);
     });
     test("Default block - earliest", () {
-      EthereumDefaultBlock block = new EthereumDefaultBlock();
+      final EthereumDefaultBlock block = new EthereumDefaultBlock();
       block.earliest = false;
       expect(block.earliest, isTrue);
       expect(block.latest, isFalse);
@@ -1334,7 +1343,7 @@ void main() {
       expect(block.getSelection(), EthereumDefaultBlock.ethEarliest);
     });
     test("Default block - latest", () {
-      EthereumDefaultBlock block = new EthereumDefaultBlock();
+      final EthereumDefaultBlock block = new EthereumDefaultBlock();
       block.latest = false;
       expect(block.earliest, isFalse);
       expect(block.latest, isTrue);
@@ -1343,7 +1352,7 @@ void main() {
       expect(block.getSelection(), EthereumDefaultBlock.ethLatest);
     });
     test("Default block - pending", () {
-      EthereumDefaultBlock block = new EthereumDefaultBlock();
+      final EthereumDefaultBlock block = new EthereumDefaultBlock();
       block.pending = false;
       expect(block.earliest, isFalse);
       expect(block.latest, isFalse);
@@ -1352,7 +1361,7 @@ void main() {
       expect(block.getSelection(), EthereumDefaultBlock.ethPending);
     });
     test("Default block - blockNumber", () {
-      EthereumDefaultBlock block = new EthereumDefaultBlock();
+      final EthereumDefaultBlock block = new EthereumDefaultBlock();
       block.blockNumber = 0x1b4;
       expect(block.earliest, isFalse);
       expect(block.latest, isFalse);
@@ -1364,7 +1373,7 @@ void main() {
 
   group("Error tests", () {
     test("Default", () {
-      EthereumError error = new EthereumError();
+      final EthereumError error = new EthereumError();
       expect(error.code, 0);
       expect(error.message, EthereumError.noError);
       expect(error.id, EthereumError.noId);
@@ -1372,7 +1381,7 @@ void main() {
       expect(error.toString(), "Code : 0 <> Message : No Error <> Id : -1");
     });
     test("Update", () {
-      EthereumError error = new EthereumError();
+      final EthereumError error = new EthereumError();
       error.updateError(10, "An Error", 50);
       expect(error.code, 10);
       expect(error.message, "An Error");

@@ -52,6 +52,11 @@ class Ethereum {
   /// Last error
   EthereumError lastError = new EthereumError();
 
+  /// Transmission id
+  set id(int value) => rpcClient.resetTransmissionId(value);
+
+  int get id => rpcClient.id;
+
   /// Connection methods
 
   //// Connect using a host string of the form http://thehost.com:1234,

@@ -42,17 +42,6 @@ class EthereumRpcClient {
     return _adapter.httpRequest(_uri, packet);
   }
 
-  /// The notification method
-  Future<Map> notification(String method, [dynamic parameters]) {
-    final Map packet = new Map();
-    packet['jsonrpc'] = jsonRPpcVersion;
-    packet['method'] = method;
-    if (parameters != null) {
-      packet['params'] = parameters;
-    }
-    return _adapter.httpRequest(_uri, packet);
-  }
-
   /// Reset the transmission id
   void resetTransmissionId([int value]) {
     if (value == null) {
