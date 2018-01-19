@@ -555,9 +555,9 @@ class Ethereum {
   /// gasPrice: (optional) Integer of the gasPrice used for each paid gas
   /// value: (optional) Integer of the value send with this transaction
   /// data: (optional) Hash of the method signature and encoded parameters. For details see Ethereum Contract ABI
-  /// block: integer block number, or the string "latest", "earliest" or "pending"
+  /// block: default block parameter
   /// Returns the return value of executed contract.
-  Future<int> call(int address, dynamic block,
+  Future<int> call(int address, EthereumDefaultBlock block,
       {int from, int gas, int gasPrice, int value, int data}) async {
     if (address == null) {
       throw new ArgumentError.notNull("Ethereum::call - address");
@@ -566,12 +566,7 @@ class Ethereum {
       throw new ArgumentError.notNull("Ethereum::call - block");
     }
     final String method = EthereumRpcMethods.call;
-    String blockString;
-    if (block is int) {
-      blockString = EthereumUtilities.intToHex(block);
-    } else {
-      blockString = block;
-    }
+    final String blockString = block.getSelection();
     Map<String, String> paramBlock = {
       "from": from == null ? null : EthereumUtilities.intToHex(from),
       "to": EthereumUtilities.intToHex(address),
@@ -647,23 +642,18 @@ class Ethereum {
 
   /// Get block by number
   /// Returns information about a block by block number.
-  /// blockNumber - integer of a block number, or the string "earliest", "latest" or "pending",
+  /// blockNumber - defualt block parameter
   /// as in the default block parameter.
   /// A boolean, if true it returns the full transaction objects,
   /// if false only the hashes of the transactions, defaults to true.
   /// Returns See getBlockByHash
-  Future<EthereumBlock> getBlockByNumber(dynamic blockNumber,
+  Future<EthereumBlock> getBlockByNumber(EthereumDefaultBlock blockNumber,
       [bool full = true]) async {
     if (blockNumber == null) {
       throw new ArgumentError.notNull(
           "Ethereum::getBlockByNumber - blockNumber");
     }
-    String blockString;
-    if (blockNumber is int) {
-      blockString = EthereumUtilities.intToHex(blockNumber);
-    } else {
-      blockString = blockNumber;
-    }
+    final String blockString = blockNumber.getSelection();
     final dynamic params = [blockString, full];
     final String method = EthereumRpcMethods.getBlockByNumber;
     final res = await rpcClient.request(method, params);
@@ -721,10 +711,10 @@ class Ethereum {
 
   /// Get transaction by block number and index.
   /// Returns information about a transaction by block number and transaction index position.
-  /// A block number, or the string "earliest", "latest" or "pending", as in the default block parameter.
+  /// A block number as in the default block parameter.
   /// Returns see getTransactionByHash.
   Future<EthereumTransaction> getTransactionByBlockNumberAndIndex(
-      dynamic blockNumber, int index) async {
+      EthereumDefaultBlock blockNumber, int index) async {
     if (blockNumber == null) {
       throw new ArgumentError.notNull(
           "Ethereum::getTransactionByBlockNumberAndIndex - blockNumber");
@@ -733,12 +723,7 @@ class Ethereum {
       throw new ArgumentError.notNull(
           "Ethereum::getTransactionByBlockNumberAndIndex - index");
     }
-    String blockNumberString;
-    if (blockNumber is int) {
-      blockNumberString = EthereumUtilities.intToHex(blockNumber);
-    } else {
-      blockNumberString = blockNumber;
-    }
+    final String blockNumberString = blockNumber.getSelection();
     final dynamic params = [
       blockNumberString,
       EthereumUtilities.intToHex(index)
@@ -805,9 +790,10 @@ class Ethereum {
   /// Get uncle by block number and index.
   /// Returns information about an uncle by block number and uncle index position.
   /// Note: An uncle doesn't contain individual transactions.
-  /// A block number, or the string "earliest", "latest" or "pending", as in the default block parameter.
+  /// A block number as in the default block parameter.
   /// Returns see getBlockByHash.
-  Future<EthereumBlock> getUncleByBlockNumberAndIndex(dynamic blockNumber,
+  Future<EthereumBlock> getUncleByBlockNumberAndIndex(
+      EthereumDefaultBlock blockNumber,
       int index) async {
     if (blockNumber == null) {
       throw new ArgumentError.notNull(
@@ -817,12 +803,7 @@ class Ethereum {
       throw new ArgumentError.notNull(
           "Ethereum::getUncleByBlockNumberAndIndex - index");
     }
-    String blockNumberString;
-    if (blockNumber is int) {
-      blockNumberString = EthereumUtilities.intToHex(blockNumber);
-    } else {
-      blockNumberString = blockNumber;
-    }
+    final String blockNumberString = blockNumber.getSelection();
     final dynamic params = [
       blockNumberString,
       EthereumUtilities.intToHex(index)
@@ -866,7 +847,7 @@ class Ethereum {
       if (address is List) {
         final List<String> addresses =
         EthereumUtilities.bigIntegerToHexList(address);
-        params["address"] = [addresses];
+        params["address"] = addresses;
       } else {
         params["address"] = (EthereumUtilities.bigIntegerToHex(address));
       }
@@ -971,28 +952,18 @@ class Ethereum {
   /// Get logs
   /// The filter definition, see newFilter parameters.
   /// Returns see getFilterChanges
-  Future<EthereumFilter> getLogs({dynamic fromBlock: "latest",
-    dynamic toBlock: "latest",
+  Future<EthereumFilter> getLogs({EthereumDefaultBlock fromBlock,
+    EthereumDefaultBlock toBlock,
     dynamic address,
     List topics}) async {
-    String fromBlockString;
-    if (fromBlock is int) {
-      fromBlockString = EthereumUtilities.intToHex(fromBlock);
-    } else {
-      fromBlockString = fromBlock;
-    }
-    String toBlockString;
-    if (toBlock is int) {
-      toBlockString = EthereumUtilities.intToHex(toBlock);
-    } else {
-      toBlockString = toBlock;
-    }
+    final String fromBlockString = fromBlock.getSelection();
+    final String toBlockString = toBlock.getSelection();
     final Map params = {"toBlock": toBlockString, "fromBlock": fromBlockString};
     if (address != null) {
       if (address is List) {
         final List<String> addresses =
         EthereumUtilities.bigIntegerToHexList(address);
-        params["address"] = [addresses];
+        params["address"] = addresses;
       } else {
         params["address"] = (EthereumUtilities.bigIntegerToHex(address));
       }

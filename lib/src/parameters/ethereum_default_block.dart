@@ -27,7 +27,7 @@ class EthereumDefaultBlock {
     _latest = true;
     _earliest = false;
     _pending = false;
-    _blockNumber = null;
+    _number = null;
   }
 
   /// Earliest indicator
@@ -39,7 +39,7 @@ class EthereumDefaultBlock {
     _earliest = true;
     _latest = false;
     _pending = false;
-    _blockNumber = null;
+    _number = null;
   }
 
   /// Pending indicator
@@ -51,16 +51,16 @@ class EthereumDefaultBlock {
     _pending = true;
     _earliest = false;
     _latest = false;
-    _blockNumber = null;
+    _number = null;
   }
 
   /// Block number
-  int _blockNumber;
+  int _number;
 
-  int get blockNumber => _blockNumber;
+  int get number => _number;
 
-  set blockNumber(int value) {
-    _blockNumber = value;
+  set number(int value) {
+    _number = value;
     _earliest = false;
     _latest = false;
     _pending = false;
@@ -77,8 +77,8 @@ class EthereumDefaultBlock {
     if (_pending) {
       return ethPending;
     }
-    if (_blockNumber != null) {
-      return EthereumUtilities.intToHex(_blockNumber);
+    if (_number != null) {
+      return EthereumUtilities.intToHex(_number);
     }
     return null;
   }

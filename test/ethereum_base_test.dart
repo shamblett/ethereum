@@ -410,7 +410,7 @@ void main() {
     test("Call - address", () async {
       bool thrown = false;
       try {
-        await client.call(null, "");
+        await client.call(null, null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -506,7 +506,7 @@ void main() {
     test("Get transaction by block number and index - index", () async {
       bool thrown = false;
       try {
-        await client.getTransactionByBlockNumberAndIndex(0, null);
+        await client.getTransactionByBlockNumberAndIndex(null, null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -566,7 +566,7 @@ void main() {
     test("Get uncle by block number and index - index", () async {
       bool thrown = false;
       try {
-        await client.getUncleByBlockNumberAndIndex(0, null);
+        await client.getUncleByBlockNumberAndIndex(null, null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -1338,7 +1338,7 @@ void main() {
       expect(block.earliest, isFalse);
       expect(block.latest, isTrue);
       expect(block.pending, isFalse);
-      expect(block.blockNumber, isNull);
+      expect(block.number, isNull);
       expect(block.getSelection(), EthereumDefaultBlock.ethLatest);
     });
     test("Default block - earliest", () {
@@ -1347,7 +1347,7 @@ void main() {
       expect(block.earliest, isTrue);
       expect(block.latest, isFalse);
       expect(block.pending, isFalse);
-      expect(block.blockNumber, isNull);
+      expect(block.number, isNull);
       expect(block.getSelection(), EthereumDefaultBlock.ethEarliest);
     });
     test("Default block - latest", () {
@@ -1356,7 +1356,7 @@ void main() {
       expect(block.earliest, isFalse);
       expect(block.latest, isTrue);
       expect(block.pending, isFalse);
-      expect(block.blockNumber, isNull);
+      expect(block.number, isNull);
       expect(block.getSelection(), EthereumDefaultBlock.ethLatest);
     });
     test("Default block - pending", () {
@@ -1365,16 +1365,16 @@ void main() {
       expect(block.earliest, isFalse);
       expect(block.latest, isFalse);
       expect(block.pending, isTrue);
-      expect(block.blockNumber, isNull);
+      expect(block.number, isNull);
       expect(block.getSelection(), EthereumDefaultBlock.ethPending);
     });
     test("Default block - blockNumber", () {
       final EthereumDefaultBlock block = new EthereumDefaultBlock();
-      block.blockNumber = 0x1b4;
+      block.number = 0x1b4;
       expect(block.earliest, isFalse);
       expect(block.latest, isFalse);
       expect(block.pending, isFalse);
-      expect(block.blockNumber, 0x1b4);
+      expect(block.number, 0x1b4);
       expect(block.getSelection(), "0x1b4");
     });
   });
