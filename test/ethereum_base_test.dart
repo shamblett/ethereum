@@ -506,7 +506,8 @@ void main() {
     test("Get transaction by block number and index - index", () async {
       bool thrown = false;
       try {
-        await client.getTransactionByBlockNumberAndIndex(null, null);
+        await client.getTransactionByBlockNumberAndIndex(
+            new EthereumDefaultBlock(), null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -566,7 +567,8 @@ void main() {
     test("Get uncle by block number and index - index", () async {
       bool thrown = false;
       try {
-        await client.getUncleByBlockNumberAndIndex(null, null);
+        await client.getUncleByBlockNumberAndIndex(
+            new EthereumDefaultBlock(), null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
