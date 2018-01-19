@@ -31,13 +31,13 @@
             <td class="headerValue">coverage.lcov</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">89</td>
             <td class="headerCovTableEntry">92</td>
-            <td class="headerCovTableEntryHi">96.7 %</td>
+            <td class="headerCovTableEntry">92</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-01-15 11:32:25</td>
+            <td class="headerValue">2018-01-19 11:13:13</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">0</td>
@@ -73,7 +73,7 @@
 <span class="lineNum">      11 </span>            : 
 <span class="lineNum">      12 </span>            : /// An ethereum block descriptor message
 <span class="lineNum">      13 </span>            : class EthereumBlock {
-<span class="lineNum">      14 </span><span class="lineNoCov">          0 :   EthereumBlock();</span>
+<span class="lineNum">      14 </span><span class="lineCov">          1 :   EthereumBlock();</span>
 <span class="lineNum">      15 </span>            : 
 <span class="lineNum">      16 </span><span class="lineCov">          2 :   EthereumBlock.fromMap(Map result) {</span>
 <span class="lineNum">      17 </span><span class="lineCov">          2 :     construct(result);</span>
@@ -122,7 +122,7 @@
 <span class="lineNum">      60 </span>            :   /// Receipts root. The root of the receipts tree of the block.
 <span class="lineNum">      61 </span>            :   BigInteger _receiptsRoot;
 <span class="lineNum">      62 </span>            : 
-<span class="lineNum">      63 </span><span class="lineNoCov">          0 :   BigInteger get receiptsRoot =&gt; _receiptsRoot;</span>
+<span class="lineNum">      63 </span><span class="lineCov">          1 :   BigInteger get receiptsRoot =&gt; _receiptsRoot;</span>
 <span class="lineNum">      64 </span>            : 
 <span class="lineNum">      65 </span>            :   /// Miner. The address of the beneficiary to whom the mining rewards were given.
 <span class="lineNum">      66 </span>            :   BigInteger _miner;
@@ -211,7 +211,7 @@
 <span class="lineNum">     149 </span><span class="lineCov">          4 :       _stateRoot = new BigInteger(data[ethResultKey]['stateRoot']);</span>
 <span class="lineNum">     150 </span>            :     }
 <span class="lineNum">     151 </span><span class="lineCov">          2 :     if (data[ethResultKey].containsKey('receiptsRoot')) {</span>
-<span class="lineNum">     152 </span><span class="lineNoCov">          0 :       _receiptsRoot = new BigInteger(data[ethResultKey]['receiptsRoot']);</span>
+<span class="lineNum">     152 </span><span class="lineCov">          4 :       _receiptsRoot = new BigInteger(data[ethResultKey]['receiptsRoot']);</span>
 <span class="lineNum">     153 </span>            :     }
 <span class="lineNum">     154 </span><span class="lineCov">          2 :     if (data[ethResultKey].containsKey('miner')) {</span>
 <span class="lineNum">     155 </span><span class="lineCov">          4 :       _miner = new BigInteger(data[ethResultKey]['miner']);</span>
