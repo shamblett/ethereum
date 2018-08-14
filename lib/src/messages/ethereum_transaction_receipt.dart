@@ -18,9 +18,9 @@ class EthereumTransactionReceipt {
   }
 
   /// Transaction hash. Hash of the transaction.
-  BigInteger _transactionHash;
+  BigInt _transactionHash;
 
-  BigInteger get transactionHash => _transactionHash;
+  BigInt get transactionHash => _transactionHash;
 
   /// Transaction index. Ihe transactions index position in the block.
   int _transactionIndex;
@@ -28,9 +28,9 @@ class EthereumTransactionReceipt {
   int get transactionIndex => _transactionIndex;
 
   /// Block hash. Hash of the block this transaction was in.
-  BigInteger _blockHash;
+  BigInt _blockHash;
 
-  BigInteger get blockHash => _blockHash;
+  BigInt get blockHash => _blockHash;
 
   /// Block number. Block number of this transaction.
   int _blockNumber;
@@ -48,9 +48,9 @@ class EthereumTransactionReceipt {
   int get gasUsed => _gasUsed;
 
   /// Contract address. The contract address created, if the transaction was a contract creation, otherwise null.
-  BigInteger _contractAddress;
+  BigInt _contractAddress;
 
-  BigInteger get contractAddress => _contractAddress;
+  BigInt get contractAddress => _contractAddress;
 
   /// Logs. List of log objects, which this transaction generated.
   List<EthereumLog> _logs;
@@ -58,15 +58,15 @@ class EthereumTransactionReceipt {
   List<EthereumLog> get logs => _logs;
 
   /// Logs bloom. Bloom filter for light clients to quickly retrieve related logs.
-  BigInteger _logsBloom;
+  BigInt _logsBloom;
 
-  BigInteger get logsBloom => _logsBloom;
+  BigInt get logsBloom => _logsBloom;
 
   /// Root. Post-transaction stateroot (pre Byzantium)
   /// Null if status is present.
-  BigInteger _root;
+  BigInt _root;
 
-  BigInteger get root => _root;
+  BigInt get root => _root;
 
   /// Status. Either 1 (success) or 0 (failure)
   /// Null if root is present
@@ -80,14 +80,14 @@ class EthereumTransactionReceipt {
       return;
     }
     if (data[ethResultKey].containsKey('transactionHash')) {
-      _transactionHash = new BigInteger(data[ethResultKey]['transactionHash']);
+      _transactionHash = BigInt.from(data[ethResultKey]['transactionHash']);
     }
     if (data[ethResultKey].containsKey('transactionIndex')) {
       _transactionIndex =
           EthereumUtilities.hexToInt(data[ethResultKey]['transactionIndex']);
     }
     if (data[ethResultKey].containsKey('blockHash')) {
-      _blockHash = new BigInteger(data[ethResultKey]['blockHash']);
+      _blockHash = BigInt.from(data[ethResultKey]['blockHash']);
     }
     if (data[ethResultKey].containsKey('blockNumber')) {
       _blockNumber =
@@ -101,13 +101,13 @@ class EthereumTransactionReceipt {
       _gasUsed = EthereumUtilities.hexToInt(data[ethResultKey]['gasUsed']);
     }
     if (data[ethResultKey].containsKey('contractAddress')) {
-      _contractAddress = new BigInteger(data[ethResultKey]['contractAddress']);
+      _contractAddress = BigInt.from(data[ethResultKey]['contractAddress']);
     }
     if (data[ethResultKey].containsKey('logsBloom')) {
-      _logsBloom = new BigInteger(data[ethResultKey]['logsBloom']);
+      _logsBloom = BigInt.from(data[ethResultKey]['logsBloom']);
     }
     if (data[ethResultKey].containsKey('root')) {
-      _root = new BigInteger(data[ethResultKey]['root']);
+      _root = BigInt.from(data[ethResultKey]['root']);
     }
     if (data[ethResultKey].containsKey('status')) {
       _status = EthereumUtilities.hexToInt(data[ethResultKey]['status']);
@@ -115,10 +115,10 @@ class EthereumTransactionReceipt {
     if (data[ethResultKey].containsKey('logs')) {
       if ((data[ethResultKey]['logs'] != null) &&
           (data[ethResultKey]['logs'].isNotEmpty)) {
-        _logs = new List<EthereumLog>();
+        _logs = List<EthereumLog>();
         for (Map log in data[ethResultKey]['logs']) {
           final Map buildLog = {ethResultKey: log};
-          final EthereumLog entry = new EthereumLog.fromMap(buildLog);
+          final EthereumLog entry = EthereumLog.fromMap(buildLog);
           _logs.add(entry);
         }
       }

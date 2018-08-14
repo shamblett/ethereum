@@ -8,7 +8,6 @@
 library ethereum;
 
 import 'dart:async';
-import 'package:bignum/bignum.dart';
 
 part 'src/ethereum.dart';
 

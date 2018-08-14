@@ -25,7 +25,7 @@ class EthereumUtilities {
     String ret = val.toRadixString(16);
     if (pad != 0) {
       if (pad.isNegative || pad.isOdd) {
-        throw new FormatException(
+        throw FormatException(
             "EthereumUtilities:: intToHex - invalid pad value, $pad");
       }
       if (ret.length.isOdd) {
@@ -42,39 +42,42 @@ class EthereumUtilities {
     return '0x' + ret;
   }
 
-  /// BigInteger to hex string
-  static String bigIntegerToHex(BigInteger val) {
-    return '0x' + val.toRadix(16);
+  /// BigInt to hex string
+  static String bigIntegerToHex(BigInt val) {
+    return '0x' + val.toRadixString(16);
   }
 
   /// Hex string to integer, a value of null indicates an error.
   /// The string must start with 0x
   static int hexToInt(String val) {
-    return int.parse(val, onError: (val) => null);
+    final int temp = int.tryParse(val);
+    if (temp == null) {
+      return null;
+    }
+    return temp;
   }
 
   /// Hex String list to Integer list
   static List<int> hexToIntList(List<String> val) {
-    return new List<int>.generate(
-        val.length, (int index) => hexToInt(val[index]));
+    return List<int>.generate(val.length, (int index) => hexToInt(val[index]));
   }
 
-  /// Hex String list to BigInteger list
-  static List<BigInteger> hexToBigIntegerList(List<String> val) {
-    return new List<BigInteger>.generate(
-        val.length, (int index) => new BigInteger(val[index]));
+  /// Hex String list to BigInt list
+  static List<BigInt> hexToBigIntList(List<String> val) {
+    return List<BigInt>.generate(
+        val.length, (int index) => BigInt.parse(val[index]));
   }
 
   /// Integer list to Hex String list
   static List<String> intToHexList(List<int> val) {
-    return new List<String>.generate(
+    return List<String>.generate(
         val.length, (int index) => intToHex(val[index]));
   }
 
-  /// BigInteger list to Hex String list
-  static List<String> bigIntegerToHexList(List<BigInteger> val) {
-    return new List<String>.generate(
-        val.length, (int index) => '0x' + val[index].toRadix(16));
+  /// BigInt list to Hex String list
+  static List<String> bigIntegerToHexList(List<BigInt> val) {
+    return List<String>.generate(
+        val.length, (int index) => '0x' + val[index].toRadixString(16));
   }
 
   /// Remove null values from a map

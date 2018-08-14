@@ -19,19 +19,19 @@ class EthereumWork {
   }
 
   /// Current block header pow-hash
-  BigInteger _powHash;
+  BigInt _powHash;
 
-  BigInteger get powHash => _powHash;
+  BigInt get powHash => _powHash;
 
   /// Seed hash used for the DAG.
-  BigInteger _seedHash;
+  BigInt _seedHash;
 
-  BigInteger get seedHash => _seedHash;
+  BigInt get seedHash => _seedHash;
 
   /// The boundary condition ("target"), 2^256 / difficulty.
-  BigInteger _boundaryCondition;
+  BigInt _boundaryCondition;
 
-  BigInteger get boundaryCondition => _boundaryCondition;
+  BigInt get boundaryCondition => _boundaryCondition;
 
   /// Construct from the supplied Map, only check for the keys we need.
   void construct(List data) {
@@ -41,9 +41,9 @@ class EthereumWork {
     if (data.length != 3) {
       return;
     }
-    _powHash = new BigInteger(data[0]);
-    _seedHash = new BigInteger(data[1]);
-    _boundaryCondition = new BigInteger(data[2]);
+    _powHash = BigInt.from(data[0]);
+    _seedHash = BigInt.from(data[1]);
+    _boundaryCondition = BigInt.from(data[2]);
   }
 
   // To string

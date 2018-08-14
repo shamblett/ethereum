@@ -33,14 +33,14 @@ class EthereumLog {
   int get transactionIndex => _transactionIndex;
 
   /// Transaction hash. Hash of the transactions this log was created from. Null when the log is pending.
-  BigInteger _transactionHash;
+  BigInt _transactionHash;
 
-  BigInteger get transactionHash => _transactionHash;
+  BigInt get transactionHash => _transactionHash;
 
   /// Block hash. Hash of the block where this log was in. Null when the log is pending.
-  BigInteger _blockHash;
+  BigInt _blockHash;
 
-  BigInteger get blockHash => _blockHash;
+  BigInt get blockHash => _blockHash;
 
   /// Block number. The block number of this log. Null when the log is pending.
   int _blockNumber;
@@ -48,21 +48,21 @@ class EthereumLog {
   int get blockNumber => _blockNumber;
 
   /// Address. Address from which this log originated.
-  BigInteger _address;
+  BigInt _address;
 
-  BigInteger get address => _address;
+  BigInt get address => _address;
 
   /// Data. Contains one or more 32 Bytes non-indexed arguments of the log.
-  BigInteger _data;
+  BigInt _data;
 
-  BigInteger get data => _data;
+  BigInt get data => _data;
 
   /// Topics. List of 0 to 4 32 of indexed log arguments. (In solidity:
   /// The first topic is the hash of the signature of the event (e.g. Deposit(address,bytes32,uint256)),
   /// except you declared the event with the anonymous specifier.)
-  List<BigInteger> _topics;
+  List<BigInt> _topics;
 
-  List<BigInteger> get topics => _topics;
+  List<BigInt> get topics => _topics;
 
   /// Construct from the supplied Map, only check for the keys we need.
   void construct(Map data) {
@@ -80,27 +80,27 @@ class EthereumLog {
           EthereumUtilities.hexToInt(data[ethResultKey]['transactionIndex']);
     }
     if (data[ethResultKey].containsKey('transactionHash')) {
-      _transactionHash = new BigInteger(data[ethResultKey]['transactionHash']);
+      _transactionHash = BigInt.from(data[ethResultKey]['transactionHash']);
     }
     if (data[ethResultKey].containsKey('blockHash')) {
-      _blockHash = new BigInteger(data[ethResultKey]['blockHash']);
+      _blockHash = BigInt.from(data[ethResultKey]['blockHash']);
     }
     if (data[ethResultKey].containsKey('blockNumber')) {
       _blockNumber =
           EthereumUtilities.hexToInt(data[ethResultKey]['blockNumber']);
     }
     if (data[ethResultKey].containsKey('address')) {
-      _address = new BigInteger(data[ethResultKey]['address']);
+      _address = BigInt.from(data[ethResultKey]['address']);
     }
     if (data[ethResultKey].containsKey('data')) {
-      _data = new BigInteger(data[ethResultKey]['data']);
+      _data = BigInt.from(data[ethResultKey]['data']);
     }
     if (data[ethResultKey].containsKey('topics')) {
       if ((data[ethResultKey]['topics'] != null) &&
           (data[ethResultKey]['topics'].isNotEmpty)) {
-        _topics = new List<BigInteger>();
+        _topics = List<BigInt>();
         for (String topic in data[ethResultKey]['topics']) {
-          final BigInteger entry = new BigInteger(topic);
+          final BigInt entry = BigInt.parse(topic);
           _topics.add(entry);
         }
       }

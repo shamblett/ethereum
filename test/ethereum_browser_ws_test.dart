@@ -28,8 +28,7 @@ void main() {
     if (EthereumTestConfiguration.runBrowserWS) {
       // Run the common API tests
       final EthereumBrowserWSClient client =
-      new EthereumBrowserWSClient.withConnectionParameters(
-          "localhost", 8546);
+      EthereumBrowserWSClient.withConnectionParameters("localhost", 8546);
       // Print errors
       client.printError = true;
       EthereumCommon.run(client);

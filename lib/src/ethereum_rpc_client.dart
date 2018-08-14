@@ -31,7 +31,7 @@ class EthereumRpcClient {
 
   /// The request method
   Future<Map> request(String method, [dynamic parameters]) {
-    final Map packet = new Map();
+    final Map packet = Map();
     packet['jsonrpc'] = jsonRPpcVersion;
     packet['method'] = method;
     if (parameters != null) {

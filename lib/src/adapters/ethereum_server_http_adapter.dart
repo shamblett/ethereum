@@ -12,22 +12,22 @@ part of ethereum_server_client;
 
 class EthereumServerHTTPAdapter implements EthereumINetworkAdapter {
   /// The HTTP client
-  HttpClient _client = new HttpClient();
+  HttpClient _client = HttpClient();
 
   static const String jsonMimeType = 'application/json';
 
   /// Processes the HTTP request returning the  HTTP response as
   /// a map
   Future<Map> httpRequest(Uri uri, Map request) {
-    final completer = new Completer();
+    final completer = Completer();
     _client.postUrl(uri).then((HttpClientRequest req) {
-      final payload = JSON.encode(request);
-      req.headers.add(HttpHeaders.CONTENT_TYPE, jsonMimeType);
+      final payload = json.encode(request);
+      req.headers.add(HttpHeaders.contentTypeHeader, jsonMimeType);
       req.contentLength = payload.length;
       req.write(payload);
       req.close().then((HttpClientResponse resp) {
         resp.listen((data) {
-          final Map payload = JSON.decode(new String.fromCharCodes(data));
+          final Map payload = json.decode(String.fromCharCodes(data));
           completer.complete(payload);
         }, onError: (e) {
           print(e);

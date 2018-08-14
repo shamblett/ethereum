@@ -11,7 +11,6 @@ part of ethereum;
 
 /// Manages Ethereum client errors
 class EthereumError {
-
   /// Constants
   static const String noError = "No Error";
   static const int noId = -1;
@@ -42,7 +41,7 @@ class EthereumError {
     _code = errorCode;
     _message = errorMessage;
     _id = errorId;
-    _timestamp = new DateTime.now();
+    _timestamp = DateTime.now();
   }
 
   String toString() {

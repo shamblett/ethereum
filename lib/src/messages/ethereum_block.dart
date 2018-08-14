@@ -23,49 +23,49 @@ class EthereumBlock {
   int get number => _number;
 
   /// Hash of the block. Null when its a pending block.
-  BigInteger _hash;
+  BigInt _hash;
 
-  BigInteger get hash => _hash;
+  BigInt get hash => _hash;
 
   /// Parent hash. Hash of the parent block.
-  BigInteger _parentHash;
+  BigInt _parentHash;
 
-  BigInteger get parentHash => _parentHash;
+  BigInt get parentHash => _parentHash;
 
   /// nonce. Hash of the generated proof-of-work. Null when its pending block.
-  BigInteger _nonce;
+  BigInt _nonce;
 
-  BigInteger get nonce => _nonce;
+  BigInt get nonce => _nonce;
 
   /// Sha3 Uncles. SHA3 of the uncles data in the block.
-  BigInteger _sha3Uncles;
+  BigInt _sha3Uncles;
 
-  BigInteger get sha3Uncles => _sha3Uncles;
+  BigInt get sha3Uncles => _sha3Uncles;
 
   /// Logs bloom. The bloom filter for the logs of the block. Null when its pending block.
-  BigInteger _logsBloom;
+  BigInt _logsBloom;
 
-  BigInteger get logsBloom => _logsBloom;
+  BigInt get logsBloom => _logsBloom;
 
   /// Transactions root. The root of the transaction tree of the block.
-  BigInteger _transactionsRoot;
+  BigInt _transactionsRoot;
 
-  BigInteger get transactionsRoot => _transactionsRoot;
+  BigInt get transactionsRoot => _transactionsRoot;
 
   /// State root. The root of the final state tree of the block.
-  BigInteger _stateRoot;
+  BigInt _stateRoot;
 
-  BigInteger get stateRoot => _stateRoot;
+  BigInt get stateRoot => _stateRoot;
 
   /// Receipts root. The root of the receipts tree of the block.
-  BigInteger _receiptsRoot;
+  BigInt _receiptsRoot;
 
-  BigInteger get receiptsRoot => _receiptsRoot;
+  BigInt get receiptsRoot => _receiptsRoot;
 
   /// Miner. The address of the beneficiary to whom the mining rewards were given.
-  BigInteger _miner;
+  BigInt _miner;
 
-  BigInteger get miner => _miner;
+  BigInt get miner => _miner;
 
   /// Difficulty. Integer of the difficulty for this block.
   int _difficulty;
@@ -78,9 +78,9 @@ class EthereumBlock {
   int get totalDifficulty => _totalDifficulty;
 
   /// Extra data. The "extra data" field of this block.
-  BigInteger _extraData;
+  BigInt _extraData;
 
-  BigInteger get extraData => _extraData;
+  BigInt get extraData => _extraData;
 
   /// Size. Integer the size of this block in bytes.
   int _size;
@@ -114,9 +114,9 @@ class EthereumBlock {
   bool get transactionsAreHashes => _transactionsAreHashes;
 
   /// Uncles. A list of uncle hashes.
-  List<BigInteger> _uncles;
+  List<BigInt> _uncles;
 
-  List<BigInteger> get uncles => _uncles;
+  List<BigInt> get uncles => _uncles;
 
   /// Construct from the supplied Map, only check for the keys we need.
   void construct(Map data) {
@@ -127,32 +127,31 @@ class EthereumBlock {
       _number = EthereumUtilities.hexToInt(data[ethResultKey]['number']);
     }
     if (data[ethResultKey].containsKey('hash')) {
-      _hash = new BigInteger(data[ethResultKey]['hash']);
+      _hash = BigInt.from(data[ethResultKey]['hash']);
     }
     if (data[ethResultKey].containsKey('parentHash')) {
-      _parentHash = new BigInteger(data[ethResultKey]['parentHash']);
+      _parentHash = BigInt.from(data[ethResultKey]['parentHash']);
     }
     if (data[ethResultKey].containsKey('nonce')) {
-      _nonce = new BigInteger(data[ethResultKey]['nonce']);
+      _nonce = BigInt.from(data[ethResultKey]['nonce']);
     }
     if (data[ethResultKey].containsKey('sha3Uncles')) {
-      _sha3Uncles = new BigInteger(data[ethResultKey]['sha3Uncles']);
+      _sha3Uncles = BigInt.from(data[ethResultKey]['sha3Uncles']);
     }
     if (data[ethResultKey].containsKey('logsBloom')) {
-      _logsBloom = new BigInteger(data[ethResultKey]['logsBloom']);
+      _logsBloom = BigInt.from(data[ethResultKey]['logsBloom']);
     }
     if (data[ethResultKey].containsKey('transactionsRoot')) {
-      _transactionsRoot =
-      new BigInteger(data[ethResultKey]['transactionsRoot']);
+      _transactionsRoot = BigInt.from(data[ethResultKey]['transactionsRoot']);
     }
     if (data[ethResultKey].containsKey('stateRoot')) {
-      _stateRoot = new BigInteger(data[ethResultKey]['stateRoot']);
+      _stateRoot = BigInt.from(data[ethResultKey]['stateRoot']);
     }
     if (data[ethResultKey].containsKey('receiptsRoot')) {
-      _receiptsRoot = new BigInteger(data[ethResultKey]['receiptsRoot']);
+      _receiptsRoot = BigInt.from(data[ethResultKey]['receiptsRoot']);
     }
     if (data[ethResultKey].containsKey('miner')) {
-      _miner = new BigInteger(data[ethResultKey]['miner']);
+      _miner = BigInt.from(data[ethResultKey]['miner']);
     }
     if (data[ethResultKey].containsKey('difficulty')) {
       _difficulty =
@@ -163,7 +162,7 @@ class EthereumBlock {
           EthereumUtilities.hexToInt(data[ethResultKey]['totalDifficulty']);
     }
     if (data[ethResultKey].containsKey('extraData')) {
-      _extraData = new BigInteger(data[ethResultKey]['extraData']);
+      _extraData = BigInt.from(data[ethResultKey]['extraData']);
     }
     if (data[ethResultKey].containsKey('size')) {
       _size = EthereumUtilities.hexToInt(data[ethResultKey]['size']);
@@ -175,12 +174,11 @@ class EthereumBlock {
       _gasUsed = EthereumUtilities.hexToInt(data[ethResultKey]['gasUsed']);
     }
     if (data[ethResultKey].containsKey('timestamp')) {
-      _timestamp = new DateTime.fromMillisecondsSinceEpoch(
+      _timestamp = DateTime.fromMillisecondsSinceEpoch(
           EthereumUtilities.hexToInt(data[ethResultKey]['timestamp']));
     }
     if (data[ethResultKey].containsKey('uncles')) {
-      _uncles =
-          EthereumUtilities.hexToBigIntegerList(data[ethResultKey]['uncles']);
+      _uncles = EthereumUtilities.hexToBigIntList(data[ethResultKey]['uncles']);
     }
     if (data[ethResultKey].containsKey('transactions')) {
       if ((data[ethResultKey]['transactions'] != null) &&
@@ -188,15 +186,15 @@ class EthereumBlock {
         if (data[ethResultKey]['transactions'][0] is String) {
           // Hashes
           _transactionsAreHashes = true;
-          _transactions = EthereumUtilities
-              .hexToBigIntegerList(data[ethResultKey]['transactions']);
+          _transactions = EthereumUtilities.hexToBigIntList(
+              data[ethResultKey]['transactions']);
         } else {
           // Transaction objects
-          _transactions = new List<EthereumTransaction>();
+          _transactions = List<EthereumTransaction>();
           for (Map transaction in data[ethResultKey]['transactions']) {
             final Map buildTrans = {ethResultKey: transaction};
             final EthereumTransaction entry =
-            new EthereumTransaction.fromMap(buildTrans);
+            EthereumTransaction.fromMap(buildTrans);
             _transactions.add(entry);
           }
         }

@@ -22,9 +22,9 @@ class EthereumFilter {
   }
 
   /// Hashes, block or transaction
-  List<BigInteger> _hashes;
+  List<BigInt> _hashes;
 
-  List<BigInteger> get hashes => _hashes;
+  List<BigInt> get hashes => _hashes;
 
   /// Logs
   List<EthereumLog> _logs;
@@ -40,13 +40,13 @@ class EthereumFilter {
     if (data[ethResultKey].isNotEmpty) {
       if (data[ethResultKey][0] is String) {
         // Hashes
-        _hashes = EthereumUtilities.hexToBigIntegerList(data[ethResultKey]);
+        _hashes = EthereumUtilities.hexToBigIntList(data[ethResultKey]);
       } else {
         // Logs
-        _logs = new List<EthereumLog>();
+        _logs = List<EthereumLog>();
         for (Map log in data[ethResultKey]) {
           final Map buildLog = {ethResultKey: log};
-          final EthereumLog entry = new EthereumLog.fromMap(buildLog);
+          final EthereumLog entry = EthereumLog.fromMap(buildLog);
           _logs.add(entry);
         }
       }

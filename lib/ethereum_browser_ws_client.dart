@@ -17,8 +17,7 @@ import 'package:ethereum/ethereum.dart';
 part 'src/adapters/ethereum_browser_ws_adapter.dart';
 
 class EthereumBrowserWSClient extends Ethereum {
-  static EthereumBrowserWSAdapter browserWSAdapter =
-      new EthereumBrowserWSAdapter();
+  static EthereumBrowserWSAdapter browserWSAdapter = EthereumBrowserWSAdapter();
 
   EthereumBrowserWSClient() : super(browserWSAdapter);
 
