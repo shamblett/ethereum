@@ -18,7 +18,3 @@ dev_dependencies:
   build_runner: '^0.10.0'
   build_test: '^0.10.2'
   build_web_compilers: '^0.4.0'
-
-web:
-  compiler:
-    debug: dartdevc
