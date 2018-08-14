@@ -81,13 +81,13 @@ class EthereumTransaction {
       return;
     }
     if (data[ethResultKey].containsKey('hash')) {
-      _hash = BigInt.parse(data[ethResultKey]['hash']);
+      _hash = EthereumUtilities.safeParse(data[ethResultKey]['hash']);
     }
     if (data[ethResultKey].containsKey('nonce')) {
       _nonce = EthereumUtilities.hexToInt(data[ethResultKey]['nonce']);
     }
     if (data[ethResultKey].containsKey('blockHash')) {
-      _blockHash = BigInt.parse(data[ethResultKey]['blockHash']);
+      _blockHash = EthereumUtilities.safeParse(data[ethResultKey]['blockHash']);
     }
     if (data[ethResultKey].containsKey('blockNumber')) {
       _blockNumber =
@@ -98,10 +98,10 @@ class EthereumTransaction {
           EthereumUtilities.hexToInt(data[ethResultKey]['transactionIndex']);
     }
     if (data[ethResultKey].containsKey('from')) {
-      _from = BigInt.parse(data[ethResultKey]['from']);
+      _from = EthereumUtilities.safeParse(data[ethResultKey]['from']);
     }
     if (data[ethResultKey].containsKey('to')) {
-      _to = BigInt.parse(data[ethResultKey]['to']);
+      _to = EthereumUtilities.safeParse(data[ethResultKey]['to']);
     }
     if (data[ethResultKey].containsKey('value')) {
       _value = EthereumUtilities.hexToInt(data[ethResultKey]['value']);
@@ -113,7 +113,7 @@ class EthereumTransaction {
       _gas = EthereumUtilities.hexToInt(data[ethResultKey]['gas']);
     }
     if (data[ethResultKey].containsKey('input')) {
-      _input = BigInt.parse(data[ethResultKey]['input']);
+      _input = EthereumUtilities.safeParse(data[ethResultKey]['input']);
     }
   }
 

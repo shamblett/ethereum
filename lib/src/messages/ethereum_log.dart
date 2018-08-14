@@ -80,27 +80,28 @@ class EthereumLog {
           EthereumUtilities.hexToInt(data[ethResultKey]['transactionIndex']);
     }
     if (data[ethResultKey].containsKey('transactionHash')) {
-      _transactionHash = BigInt.parse(data[ethResultKey]['transactionHash']);
+      _transactionHash =
+          EthereumUtilities.safeParse(data[ethResultKey]['transactionHash']);
     }
     if (data[ethResultKey].containsKey('blockHash')) {
-      _blockHash = BigInt.parse(data[ethResultKey]['blockHash']);
+      _blockHash = EthereumUtilities.safeParse(data[ethResultKey]['blockHash']);
     }
     if (data[ethResultKey].containsKey('blockNumber')) {
       _blockNumber =
           EthereumUtilities.hexToInt(data[ethResultKey]['blockNumber']);
     }
     if (data[ethResultKey].containsKey('address')) {
-      _address = BigInt.parse(data[ethResultKey]['address']);
+      _address = EthereumUtilities.safeParse(data[ethResultKey]['address']);
     }
     if (data[ethResultKey].containsKey('data')) {
-      _data = BigInt.parse(data[ethResultKey]['data']);
+      _data = EthereumUtilities.safeParse(data[ethResultKey]['data']);
     }
     if (data[ethResultKey].containsKey('topics')) {
       if ((data[ethResultKey]['topics'] != null) &&
           (data[ethResultKey]['topics'].isNotEmpty)) {
         _topics = List<BigInt>();
         for (String topic in data[ethResultKey]['topics']) {
-          final BigInt entry = BigInt.parse(topic);
+          final BigInt entry = EthereumUtilities.safeParse(topic);
           _topics.add(entry);
         }
       }

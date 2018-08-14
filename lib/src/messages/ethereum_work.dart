@@ -41,9 +41,9 @@ class EthereumWork {
     if (data.length != 3) {
       return;
     }
-    _powHash = BigInt.parse(data[0]);
-    _seedHash = BigInt.parse(data[1]);
-    _boundaryCondition = BigInt.parse(data[2]);
+    _powHash = EthereumUtilities.safeParse(data[0]);
+    _seedHash = EthereumUtilities.safeParse(data[1]);
+    _boundaryCondition = EthereumUtilities.safeParse(data[2]);
   }
 
   // To string

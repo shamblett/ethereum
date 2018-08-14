@@ -80,14 +80,15 @@ class EthereumTransactionReceipt {
       return;
     }
     if (data[ethResultKey].containsKey('transactionHash')) {
-      _transactionHash = BigInt.parse(data[ethResultKey]['transactionHash']);
+      _transactionHash =
+          EthereumUtilities.safeParse(data[ethResultKey]['transactionHash']);
     }
     if (data[ethResultKey].containsKey('transactionIndex')) {
       _transactionIndex =
           EthereumUtilities.hexToInt(data[ethResultKey]['transactionIndex']);
     }
     if (data[ethResultKey].containsKey('blockHash')) {
-      _blockHash = BigInt.parse(data[ethResultKey]['blockHash']);
+      _blockHash = EthereumUtilities.safeParse(data[ethResultKey]['blockHash']);
     }
     if (data[ethResultKey].containsKey('blockNumber')) {
       _blockNumber =
@@ -101,13 +102,14 @@ class EthereumTransactionReceipt {
       _gasUsed = EthereumUtilities.hexToInt(data[ethResultKey]['gasUsed']);
     }
     if (data[ethResultKey].containsKey('contractAddress')) {
-      _contractAddress = BigInt.parse(data[ethResultKey]['contractAddress']);
+      _contractAddress =
+          EthereumUtilities.safeParse(data[ethResultKey]['contractAddress']);
     }
     if (data[ethResultKey].containsKey('logsBloom')) {
-      _logsBloom = BigInt.parse(data[ethResultKey]['logsBloom']);
+      _logsBloom = EthereumUtilities.safeParse(data[ethResultKey]['logsBloom']);
     }
     if (data[ethResultKey].containsKey('root')) {
-      _root = BigInt.parse(data[ethResultKey]['root']);
+      _root = EthereumUtilities.safeParse(data[ethResultKey]['root']);
     }
     if (data[ethResultKey].containsKey('status')) {
       _status = EthereumUtilities.hexToInt(data[ethResultKey]['status']);

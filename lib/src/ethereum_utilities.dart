@@ -63,9 +63,9 @@ class EthereumUtilities {
   }
 
   /// Hex String list to BigInt list
-  static List<BigInt> hexToBigIntList(List<String> val) {
+  static List<BigInt> hexToBigIntList(List val) {
     return List<BigInt>.generate(
-        val.length, (int index) => BigInt.parse(val[index]));
+        val.length, (int index) => EthereumUtilities.safeParse(val[index]));
   }
 
   /// Integer list to Hex String list
@@ -92,5 +92,14 @@ class EthereumUtilities {
       index++;
     }
     return theMap;
+  }
+
+  /// Safe parser for BigInt, returns BigInt.zero if the parse fails
+  static BigInt safeParse(String val) {
+    BigInt temp = BigInt.tryParse(val);
+    if (temp == null) {
+      return BigInt.zero;
+    }
+    return temp;
   }
 }

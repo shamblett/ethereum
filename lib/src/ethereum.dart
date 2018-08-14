@@ -150,7 +150,7 @@ class Ethereum {
     final List params = [EthereumUtilities.bigIntegerToHex(data)];
     final res = await rpcClient.request(method, params);
     if (res.containsKey(ethResultKey)) {
-      return BigInt.from(res[ethResultKey]);
+      return EthereumUtilities.safeParse(res[ethResultKey]);
     }
     _processError(method, res);
     return null;
@@ -216,7 +216,7 @@ class Ethereum {
     final String method = EthereumRpcMethods.coinbaseAddress;
     final res = await rpcClient.request(method);
     if (res.containsKey(ethResultKey)) {
-      return BigInt.from(res[ethResultKey]);
+      return EthereumUtilities.safeParse(res[ethResultKey]);
     }
     _processError(method, res);
     return null;
@@ -323,7 +323,7 @@ class Ethereum {
     ];
     final res = await rpcClient.request(method, params);
     if (res.containsKey(ethResultKey)) {
-      return BigInt.from(res[ethResultKey]);
+      return EthereumUtilities.safeParse(res[ethResultKey]);
     }
     _processError(method, res);
     return null;

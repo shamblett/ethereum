@@ -19,7 +19,7 @@ class EthereumServerHTTPAdapter implements EthereumINetworkAdapter {
   /// Processes the HTTP request returning the  HTTP response as
   /// a map
   Future<Map> httpRequest(Uri uri, Map request) {
-    final completer = Completer();
+    final completer = Completer<Map>();
     _client.postUrl(uri).then((HttpClientRequest req) {
       final payload = json.encode(request);
       req.headers.add(HttpHeaders.contentTypeHeader, jsonMimeType);
