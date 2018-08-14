@@ -200,7 +200,7 @@ class EthereumCommon {
               "0x295a70b2de5e3953354a6a8344e616ed314d7251"), 0x0,
           block);
       if (storage != null) {
-        expect(storage, 0);
+        expect(storage, BigInt.zero);
       }
       expect(client.id, ++id);
       print("Storage at block is $storage");
@@ -604,6 +604,9 @@ class EthereumCommon {
       expect(client.id, ++id);
     });
     test("Uninstall filter", () async {
+      if (pendFilterId == null) {
+        return;
+      }
       final bool res = await client.uninstallFilter(pendFilterId);
       expect(res, isNotNull);
       expect(client.id, ++id);

@@ -954,7 +954,7 @@ class Ethereum {
   Future<EthereumFilter> getLogs({EthereumDefaultBlock fromBlock,
     EthereumDefaultBlock toBlock,
     dynamic address,
-    List topics}) async {
+    List<BigInt> topics}) async {
     final String fromBlockString = fromBlock.getSelection();
     final String toBlockString = toBlock.getSelection();
     final Map params = {"toBlock": toBlockString, "fromBlock": fromBlockString};
