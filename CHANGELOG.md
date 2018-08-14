@@ -1,3 +1,6 @@
+#2.0.0
+Issue 3, updates for Dart 2
+
 #1.1.0
 Minor API(default block parameter) and coverage updates
 
