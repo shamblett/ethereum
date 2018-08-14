@@ -788,24 +788,26 @@ void main() {
 
       final EthereumTransaction message =
       EthereumTransaction.fromMap(transaction);
-      expect(message.hash,
+      expect(
+          message.hash,
           BigInt.parse(
               "0xc6ef2fc5426d6ad6fd9e2a26abeab0aa2411b7ab17f30a99d3cb96aed1d1055b"));
       expect(message.nonce, 0);
-      expect(message.blockHash,
+      expect(
+          message.blockHash,
           BigInt.parse(
               "0xbeab0aa2411b7ab17f30a99d3cb9c6ef2fc5426d6ad6fd9e2a26a6aed1d1055b"));
       expect(message.blockNumber, 5599);
       expect(message.transactionIndex, 1);
-      expect(
-          message.from,
+      expect(message.from,
           BigInt.parse("0x407d73d8a49eeb85d32cf465507dd71d507100c1"));
       expect(message.to,
           BigInt.parse("0x85a43d8a49eeb85d32cf465507dd71d507100c1"));
       expect(message.value, 520464);
       expect(message.gas, 520465);
       expect(message.gasPrice, 0x09184e72a000);
-      expect(message.input,
+      expect(
+          message.input,
           BigInt.parse(
               "0x603880600c6000396000f300603880600c6000396000f3603880600c6000396000f360"));
       print(message);
@@ -877,50 +879,61 @@ void main() {
       };
       final EthereumBlock message = EthereumBlock.fromMap(block);
       expect(message.number, 436);
-      expect(message.hash,
+      expect(
+          message.hash,
           BigInt.parse(
               "0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331"));
-      expect(message.parentHash,
+      expect(
+          message.parentHash,
           BigInt.parse(
               "0x9646252be9520f6e71339a8df9c55e4d7619deeb018d2a3f2d21fc165dde5eb5"));
-      expect(message.nonce,
+      expect(
+          message.nonce,
           BigInt.parse(
               "0xe04d296d2460cfb8472af2c5fd05b5a214109c25688d3704aed5484f9a7792f2"));
-      expect(message.sha3Uncles,
+      expect(
+          message.sha3Uncles,
           BigInt.parse(
               "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347"));
-      expect(message.logsBloom,
+      expect(
+          message.logsBloom,
           BigInt.parse(
               "0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331"));
-      expect(message.transactionsRoot,
+      expect(
+          message.transactionsRoot,
           BigInt.parse(
               "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421"));
-      expect(message.stateRoot,
-          BigInt.parse(
-              "0xd5855eb08b3387c0af375e9cdb6acfc05eb8f519e419b874b6ff2ffda7ed1dff"));
-      expect(message.receiptsRoot,
+      expect(
+          message.stateRoot,
           BigInt.parse(
               "0xd5855eb08b3387c0af375e9cdb6acfc05eb8f519e419b874b6ff2ffda7ed1dff"));
       expect(
-          message.miner,
+          message.receiptsRoot,
+          BigInt.parse(
+              "0xd5855eb08b3387c0af375e9cdb6acfc05eb8f519e419b874b6ff2ffda7ed1dff"));
+      expect(message.miner,
           BigInt.parse("0x4e65fda2159562a496f9f3522f89122a3088497a"));
       expect(message.difficulty, 163591);
       expect(message.totalDifficulty, 163591);
-      expect(message.extraData, 0);
+      expect(message.extraData, BigInt.zero);
       expect(message.size, 163591);
       expect(message.gasLimit, 653145);
       expect(message.gasUsed, 653145);
       expect(message.timestamp.millisecondsSinceEpoch, 1424182926);
-      expect(message.transactions[0],
+      expect(
+          message.transactions[0],
           BigInt.parse(
               "0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527332"));
-      expect(message.transactions[1],
+      expect(
+          message.transactions[1],
           BigInt.parse(
               "0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527333"));
-      expect(message.uncles[0],
+      expect(
+          message.uncles[0],
           BigInt.parse(
               "0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527334"));
-      expect(message.uncles[1],
+      expect(
+          message.uncles[1],
           BigInt.parse(
               "0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527335"));
       expect(message.transactionsAreHashes, isTrue);
@@ -995,33 +1008,39 @@ void main() {
       };
       final EthereumBlock message = EthereumBlock.fromMap(block);
       expect(message.number, 436);
-      expect(message.hash,
+      expect(
+          message.hash,
           BigInt.parse(
               "0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331"));
-      expect(message.parentHash,
+      expect(
+          message.parentHash,
           BigInt.parse(
               "0x9646252be9520f6e71339a8df9c55e4d7619deeb018d2a3f2d21fc165dde5eb5"));
-      expect(message.nonce,
+      expect(
+          message.nonce,
           BigInt.parse(
               "0xe04d296d2460cfb8472af2c5fd05b5a214109c25688d3704aed5484f9a7792f2"));
-      expect(message.sha3Uncles,
+      expect(
+          message.sha3Uncles,
           BigInt.parse(
               "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347"));
-      expect(message.logsBloom,
+      expect(
+          message.logsBloom,
           BigInt.parse(
               "0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331"));
-      expect(message.transactionsRoot,
+      expect(
+          message.transactionsRoot,
           BigInt.parse(
               "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421"));
-      expect(message.stateRoot,
+      expect(
+          message.stateRoot,
           BigInt.parse(
               "0xd5855eb08b3387c0af375e9cdb6acfc05eb8f519e419b874b6ff2ffda7ed1dff"));
-      expect(
-          message.miner,
+      expect(message.miner,
           BigInt.parse("0x4e65fda2159562a496f9f3522f89122a3088497a"));
       expect(message.difficulty, 163591);
       expect(message.totalDifficulty, 163591);
-      expect(message.extraData, 0);
+      expect(message.extraData, BigInt.zero);
       expect(message.size, 163591);
       expect(message.gasLimit, 653145);
       expect(message.gasUsed, 653145);
@@ -1029,10 +1048,12 @@ void main() {
       expect(message.transactions.length, 2);
       expect(message.transactions[0].nonce, 0);
       expect(message.transactions[1].nonce, 1);
-      expect(message.uncles[0],
+      expect(
+          message.uncles[0],
           BigInt.parse(
               "0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527334"));
-      expect(message.uncles[1],
+      expect(
+          message.uncles[1],
           BigInt.parse(
               "0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527335"));
       expect(message.transactionsAreHashes, isFalse);
@@ -1074,19 +1095,22 @@ void main() {
       expect(message.removed, false);
       expect(message.logIndex, 1);
       expect(message.blockNumber, 436);
-      expect(message.blockHash,
+      expect(
+          message.blockHash,
           BigInt.parse(
               "0x8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcfdf829c5a142f1fccd7d"));
-      expect(message.transactionHash,
+      expect(
+          message.transactionHash,
           BigInt.parse(
               "0xdf829c5a142f1fccd7d8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcf"));
       expect(message.transactionIndex, 0);
       expect(message.address,
           BigInt.parse("0x16c5785ac562ff41e2dcfdf829c5a142f1fccd7d"));
-      expect(message.data, 0);
+      expect(message.data, BigInt.zero);
       expect(message.topics, isNotNull);
       expect(message.topics.length, 1);
-      expect(message.topics[0],
+      expect(
+          message.topics[0],
           BigInt.parse(
               "0x59ebeb90bc63057b6515673c3ecf9438e5058bca0f92585014eced636878c9a5"));
       print(message);
@@ -1163,11 +1187,14 @@ void main() {
       };
       final EthereumTransactionReceipt message =
       EthereumTransactionReceipt.fromMap(tr);
-      expect(message.transactionHash,
-          "0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238");
+      expect(
+          message.transactionHash,
+          BigInt.parse(
+              "0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238"));
       expect(message.transactionIndex, 1);
       expect(message.blockNumber, 11);
-      expect(message.blockHash,
+      expect(
+          message.blockHash,
           BigInt.parse(
               "0xc6ef2fc5426d6ad6fd9e2a26abeab0aa2411b7ab17f30a99d3cb96aed1d1055b"));
       expect(message.cumulativeGasUsed, 13244);
@@ -1178,7 +1205,7 @@ void main() {
       expect(message.logs.length, 2);
       expect(message.logs[0].logIndex, 1);
       expect(message.logs[1].logIndex, 2);
-      expect(message.logsBloom, 0);
+      expect(message.logsBloom, BigInt.zero);
       expect(message.status, 1);
       expect(message.root, isNull);
       print(message);
@@ -1242,12 +1269,14 @@ void main() {
       };
       final EthereumTransactionReceipt message =
       EthereumTransactionReceipt.fromMap(tr);
-      expect(message.transactionHash,
+      expect(
+          message.transactionHash,
           BigInt.parse(
               "0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238"));
       expect(message.transactionIndex, 1);
       expect(message.blockNumber, 11);
-      expect(message.blockHash,
+      expect(
+          message.blockHash,
           BigInt.parse(
               "0xc6ef2fc5426d6ad6fd9e2a26abeab0aa2411b7ab17f30a99d3cb96aed1d1055b"));
       expect(message.cumulativeGasUsed, 13244);
@@ -1258,8 +1287,9 @@ void main() {
       expect(message.logs.length, 2);
       expect(message.logs[0].logIndex, 1);
       expect(message.logs[1].logIndex, 2);
-      expect(message.logsBloom, 0);
-      expect(message.root,
+      expect(message.logsBloom, BigInt.zero);
+      expect(
+          message.root,
           BigInt.parse(
               "0x59ebeb90bc63057b6515673c3ecf9438e5058bca0f92585014eced636878c9a5"));
       expect(message.status, isNull);
@@ -1284,10 +1314,12 @@ void main() {
     expect(message.logs, isNull);
     expect(message.hashes, isNotNull);
     expect(message.hashes.length, 2);
-    expect(message.hashes[0],
+    expect(
+        message.hashes[0],
         BigInt.parse(
             "0x8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcfdf829c5a142f1fccd7d"));
-    expect(message.hashes[1],
+    expect(
+        message.hashes[1],
         BigInt.parse(
             "0x8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcfdf829c5a142f1fccd7e"));
   });
@@ -1347,12 +1379,16 @@ void main() {
       "0xd1ff1c01710000000000000000000000d1ff1c01710000000000000000000000"
     ];
     final EthereumWork message = EthereumWork.fromList(work);
-    expect(message.powHash,
-        "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef");
-    expect(message.seedHash,
+    expect(
+        message.powHash,
+        BigInt.parse(
+            "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef"));
+    expect(
+        message.seedHash,
         BigInt.parse(
             "0x5EED00000000000000000000000000005EED0000000000000000000000000000"));
-    expect(message.boundaryCondition,
+    expect(
+        message.boundaryCondition,
         BigInt.parse(
             "0xd1ff1c01710000000000000000000000d1ff1c01710000000000000000000000"));
     print(message);

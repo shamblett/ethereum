@@ -80,20 +80,20 @@ class EthereumLog {
           EthereumUtilities.hexToInt(data[ethResultKey]['transactionIndex']);
     }
     if (data[ethResultKey].containsKey('transactionHash')) {
-      _transactionHash = BigInt.from(data[ethResultKey]['transactionHash']);
+      _transactionHash = BigInt.parse(data[ethResultKey]['transactionHash']);
     }
     if (data[ethResultKey].containsKey('blockHash')) {
-      _blockHash = BigInt.from(data[ethResultKey]['blockHash']);
+      _blockHash = BigInt.parse(data[ethResultKey]['blockHash']);
     }
     if (data[ethResultKey].containsKey('blockNumber')) {
       _blockNumber =
           EthereumUtilities.hexToInt(data[ethResultKey]['blockNumber']);
     }
     if (data[ethResultKey].containsKey('address')) {
-      _address = BigInt.from(data[ethResultKey]['address']);
+      _address = BigInt.parse(data[ethResultKey]['address']);
     }
     if (data[ethResultKey].containsKey('data')) {
-      _data = BigInt.from(data[ethResultKey]['data']);
+      _data = BigInt.parse(data[ethResultKey]['data']);
     }
     if (data[ethResultKey].containsKey('topics')) {
       if ((data[ethResultKey]['topics'] != null) &&

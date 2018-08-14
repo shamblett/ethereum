@@ -127,31 +127,31 @@ class EthereumBlock {
       _number = EthereumUtilities.hexToInt(data[ethResultKey]['number']);
     }
     if (data[ethResultKey].containsKey('hash')) {
-      _hash = BigInt.from(data[ethResultKey]['hash']);
+      _hash = BigInt.parse(data[ethResultKey]['hash']);
     }
     if (data[ethResultKey].containsKey('parentHash')) {
-      _parentHash = BigInt.from(data[ethResultKey]['parentHash']);
+      _parentHash = BigInt.parse(data[ethResultKey]['parentHash']);
     }
     if (data[ethResultKey].containsKey('nonce')) {
-      _nonce = BigInt.from(data[ethResultKey]['nonce']);
+      _nonce = BigInt.parse(data[ethResultKey]['nonce']);
     }
     if (data[ethResultKey].containsKey('sha3Uncles')) {
-      _sha3Uncles = BigInt.from(data[ethResultKey]['sha3Uncles']);
+      _sha3Uncles = BigInt.parse(data[ethResultKey]['sha3Uncles']);
     }
     if (data[ethResultKey].containsKey('logsBloom')) {
-      _logsBloom = BigInt.from(data[ethResultKey]['logsBloom']);
+      _logsBloom = BigInt.parse(data[ethResultKey]['logsBloom']);
     }
     if (data[ethResultKey].containsKey('transactionsRoot')) {
-      _transactionsRoot = BigInt.from(data[ethResultKey]['transactionsRoot']);
+      _transactionsRoot = BigInt.parse(data[ethResultKey]['transactionsRoot']);
     }
     if (data[ethResultKey].containsKey('stateRoot')) {
-      _stateRoot = BigInt.from(data[ethResultKey]['stateRoot']);
+      _stateRoot = BigInt.parse(data[ethResultKey]['stateRoot']);
     }
     if (data[ethResultKey].containsKey('receiptsRoot')) {
-      _receiptsRoot = BigInt.from(data[ethResultKey]['receiptsRoot']);
+      _receiptsRoot = BigInt.parse(data[ethResultKey]['receiptsRoot']);
     }
     if (data[ethResultKey].containsKey('miner')) {
-      _miner = BigInt.from(data[ethResultKey]['miner']);
+      _miner = BigInt.parse(data[ethResultKey]['miner']);
     }
     if (data[ethResultKey].containsKey('difficulty')) {
       _difficulty =
@@ -162,7 +162,7 @@ class EthereumBlock {
           EthereumUtilities.hexToInt(data[ethResultKey]['totalDifficulty']);
     }
     if (data[ethResultKey].containsKey('extraData')) {
-      _extraData = BigInt.from(data[ethResultKey]['extraData']);
+      _extraData = BigInt.parse(data[ethResultKey]['extraData']);
     }
     if (data[ethResultKey].containsKey('size')) {
       _size = EthereumUtilities.hexToInt(data[ethResultKey]['size']);
