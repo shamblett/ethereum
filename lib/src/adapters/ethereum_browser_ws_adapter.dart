@@ -12,7 +12,7 @@ part of ethereum_browser_ws_client;
 
 class EthereumBrowserWSAdapter implements EthereumINetworkAdapter {
   Future<Map> httpRequest(Uri uri, Map request) {
-    final completer = Completer();
+    final completer = Completer<Map>();
     final WebSocket webSocket = WebSocket(uri.toString());
     final String message = json.encode(request);
     webSocket.onOpen.listen((Event e) {

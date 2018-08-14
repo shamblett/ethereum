@@ -95,8 +95,9 @@ class EthereumUtilities {
   }
 
   /// Safe parser for BigInt, returns BigInt.zero if the parse fails
+  /// Geth sometimes returns '0x' rather than '0x00'
   static BigInt safeParse(String val) {
-    BigInt temp = BigInt.tryParse(val);
+    final BigInt temp = BigInt.tryParse(val);
     if (temp == null) {
       return BigInt.zero;
     }

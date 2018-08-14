@@ -652,7 +652,7 @@ class EthereumCommon {
     });
     test("Submit work", () async {
       final bool ret = await client.submitWork(
-          BigInt.from(0x123456789abcdef0),
+          EthereumUtilities.safeParse("0x123456789abcdef0"),
           EthereumUtilities.safeParse(
               "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef"),
           EthereumUtilities.safeParse(

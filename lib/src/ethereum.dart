@@ -121,6 +121,12 @@ class Ethereum {
 
   /// Error processing helper
   void _processError(String method, Map res) {
+    if (res == null) {
+      if (printError) {
+        print("ERROR:: Result from RPC call is null");
+      }
+      return;
+    }
     final Map error = res[ethErrorKey];
     lastError.updateError(error['code'], error['message'], rpcClient.id);
     if (printError) {
@@ -134,7 +140,7 @@ class Ethereum {
   Future<String> clientVersion() async {
     final String method = EthereumRpcMethods.web3ClientVersion;
     final res = await rpcClient.request(method);
-    if (res.containsKey(ethResultKey)) {
+    if (res != null && res.containsKey(ethResultKey)) {
       return res[ethResultKey];
     }
     _processError(method, res);
@@ -149,7 +155,7 @@ class Ethereum {
     final String method = EthereumRpcMethods.web3Sha3;
     final List params = [EthereumUtilities.bigIntegerToHex(data)];
     final res = await rpcClient.request(method, params);
-    if (res.containsKey(ethResultKey)) {
+    if (res != null && res.containsKey(ethResultKey)) {
       return EthereumUtilities.safeParse(res[ethResultKey]);
     }
     _processError(method, res);
@@ -160,7 +166,7 @@ class Ethereum {
   Future<String> netVersion() async {
     final String method = EthereumRpcMethods.netVersion;
     final res = await rpcClient.request(method);
-    if (res.containsKey(ethResultKey)) {
+    if (res != null && res.containsKey(ethResultKey)) {
       return res[ethResultKey];
     }
     _processError(method, res);
@@ -171,7 +177,7 @@ class Ethereum {
   Future<bool> netListening() async {
     final String method = EthereumRpcMethods.netListening;
     final res = await rpcClient.request(method);
-    if (res.containsKey(ethResultKey)) {
+    if (res != null && res.containsKey(ethResultKey)) {
       return res[ethResultKey];
     }
     _processError(method, res);
@@ -182,7 +188,7 @@ class Ethereum {
   Future<int> netPeerCount() async {
     final String method = EthereumRpcMethods.netPeerCount;
     final res = await rpcClient.request(method);
-    if (res.containsKey(ethResultKey)) {
+    if (res != null && res.containsKey(ethResultKey)) {
       return EthereumUtilities.hexToInt(res[ethResultKey]);
     }
     _processError(method, res);
@@ -193,7 +199,7 @@ class Ethereum {
   Future<String> protocolVersion() async {
     final String method = EthereumRpcMethods.protocolVersion;
     final res = await rpcClient.request(method);
-    if (res.containsKey(ethResultKey)) {
+    if (res != null && res.containsKey(ethResultKey)) {
       return res[ethResultKey];
     }
     _processError(method, res);
@@ -204,7 +210,7 @@ class Ethereum {
   Future<EthereumSyncStatus> syncStatus() async {
     final String method = EthereumRpcMethods.syncing;
     final res = await rpcClient.request(method);
-    if (res.containsKey(ethResultKey)) {
+    if (res != null && res.containsKey(ethResultKey)) {
       return EthereumSyncStatus.fromMap(res);
     }
     _processError(method, res);
@@ -215,7 +221,7 @@ class Ethereum {
   Future<BigInt> coinbaseAddress() async {
     final String method = EthereumRpcMethods.coinbaseAddress;
     final res = await rpcClient.request(method);
-    if (res.containsKey(ethResultKey)) {
+    if (res != null && res.containsKey(ethResultKey)) {
       return EthereumUtilities.safeParse(res[ethResultKey]);
     }
     _processError(method, res);
@@ -226,7 +232,7 @@ class Ethereum {
   Future<bool> mining() async {
     final String method = EthereumRpcMethods.mining;
     final res = await rpcClient.request(method);
-    if (res.containsKey(ethResultKey)) {
+    if (res != null && res.containsKey(ethResultKey)) {
       return res[ethResultKey];
     }
     _processError(method, res);
@@ -237,7 +243,7 @@ class Ethereum {
   Future<int> hashrate() async {
     final String method = EthereumRpcMethods.hashrate;
     final res = await rpcClient.request(method);
-    if (res.containsKey(ethResultKey)) {
+    if (res != null && res.containsKey(ethResultKey)) {
       return EthereumUtilities.hexToInt(res[ethResultKey]);
     }
     _processError(method, res);
@@ -248,7 +254,7 @@ class Ethereum {
   Future<int> gasPrice() async {
     final String method = EthereumRpcMethods.gasPrice;
     final res = await rpcClient.request(method);
-    if (res.containsKey(ethResultKey)) {
+    if (res != null && res.containsKey(ethResultKey)) {
       return EthereumUtilities.hexToInt(res[ethResultKey]);
     }
     _processError(method, res);
@@ -259,7 +265,7 @@ class Ethereum {
   Future<List<BigInt>> accounts() async {
     final String method = EthereumRpcMethods.accounts;
     final res = await rpcClient.request(method);
-    if (res.containsKey(ethResultKey)) {
+    if (res != null && res.containsKey(ethResultKey)) {
       return EthereumUtilities.hexToBigIntList(res[ethResultKey]);
     }
     _processError(method, res);
@@ -270,7 +276,7 @@ class Ethereum {
   Future<int> blockNumber() async {
     final String method = EthereumRpcMethods.blockNumber;
     final res = await rpcClient.request(method);
-    if (res.containsKey(ethResultKey)) {
+    if (res != null && res.containsKey(ethResultKey)) {
       return EthereumUtilities.hexToInt(res[ethResultKey]);
     }
     _processError(method, res);
@@ -293,7 +299,7 @@ class Ethereum {
       blockString
     ];
     final res = await rpcClient.request(method, params);
-    if (res.containsKey(ethResultKey)) {
+    if (res != null && res.containsKey(ethResultKey)) {
       return EthereumUtilities.hexToInt(res[ethResultKey]);
     }
     _processError(method, res);
@@ -322,7 +328,7 @@ class Ethereum {
       blockString
     ];
     final res = await rpcClient.request(method, params);
-    if (res.containsKey(ethResultKey)) {
+    if (res != null && res.containsKey(ethResultKey)) {
       return EthereumUtilities.safeParse(res[ethResultKey]);
     }
     _processError(method, res);
@@ -343,7 +349,7 @@ class Ethereum {
     final List params = [EthereumUtilities.bigIntegerToHex(address), blockString
     ];
     final res = await rpcClient.request(method, params);
-    if (res.containsKey(ethResultKey)) {
+    if (res != null && res.containsKey(ethResultKey)) {
       return EthereumUtilities.hexToInt(res[ethResultKey]);
     }
     _processError(method, res);
@@ -362,7 +368,7 @@ class Ethereum {
     final String method = EthereumRpcMethods.blockTransactionCountByHash;
     final List params = [EthereumUtilities.bigIntegerToHex(blockHash)];
     final res = await rpcClient.request(method, params);
-    if (res.containsKey(ethResultKey)) {
+    if (res != null && res.containsKey(ethResultKey)) {
       if (res[ethResultKey] != null) {
         return EthereumUtilities.hexToInt(res[ethResultKey]);
       } else {
@@ -387,7 +393,7 @@ class Ethereum {
     final String blockString = blockNumber.getSelection();
     final List params = [blockString];
     final res = await rpcClient.request(method, params);
-    if (res.containsKey(ethResultKey)) {
+    if (res != null && res.containsKey(ethResultKey)) {
       if (res[ethResultKey] != null) {
         return EthereumUtilities.hexToInt(res[ethResultKey]);
       } else {
@@ -409,7 +415,7 @@ class Ethereum {
     final String method = EthereumRpcMethods.blockUncleCountByBlockHash;
     final List params = [EthereumUtilities.bigIntegerToHex(blockHash)];
     final res = await rpcClient.request(method, params);
-    if (res.containsKey(ethResultKey)) {
+    if (res != null && res.containsKey(ethResultKey)) {
       if (res[ethResultKey] != null) {
         return EthereumUtilities.hexToInt(res[ethResultKey]);
       } else {
@@ -433,7 +439,7 @@ class Ethereum {
     final String blockString = blockNumber.getSelection();
     final List params = [blockString];
     final res = await rpcClient.request(method, params);
-    if (res.containsKey(ethResultKey)) {
+    if (res != null && res.containsKey(ethResultKey)) {
       if (res[ethResultKey] != null) {
         return EthereumUtilities.hexToInt(res[ethResultKey]);
       } else {
@@ -457,7 +463,7 @@ class Ethereum {
     final List params = [EthereumUtilities.bigIntegerToHex(address), blockString
     ];
     final res = await rpcClient.request(method, params);
-    if (res.containsKey(ethResultKey)) {
+    if (res != null && res.containsKey(ethResultKey)) {
       return EthereumUtilities.hexToInt(res[ethResultKey]);
     }
     _processError(method, res);
@@ -481,7 +487,7 @@ class Ethereum {
       EthereumUtilities.intToHex(message)
     ];
     final res = await rpcClient.request(method, params);
-    if (res.containsKey(ethResultKey)) {
+    if (res != null && res.containsKey(ethResultKey)) {
       return EthereumUtilities.hexToInt(res[ethResultKey]);
     }
     _processError(method, res);
@@ -520,7 +526,7 @@ class Ethereum {
     paramBlock = EthereumUtilities.removeNull(paramBlock);
     final dynamic params = [paramBlock];
     final res = await rpcClient.request(method, params);
-    if (res.containsKey(ethResultKey)) {
+    if (res != null && res.containsKey(ethResultKey)) {
       return EthereumUtilities.hexToInt(res[ethResultKey]);
     }
     _processError(method, res);
@@ -540,7 +546,7 @@ class Ethereum {
     final dynamic params = [EthereumUtilities.bigIntegerToHex(signedTransaction)
     ];
     final res = await rpcClient.request(method, params);
-    if (res.containsKey(ethResultKey)) {
+    if (res != null && res.containsKey(ethResultKey)) {
       return EthereumUtilities.hexToInt(res[ethResultKey]);
     }
     _processError(method, res);
@@ -580,7 +586,7 @@ class Ethereum {
     paramBlock = EthereumUtilities.removeNull(paramBlock);
     final dynamic params = [paramBlock, blockString];
     final res = await rpcClient.request(method, params);
-    if (res.containsKey(ethResultKey)) {
+    if (res != null && res.containsKey(ethResultKey)) {
       return EthereumUtilities.hexToInt(res[ethResultKey]);
     }
     _processError(method, res);
@@ -614,7 +620,7 @@ class Ethereum {
     final dynamic params = [paramBlock];
     final String method = EthereumRpcMethods.estimateGas;
     final res = await rpcClient.request(method, params);
-    if (res.containsKey(ethResultKey)) {
+    if (res != null && res.containsKey(ethResultKey)) {
       return EthereumUtilities.hexToInt(res[ethResultKey]);
     }
     _processError(method, res);
@@ -634,7 +640,7 @@ class Ethereum {
     final dynamic params = [EthereumUtilities.bigIntegerToHex(blockHash), full];
     final String method = EthereumRpcMethods.getBlockByHash;
     final res = await rpcClient.request(method, params);
-    if (res.containsKey(ethResultKey)) {
+    if (res != null && res.containsKey(ethResultKey)) {
       return EthereumBlock.fromMap(res[ethResultKey]);
     }
     _processError(method, res);
@@ -657,7 +663,7 @@ class Ethereum {
     final dynamic params = [blockString, full];
     final String method = EthereumRpcMethods.getBlockByNumber;
     final res = await rpcClient.request(method, params);
-    if (res.containsKey(ethResultKey)) {
+    if (res != null && res.containsKey(ethResultKey)) {
       return EthereumBlock.fromMap(res[ethResultKey]);
     }
     _processError(method, res);
@@ -675,7 +681,7 @@ class Ethereum {
     final dynamic params = [EthereumUtilities.bigIntegerToHex(hash)];
     final String method = EthereumRpcMethods.getTransactionByHash;
     final res = await rpcClient.request(method, params);
-    if (res.containsKey(ethResultKey)) {
+    if (res != null && res.containsKey(ethResultKey)) {
       return EthereumTransaction.fromMap(res[ethResultKey]);
     }
     _processError(method, res);
@@ -702,7 +708,7 @@ class Ethereum {
     ];
     final String method = EthereumRpcMethods.getTransactionByBlockHashAndIndex;
     final res = await rpcClient.request(method, params);
-    if (res.containsKey(ethResultKey)) {
+    if (res != null && res.containsKey(ethResultKey)) {
       return EthereumTransaction.fromMap(res[ethResultKey]);
     }
     _processError(method, res);
@@ -731,7 +737,7 @@ class Ethereum {
     final String method =
         EthereumRpcMethods.getTransactionByBlockNumberAndIndex;
     final res = await rpcClient.request(method, params);
-    if (res.containsKey(ethResultKey)) {
+    if (res != null && res.containsKey(ethResultKey)) {
       return EthereumTransaction.fromMap(res[ethResultKey]);
     }
     _processError(method, res);
@@ -752,7 +758,7 @@ class Ethereum {
     final dynamic params = [EthereumUtilities.bigIntegerToHex(transactionHash)];
     final String method = EthereumRpcMethods.getTransactionReceipt;
     final res = await rpcClient.request(method, params);
-    if (res.containsKey(ethResultKey)) {
+    if (res != null && res.containsKey(ethResultKey)) {
       return EthereumTransactionReceipt.fromMap(res[ethResultKey]);
     }
     _processError(method, res);
@@ -780,7 +786,7 @@ class Ethereum {
     ];
     final String method = EthereumRpcMethods.getUncleByBlockHashAndIndex;
     final res = await rpcClient.request(method, params);
-    if (res.containsKey(ethResultKey)) {
+    if (res != null && res.containsKey(ethResultKey)) {
       return EthereumBlock.fromMap(res[ethResultKey]);
     }
     _processError(method, res);
@@ -809,7 +815,7 @@ class Ethereum {
     ];
     final String method = EthereumRpcMethods.getUncleByBlockNumberAndIndex;
     final res = await rpcClient.request(method, params);
-    if (res.containsKey(ethResultKey)) {
+    if (res != null && res.containsKey(ethResultKey)) {
       return EthereumBlock.fromMap(res[ethResultKey]);
     }
     _processError(method, res);
@@ -857,7 +863,7 @@ class Ethereum {
     final List paramBlock = [params];
     final String method = EthereumRpcMethods.newFilter;
     final res = await rpcClient.request(method, paramBlock);
-    if (res.containsKey(ethResultKey)) {
+    if (res != null && res.containsKey(ethResultKey)) {
       return EthereumUtilities.hexToInt(res[ethResultKey]);
     }
     _processError(method, res);
@@ -872,7 +878,7 @@ class Ethereum {
     final List params = [];
     final String method = EthereumRpcMethods.newBlockFilter;
     final res = await rpcClient.request(method, params);
-    if (res.containsKey(ethResultKey)) {
+    if (res != null && res.containsKey(ethResultKey)) {
       return EthereumUtilities.hexToInt(res[ethResultKey]);
     }
     _processError(method, res);
@@ -887,7 +893,7 @@ class Ethereum {
     final List params = [];
     final String method = EthereumRpcMethods.newPendingTransactionFilter;
     final res = await rpcClient.request(method, params);
-    if (res.containsKey(ethResultKey)) {
+    if (res != null && res.containsKey(ethResultKey)) {
       return EthereumUtilities.hexToInt(res[ethResultKey]);
     }
     _processError(method, res);
@@ -906,7 +912,7 @@ class Ethereum {
     final List params = [EthereumUtilities.intToHex(filterId)];
     final String method = EthereumRpcMethods.uninstallFilter;
     final res = await rpcClient.request(method, params);
-    if (res.containsKey(ethResultKey)) {
+    if (res != null && res.containsKey(ethResultKey)) {
       return res[ethResultKey];
     }
     _processError(method, res);
@@ -924,7 +930,7 @@ class Ethereum {
     final List params = [EthereumUtilities.intToHex(filterId)];
     final String method = EthereumRpcMethods.getFilterChanges;
     final res = await rpcClient.request(method, params);
-    if (res.containsKey(ethResultKey)) {
+    if (res != null && res.containsKey(ethResultKey)) {
       return EthereumFilter.fromMap(res[ethResultKey]);
     }
     _processError(method, res);
@@ -941,7 +947,7 @@ class Ethereum {
     final List params = [EthereumUtilities.intToHex(filterId)];
     final String method = EthereumRpcMethods.getFilterLogs;
     final res = await rpcClient.request(method, params);
-    if (res.containsKey(ethResultKey)) {
+    if (res != null && res.containsKey(ethResultKey)) {
       return EthereumFilter.fromMap(res[ethResultKey]);
     }
     _processError(method, res);
@@ -973,7 +979,7 @@ class Ethereum {
     final List paramBlock = [params];
     final String method = EthereumRpcMethods.getLogs;
     final res = await rpcClient.request(method, paramBlock);
-    if (res.containsKey(ethResultKey)) {
+    if (res != null && res.containsKey(ethResultKey)) {
       return EthereumFilter.fromMap(res[ethResultKey]);
     }
     _processError(method, res);
@@ -987,7 +993,7 @@ class Ethereum {
     final List paramBlock = [];
     final String method = EthereumRpcMethods.getWork;
     final res = await rpcClient.request(method, paramBlock);
-    if (res.containsKey(ethResultKey)) {
+    if (res != null && res.containsKey(ethResultKey)) {
       return EthereumWork.fromList(res[ethResultKey]);
     }
     _processError(method, res);
@@ -1017,7 +1023,7 @@ class Ethereum {
     ];
     final String method = EthereumRpcMethods.submitWork;
     final res = await rpcClient.request(method, params);
-    if (res.containsKey(ethResultKey)) {
+    if (res != null && res.containsKey(ethResultKey)) {
       return res[ethResultKey];
     }
     _processError(method, res);
@@ -1039,7 +1045,7 @@ class Ethereum {
     final List params = [EthereumUtilities.bigIntegerToHex(hashRate), id];
     final String method = EthereumRpcMethods.submitHashrate;
     final res = await rpcClient.request(method, params);
-    if (res.containsKey(ethResultKey)) {
+    if (res != null && res.containsKey(ethResultKey)) {
       return res[ethResultKey];
     }
     _processError(method, res);
@@ -1052,7 +1058,7 @@ class Ethereum {
     final List params = [];
     final String method = EthereumRpcMethods.shhVersion;
     final res = await rpcClient.request(method, params);
-    if (res.containsKey(ethResultKey)) {
+    if (res != null && res.containsKey(ethResultKey)) {
       return res[ethResultKey];
     }
     _processError(method, res);
@@ -1096,7 +1102,7 @@ class Ethereum {
     final List paramBlock = [params];
     final String method = EthereumRpcMethods.shhPost;
     final res = await rpcClient.request(method, paramBlock);
-    if (res.containsKey(ethResultKey)) {
+    if (res != null && res.containsKey(ethResultKey)) {
       return res[ethResultKey];
     }
     _processError(method, res);
