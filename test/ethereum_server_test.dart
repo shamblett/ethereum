@@ -12,14 +12,14 @@ import 'ethereum_common.dart';
 import 'ethereum_test_configuration.dart';
 
 void main() {
-    if (EthereumTestConfiguration.runServer) {
-      // Run the common API tests
-      final EthereumServerClient client =
-      EthereumServerClient.withConnectionParameters("localhost");
-      // Print errors
-      client.printError = true;
-      EthereumCommon.run(client);
-    } else {
-      print("Server tests not selected");
-    }
+  if (EthereumTestConfiguration.runServer) {
+    // Run the common API tests
+    final EthereumServerClient client =
+    EthereumServerClient.withConnectionParameters("localhost");
+    // Print errors
+    client.printError = true;
+    EthereumCommon.run(client);
+  } else {
+    print("Server tests not selected");
+  }
 }

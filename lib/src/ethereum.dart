@@ -346,7 +346,9 @@ class Ethereum {
     }
     final String method = EthereumRpcMethods.transactionCount;
     final String blockString = block.getSelection();
-    final List params = [EthereumUtilities.bigIntegerToHex(address), blockString
+    final List params = [
+      EthereumUtilities.bigIntegerToHex(address),
+      blockString
     ];
     final res = await rpcClient.request(method, params);
     if (res != null && res.containsKey(ethResultKey)) {
@@ -460,7 +462,9 @@ class Ethereum {
     }
     final String method = EthereumRpcMethods.code;
     final String blockString = block.getSelection();
-    final List params = [EthereumUtilities.bigIntegerToHex(address), blockString
+    final List params = [
+      EthereumUtilities.bigIntegerToHex(address),
+      blockString
     ];
     final res = await rpcClient.request(method, params);
     if (res != null && res.containsKey(ethResultKey)) {
@@ -543,7 +547,8 @@ class Ethereum {
           "Ethereum::sendRawTransaction - signedTransaction");
     }
     final String method = EthereumRpcMethods.sendRawTransaction;
-    final dynamic params = [EthereumUtilities.bigIntegerToHex(signedTransaction)
+    final dynamic params = [
+      EthereumUtilities.bigIntegerToHex(signedTransaction)
     ];
     final res = await rpcClient.request(method, params);
     if (res != null && res.containsKey(ethResultKey)) {

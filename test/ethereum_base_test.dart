@@ -799,10 +799,12 @@ void main() {
               "0xbeab0aa2411b7ab17f30a99d3cb9c6ef2fc5426d6ad6fd9e2a26a6aed1d1055b"));
       expect(message.blockNumber, 5599);
       expect(message.transactionIndex, 1);
-      expect(message.from,
+      expect(
+          message.from,
           EthereumUtilities.safeParse(
               "0x407d73d8a49eeb85d32cf465507dd71d507100c1"));
-      expect(message.to,
+      expect(
+          message.to,
           EthereumUtilities.safeParse(
               "0x85a43d8a49eeb85d32cf465507dd71d507100c1"));
       expect(message.value, 520464);
@@ -913,7 +915,8 @@ void main() {
           message.receiptsRoot,
           EthereumUtilities.safeParse(
               "0xd5855eb08b3387c0af375e9cdb6acfc05eb8f519e419b874b6ff2ffda7ed1dff"));
-      expect(message.miner,
+      expect(
+          message.miner,
           EthereumUtilities.safeParse(
               "0x4e65fda2159562a496f9f3522f89122a3088497a"));
       expect(message.difficulty, 163591);
@@ -1039,7 +1042,8 @@ void main() {
           message.stateRoot,
           EthereumUtilities.safeParse(
               "0xd5855eb08b3387c0af375e9cdb6acfc05eb8f519e419b874b6ff2ffda7ed1dff"));
-      expect(message.miner,
+      expect(
+          message.miner,
           EthereumUtilities.safeParse(
               "0x4e65fda2159562a496f9f3522f89122a3088497a"));
       expect(message.difficulty, 163591);
@@ -1108,7 +1112,8 @@ void main() {
           EthereumUtilities.safeParse(
               "0xdf829c5a142f1fccd7d8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcf"));
       expect(message.transactionIndex, 0);
-      expect(message.address,
+      expect(
+          message.address,
           EthereumUtilities.safeParse(
               "0x16c5785ac562ff41e2dcfdf829c5a142f1fccd7d"));
       expect(message.data, BigInt.zero);
@@ -1204,7 +1209,8 @@ void main() {
               "0xc6ef2fc5426d6ad6fd9e2a26abeab0aa2411b7ab17f30a99d3cb96aed1d1055b"));
       expect(message.cumulativeGasUsed, 13244);
       expect(message.gasUsed, 1244);
-      expect(message.contractAddress,
+      expect(
+          message.contractAddress,
           EthereumUtilities.safeParse(
               "0xb60e8dd61c5d32be8058bb8eb970870f07233155"));
       expect(message.logs, isNotNull);
@@ -1287,7 +1293,8 @@ void main() {
               "0xc6ef2fc5426d6ad6fd9e2a26abeab0aa2411b7ab17f30a99d3cb96aed1d1055b"));
       expect(message.cumulativeGasUsed, 13244);
       expect(message.gasUsed, 1244);
-      expect(message.contractAddress,
+      expect(
+          message.contractAddress,
           EthereumUtilities.safeParse(
               "0xb60e8dd61c5d32be8058bb8eb970870f07233155"));
       expect(message.logs, isNotNull);
