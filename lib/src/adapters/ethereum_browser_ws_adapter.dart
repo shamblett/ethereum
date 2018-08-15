@@ -20,8 +20,7 @@ class EthereumBrowserWSAdapter implements EthereumINetworkAdapter {
     });
     webSocket.onError.listen((Event e) {
       print(
-          'EthereumBrowserWSAdapter::WebSocket error, message not sent, state is ${webSocket
-              .readyState.toString()}');
+          'EthereumBrowserWSAdapter::WebSocket error, message not sent, state is ${webSocket.readyState.toString()}');
       webSocket.close();
       return completer.complete(null);
     });

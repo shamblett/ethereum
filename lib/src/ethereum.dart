@@ -18,8 +18,8 @@ class Ethereum {
     rpcClient = EthereumRpcClient(_networkAdapter);
   }
 
-  Ethereum.withConnectionParameters(EthereumINetworkAdapter adapter,
-      String hostname, String scheme,
+  Ethereum.withConnectionParameters(
+      EthereumINetworkAdapter adapter, String hostname, String scheme,
       [port = defaultHttpPort])
       : _networkAdapter = adapter {
     rpcClient = EthereumRpcClient(_networkAdapter);
@@ -284,8 +284,8 @@ class Ethereum {
   }
 
   /// Get balance, the balance of the account of the given address.
-  Future<int> getBalance(BigInt accountNumber,
-      EthereumDefaultBlock block) async {
+  Future<int> getBalance(
+      BigInt accountNumber, EthereumDefaultBlock block) async {
     if (accountNumber == null) {
       throw ArgumentError.notNull("Ethereum::getBalance - accountNumber");
     }
@@ -309,8 +309,8 @@ class Ethereum {
   /// Get Storage at, the value from a storage position at a given address.
   /// Parameters are the address of the storage, the integer position of the storage and
   // the default block parameter.
-  Future<BigInt> getStorageAt(BigInt address, int pos,
-      EthereumDefaultBlock block) async {
+  Future<BigInt> getStorageAt(
+      BigInt address, int pos, EthereumDefaultBlock block) async {
     if (address == null) {
       throw ArgumentError.notNull("Ethereum::getStorageAt - address");
     }
@@ -336,8 +336,8 @@ class Ethereum {
   }
 
   /// Transaction count, returns the number of transactions sent from an address.
-  Future<int> getTransactionCount(BigInt address,
-      EthereumDefaultBlock block) async {
+  Future<int> getTransactionCount(
+      BigInt address, EthereumDefaultBlock block) async {
     if (address == null) {
       throw ArgumentError.notNull("Ethereum::getTransactionCount - address");
     }
@@ -522,7 +522,7 @@ class Ethereum {
       "to": to == null ? null : EthereumUtilities.bigIntegerToHex(to),
       "gas": EthereumUtilities.intToHex(gas),
       "gasPrice":
-      gasPrice == null ? null : EthereumUtilities.intToHex(gasPrice),
+          gasPrice == null ? null : EthereumUtilities.intToHex(gasPrice),
       "value": value == null ? null : EthereumUtilities.intToHex(value),
       "data": EthereumUtilities.bigIntegerToHex(data),
       "nonce": nonce == null ? null : EthereumUtilities.intToHex(nonce)
@@ -584,7 +584,7 @@ class Ethereum {
       "to": EthereumUtilities.bigIntegerToHex(address),
       "gas": gas == null ? null : EthereumUtilities.intToHex(gas),
       "gasPrice":
-      gasPrice == null ? null : EthereumUtilities.intToHex(gasPrice),
+          gasPrice == null ? null : EthereumUtilities.intToHex(gasPrice),
       "value": value == null ? null : EthereumUtilities.intToHex(value),
       "data": data == null ? null : EthereumUtilities.bigIntegerToHex(data)
     };
@@ -606,18 +606,19 @@ class Ethereum {
   /// might not be enough to executed the call/transaction when the amount of gas is higher than the
   /// pending block gas limit.
   /// Returns the amount of gas used.
-  Future<int> estimateGas({BigInt address,
-    BigInt from,
-    int gas,
-    int gasPrice,
-    int value,
-    BigInt data}) async {
+  Future<int> estimateGas(
+      {BigInt address,
+      BigInt from,
+      int gas,
+      int gasPrice,
+      int value,
+      BigInt data}) async {
     Map<String, String> paramBlock = {
       "from": from == null ? null : EthereumUtilities.bigIntegerToHex(from),
       "to": address == null ? null : EthereumUtilities.bigIntegerToHex(address),
       "gas": gas == null ? null : EthereumUtilities.intToHex(gas),
       "gasPrice":
-      gasPrice == null ? null : EthereumUtilities.intToHex(gasPrice),
+          gasPrice == null ? null : EthereumUtilities.intToHex(gasPrice),
       "value": value == null ? null : EthereumUtilities.intToHex(value),
       "data": data == null ? null : EthereumUtilities.bigIntegerToHex(data)
     };
@@ -775,8 +776,8 @@ class Ethereum {
   /// Note: An uncle doesn't contain individual transactions.
   /// Hash of a block and integer of the uncle index position.
   /// Returns see getBlockByHash.
-  Future<EthereumBlock> getUncleByBlockHashAndIndex(BigInt blockHash,
-      int index) async {
+  Future<EthereumBlock> getUncleByBlockHashAndIndex(
+      BigInt blockHash, int index) async {
     if (blockHash == null) {
       throw ArgumentError.notNull(
           "Ethereum::getUncleByBlockHashAndIndex - blockHash");
@@ -846,17 +847,18 @@ class Ethereum {
   /// Note: the user must build this structure using the utilities in the EthereumUtilities class. See the Ethereum
   /// Wiki RPC page for examples.
   /// Returns a filter id.
-  Future<int> newFilter({EthereumDefaultBlock fromBlock,
-    EthereumDefaultBlock toBlock,
-    dynamic address,
-    List<BigInt> topics}) async {
+  Future<int> newFilter(
+      {EthereumDefaultBlock fromBlock,
+      EthereumDefaultBlock toBlock,
+      dynamic address,
+      List<BigInt> topics}) async {
     final String fromBlockString = fromBlock.getSelection();
     final String toBlockString = toBlock.getSelection();
     final Map params = {"toBlock": toBlockString, "fromBlock": fromBlockString};
     if (address != null) {
       if (address is List) {
         final List<String> addresses =
-        EthereumUtilities.bigIntegerToHexList(address);
+            EthereumUtilities.bigIntegerToHexList(address);
         params["address"] = addresses;
       } else {
         params["address"] = (EthereumUtilities.bigIntegerToHex(address));
@@ -962,17 +964,18 @@ class Ethereum {
   /// Get logs
   /// The filter definition, see newFilter parameters.
   /// Returns see getFilterChanges
-  Future<EthereumFilter> getLogs({EthereumDefaultBlock fromBlock,
-    EthereumDefaultBlock toBlock,
-    dynamic address,
-    List<BigInt> topics}) async {
+  Future<EthereumFilter> getLogs(
+      {EthereumDefaultBlock fromBlock,
+      EthereumDefaultBlock toBlock,
+      dynamic address,
+      List<BigInt> topics}) async {
     final String fromBlockString = fromBlock.getSelection();
     final String toBlockString = toBlock.getSelection();
     final Map params = {"toBlock": toBlockString, "fromBlock": fromBlockString};
     if (address != null) {
       if (address is List) {
         final List<String> addresses =
-        EthereumUtilities.bigIntegerToHexList(address);
+            EthereumUtilities.bigIntegerToHexList(address);
         params["address"] = addresses;
       } else {
         params["address"] = (EthereumUtilities.bigIntegerToHex(address));
@@ -1080,8 +1083,8 @@ class Ethereum {
   /// priority: - The integer of the priority in a range from ... (?).
   /// ttl: - integer of the time to live in seconds.
   /// Returns true if the message was send, otherwise false.
-  Future<bool> shhPost(List<BigInt> topics, BigInt payload, int priority,
-      int ttl,
+  Future<bool> shhPost(
+      List<BigInt> topics, BigInt payload, int priority, int ttl,
       {BigInt to, BigInt from}) async {
     if (topics == null) {
       throw ArgumentError.notNull("Ethereum::shhPost - topics");

@@ -18,11 +18,11 @@ part 'src/adapters/ethereum_browser_http_adapter.dart';
 
 class EthereumBrowserHTTPClient extends Ethereum {
   static EthereumBrowserHTTPAdapter browserHttpAdapter =
-  EthereumBrowserHTTPAdapter();
+      EthereumBrowserHTTPAdapter();
 
   EthereumBrowserHTTPClient() : super(browserHttpAdapter);
 
   EthereumBrowserHTTPClient.withConnectionParameters(hostname, [port])
       : super.withConnectionParameters(
-      browserHttpAdapter, hostname, Ethereum.rpcHttpScheme, port);
+            browserHttpAdapter, hostname, Ethereum.rpcHttpScheme, port);
 }
