@@ -1,4 +1,4 @@
-#2.0.0
+#2.0.1
 Issue 3, updates for Dart 2
 
 #1.1.0
