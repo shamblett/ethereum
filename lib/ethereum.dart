@@ -35,6 +35,8 @@ part 'src/messages/ethereum_work.dart';
 
 part 'src/parameters/ethereum_default_block.dart';
 
+part 'src/api/ethereum_api.dart';
+
 part 'src/api/ethereum_api_dapp.dart';
 
 part 'src/api/ethereum_api_admin.dart';

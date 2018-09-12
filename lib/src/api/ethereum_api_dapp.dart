@@ -10,17 +10,8 @@
 part of ethereum;
 
 /// This class implements the Ethereuum DApp API, otherwise refereed to as 'eth'.
-class EthereumApiDapp {
-  EthereumApiDapp(this._client);
-
-  /// Our client
-  Ethereum _client;
-
-  /// Message Id
-  int get id => _client.id;
-
-  /// Last error
-  EthereumError get lastError => _client.lastError;
+class EthereumApiDapp extends EthereumApi {
+  EthereumApiDapp(Ethereum client) : super(client);
 
   //// Client version
   Future<String> clientVersion() async {
