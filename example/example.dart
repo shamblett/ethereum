@@ -23,7 +23,7 @@ Future main() async {
   client.printError = true;
 
   // Make an API call, the client is stateless form a connection point of view.
-  final String version = await client.protocolVersion();
+  final String version = await client.dapp.protocolVersion();
 
   // Check for an error if you think anything is wrong
   if (version == null) {
