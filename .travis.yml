@@ -7,4 +7,6 @@ dart_task:
     xvfb: false
 script:
 - pub run test/ethereum_base_test.dart
-
+branches:
+  only:
+  - master
