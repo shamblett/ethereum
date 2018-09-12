@@ -79,7 +79,7 @@ class EthereumCommon {
         } else {
           expect(client.dapp.lastError.code, -32000);
           expect(client.dapp.lastError.message,
-              "etherbase address must be explicitly specified");
+              "etherbase must be explicitly specified");
         }
       });
       test("Mining", () async {
@@ -681,13 +681,24 @@ class EthereumCommon {
       test("Submit hash rate", () async {
         final bool ret = await client.dapp.submitHashrate(BigInt.from(0x500000),
             "0x59daa26581d0acd1fce254fb7e85952f4c09d0915afd33d3886cd914bc7d283c");
-        expect(ret, isTrue);
+        if (ret != null) {
+          expect(ret, isTrue);
+        } else {
+          expect(client.dapp.lastError.code, -32601);
+          expect(client.dapp.lastError.message,
+              "The method eth_submitHashrate does not exist/is not available");
+        }
         expect(client.dapp.id, ++id);
       });
       test("SHH version", () async {
         final String version = await client.dapp.shhVersion();
-        expect(version, isNotNull);
-        expect(version, "5.0");
+        if (version != null) {
+          expect(version, "5.0");
+        } else {
+          expect(client.dapp.lastError.code, -32601);
+          expect(client.dapp.lastError.message,
+              "The method shh_version does not exist/is not available");
+        }
         print("SHH version is $version");
         expect(client.dapp.id, ++id);
       });
@@ -703,6 +714,21 @@ class EthereumCommon {
                 "0x04f96a5e25610293e42a73908e93ccc8c4d4dc0edcfa9fa872f50cb214e08ebf61a03e245533f97284d442460f2998cd41858798ddfd4d661997d3940272b717b1"));
         expect(ret, isNull);
         expect(client.dapp.id, ++id);
+      });
+    });
+
+    group("Admin", () {
+      test("Personal ImportRawKey", () async {
+        final BigInt address = await client.admin.personalImportRawKey(
+            "b5b1870957d373ef0eeffecc6e4812c0fd08f554b37b233526acc331bf1544f7",
+            "password");
+        if (address != null) {
+          expect(address.isValidInt, true);
+        } else {
+          expect(client.dapp.lastError.code, -32000);
+          expect(client.dapp.lastError.message, "account already exists");
+        }
+        expect(client.admin.id, ++id);
       });
     });
   }

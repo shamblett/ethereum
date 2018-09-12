@@ -11,6 +11,7 @@ part of ethereum;
 
 /// The Ethereum RPC method names
 class EthereumRpcMethods {
+  /// Dapp
   static const String web3ClientVersion = 'web3_clientVersion';
   static const String web3Sha3 = 'web3_sha3';
   static const String netVersion = 'net_version';
@@ -67,4 +68,7 @@ class EthereumRpcMethods {
   static const String shhVersion = 'shh_version';
   static const String shhPost = 'shh_post';
   static const String shhNewIdentity = 'shh_newIdentity';
+
+  /// Administration
+  static const String personalmportRawKey = 'personal_importRawKey';
 }

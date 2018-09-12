@@ -16,16 +16,20 @@ part of ethereum;
 class Ethereum {
   Ethereum(this._networkAdapter) {
     rpcClient = EthereumRpcClient(_networkAdapter);
-
     /// Construct the API classes
     this._dapp = new EthereumApiDapp(this);
+    this._admin = new EthereumApiAdmin(this);
   }
 
   Ethereum.withConnectionParameters(
       EthereumINetworkAdapter adapter, String hostname, String scheme,
       [port = defaultHttpPort])
       : _networkAdapter = adapter {
-    Ethereum(_networkAdapter);
+    rpcClient = EthereumRpcClient(_networkAdapter);
+
+    /// Construct the API classes
+    this._dapp = new EthereumApiDapp(this);
+    this._admin = new EthereumApiAdmin(this);
     connectParameters(scheme, hostname, port);
   }
 
@@ -141,4 +145,10 @@ class Ethereum {
   EthereumApiDapp _dapp;
 
   EthereumApiDapp get dapp => _dapp;
+
+  /// Admin API
+  EthereumApiAdmin _admin;
+
+  EthereumApiAdmin get admin => _admin;
+
 }
