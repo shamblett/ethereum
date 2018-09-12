@@ -1,7 +1,7 @@
 /*
  * Package : Ethereum
  * Author : S. Hamblett <steve.hamblett@linux.com>
- * Date   : 06/011/2017
+ * Date   : 12/09/2018
  * Copyright :  S.Hamblett
  *
  * The Ethereum client package
