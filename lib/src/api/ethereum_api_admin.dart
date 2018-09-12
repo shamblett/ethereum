@@ -26,6 +26,14 @@ class EthereumApiAdmin extends EthereumApi {
     return null;
   }
 
-
-
+  /// Returns all the Ethereum account addresses of all keys in the key store.
+  Future<List<BigInt>> personalListAccounts() async {
+    final String method = EthereumRpcMethods.personalListAccounts;
+    final res = await _client.rpcClient.request(method);
+    if (res != null && res.containsKey(ethResultKey)) {
+      return EthereumUtilities.hexToBigIntList(res[ethResultKey]);
+    }
+    _client.processError(method, res);
+    return null;
+  }
 }

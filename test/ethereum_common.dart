@@ -730,6 +730,12 @@ class EthereumCommon {
         }
         expect(client.admin.id, ++id);
       });
+      test("Personal List Accounts", () async {
+        final List<BigInt> ret = await client.admin.personalListAccounts();
+        expect(ret, isNotNull);
+        print(ret);
+        expect(client.admin.id, ++id);
+      });
     });
   }
 }

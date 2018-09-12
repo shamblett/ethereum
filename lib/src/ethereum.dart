@@ -16,6 +16,7 @@ part of ethereum;
 class Ethereum {
   Ethereum(this._networkAdapter) {
     rpcClient = EthereumRpcClient(_networkAdapter);
+
     /// Construct the API classes
     this._dapp = new EthereumApiDapp(this);
     this._admin = new EthereumApiAdmin(this);
@@ -150,5 +151,4 @@ class Ethereum {
   EthereumApiAdmin _admin;
 
   EthereumApiAdmin get admin => _admin;
-
 }
