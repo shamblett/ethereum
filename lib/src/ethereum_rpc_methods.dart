@@ -75,4 +75,5 @@ class EthereumRpcMethods {
   static const String lockAccount = 'personal_lockAccount';
   static const String newAccount = 'personal_newAccount';
   static const String unlockAccount = 'personal_unlockAccount';
+  static const String psendTransaction = 'personal_sendTransaction';
 }

@@ -1566,5 +1566,44 @@ void main() {
       }
       expect(thrown, isTrue);
     });
+    test("personalSendTransaction - address", () async {
+      bool thrown = false;
+      try {
+        await client.admin.personalSendTransaction(
+            null, BigInt.zero, "password");
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::personalSendTransaction - address): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
+    test("personalSendTransaction - to", () async {
+      bool thrown = false;
+      try {
+        await client.admin.personalSendTransaction(
+            BigInt.zero, null, "password");
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::personalSendTransaction - to): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
+    test("personalSendTransaction - passphrase", () async {
+      bool thrown = false;
+      try {
+        await client.admin.personalSendTransaction(
+            BigInt.zero, BigInt.zero, null);
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::personalSendTransaction - passphrase): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
   });
 }

@@ -751,9 +751,18 @@ class EthereumCommon {
         expect(client.admin.id, ++id);
       });
       test("Personal Unlock Account", () async {
-        final bool ret = await client.admin.personalUnlockAccount(
-            lockAddress, 'password');
+        final bool ret =
+        await client.admin.personalUnlockAccount(lockAddress, 'password');
         expect(ret, isTrue);
+        expect(client.admin.id, ++id);
+      });
+      test("Personal Send Transaction", () async {
+        final bool ret = await client.admin
+            .personalSendTransaction(lockAddress, lockAddress, 'password');
+        if (!ret) {
+          expect(client.eth.lastError.code, -32000);
+          expect(client.eth.lastError.message, "exceeds block gas limit");
+        }
         expect(client.admin.id, ++id);
       });
     });

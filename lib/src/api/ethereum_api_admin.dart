@@ -106,9 +106,35 @@ class EthereumApiAdmin extends EthereumApi {
     return false;
   }
 
-/// Validate the given passphrase and submit transaction.
-/// The transaction is the same argument as for eth.sendTransaction and contains the from address.
-/// If the passphrase can be used to decrypt the private key belogging to tx.from the transaction is verified,
-/// signed and send onto the network. The account is not unlocked globally in the node and cannot be
-/// used in other RPC calls.
+  /// Validate the given passphrase and submit transaction.
+  /// The transaction is the same argument as for eth.sendTransaction and contains the from address.
+  /// If the passphrase can be used to decrypt the private key belogging to tx.from the transaction is verified,
+  /// signed and send onto the network. The account is not unlocked globally in the node and cannot be
+  /// used in other RPC calls.
+  Future<bool> personalSendTransaction(BigInt address, BigInt to,
+      String passphrase) async {
+    if (address == null) {
+      throw ArgumentError.notNull(
+          "Ethereum::personalSendTransaction - address");
+    }
+    if (to == null) {
+      throw ArgumentError.notNull("Ethereum::personalSendTransaction - to");
+    }
+    if (passphrase == null) {
+      throw ArgumentError.notNull(
+          "Ethereum::personalSendTransaction - passphrase");
+    }
+    final String method = EthereumRpcMethods.psendTransaction;
+    Map<String, String> paramBlock = {
+      "from": EthereumUtilities.bigIntegerToHex(address),
+      "to": EthereumUtilities.bigIntegerToHex(to)
+    };
+    final dynamic params = [paramBlock, passphrase];
+    final res = await _client.rpcClient.request(method, params);
+    if (res != null && res.containsKey(ethResultKey)) {
+      return true;
+    }
+    _client.processError(method, res);
+    return false;
+  }
 }
