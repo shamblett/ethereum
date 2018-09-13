@@ -750,6 +750,12 @@ class EthereumCommon {
         print(ret);
         expect(client.admin.id, ++id);
       });
+      test("Personal Unlock Account", () async {
+        final bool ret = await client.admin.personalUnlockAccount(
+            lockAddress, 'password');
+        expect(ret, isTrue);
+        expect(client.admin.id, ++id);
+      });
     });
   }
 }

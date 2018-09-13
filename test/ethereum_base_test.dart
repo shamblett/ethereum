@@ -1542,5 +1542,29 @@ void main() {
       }
       expect(thrown, isTrue);
     });
+    test("personalUnlockAccount - address", () async {
+      bool thrown = false;
+      try {
+        await client.admin.personalUnlockAccount(null, "");
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::personalUnlockAccount - address): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
+    test("personalUnlockAccount - passphrase", () async {
+      bool thrown = false;
+      try {
+        await client.admin.personalUnlockAccount(BigInt.zero, null);
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::personalUnlockAccount - passphrase): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
   });
 }

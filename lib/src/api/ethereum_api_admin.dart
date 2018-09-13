@@ -23,7 +23,7 @@ class EthereumApiAdmin extends EthereumApi {
       throw ArgumentError.notNull(
           "Ethereum::personalImportRawKey - passphrase");
     }
-    final String method = EthereumRpcMethods.personalmportRawKey;
+    final String method = EthereumRpcMethods.importRawKey;
     final List params = [keydata, passphrase];
     final res = await _client.rpcClient.request(method, params);
     if (res != null && res.containsKey(ethResultKey)) {
@@ -35,7 +35,7 @@ class EthereumApiAdmin extends EthereumApi {
 
   /// Returns all the Ethereum account addresses of all keys in the key store.
   Future<List<BigInt>> personalListAccounts() async {
-    final String method = EthereumRpcMethods.personalListAccounts;
+    final String method = EthereumRpcMethods.listAccounts;
     final res = await _client.rpcClient.request(method);
     if (res != null && res.containsKey(ethResultKey)) {
       return EthereumUtilities.hexToBigIntList(res[ethResultKey]);
@@ -50,7 +50,7 @@ class EthereumApiAdmin extends EthereumApi {
     if (address == null) {
       throw ArgumentError.notNull("Ethereum::personalLockAccount - address");
     }
-    final String method = EthereumRpcMethods.personalLockAccount;
+    final String method = EthereumRpcMethods.lockAccount;
     final List params = [EthereumUtilities.bigIntegerToHex(address)];
     final res = await _client.rpcClient.request(method, params);
     if (res != null && res.containsKey(ethResultKey)) {
@@ -67,7 +67,7 @@ class EthereumApiAdmin extends EthereumApi {
     if (passphrase == null) {
       throw ArgumentError.notNull("Ethereum::personalNewAccount - passphrase");
     }
-    final String method = EthereumRpcMethods.personalNewAccount;
+    final String method = EthereumRpcMethods.newAccount;
     final List params = [passphrase];
     final res = await _client.rpcClient.request(method, params);
     if (res != null && res.containsKey(ethResultKey)) {
@@ -79,11 +79,36 @@ class EthereumApiAdmin extends EthereumApi {
 
   /// Decrypts the key with the given address from the key store.
   /// The unencrypted key will be held in memory until the unlock duration expires.
-  /// If the unlock duration defaults to 300 seconds. An explicit duration of zero seconds
+  /// The unlock duration defaults to 300 seconds. An explicit duration of zero seconds
   /// unlocks the key until geth exits.
   /// The account can be used with eth_sign and eth_sendTransaction while it is unlocked.
-  Future personalUnlockAccount(BigInt address, String passphrase,
-      [int duration = 300]) {
-
+  Future<bool> personalUnlockAccount(BigInt address, String passphrase,
+      [int duration = 300]) async {
+    if (address == null) {
+      throw ArgumentError.notNull("Ethereum::personalUnlockAccount - address");
+    }
+    if (passphrase == null) {
+      throw ArgumentError.notNull(
+          "Ethereum::personalUnlockAccount - passphrase");
+    }
+    int paramDuration = duration == null ? 300 : duration;
+    final String method = EthereumRpcMethods.unlockAccount;
+    final List params = [
+      EthereumUtilities.bigIntegerToHex(address),
+      passphrase,
+      paramDuration
+    ];
+    final res = await _client.rpcClient.request(method, params);
+    if (res != null && res.containsKey(ethResultKey)) {
+      return true;
+    }
+    _client.processError(method, res);
+    return false;
   }
+
+/// Validate the given passphrase and submit transaction.
+/// The transaction is the same argument as for eth.sendTransaction and contains the from address.
+/// If the passphrase can be used to decrypt the private key belogging to tx.from the transaction is verified,
+/// signed and send onto the network. The account is not unlocked globally in the node and cannot be
+/// used in other RPC calls.
 }

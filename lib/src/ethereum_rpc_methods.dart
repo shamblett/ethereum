@@ -70,8 +70,9 @@ class EthereumRpcMethods {
   static const String shhNewIdentity = 'shh_newIdentity';
 
   /// Administration
-  static const String personalmportRawKey = 'personal_importRawKey';
-  static const String personalListAccounts = 'personal_listAccounts';
-  static const String personalLockAccount = 'personal_lockAccount';
-  static const String personalNewAccount = 'personal_newAccount';
+  static const String importRawKey = 'personal_importRawKey';
+  static const String listAccounts = 'personal_listAccounts';
+  static const String lockAccount = 'personal_lockAccount';
+  static const String newAccount = 'personal_newAccount';
+  static const String unlockAccount = 'personal_unlockAccount';
 }
