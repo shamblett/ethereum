@@ -1518,5 +1518,17 @@ void main() {
       }
       expect(thrown, isTrue);
     });
+    test("personalLockAccount - address", () async {
+      bool thrown = false;
+      try {
+        await client.admin.personalLockAccount(null);
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::personalLockAccount - address): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
   });
 }

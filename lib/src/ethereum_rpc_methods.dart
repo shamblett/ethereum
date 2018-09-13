@@ -72,4 +72,5 @@ class EthereumRpcMethods {
   /// Administration
   static const String personalmportRawKey = 'personal_importRawKey';
   static const String personalListAccounts = 'personal_listAccounts';
+  static const String personalLockAccount = 'personal_lockAccount';
 }

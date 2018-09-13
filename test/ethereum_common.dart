@@ -718,6 +718,7 @@ class EthereumCommon {
     });
 
     group("Admin", () {
+      BigInt lockAddress;
       test("Personal ImportRawKey", () async {
         final BigInt address = await client.admin.personalImportRawKey(
             "b5b1870957d373ef0eeffecc6e4812c0fd08f554b37b233526acc331bf1544f7",
@@ -733,7 +734,13 @@ class EthereumCommon {
       test("Personal List Accounts", () async {
         final List<BigInt> ret = await client.admin.personalListAccounts();
         expect(ret, isNotNull);
+        lockAddress = ret[0];
         print(ret);
+        expect(client.admin.id, ++id);
+      });
+      test("Personal Lock Account", () async {
+        final ret = await client.admin.personalLockAccount(lockAddress);
+        expect(ret, isTrue);
         expect(client.admin.id, ++id);
       });
     });

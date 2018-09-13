@@ -43,4 +43,21 @@ class EthereumApiAdmin extends EthereumApi {
     _client.processError(method, res);
     return null;
   }
+
+  /// Removes the private key with given address from memory.
+  /// The account can no longer be used to send transactions.
+  Future<bool> personalLockAccount(BigInt address) async {
+    if (address == null) {
+      throw ArgumentError.notNull("Ethereum::personalLockAccount - address");
+    }
+    final String method = EthereumRpcMethods.personalLockAccount;
+    final List params = [EthereumUtilities.bigIntegerToHex(address)];
+    final res = await _client.rpcClient.request(method, params);
+    if (res != null && res.containsKey(ethResultKey)) {
+      return true;
+    }
+    _client.processError(method, res);
+    return false;
+  }
+
 }
