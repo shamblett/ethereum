@@ -743,6 +743,13 @@ class EthereumCommon {
         expect(ret, isTrue);
         expect(client.admin.id, ++id);
       });
+      test("Personal New Account", () async {
+        final BigInt ret = await client.admin.personalNewAccount('password');
+        expect(ret, isNotNull);
+        lockAddress = ret;
+        print(ret);
+        expect(client.admin.id, ++id);
+      });
     });
   }
 }

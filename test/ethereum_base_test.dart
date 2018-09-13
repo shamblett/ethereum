@@ -1530,5 +1530,17 @@ void main() {
       }
       expect(thrown, isTrue);
     });
+    test("personalNewAccount - passphrase", () async {
+      bool thrown = false;
+      try {
+        await client.admin.personalNewAccount(null);
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::personalNewAccount - passphrase): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
   });
 }

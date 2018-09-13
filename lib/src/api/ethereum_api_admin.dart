@@ -60,4 +60,30 @@ class EthereumApiAdmin extends EthereumApi {
     return false;
   }
 
+  /// Generates a new private key and stores it in the key store directory.
+  /// The key file is encrypted with the given passphrase.
+  /// Returns the address of the new account.
+  Future<BigInt> personalNewAccount(String passphrase) async {
+    if (passphrase == null) {
+      throw ArgumentError.notNull("Ethereum::personalNewAccount - passphrase");
+    }
+    final String method = EthereumRpcMethods.personalNewAccount;
+    final List params = [passphrase];
+    final res = await _client.rpcClient.request(method, params);
+    if (res != null && res.containsKey(ethResultKey)) {
+      return EthereumUtilities.safeParse(res[ethResultKey]);
+    }
+    _client.processError(method, res);
+    return null;
+  }
+
+  /// Decrypts the key with the given address from the key store.
+  /// The unencrypted key will be held in memory until the unlock duration expires.
+  /// If the unlock duration defaults to 300 seconds. An explicit duration of zero seconds
+  /// unlocks the key until geth exits.
+  /// The account can be used with eth_sign and eth_sendTransaction while it is unlocked.
+  Future personalUnlockAccount(BigInt address, String passphrase,
+      [int duration = 300]) {
+
+  }
 }
