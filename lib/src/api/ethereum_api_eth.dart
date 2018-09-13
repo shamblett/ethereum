@@ -9,9 +9,9 @@
 
 part of ethereum;
 
-/// This class implements the Ethereuum DApp API, otherwise refereed to as 'eth'.
-class EthereumApiDapp extends EthereumApi {
-  EthereumApiDapp(Ethereum client) : super(client);
+/// This class implements the Ethereuum eth API, sometimes referred to as DApp
+class EthereumApiEth extends EthereumApi {
+  EthereumApiEth(Ethereum client) : super(client);
 
   //// Client version
   Future<String> clientVersion() async {

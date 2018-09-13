@@ -16,6 +16,13 @@ class EthereumApiAdmin extends EthereumApi {
   /// Imports the given unencrypted private key (byte string) into the key store,
   /// encrypting it with the passphrase.
   Future<BigInt> personalImportRawKey(String keydata, String passphrase) async {
+    if (keydata == null) {
+      throw ArgumentError.notNull("Ethereum::personalImportRawKey - keydata");
+    }
+    if (passphrase == null) {
+      throw ArgumentError.notNull(
+          "Ethereum::personalImportRawKey - passphrase");
+    }
     final String method = EthereumRpcMethods.personalmportRawKey;
     final List params = [keydata, passphrase];
     final res = await _client.rpcClient.request(method, params);

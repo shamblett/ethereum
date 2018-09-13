@@ -175,12 +175,12 @@ void main() {
     });
   });
 
-  group("Null parameter tests - dapp", () {
+  group("Null parameter tests - eth", () {
     final EthereumServerClient client = EthereumServerClient();
     test("Sha3 - data", () async {
       bool thrown = false;
       try {
-        await client.dapp.sha3(null);
+        await client.eth.sha3(null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -192,7 +192,7 @@ void main() {
     test("Balance - account number", () async {
       bool thrown = false;
       try {
-        await client.dapp.getBalance(null, null);
+        await client.eth.getBalance(null, null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -204,7 +204,7 @@ void main() {
     test("Balance - block", () async {
       bool thrown = false;
       try {
-        await client.dapp.getBalance(BigInt.zero, null);
+        await client.eth.getBalance(BigInt.zero, null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -216,7 +216,7 @@ void main() {
     test("Storage at - block", () async {
       bool thrown = false;
       try {
-        await client.dapp.getStorageAt(BigInt.one, 2, null);
+        await client.eth.getStorageAt(BigInt.one, 2, null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -228,8 +228,7 @@ void main() {
     test("Storage at - pos", () async {
       bool thrown = false;
       try {
-        await client.dapp
-            .getStorageAt(BigInt.one, null, EthereumDefaultBlock());
+        await client.eth.getStorageAt(BigInt.one, null, EthereumDefaultBlock());
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -241,7 +240,7 @@ void main() {
     test("Storage at - address", () async {
       bool thrown = false;
       try {
-        await client.dapp.getStorageAt(null, 1, EthereumDefaultBlock());
+        await client.eth.getStorageAt(null, 1, EthereumDefaultBlock());
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -253,7 +252,7 @@ void main() {
     test("Block transaction count - address", () async {
       bool thrown = false;
       try {
-        await client.dapp.getTransactionCount(null, EthereumDefaultBlock());
+        await client.eth.getTransactionCount(null, EthereumDefaultBlock());
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -265,7 +264,7 @@ void main() {
     test("Block transaction count - block", () async {
       bool thrown = false;
       try {
-        await client.dapp.getTransactionCount(BigInt.one, null);
+        await client.eth.getTransactionCount(BigInt.one, null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -277,7 +276,7 @@ void main() {
     test("Block transaction count by hash", () async {
       bool thrown = false;
       try {
-        await client.dapp.getBlockTransactionCountByHash(null);
+        await client.eth.getBlockTransactionCountByHash(null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -289,7 +288,7 @@ void main() {
     test("Block transaction count by number", () async {
       bool thrown = false;
       try {
-        await client.dapp.getBlockTransactionCountByNumber(null);
+        await client.eth.getBlockTransactionCountByNumber(null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -301,7 +300,7 @@ void main() {
     test("Block uncle count by hash", () async {
       bool thrown = false;
       try {
-        await client.dapp.getUncleCountByHash(null);
+        await client.eth.getUncleCountByHash(null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -313,7 +312,7 @@ void main() {
     test("Block uncle count by number", () async {
       bool thrown = false;
       try {
-        await client.dapp.getUncleCountByNumber(null);
+        await client.eth.getUncleCountByNumber(null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -325,7 +324,7 @@ void main() {
     test("Code - address", () async {
       bool thrown = false;
       try {
-        await client.dapp.getCode(null, EthereumDefaultBlock());
+        await client.eth.getCode(null, EthereumDefaultBlock());
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -337,7 +336,7 @@ void main() {
     test("Code - block", () async {
       bool thrown = false;
       try {
-        await client.dapp.getCode(BigInt.two, null);
+        await client.eth.getCode(BigInt.two, null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -349,7 +348,7 @@ void main() {
     test("Sign - account", () async {
       bool thrown = false;
       try {
-        await client.dapp.sign(null, 0);
+        await client.eth.sign(null, 0);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -361,7 +360,7 @@ void main() {
     test("Sign - message", () async {
       bool thrown = false;
       try {
-        await client.dapp.sign(BigInt.zero, null);
+        await client.eth.sign(BigInt.zero, null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -373,7 +372,7 @@ void main() {
     test("Send transaction - address", () async {
       bool thrown = false;
       try {
-        await client.dapp.sendTransaction(null, BigInt.zero);
+        await client.eth.sendTransaction(null, BigInt.zero);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -385,7 +384,7 @@ void main() {
     test("Send transaction - data", () async {
       bool thrown = false;
       try {
-        await client.dapp.sendTransaction(BigInt.zero, null);
+        await client.eth.sendTransaction(BigInt.zero, null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -397,7 +396,7 @@ void main() {
     test("Send raw transaction", () async {
       bool thrown = false;
       try {
-        await client.dapp.sendRawTransaction(null);
+        await client.eth.sendRawTransaction(null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -409,7 +408,7 @@ void main() {
     test("Call - address", () async {
       bool thrown = false;
       try {
-        await client.dapp.call(null, null);
+        await client.eth.call(null, null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -421,7 +420,7 @@ void main() {
     test("Call - block", () async {
       bool thrown = false;
       try {
-        await client.dapp.call(BigInt.zero, null);
+        await client.eth.call(BigInt.zero, null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -433,7 +432,7 @@ void main() {
     test("Get block by hash", () async {
       bool thrown = false;
       try {
-        await client.dapp.getBlockByHash(null);
+        await client.eth.getBlockByHash(null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -445,7 +444,7 @@ void main() {
     test("Get block by number", () async {
       bool thrown = false;
       try {
-        await client.dapp.getBlockByNumber(null);
+        await client.eth.getBlockByNumber(null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -457,7 +456,7 @@ void main() {
     test("Get transaction by hash", () async {
       bool thrown = false;
       try {
-        await client.dapp.getTransactionByHash(null);
+        await client.eth.getTransactionByHash(null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -469,7 +468,7 @@ void main() {
     test("Get transaction by block hash and index - block hash", () async {
       bool thrown = false;
       try {
-        await client.dapp.getTransactionByBlockHashAndIndex(null, 0);
+        await client.eth.getTransactionByBlockHashAndIndex(null, 0);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -481,7 +480,7 @@ void main() {
     test("Get transaction by block hash and index - index", () async {
       bool thrown = false;
       try {
-        await client.dapp.getTransactionByBlockHashAndIndex(BigInt.zero, null);
+        await client.eth.getTransactionByBlockHashAndIndex(BigInt.zero, null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -493,7 +492,7 @@ void main() {
     test("Get transaction by block number and index - block number", () async {
       bool thrown = false;
       try {
-        await client.dapp.getTransactionByBlockNumberAndIndex(null, 0);
+        await client.eth.getTransactionByBlockNumberAndIndex(null, 0);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -505,7 +504,7 @@ void main() {
     test("Get transaction by block number and index - index", () async {
       bool thrown = false;
       try {
-        await client.dapp
+        await client.eth
             .getTransactionByBlockNumberAndIndex(EthereumDefaultBlock(), null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
@@ -518,7 +517,7 @@ void main() {
     test("Get transaction receipt", () async {
       bool thrown = false;
       try {
-        await client.dapp.getTransactionReceipt(null);
+        await client.eth.getTransactionReceipt(null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -530,7 +529,7 @@ void main() {
     test("Get uncle by block hash and index - block hash", () async {
       bool thrown = false;
       try {
-        await client.dapp.getUncleByBlockHashAndIndex(null, 0);
+        await client.eth.getUncleByBlockHashAndIndex(null, 0);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -542,7 +541,7 @@ void main() {
     test("Get uncle by block hash and index - index", () async {
       bool thrown = false;
       try {
-        await client.dapp.getUncleByBlockHashAndIndex(BigInt.zero, null);
+        await client.eth.getUncleByBlockHashAndIndex(BigInt.zero, null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -554,7 +553,7 @@ void main() {
     test("Get uncle by block number and index - block number", () async {
       bool thrown = false;
       try {
-        await client.dapp.getUncleByBlockNumberAndIndex(null, 0);
+        await client.eth.getUncleByBlockNumberAndIndex(null, 0);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -566,7 +565,7 @@ void main() {
     test("Get uncle by block number and index - index", () async {
       bool thrown = false;
       try {
-        await client.dapp
+        await client.eth
             .getUncleByBlockNumberAndIndex(EthereumDefaultBlock(), null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
@@ -579,7 +578,7 @@ void main() {
     test("Uninstall filter", () async {
       bool thrown = false;
       try {
-        await client.dapp.uninstallFilter(null);
+        await client.eth.uninstallFilter(null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -591,7 +590,7 @@ void main() {
     test("Get filter changes", () async {
       bool thrown = false;
       try {
-        await client.dapp.getFilterChanges(null);
+        await client.eth.getFilterChanges(null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -603,7 +602,7 @@ void main() {
     test("Get filter logs", () async {
       bool thrown = false;
       try {
-        await client.dapp.getFilterLogs(null);
+        await client.eth.getFilterLogs(null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -615,7 +614,7 @@ void main() {
     test("Submit work - nonce", () async {
       bool thrown = false;
       try {
-        await client.dapp.submitWork(null, BigInt.one, BigInt.two);
+        await client.eth.submitWork(null, BigInt.one, BigInt.two);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -627,7 +626,7 @@ void main() {
     test("Submit work - powHash", () async {
       bool thrown = false;
       try {
-        await client.dapp.submitWork(BigInt.one, null, BigInt.two);
+        await client.eth.submitWork(BigInt.one, null, BigInt.two);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -639,7 +638,7 @@ void main() {
     test("Submit work - digest", () async {
       bool thrown = false;
       try {
-        await client.dapp.submitWork(BigInt.one, BigInt.two, null);
+        await client.eth.submitWork(BigInt.one, BigInt.two, null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -651,7 +650,7 @@ void main() {
     test("Submit hash rate - hash rate", () async {
       bool thrown = false;
       try {
-        await client.dapp.submitHashrate(null, "id");
+        await client.eth.submitHashrate(null, "id");
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -663,7 +662,7 @@ void main() {
     test("Submit hash rate - id", () async {
       bool thrown = false;
       try {
-        await client.dapp.submitHashrate(BigInt.one, null);
+        await client.eth.submitHashrate(BigInt.one, null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -675,7 +674,7 @@ void main() {
     test("Shh Post - topics", () async {
       bool thrown = false;
       try {
-        await client.dapp.shhPost(null, BigInt.one, 2, 3);
+        await client.eth.shhPost(null, BigInt.one, 2, 3);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -687,7 +686,7 @@ void main() {
     test("Shh Post - payload", () async {
       bool thrown = false;
       try {
-        await client.dapp.shhPost([BigInt.one], null, 2, 3);
+        await client.eth.shhPost([BigInt.one], null, 2, 3);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -699,7 +698,7 @@ void main() {
     test("Shh Post - priority", () async {
       bool thrown = false;
       try {
-        await client.dapp.shhPost([BigInt.one], BigInt.one, null, 3);
+        await client.eth.shhPost([BigInt.one], BigInt.one, null, 3);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -711,7 +710,7 @@ void main() {
     test("Shh Post - ttl", () async {
       bool thrown = false;
       try {
-        await client.dapp.shhPost([BigInt.one], BigInt.one, 2, null);
+        await client.eth.shhPost([BigInt.one], BigInt.one, 2, null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -1490,6 +1489,34 @@ void main() {
                   .millisecondsSinceEpoch,
           isTrue);
       expect(error.toString(), "Code : 10 <> Message : An Error <> Id : 50");
+    });
+  });
+
+  group("Null parameter tests - admin", () {
+    final EthereumServerClient client = EthereumServerClient();
+    test("personalImportRawKey - keydata", () async {
+      bool thrown = false;
+      try {
+        await client.admin.personalImportRawKey(null, "");
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::personalImportRawKey - keydata): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
+    test("personalImportRawKey - passphrase", () async {
+      bool thrown = false;
+      try {
+        await client.admin.personalImportRawKey("", null);
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::personalImportRawKey - passphrase): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
     });
   });
 }

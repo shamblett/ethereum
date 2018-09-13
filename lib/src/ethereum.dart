@@ -18,7 +18,7 @@ class Ethereum {
     rpcClient = EthereumRpcClient(_networkAdapter);
 
     /// Construct the API classes
-    this._dapp = new EthereumApiDapp(this);
+    this._eth = new EthereumApiEth(this);
     this._admin = new EthereumApiAdmin(this);
   }
 
@@ -29,7 +29,7 @@ class Ethereum {
     rpcClient = EthereumRpcClient(_networkAdapter);
 
     /// Construct the API classes
-    this._dapp = new EthereumApiDapp(this);
+    this._eth = new EthereumApiEth(this);
     this._admin = new EthereumApiAdmin(this);
     connectParameters(scheme, hostname, port);
   }
@@ -142,10 +142,10 @@ class Ethereum {
     }
   }
 
-  /// Dapp API
-  EthereumApiDapp _dapp;
+  /// Eth API
+  EthereumApiEth _eth;
 
-  EthereumApiDapp get dapp => _dapp;
+  EthereumApiEth get eth => _eth;
 
   /// Admin API
   EthereumApiAdmin _admin;
