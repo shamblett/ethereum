@@ -1,5 +1,5 @@
 #3.0.0
-Issue 4, Interface updates
+Issue 4, Interface updates - admin
 
 #2.0.1
 Issue 3, updates for Dart 2
