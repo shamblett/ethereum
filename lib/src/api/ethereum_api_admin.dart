@@ -165,4 +165,26 @@ class EthereumApiAdmin extends EthereumApi {
     _client.processError(method, res);
     return null;
   }
+
+  /// Returns the address associated with the private key that was used to
+  /// calculate the signature in personal_sign.
+  Future<BigInt> personalEcRecover(BigInt message, BigInt signature) async {
+    if (message == null) {
+      throw ArgumentError.notNull("Ethereum::personalEcRecover - message");
+    }
+    if (signature == null) {
+      throw ArgumentError.notNull("Ethereum::personalEcRecover - signature");
+    }
+    final String method = EthereumRpcMethods.ecRecover;
+    final List params = [
+      EthereumUtilities.bigIntegerToHex(message),
+      EthereumUtilities.bigIntegerToHex(signature)
+    ];
+    final res = await _client.rpcClient.request(method, params);
+    if (res != null && res.containsKey(ethResultKey)) {
+      return EthereumUtilities.safeParse(res[ethResultKey]);
+    }
+    _client.processError(method, res);
+    return null;
+  }
 }

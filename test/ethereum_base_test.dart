@@ -1629,5 +1629,29 @@ void main() {
       }
       expect(thrown, isTrue);
     });
+    test("personalEcRecover - message", () async {
+      bool thrown = false;
+      try {
+        await client.admin.personalEcRecover(null, BigInt.zero);
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::personalEcRecover - message): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
+    test("personalEcRecover - signature", () async {
+      bool thrown = false;
+      try {
+        await client.admin.personalEcRecover(BigInt.zero, null);
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::personalEcRecover - signature): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
   });
 }

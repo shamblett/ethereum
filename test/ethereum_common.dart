@@ -719,6 +719,7 @@ class EthereumCommon {
 
     group("Admin", () {
       BigInt lockAddress;
+      BigInt signature;
       test("Personal ImportRawKey", () async {
         final BigInt address = await client.admin.personalImportRawKey(
             "b5b1870957d373ef0eeffecc6e4812c0fd08f554b37b233526acc331bf1544f7",
@@ -770,7 +771,16 @@ class EthereumCommon {
         final BigInt ret =
         await client.admin.personalSign(message, lockAddress, "password");
         expect(ret, isNotNull);
+        signature = ret;
         print(EthereumUtilities.bigIntegerToHex(ret));
+        expect(client.admin.id, ++id);
+      });
+      test("Personal EcRecover", () async {
+        final BigInt message = new BigInt.from(0xdeadbeaf);
+        final BigInt ret =
+        await client.admin.personalEcRecover(message, signature);
+        expect(ret, isNotNull);
+        expect(ret, lockAddress);
         expect(client.admin.id, ++id);
       });
     });

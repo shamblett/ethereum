@@ -77,4 +77,5 @@ class EthereumRpcMethods {
   static const String unlockAccount = 'personal_unlockAccount';
   static const String psendTransaction = 'personal_sendTransaction';
   static const String pSign = 'personal_sign';
+  static const String ecRecover = 'personal_ecRecover';
 }
