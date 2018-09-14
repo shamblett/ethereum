@@ -765,6 +765,14 @@ class EthereumCommon {
         }
         expect(client.admin.id, ++id);
       });
+      test("Personal Sign", () async {
+        final BigInt message = new BigInt.from(0xdeadbeaf);
+        final BigInt ret =
+        await client.admin.personalSign(message, lockAddress, "password");
+        expect(ret, isNotNull);
+        print(EthereumUtilities.bigIntegerToHex(ret));
+        expect(client.admin.id, ++id);
+      });
     });
   }
 }

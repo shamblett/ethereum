@@ -91,7 +91,7 @@ class EthereumApiAdmin extends EthereumApi {
       throw ArgumentError.notNull(
           "Ethereum::personalUnlockAccount - passphrase");
     }
-    int paramDuration = duration == null ? 300 : duration;
+    final int paramDuration = duration == null ? 300 : duration;
     final String method = EthereumRpcMethods.unlockAccount;
     final List params = [
       EthereumUtilities.bigIntegerToHex(address),
@@ -125,7 +125,7 @@ class EthereumApiAdmin extends EthereumApi {
           "Ethereum::personalSendTransaction - passphrase");
     }
     final String method = EthereumRpcMethods.psendTransaction;
-    Map<String, String> paramBlock = {
+    final Map<String, String> paramBlock = {
       "from": EthereumUtilities.bigIntegerToHex(address),
       "to": EthereumUtilities.bigIntegerToHex(to)
     };
@@ -136,5 +136,33 @@ class EthereumApiAdmin extends EthereumApi {
     }
     _client.processError(method, res);
     return false;
+  }
+
+  /// The sign method calculates an Ethereum specific signature with:
+  /// sign(keccack256("\x19Ethereum Signed Message:\n" + len(message) + message))).
+  /// By adding a prefix to the message makes the calculated signature recognisable as an Ethereum
+  /// specific signature. This prevents misuse where a malicious DApp can sign arbitrary data
+  /// (e.g. transaction) and use the signature to impersonate the victim.
+  /// See personalEcRecover to verify the signature.
+  Future<BigInt> personalSign(BigInt message, BigInt address,
+      [String password = ""]) async {
+    if (message == null) {
+      throw ArgumentError.notNull("Ethereum::personalSign - message");
+    }
+    if (address == null) {
+      throw ArgumentError.notNull("Ethereum::personalSign - address");
+    }
+    final String method = EthereumRpcMethods.pSign;
+    final List params = [
+      EthereumUtilities.bigIntegerToHex(message),
+      EthereumUtilities.bigIntegerToHex(address),
+      password
+    ];
+    final res = await _client.rpcClient.request(method, params);
+    if (res != null && res.containsKey(ethResultKey)) {
+      return EthereumUtilities.safeParse(res[ethResultKey]);
+    }
+    _client.processError(method, res);
+    return null;
   }
 }

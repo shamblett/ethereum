@@ -1569,8 +1569,8 @@ void main() {
     test("personalSendTransaction - address", () async {
       bool thrown = false;
       try {
-        await client.admin.personalSendTransaction(
-            null, BigInt.zero, "password");
+        await client.admin
+            .personalSendTransaction(null, BigInt.zero, "password");
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -1582,8 +1582,8 @@ void main() {
     test("personalSendTransaction - to", () async {
       bool thrown = false;
       try {
-        await client.admin.personalSendTransaction(
-            BigInt.zero, null, "password");
+        await client.admin
+            .personalSendTransaction(BigInt.zero, null, "password");
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
@@ -1595,12 +1595,36 @@ void main() {
     test("personalSendTransaction - passphrase", () async {
       bool thrown = false;
       try {
-        await client.admin.personalSendTransaction(
-            BigInt.zero, BigInt.zero, null);
+        await client.admin
+            .personalSendTransaction(BigInt.zero, BigInt.zero, null);
       } catch (e) {
         expect((e is ArgumentError), isTrue);
         expect(e.toString(),
             "Invalid argument(s) (Ethereum::personalSendTransaction - passphrase): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
+    test("personalSign - message", () async {
+      bool thrown = false;
+      try {
+        await client.admin.personalSign(null, BigInt.zero, "password");
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::personalSign - message): Must not be null");
+        thrown = true;
+      }
+      expect(thrown, isTrue);
+    });
+    test("personalSign - address", () async {
+      bool thrown = false;
+      try {
+        await client.admin.personalSign(BigInt.zero, null, "password");
+      } catch (e) {
+        expect((e is ArgumentError), isTrue);
+        expect(e.toString(),
+            "Invalid argument(s) (Ethereum::personalSign - address): Must not be null");
         thrown = true;
       }
       expect(thrown, isTrue);
