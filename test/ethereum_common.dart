@@ -693,7 +693,11 @@ class EthereumCommon {
       test("SHH version", () async {
         final String version = await client.eth.shhVersion();
         if (version != null) {
-          expect(version, "5.0");
+          bool ok = false;
+          if (version == '5.0' || version == '6.0') {
+            ok = true;
+          }
+          expect(ok, isTrue);
         } else {
           expect(client.eth.lastError.code, -32601);
           expect(client.eth.lastError.message,

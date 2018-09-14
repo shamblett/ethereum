@@ -20,6 +20,6 @@ void main() {
     client.printError = true;
     EthereumCommon.run(client);
   } else {
-    print("Server tests not selected");
+    print("Server tests not selected in configuration file");
   }
 }

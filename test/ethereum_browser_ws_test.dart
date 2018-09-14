@@ -20,6 +20,6 @@ void main() {
     client.printError = true;
     EthereumCommon.run(client);
   } else {
-    print("WS browser tests not selected");
+    print("WS browser tests not selected in configuration file");
   }
 }

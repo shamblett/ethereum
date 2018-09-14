@@ -5,10 +5,10 @@
  * Copyright :  S.Hamblett
  */
 
-/// Start geth as follows :-
+/// Start geth as follows for server testing :-
 /// geth --rpc --rpcapi="db,eth,net,web3,personal,admin" --shh
-/// If using websockets add --ws and --wsorigins="*" for CORS
-/// If running the HTTP tests add --rpccorsdomain=localhost
+/// If using websockets add '--ws --rpcapi="db,eth,net,web3,personal,admin"  --wsorigins="*"' for CORS
+/// If running the HTTP tests add '--rpccorsdomain="localhost"'
 /// The account above is the test account defined below, you must first create this account,
 /// see the geth documentation for details.
 ///

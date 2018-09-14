@@ -10,7 +10,7 @@ import 'package:ethereum/ethereum_server_client.dart';
 
 /// Example client usage
 /// Please refer to https://github.com/ethereum/wiki/wiki/JSON-RPC for further details of ports etc.
-
+/// Also see the ethereum_test_configuration.dart file for details on how to run geth.
 Future main() async {
   // Create a client using default parameters
   final EthereumServerClient client =

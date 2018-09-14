@@ -20,7 +20,7 @@ class EthereumBrowserHTTPAdapter implements EthereumINetworkAdapter {
   Future<Map> httpRequest(Uri uri, Map request) {
     final completer = Completer<Map>();
     final String reqText = json.encode(request);
-    final Map<String, dynamic> headers = {contentType: jsonMimeType};
+    final Map<String, String> headers = {contentType: jsonMimeType};
     HttpRequest.request(uri.toString(),
         method: 'POST',
         withCredentials: false,
