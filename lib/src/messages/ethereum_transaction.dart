@@ -81,39 +81,48 @@ class EthereumTransaction {
       return;
     }
     if (data[EthereumConstants.ethResultKey].containsKey('hash')) {
-      _hash = EthereumUtilities.safeParse(data[EthereumConstants.ethResultKey]['hash']);
+      _hash = EthereumUtilities.safeParse(
+          data[EthereumConstants.ethResultKey]['hash']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('nonce')) {
-      _nonce = EthereumUtilities.hexToInt(data[EthereumConstants.ethResultKey]['nonce']);
+      _nonce = EthereumUtilities.hexToInt(
+          data[EthereumConstants.ethResultKey]['nonce']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('blockHash')) {
-      _blockHash = EthereumUtilities.safeParse(data[EthereumConstants.ethResultKey]['blockHash']);
+      _blockHash = EthereumUtilities.safeParse(
+          data[EthereumConstants.ethResultKey]['blockHash']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('blockNumber')) {
-      _blockNumber =
-          EthereumUtilities.hexToInt(data[EthereumConstants.ethResultKey]['blockNumber']);
+      _blockNumber = EthereumUtilities.hexToInt(
+          data[EthereumConstants.ethResultKey]['blockNumber']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('transactionIndex')) {
-      _transactionIndex =
-          EthereumUtilities.hexToInt(data[EthereumConstants.ethResultKey]['transactionIndex']);
+      _transactionIndex = EthereumUtilities.hexToInt(
+          data[EthereumConstants.ethResultKey]['transactionIndex']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('from')) {
-      _from = EthereumUtilities.safeParse(data[EthereumConstants.ethResultKey]['from']);
+      _from = EthereumUtilities.safeParse(
+          data[EthereumConstants.ethResultKey]['from']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('to')) {
-      _to = EthereumUtilities.safeParse(data[EthereumConstants.ethResultKey]['to']);
+      _to = EthereumUtilities.safeParse(
+          data[EthereumConstants.ethResultKey]['to']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('value')) {
-      _value = EthereumUtilities.hexToInt(data[EthereumConstants.ethResultKey]['value']);
+      _value = EthereumUtilities.hexToInt(
+          data[EthereumConstants.ethResultKey]['value']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('gasPrice')) {
-      _gasPrice = EthereumUtilities.hexToInt(data[EthereumConstants.ethResultKey]['gasPrice']);
+      _gasPrice = EthereumUtilities.hexToInt(
+          data[EthereumConstants.ethResultKey]['gasPrice']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('gas')) {
-      _gas = EthereumUtilities.hexToInt(data[EthereumConstants.ethResultKey]['gas']);
+      _gas = EthereumUtilities.hexToInt(
+          data[EthereumConstants.ethResultKey]['gas']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('input')) {
-      _input = EthereumUtilities.safeParse(data[EthereumConstants.ethResultKey]['input']);
+      _input = EthereumUtilities.safeParse(
+          data[EthereumConstants.ethResultKey]['input']);
     }
   }
 

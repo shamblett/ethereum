@@ -34,7 +34,7 @@ class EthereumCommon {
       });
       test("SHA3", () async {
         final BigInt data =
-        EthereumUtilities.safeParse("0x68656c6c6f20776f726c64");
+            EthereumUtilities.safeParse("0x68656c6c6f20776f726c64");
         final BigInt hash = await client.eth.sha3(data);
         expect(hash, isNotNull);
         print(hash);
@@ -104,7 +104,7 @@ class EthereumCommon {
         final List<BigInt> accounts = await client.eth.accounts();
         expect(accounts, isNotNull);
         final List<String> accountsStr =
-        EthereumUtilities.bigIntegerToHexList(accounts);
+            EthereumUtilities.bigIntegerToHexList(accounts);
         expect(client.eth.id, ++id);
         if (accounts.length != 0) {
           print("Accounts are $accountsStr");
@@ -268,7 +268,7 @@ class EthereumCommon {
         final EthereumDefaultBlock block = EthereumDefaultBlock();
         block.number = 0xe8;
         final int count =
-        await client.eth.getBlockTransactionCountByNumber(block);
+            await client.eth.getBlockTransactionCountByNumber(block);
         expect(count, isNotNull);
         expect(client.eth.id, ++id);
       });
@@ -276,7 +276,7 @@ class EthereumCommon {
         final EthereumDefaultBlock block = EthereumDefaultBlock();
         block.latest = true;
         final int count =
-        await client.eth.getBlockTransactionCountByNumber(block);
+            await client.eth.getBlockTransactionCountByNumber(block);
         expect(count, isNotNull);
         expect(client.eth.id, ++id);
       });
@@ -284,7 +284,7 @@ class EthereumCommon {
         final EthereumDefaultBlock block = EthereumDefaultBlock();
         block.pending = true;
         final int count =
-        await client.eth.getBlockTransactionCountByNumber(block);
+            await client.eth.getBlockTransactionCountByNumber(block);
         expect(count, isNotNull);
         expect(client.eth.id, ++id);
       });
@@ -292,7 +292,7 @@ class EthereumCommon {
         final EthereumDefaultBlock block = EthereumDefaultBlock();
         block.earliest = true;
         final int count =
-        await client.eth.getBlockTransactionCountByNumber(block);
+            await client.eth.getBlockTransactionCountByNumber(block);
         expect(count, isNotNull);
         expect(client.eth.id, ++id);
       });
@@ -515,9 +515,9 @@ class EthereumCommon {
       test("Get transaction by block hash and index", () async {
         final EthereumTransaction ret = await client.eth
             .getTransactionByBlockHashAndIndex(
-            EthereumUtilities.safeParse(
-                "0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8"),
-            0);
+                EthereumUtilities.safeParse(
+                    "0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8"),
+                0);
         if (ret != null) {
           print(ret);
         }
@@ -527,7 +527,7 @@ class EthereumCommon {
         final EthereumDefaultBlock block = EthereumDefaultBlock();
         block.number = 0x100;
         final EthereumTransaction ret =
-        await client.eth.getTransactionByBlockNumberAndIndex(block, 0);
+            await client.eth.getTransactionByBlockNumberAndIndex(block, 0);
         if (ret != null) {
           print(ret);
         }
@@ -536,7 +536,7 @@ class EthereumCommon {
       test("Get transaction receipt", () async {
         final EthereumTransactionReceipt ret = await client.eth
             .getTransactionReceipt(EthereumUtilities.safeParse(
-            "0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8"));
+                "0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8"));
         if (ret != null) {
           print(ret);
         }
@@ -556,7 +556,7 @@ class EthereumCommon {
         final EthereumDefaultBlock block = EthereumDefaultBlock();
         block.number = 0x100;
         final EthereumBlock ret =
-        await client.eth.getUncleByBlockNumberAndIndex(block, 0);
+            await client.eth.getUncleByBlockNumberAndIndex(block, 0);
         if (ret != null) {
           print(ret);
         }
@@ -590,7 +590,7 @@ class EthereumCommon {
         final EthereumDefaultBlock to = EthereumDefaultBlock();
         from.number = 2;
         filterId =
-        await client.eth.newFilter(fromBlock: from, toBlock: to, address: [
+            await client.eth.newFilter(fromBlock: from, toBlock: to, address: [
           EthereumUtilities.safeParse(
               "0x8888f1f195afa192cfee860698584c030f4c9db1"),
           EthereumUtilities.safeParse(
@@ -757,7 +757,7 @@ class EthereumCommon {
       });
       test("Personal Unlock Account", () async {
         final bool ret =
-        await client.admin.personalUnlockAccount(lockAddress, 'password');
+            await client.admin.personalUnlockAccount(lockAddress, 'password');
         expect(ret, isTrue);
         expect(client.admin.id, ++id);
       });
@@ -773,7 +773,7 @@ class EthereumCommon {
       test("Personal Sign", () async {
         final BigInt message = new BigInt.from(0xdeadbeaf);
         final BigInt ret =
-        await client.admin.personalSign(message, lockAddress, "password");
+            await client.admin.personalSign(message, lockAddress, "password");
         expect(ret, isNotNull);
         signature = ret;
         print(EthereumUtilities.bigIntegerToHex(ret));
@@ -782,7 +782,7 @@ class EthereumCommon {
       test("Personal EcRecover", () async {
         final BigInt message = new BigInt.from(0xdeadbeaf);
         final BigInt ret =
-        await client.admin.personalEcRecover(message, signature);
+            await client.admin.personalEcRecover(message, signature);
         expect(ret, isNotNull);
         expect(ret, lockAddress);
         expect(client.admin.id, ++id);

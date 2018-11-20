@@ -21,20 +21,26 @@ class EthereumServerHTTPAdapter implements EthereumINetworkAdapter {
   /// Processes the HTTP request returning the  HTTP response as
   /// a map
   @override
-  Future<Map<dynamic,dynamic>> httpRequest(Uri uri, Map<String,dynamic> request) {
-    final Completer<Map<dynamic,dynamic>> completer = Completer<Map<dynamic,dynamic>>();
+  Future<Map<dynamic, dynamic>> httpRequest(
+      Uri uri, Map<String, dynamic> request) {
+    final Completer<Map<dynamic, dynamic>> completer =
+        Completer<Map<dynamic, dynamic>>();
     _client.postUrl(uri).then((HttpClientRequest req) {
       final dynamic payload = json.encode(request);
       req.headers.add(HttpHeaders.contentTypeHeader, jsonMimeType);
       req.contentLength = payload.length;
       req.write(payload);
       req.close().then((HttpClientResponse resp) {
-        resp.listen((dynamic data) {
-          final Map<dynamic,dynamic> payload = json.decode(String.fromCharCodes(data));
-          completer.complete(payload);
-        }, onError: print, onDone: () {
-          _client.close();
-        });
+        resp.listen(
+            (dynamic data) {
+              final Map<dynamic, dynamic> payload =
+                  json.decode(String.fromCharCodes(data));
+              completer.complete(payload);
+            },
+            onError: print,
+            onDone: () {
+              _client.close();
+            });
       });
     }, onError: print);
     return completer.future;

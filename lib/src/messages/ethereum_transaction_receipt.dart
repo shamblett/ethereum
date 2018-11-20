@@ -80,39 +80,44 @@ class EthereumTransactionReceipt {
       return;
     }
     if (data[EthereumConstants.ethResultKey].containsKey('transactionHash')) {
-      _transactionHash =
-          EthereumUtilities.safeParse(data[EthereumConstants.ethResultKey]['transactionHash']);
+      _transactionHash = EthereumUtilities.safeParse(
+          data[EthereumConstants.ethResultKey]['transactionHash']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('transactionIndex')) {
-      _transactionIndex =
-          EthereumUtilities.hexToInt(data[EthereumConstants.ethResultKey]['transactionIndex']);
+      _transactionIndex = EthereumUtilities.hexToInt(
+          data[EthereumConstants.ethResultKey]['transactionIndex']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('blockHash')) {
-      _blockHash = EthereumUtilities.safeParse(data[EthereumConstants.ethResultKey]['blockHash']);
+      _blockHash = EthereumUtilities.safeParse(
+          data[EthereumConstants.ethResultKey]['blockHash']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('blockNumber')) {
-      _blockNumber =
-          EthereumUtilities.hexToInt(data[EthereumConstants.ethResultKey]['blockNumber']);
+      _blockNumber = EthereumUtilities.hexToInt(
+          data[EthereumConstants.ethResultKey]['blockNumber']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('cumulativeGasUsed')) {
-      _cumulativeGasUsed =
-          EthereumUtilities.hexToInt(data[EthereumConstants.ethResultKey]['cumulativeGasUsed']);
+      _cumulativeGasUsed = EthereumUtilities.hexToInt(
+          data[EthereumConstants.ethResultKey]['cumulativeGasUsed']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('gasUsed')) {
-      _gasUsed = EthereumUtilities.hexToInt(data[EthereumConstants.ethResultKey]['gasUsed']);
+      _gasUsed = EthereumUtilities.hexToInt(
+          data[EthereumConstants.ethResultKey]['gasUsed']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('contractAddress')) {
-      _contractAddress =
-          EthereumUtilities.safeParse(data[EthereumConstants.ethResultKey]['contractAddress']);
+      _contractAddress = EthereumUtilities.safeParse(
+          data[EthereumConstants.ethResultKey]['contractAddress']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('logsBloom')) {
-      _logsBloom = EthereumUtilities.safeParse(data[EthereumConstants.ethResultKey]['logsBloom']);
+      _logsBloom = EthereumUtilities.safeParse(
+          data[EthereumConstants.ethResultKey]['logsBloom']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('root')) {
-      _root = EthereumUtilities.safeParse(data[EthereumConstants.ethResultKey]['root']);
+      _root = EthereumUtilities.safeParse(
+          data[EthereumConstants.ethResultKey]['root']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('status')) {
-      _status = EthereumUtilities.hexToInt(data[EthereumConstants.ethResultKey]['status']);
+      _status = EthereumUtilities.hexToInt(
+          data[EthereumConstants.ethResultKey]['status']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('logs')) {
       if ((data[EthereumConstants.ethResultKey]['logs'] != null) &&

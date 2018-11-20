@@ -11,32 +11,36 @@ part of ethereum;
 
 /// Manages Ethereum client errors
 class EthereumError {
-  /// Constants
-  static const String noError = "No Error";
-  static const int noId = -1;
-
+  /// Constructor
   EthereumError();
 
-  /// Error code
+  /// No error
+  static const String noError = 'No Error';
+
+  /// No transaction id
+  static const int noId = -1;
+
   int _code = 0;
 
+  /// Error code
   int get code => _code;
 
-  /// Error message
   String _message = noError;
 
+  /// Error message
   String get message => _message;
 
-  /// Error transaction id
   int _id = noId;
 
+  /// Error transaction id
   int get id => _id;
 
-  /// Error timestamp
   DateTime _timestamp;
 
+  /// Error timestamp
   DateTime get timestamp => _timestamp;
 
+  /// Update the error details
   void updateError(int errorCode, String errorMessage, int errorId) {
     _code = errorCode;
     _message = errorMessage;
@@ -44,7 +48,6 @@ class EthereumError {
     _timestamp = DateTime.now();
   }
 
-  String toString() {
-    return "Code : $_code <> Message : $_message <> Id : $_id";
-  }
+  @override
+  String toString() => 'Code : $_code <> Message : $_message <> Id : $_id';
 }

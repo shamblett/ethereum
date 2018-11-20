@@ -15,7 +15,7 @@
 /// Test configuration options
 class EthereumTestConfiguration {
   static BigInt defaultAccount =
-  BigInt.parse("0x12890d2cce102216644c59dae5baed380d84830c");
+      BigInt.parse("0x12890d2cce102216644c59dae5baed380d84830c");
 
   /// True runs the browser HTTP tests, you will need CORS support for this as above
   static bool runBrowserHttp = false;

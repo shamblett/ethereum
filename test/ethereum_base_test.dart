@@ -750,7 +750,7 @@ void main() {
       final Map transaction = {"result": null};
 
       final EthereumTransaction message =
-      EthereumTransaction.fromMap(transaction);
+          EthereumTransaction.fromMap(transaction);
       expect(message.hash, isNull);
       expect(message.nonce, isNull);
       expect(message.blockHash, isNull);
@@ -770,10 +770,10 @@ void main() {
       final Map transaction = {
         "result": {
           "hash":
-          "0xc6ef2fc5426d6ad6fd9e2a26abeab0aa2411b7ab17f30a99d3cb96aed1d1055b",
+              "0xc6ef2fc5426d6ad6fd9e2a26abeab0aa2411b7ab17f30a99d3cb96aed1d1055b",
           "nonce": "0x0",
           "blockHash":
-          "0xbeab0aa2411b7ab17f30a99d3cb9c6ef2fc5426d6ad6fd9e2a26a6aed1d1055b",
+              "0xbeab0aa2411b7ab17f30a99d3cb9c6ef2fc5426d6ad6fd9e2a26a6aed1d1055b",
           "blockNumber": "0x15df", // 5599
           "transactionIndex": "0x1", // 1
           "from": "0x407d73d8a49eeb85d32cf465507dd71d507100c1",
@@ -782,12 +782,12 @@ void main() {
           "gas": "0x7f111", // 520465
           "gasPrice": "0x09184e72a000",
           "input":
-          "0x603880600c6000396000f300603880600c6000396000f3603880600c6000396000f360"
+              "0x603880600c6000396000f300603880600c6000396000f3603880600c6000396000f360"
         }
       };
 
       final EthereumTransaction message =
-      EthereumTransaction.fromMap(transaction);
+          EthereumTransaction.fromMap(transaction);
       expect(
           message.hash,
           EthereumUtilities.safeParse(
@@ -847,26 +847,26 @@ void main() {
         "result": {
           "number": "0x1b4", // 436
           "hash":
-          "0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331",
+              "0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331",
           "parentHash":
-          "0x9646252be9520f6e71339a8df9c55e4d7619deeb018d2a3f2d21fc165dde5eb5",
+              "0x9646252be9520f6e71339a8df9c55e4d7619deeb018d2a3f2d21fc165dde5eb5",
           "nonce":
-          "0xe04d296d2460cfb8472af2c5fd05b5a214109c25688d3704aed5484f9a7792f2",
+              "0xe04d296d2460cfb8472af2c5fd05b5a214109c25688d3704aed5484f9a7792f2",
           "sha3Uncles":
-          "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+              "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
           "logsBloom":
-          "0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331",
+              "0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331",
           "transactionsRoot":
-          "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
+              "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
           "stateRoot":
-          "0xd5855eb08b3387c0af375e9cdb6acfc05eb8f519e419b874b6ff2ffda7ed1dff",
+              "0xd5855eb08b3387c0af375e9cdb6acfc05eb8f519e419b874b6ff2ffda7ed1dff",
           "receiptsRoot":
-          "0xd5855eb08b3387c0af375e9cdb6acfc05eb8f519e419b874b6ff2ffda7ed1dff",
+              "0xd5855eb08b3387c0af375e9cdb6acfc05eb8f519e419b874b6ff2ffda7ed1dff",
           "miner": "0x4e65fda2159562a496f9f3522f89122a3088497a",
           "difficulty": "0x027f07", // 163591
           "totalDifficulty": "0x027f07", // 163591
           "extraData":
-          "0x0000000000000000000000000000000000000000000000000000000000000000",
+              "0x0000000000000000000000000000000000000000000000000000000000000000",
           "size": "0x027f07", // 163591
           "gasLimit": "0x9f759", // 653145
           "gasUsed": "0x9f759", // 653145
@@ -950,24 +950,24 @@ void main() {
         "result": {
           "number": "0x1b4", // 436
           "hash":
-          "0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331",
+              "0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331",
           "parentHash":
-          "0x9646252be9520f6e71339a8df9c55e4d7619deeb018d2a3f2d21fc165dde5eb5",
+              "0x9646252be9520f6e71339a8df9c55e4d7619deeb018d2a3f2d21fc165dde5eb5",
           "nonce":
-          "0xe04d296d2460cfb8472af2c5fd05b5a214109c25688d3704aed5484f9a7792f2",
+              "0xe04d296d2460cfb8472af2c5fd05b5a214109c25688d3704aed5484f9a7792f2",
           "sha3Uncles":
-          "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+              "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
           "logsBloom":
-          "0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331",
+              "0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331",
           "transactionsRoot":
-          "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
+              "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
           "stateRoot":
-          "0xd5855eb08b3387c0af375e9cdb6acfc05eb8f519e419b874b6ff2ffda7ed1dff",
+              "0xd5855eb08b3387c0af375e9cdb6acfc05eb8f519e419b874b6ff2ffda7ed1dff",
           "miner": "0x4e65fda2159562a496f9f3522f89122a3088497a",
           "difficulty": "0x027f07", // 163591
           "totalDifficulty": "0x027f07", // 163591
           "extraData":
-          "0x0000000000000000000000000000000000000000000000000000000000000000",
+              "0x0000000000000000000000000000000000000000000000000000000000000000",
           "size": "0x027f07", // 163591
           "gasLimit": "0x9f759", // 653145
           "gasUsed": "0x9f759", // 653145
@@ -975,10 +975,10 @@ void main() {
           "transactions": [
             {
               "hash":
-              "0xc6ef2fc5426d6ad6fd9e2a26abeab0aa2411b7ab17f30a99d3cb96aed1d1055b",
+                  "0xc6ef2fc5426d6ad6fd9e2a26abeab0aa2411b7ab17f30a99d3cb96aed1d1055b",
               "nonce": "0x0",
               "blockHash":
-              "0xbeab0aa2411b7ab17f30a99d3cb9c6ef2fc5426d6ad6fd9e2a26a6aed1d1055b",
+                  "0xbeab0aa2411b7ab17f30a99d3cb9c6ef2fc5426d6ad6fd9e2a26a6aed1d1055b",
               "blockNumber": "0x15df", // 5599
               "transactionIndex": "0x1", // 1
               "from": "0x407d73d8a49eeb85d32cf465507dd71d507100c1",
@@ -987,14 +987,14 @@ void main() {
               "gas": "0x7f111", // 520465
               "gasPrice": "0x09184e72a000",
               "input":
-              "0x603880600c6000396000f300603880600c6000396000f3603880600c6000396000f360"
+                  "0x603880600c6000396000f300603880600c6000396000f3603880600c6000396000f360"
             },
             {
               "hash":
-              "0xc6ef2fc5426d6ad6fd9e2a26abeab0aa2411b7ab17f30a99d3cb96aed1d1055b",
+                  "0xc6ef2fc5426d6ad6fd9e2a26abeab0aa2411b7ab17f30a99d3cb96aed1d1055b",
               "nonce": "0x1",
               "blockHash":
-              "0xbeab0aa2411b7ab17f30a99d3cb9c6ef2fc5426d6ad6fd9e2a26a6aed1d1055b",
+                  "0xbeab0aa2411b7ab17f30a99d3cb9c6ef2fc5426d6ad6fd9e2a26a6aed1d1055b",
               "blockNumber": "0x15df", // 5599
               "transactionIndex": "0x1", // 1
               "from": "0x407d73d8a49eeb85d32cf465507dd71d507100c1",
@@ -1003,7 +1003,7 @@ void main() {
               "gas": "0x7f111", // 520465
               "gasPrice": "0x09184e72a000",
               "input":
-              "0x603880600c6000396000f300603880600c6000396000f3603880600c6000396000f360"
+                  "0x603880600c6000396000f300603880600c6000396000f3603880600c6000396000f360"
             }
           ],
           "uncles": [
@@ -1087,13 +1087,13 @@ void main() {
           "logIndex": "0x1", // 1
           "blockNumber": "0x1b4", // 436
           "blockHash":
-          "0x8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcfdf829c5a142f1fccd7d",
+              "0x8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcfdf829c5a142f1fccd7d",
           "transactionHash":
-          "0xdf829c5a142f1fccd7d8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcf",
+              "0xdf829c5a142f1fccd7d8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcf",
           "transactionIndex": "0x0", // 0
           "address": "0x16c5785ac562ff41e2dcfdf829c5a142f1fccd7d",
           "data":
-          "0x0000000000000000000000000000000000000000000000000000000000000000",
+              "0x0000000000000000000000000000000000000000000000000000000000000000",
           "topics": [
             "0x59ebeb90bc63057b6515673c3ecf9438e5058bca0f92585014eced636878c9a5"
           ]
@@ -1128,7 +1128,7 @@ void main() {
     test("Transaction receipt - null", () {
       final Map tr = {"result": {}};
       final EthereumTransactionReceipt message =
-      EthereumTransactionReceipt.fromMap(tr);
+          EthereumTransactionReceipt.fromMap(tr);
       expect(message.transactionHash, isNull);
       expect(message.transactionIndex, isNull);
       expect(message.blockNumber, isNull);
@@ -1145,13 +1145,13 @@ void main() {
       final Map tr = {
         "result": {
           "transactionHash":
-          '0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238',
+              '0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238',
           "transactionIndex": '0x1',
           // 1
           "blockNumber": '0xb',
           // 11
           "blockHash":
-          '0xc6ef2fc5426d6ad6fd9e2a26abeab0aa2411b7ab17f30a99d3cb96aed1d1055b',
+              '0xc6ef2fc5426d6ad6fd9e2a26abeab0aa2411b7ab17f30a99d3cb96aed1d1055b',
           "cumulativeGasUsed": '0x33bc',
           // 13244
           "gasUsed": '0x4dc',
@@ -1163,13 +1163,13 @@ void main() {
               "logIndex": "0x1", // 1
               "blockNumber": "0x1b4", // 436
               "blockHash":
-              "0x8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcfdf829c5a142f1fccd7d",
+                  "0x8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcfdf829c5a142f1fccd7d",
               "transactionHash":
-              "0xdf829c5a142f1fccd7d8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcf",
+                  "0xdf829c5a142f1fccd7d8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcf",
               "transactionIndex": "0x0", // 0
               "address": "0x16c5785ac562ff41e2dcfdf829c5a142f1fccd7d",
               "data":
-              "0x0000000000000000000000000000000000000000000000000000000000000000",
+                  "0x0000000000000000000000000000000000000000000000000000000000000000",
               "topics": [
                 "0x59ebeb90bc63057b6515673c3ecf9438e5058bca0f92585014eced636878c9a5"
               ]
@@ -1178,13 +1178,13 @@ void main() {
               "logIndex": "0x2", // 1
               "blockNumber": "0x1b4", // 436
               "blockHash":
-              "0x8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcfdf829c5a142f1fccd7d",
+                  "0x8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcfdf829c5a142f1fccd7d",
               "transactionHash":
-              "0xdf829c5a142f1fccd7d8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcf",
+                  "0xdf829c5a142f1fccd7d8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcf",
               "transactionIndex": "0x0", // 0
               "address": "0x16c5785ac562ff41e2dcfdf829c5a142f1fccd7d",
               "data":
-              "0x0000000000000000000000000000000000000000000000000000000000000000",
+                  "0x0000000000000000000000000000000000000000000000000000000000000000",
               "topics": [
                 "0x59ebeb90bc63057b6515673c3ecf9438e5058bca0f92585014eced636878c9a5"
               ]
@@ -1196,7 +1196,7 @@ void main() {
         }
       };
       final EthereumTransactionReceipt message =
-      EthereumTransactionReceipt.fromMap(tr);
+          EthereumTransactionReceipt.fromMap(tr);
       expect(
           message.transactionHash,
           EthereumUtilities.safeParse(
@@ -1228,13 +1228,13 @@ void main() {
       final Map tr = {
         "result": {
           "transactionHash":
-          '0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238',
+              '0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238',
           "transactionIndex": '0x1',
           // 1
           "blockNumber": '0xb',
           // 11
           "blockHash":
-          '0xc6ef2fc5426d6ad6fd9e2a26abeab0aa2411b7ab17f30a99d3cb96aed1d1055b',
+              '0xc6ef2fc5426d6ad6fd9e2a26abeab0aa2411b7ab17f30a99d3cb96aed1d1055b',
           "cumulativeGasUsed": '0x33bc',
           // 13244
           "gasUsed": '0x4dc',
@@ -1246,13 +1246,13 @@ void main() {
               "logIndex": "0x1", // 1
               "blockNumber": "0x1b4", // 436
               "blockHash":
-              "0x8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcfdf829c5a142f1fccd7d",
+                  "0x8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcfdf829c5a142f1fccd7d",
               "transactionHash":
-              "0xdf829c5a142f1fccd7d8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcf",
+                  "0xdf829c5a142f1fccd7d8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcf",
               "transactionIndex": "0x0", // 0
               "address": "0x16c5785ac562ff41e2dcfdf829c5a142f1fccd7d",
               "data":
-              "0x0000000000000000000000000000000000000000000000000000000000000000",
+                  "0x0000000000000000000000000000000000000000000000000000000000000000",
               "topics": [
                 "0x59ebeb90bc63057b6515673c3ecf9438e5058bca0f92585014eced636878c9a5"
               ]
@@ -1261,13 +1261,13 @@ void main() {
               "logIndex": "0x2", // 1
               "blockNumber": "0x1b4", // 436
               "blockHash":
-              "0x8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcfdf829c5a142f1fccd7d",
+                  "0x8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcfdf829c5a142f1fccd7d",
               "transactionHash":
-              "0xdf829c5a142f1fccd7d8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcf",
+                  "0xdf829c5a142f1fccd7d8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcf",
               "transactionIndex": "0x0", // 0
               "address": "0x16c5785ac562ff41e2dcfdf829c5a142f1fccd7d",
               "data":
-              "0x0000000000000000000000000000000000000000000000000000000000000000",
+                  "0x0000000000000000000000000000000000000000000000000000000000000000",
               "topics": [
                 "0x59ebeb90bc63057b6515673c3ecf9438e5058bca0f92585014eced636878c9a5"
               ]
@@ -1276,11 +1276,11 @@ void main() {
           "logsBloom": "0x0",
           // 256 byte bloom filter
           "root":
-          '0x59ebeb90bc63057b6515673c3ecf9438e5058bca0f92585014eced636878c9a5'
+              '0x59ebeb90bc63057b6515673c3ecf9438e5058bca0f92585014eced636878c9a5'
         }
       };
       final EthereumTransactionReceipt message =
-      EthereumTransactionReceipt.fromMap(tr);
+          EthereumTransactionReceipt.fromMap(tr);
       expect(
           message.transactionHash,
           EthereumUtilities.safeParse(
@@ -1344,13 +1344,13 @@ void main() {
           "logIndex": "0x1", // 1
           "blockNumber": "0x1b4", // 436
           "blockHash":
-          "0x8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcfdf829c5a142f1fccd7d",
+              "0x8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcfdf829c5a142f1fccd7d",
           "transactionHash":
-          "0xdf829c5a142f1fccd7d8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcf",
+              "0xdf829c5a142f1fccd7d8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcf",
           "transactionIndex": "0x0", // 0
           "address": "0x16c5785ac562ff41e2dcfdf829c5a142f1fccd7d",
           "data":
-          "0x0000000000000000000000000000000000000000000000000000000000000000",
+              "0x0000000000000000000000000000000000000000000000000000000000000000",
           "topics": [
             "0x59ebeb90bc63057b6515673c3ecf9438e5058bca0f92585014eced636878c9a5"
           ]
@@ -1359,13 +1359,13 @@ void main() {
           "logIndex": "0x2", // 1
           "blockNumber": "0x1b4", // 436
           "blockHash":
-          "0x8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcfdf829c5a142f1fccd7d",
+              "0x8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcfdf829c5a142f1fccd7d",
           "transactionHash":
-          "0xdf829c5a142f1fccd7d8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcf",
+              "0xdf829c5a142f1fccd7d8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcf",
           "transactionIndex": "0x0", // 0
           "address": "0x16c5785ac562ff41e2dcfdf829c5a142f1fccd7d",
           "data":
-          "0x0000000000000000000000000000000000000000000000000000000000000000",
+              "0x0000000000000000000000000000000000000000000000000000000000000000",
           "topics": [
             "0x59ebeb90bc63057b6515673c3ecf9438e5058bca0f92585014eced636878c9a5"
           ]
@@ -1484,9 +1484,7 @@ void main() {
       expect(error.id, 50);
       expect(
           error.timestamp.millisecondsSinceEpoch <=
-              DateTime
-                  .now()
-                  .millisecondsSinceEpoch,
+              DateTime.now().millisecondsSinceEpoch,
           isTrue);
       expect(error.toString(), "Code : 10 <> Message : An Error <> Id : 50");
     });

@@ -40,7 +40,8 @@ class EthereumFilter {
     if (data[EthereumConstants.ethResultKey].isNotEmpty) {
       if (data[EthereumConstants.ethResultKey][0] is String) {
         // Hashes
-        _hashes = EthereumUtilities.hexToBigIntList(data[EthereumConstants.ethResultKey]);
+        _hashes = EthereumUtilities.hexToBigIntList(
+            data[EthereumConstants.ethResultKey]);
       } else {
         // Logs
         _logs = List<EthereumLog>();

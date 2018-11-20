@@ -11,7 +11,6 @@ part of ethereum;
 
 /// This class implements the Ethereuum Admin API
 class EthereumApiAdmin extends EthereumApi {
-  
   /// Construction
   EthereumApiAdmin(Ethereum client) : super(client);
 
@@ -40,7 +39,8 @@ class EthereumApiAdmin extends EthereumApi {
     const String method = EthereumRpcMethods.listAccounts;
     final dynamic res = await _client.rpcClient.request(method);
     if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
-      return EthereumUtilities.hexToBigIntList(res[EthereumConstants.ethResultKey]);
+      return EthereumUtilities.hexToBigIntList(
+          res[EthereumConstants.ethResultKey]);
     }
     _client.processError(method, res);
     return null;
@@ -53,7 +53,9 @@ class EthereumApiAdmin extends EthereumApi {
       throw ArgumentError.notNull('Ethereum::personalLockAccount - address');
     }
     const String method = EthereumRpcMethods.lockAccount;
-    final List<String> params = <String>[EthereumUtilities.bigIntegerToHex(address)];
+    final List<String> params = <String>[
+      EthereumUtilities.bigIntegerToHex(address)
+    ];
     final dynamic res = await _client.rpcClient.request(method, params);
     if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
       return true;
@@ -113,8 +115,8 @@ class EthereumApiAdmin extends EthereumApi {
   /// If the passphrase can be used to decrypt the private key belogging to tx.from the transaction is verified,
   /// signed and send onto the network. The account is not unlocked globally in the node and cannot be
   /// used in other RPC calls.
-  Future<bool> personalSendTransaction(BigInt address, BigInt to,
-      String passphrase) async {
+  Future<bool> personalSendTransaction(
+      BigInt address, BigInt to, String passphrase) async {
     if (address == null) {
       throw ArgumentError.notNull(
           'Ethereum::personalSendTransaction - address');
@@ -127,7 +129,7 @@ class EthereumApiAdmin extends EthereumApi {
           'Ethereum::personalSendTransaction - passphrase');
     }
     const String method = EthereumRpcMethods.psendTransaction;
-    final Map<String, String> paramBlock = <String,String>{
+    final Map<String, String> paramBlock = <String, String>{
       'from': EthereumUtilities.bigIntegerToHex(address),
       'to': EthereumUtilities.bigIntegerToHex(to)
     };

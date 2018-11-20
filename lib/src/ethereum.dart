@@ -14,44 +14,57 @@ part of ethereum;
 /// https://github.com/ethereum/wiki/wiki/JSON-RPC#web3_clientversion.
 /// The API calls return null if an ethereum error occurred.
 class Ethereum {
+  /// Default constructor
   Ethereum(this._networkAdapter) {
     rpcClient = EthereumRpcClient(_networkAdapter);
 
     /// Construct the API classes
-    this._eth = new EthereumApiEth(this);
-    this._admin = new EthereumApiAdmin(this);
+    _eth = EthereumApiEth(this);
+    _admin = EthereumApiAdmin(this);
   }
 
+  /// With connection parameters
   Ethereum.withConnectionParameters(
       EthereumINetworkAdapter adapter, String hostname, String scheme,
-      [port = defaultHttpPort])
+      [int port = defaultHttpPort])
       : _networkAdapter = adapter {
     rpcClient = EthereumRpcClient(_networkAdapter);
 
     /// Construct the API classes
-    this._eth = new EthereumApiEth(this);
-    this._admin = new EthereumApiAdmin(this);
+    _eth = EthereumApiEth(this);
+    _admin = EthereumApiAdmin(this);
     connectParameters(scheme, hostname, port);
   }
 
   /// Constants
+  /// HTTP scheme
   static const String rpcHttpScheme = 'http';
+
+  /// Web socket scheme
   static const String rpcWsScheme = 'ws';
 
   /// Defaults
+  /// HTTP port
   static const int defaultHttpPort = 8545;
+
+  /// Web socket port
   static const int defaultWsPort = 8546;
 
   /// Connection parameters
+  /// Port
   int port = defaultHttpPort;
+
+  /// Host
   String host;
+
   Uri _uri;
 
+  /// Uri
   Uri get uri => _uri;
 
-  /// HTTP Adapter
   EthereumINetworkAdapter _networkAdapter;
 
+  /// HTTP Adapter
   set httpAdapter(EthereumINetworkAdapter adapter) => _networkAdapter = adapter;
 
   /// Json RPC client
@@ -60,9 +73,9 @@ class Ethereum {
   /// Last error
   EthereumError lastError = EthereumError();
 
-  /// Transmission id
   set id(int value) => rpcClient.resetTransmissionId(value);
 
+  /// Transmission id
   int get id => rpcClient.id;
 
   /// Connection methods
@@ -71,7 +84,7 @@ class Ethereum {
   /// port is optional. Scheme must be http or ws
   void connectString(String hostname) {
     if (hostname == null) {
-      throw ArgumentError.notNull("Ethereum::connectString - hostname");
+      throw ArgumentError.notNull('Ethereum::connectString - hostname');
     }
     final Uri uri = Uri.parse(hostname);
     _validateUri(uri);
@@ -80,7 +93,7 @@ class Ethereum {
   /// Connect using a URI, port is optional
   void connectUri(Uri uri) {
     if (uri == null) {
-      throw ArgumentError.notNull("Ethereum::connectUri - uri");
+      throw ArgumentError.notNull('Ethereum::connectUri - uri');
     }
     _validateUri(uri);
   }
@@ -89,11 +102,11 @@ class Ethereum {
   /// Scheme must be either rpcScheme or rpcWsScheme
   void connectParameters(String scheme, String hostname, [int port]) {
     if (hostname == null) {
-      throw ArgumentError.notNull("Ethereum::connectParameters - hostname");
+      throw ArgumentError.notNull('Ethereum::connectParameters - hostname');
     }
     if ((scheme != rpcHttpScheme) && (scheme != rpcWsScheme)) {
       throw FormatException(
-          "Ethereum::connectParameters - invalid scheme $scheme");
+          'Ethereum::connectParameters - invalid scheme $scheme');
     }
     int uriPort;
     if (port != null) {
@@ -109,7 +122,7 @@ class Ethereum {
       host = puri.host;
     } else {
       throw ArgumentError.value(
-          puri.host, "Ethereum::_validateUri - invalid host");
+          puri.host, 'Ethereum::_validateUri - invalid host');
     }
     Uri newUri = puri;
     if (!puri.hasPort) {
@@ -128,27 +141,29 @@ class Ethereum {
   bool printError = false;
 
   /// Error processing helper
-  void processError(String method, Map res) {
+  void processError(String method, Map<String, dynamic> res) {
     if (res == null) {
       if (printError) {
-        print("ERROR:: Result from RPC call is null");
+        print('ERROR:: Result from RPC call is null');
       }
       return;
     }
-    final Map error = res[EthereumConstants.ethErrorKey];
+    final Map<String, dynamic> error = res[EthereumConstants.ethErrorKey];
     lastError.updateError(error['code'], error['message'], rpcClient.id);
     if (printError) {
-      print("ERROR::$method - ${lastError.toString()}");
+      print('ERROR::$method - ${lastError.toString()}');
     }
   }
 
   /// Eth API
   EthereumApiEth _eth;
 
+  /// The ETH API
   EthereumApiEth get eth => _eth;
 
   /// Admin API
   EthereumApiAdmin _admin;
 
+  /// The Admin API
   EthereumApiAdmin get admin => _admin;
 }

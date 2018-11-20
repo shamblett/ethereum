@@ -73,28 +73,32 @@ class EthereumLog {
       _removed = data[EthereumConstants.ethResultKey]['removed'];
     }
     if (data[EthereumConstants.ethResultKey].containsKey('logIndex')) {
-      _logIndex = EthereumUtilities.hexToInt(data[EthereumConstants.ethResultKey]['logIndex']);
+      _logIndex = EthereumUtilities.hexToInt(
+          data[EthereumConstants.ethResultKey]['logIndex']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('transactionIndex')) {
-      _transactionIndex =
-          EthereumUtilities.hexToInt(data[EthereumConstants.ethResultKey]['transactionIndex']);
+      _transactionIndex = EthereumUtilities.hexToInt(
+          data[EthereumConstants.ethResultKey]['transactionIndex']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('transactionHash')) {
-      _transactionHash =
-          EthereumUtilities.safeParse(data[EthereumConstants.ethResultKey]['transactionHash']);
+      _transactionHash = EthereumUtilities.safeParse(
+          data[EthereumConstants.ethResultKey]['transactionHash']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('blockHash')) {
-      _blockHash = EthereumUtilities.safeParse(data[EthereumConstants.ethResultKey]['blockHash']);
+      _blockHash = EthereumUtilities.safeParse(
+          data[EthereumConstants.ethResultKey]['blockHash']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('blockNumber')) {
-      _blockNumber =
-          EthereumUtilities.hexToInt(data[EthereumConstants.ethResultKey]['blockNumber']);
+      _blockNumber = EthereumUtilities.hexToInt(
+          data[EthereumConstants.ethResultKey]['blockNumber']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('address')) {
-      _address = EthereumUtilities.safeParse(data[EthereumConstants.ethResultKey]['address']);
+      _address = EthereumUtilities.safeParse(
+          data[EthereumConstants.ethResultKey]['address']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('data')) {
-      _data = EthereumUtilities.safeParse(data[EthereumConstants.ethResultKey]['data']);
+      _data = EthereumUtilities.safeParse(
+          data[EthereumConstants.ethResultKey]['data']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('topics')) {
       if ((data[EthereumConstants.ethResultKey]['topics'] != null) &&

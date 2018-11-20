@@ -9,29 +9,28 @@
 
 part of ethereum;
 
+/// The RPC client
 class EthereumRpcClient {
-  static const String jsonRPpcVersion = '2.0';
-
+  /// Constructor
   EthereumRpcClient(this._adapter);
+
+  /// Version
+  static const String jsonRPpcVersion = '2.0';
 
   /// The HTTP adapter
   EthereumINetworkAdapter _adapter;
 
-  /// The transmission id
   int _id = 0;
 
+  /// The transmission id
   int get id => _id;
 
   /// The Uri
-  Uri _uri;
-
-  Uri get uri => _uri;
-
-  set uri(Uri uri) => _uri = uri;
+  Uri uri;
 
   /// The request method
-  Future<Map> request(String method, [dynamic parameters]) {
-    final Map packet = Map();
+  Future<Map<dynamic, dynamic>> request(String method, [dynamic parameters]) {
+    final Map<String, dynamic> packet = Map<String, dynamic>();
     packet['jsonrpc'] = jsonRPpcVersion;
     packet['method'] = method;
     if (parameters != null) {
@@ -39,7 +38,7 @@ class EthereumRpcClient {
     }
     packet['id'] = id;
     _id++;
-    return _adapter.httpRequest(_uri, packet);
+    return _adapter.httpRequest(uri, packet);
   }
 
   /// Reset the transmission id

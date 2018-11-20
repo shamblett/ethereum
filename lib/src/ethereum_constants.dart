@@ -11,7 +11,6 @@ part of ethereum;
 
 /// Package wide constants
 class EthereumConstants {
-
   /// Result key
   static const String ethResultKey = 'result';
 
