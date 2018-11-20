@@ -11,61 +11,63 @@ part of ethereum;
 
 /// Ethereum log message
 class EthereumLog {
+  /// Construction
   EthereumLog();
 
-  EthereumLog.fromMap(Map result) {
+  /// From map
+  EthereumLog.fromMap(Map<String, dynamic> result) {
     construct(result);
   }
 
-  /// Removed. True when the log was removed, due to a chain reorganization. false if its a valid log.
   bool _removed;
 
+  /// Removed. True when the log was removed, due to a chain reorganization. false if its a valid log.
   bool get removed => _removed;
 
-  /// Log index. The log index position in the block. Null when the log is pending.
   int _logIndex;
 
+  /// Log index. The log index position in the block. Null when the log is pending.
   int get logIndex => _logIndex;
 
-  /// Transaction index. The transactions index position the log was created from. Null when the log is pending.
   int _transactionIndex;
 
+  /// Transaction index. The transactions index position the log was created from. Null when the log is pending.
   int get transactionIndex => _transactionIndex;
 
-  /// Transaction hash. Hash of the transactions this log was created from. Null when the log is pending.
   BigInt _transactionHash;
 
+  /// Transaction hash. Hash of the transactions this log was created from. Null when the log is pending.
   BigInt get transactionHash => _transactionHash;
 
-  /// Block hash. Hash of the block where this log was in. Null when the log is pending.
   BigInt _blockHash;
 
+  /// Block hash. Hash of the block where this log was in. Null when the log is pending.
   BigInt get blockHash => _blockHash;
 
-  /// Block number. The block number of this log. Null when the log is pending.
   int _blockNumber;
 
+  /// Block number. The block number of this log. Null when the log is pending.
   int get blockNumber => _blockNumber;
 
-  /// Address. Address from which this log originated.
   BigInt _address;
 
+  /// Address. Address from which this log originated.
   BigInt get address => _address;
 
-  /// Data. Contains one or more 32 Bytes non-indexed arguments of the log.
   BigInt _data;
 
+  /// Data. Contains one or more 32 Bytes non-indexed arguments of the log.
   BigInt get data => _data;
+
+  List<BigInt> _topics;
 
   /// Topics. List of 0 to 4 32 of indexed log arguments. (In solidity:
   /// The first topic is the hash of the signature of the event (e.g. Deposit(address,bytes32,uint256)),
   /// except you declared the event with the anonymous specifier.)
-  List<BigInt> _topics;
-
   List<BigInt> get topics => _topics;
 
   /// Construct from the supplied Map, only check for the keys we need.
-  void construct(Map data) {
+  void construct(Map<String, dynamic> data) {
     if (data[EthereumConstants.ethResultKey] == null) {
       return;
     }
@@ -112,24 +114,24 @@ class EthereumLog {
     }
   }
 
-  // To string
+  @override
   String toString() {
-    final String ret = "Ethereum Log :" +
-        "\n" +
-        "  Removed : $removed" +
-        "\n" +
-        "  Log Index : $logIndex" +
-        "\n" +
-        "  Transaction Index : $transactionIndex" +
-        "\n" +
-        "  Transaction Hash: $transactionHash" +
-        "\n" +
-        "  Block Number: $blockNumber" +
-        "\n" +
-        "  Block Hash : $blockHash" +
-        "\n" +
-        "  Address : $address" +
-        "\n";
+    final String ret = 'Ethereum Log :'
+        '\n'
+        '  Removed : $removed'
+        '\n'
+        '  Log Index : $logIndex'
+        '\n'
+        '  Transaction Index : $transactionIndex'
+        '\n'
+        '  Transaction Hash: $transactionHash'
+        '\n'
+        '  Block Number: $blockNumber'
+        '\n'
+        '  Block Hash : $blockHash'
+        '\n'
+        '  Address : $address'
+        '\n';
     return ret;
   }
 }

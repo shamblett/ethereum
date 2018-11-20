@@ -15,25 +15,28 @@ part of ethereum;
 /// For filters created with newFilter or getFilterChanges the class contains logs
 /// which are are EthereumLog objects.
 class EthereumFilter {
+
+  /// Construction
   EthereumFilter();
 
-  EthereumFilter.fromMap(Map result) {
+  /// From map
+  EthereumFilter.fromMap(Map<String,dynamic> result) {
     construct(result);
   }
 
-  /// Hashes, block or transaction
   List<BigInt> _hashes;
 
+  /// Hashes, block or transaction
   List<BigInt> get hashes => _hashes;
 
-  /// Logs
   List<EthereumLog> _logs;
 
+  /// Logs
   List<EthereumLog> get logs => _logs;
 
   /// Ethereum log objects, returned by
   /// Construct from the supplied Map, only check for the keys we need.
-  void construct(Map data) {
+  void construct(Map<String,dynamic> data) {
     if (data[EthereumConstants.ethResultKey] == null) {
       return;
     }
@@ -45,8 +48,8 @@ class EthereumFilter {
       } else {
         // Logs
         _logs = List<EthereumLog>();
-        for (Map log in data[EthereumConstants.ethResultKey]) {
-          final Map buildLog = {EthereumConstants.ethResultKey: log};
+        for (Map<String,dynamic> log in data[EthereumConstants.ethResultKey]) {
+          final Map<String,dynamic> buildLog = <String,dynamic>{EthereumConstants.ethResultKey: log};
           final EthereumLog entry = EthereumLog.fromMap(buildLog);
           _logs.add(entry);
         }

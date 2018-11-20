@@ -11,34 +11,36 @@ part of ethereum;
 
 /// Sync status message
 class EthereumSyncStatus {
+  /// Constructor
   EthereumSyncStatus();
 
-  EthereumSyncStatus.fromMap(Map result) {
+  /// From map
+  EthereumSyncStatus.fromMap(Map<String, dynamic> result) {
     construct(result);
   }
 
-  /// Syncing indicator, true if syncing
   bool _syncing = false;
 
+  /// Syncing indicator, true if syncing
   bool get syncing => _syncing;
 
-  /// Starting block, only valid if syncing
   int _startingBlock;
 
+  /// Starting block, only valid if syncing
   int get startingBlock => _startingBlock;
 
-  /// Current block, only valid if syncing
   int _currentBlock;
 
+  /// Current block, only valid if syncing
   int get currentBlock => _currentBlock;
 
-  /// Highest block, only valid if syncing
   int _highestBlock;
 
+  /// Highest block, only valid if syncing
   int get highestBlock => _highestBlock;
 
   /// Construct from the supplied Map, only check for the keys we need.
-  void construct(Map data) {
+  void construct(Map<String, dynamic> data) {
     if (!(data[EthereumConstants.ethResultKey] is bool)) {
       _syncing = true;
       if (data.containsKey('startingBlock')) {
@@ -53,17 +55,16 @@ class EthereumSyncStatus {
     }
   }
 
-  // To string
+  @override
   String toString() {
-    String ret =
-        "Ethereum Sync Status :" + "\n" + "  Syncing : $syncing" + "\n";
+    String ret = 'Ethereum Sync Status :' '\n' '  Syncing : $syncing' '\n';
     if (syncing) {
-      ret += "  Starting Block : $startingBlock" +
-          "\n" +
-          "  Current Block : $currentBlock" +
-          "\n" +
-          "  Highest Block : $highestBlock" +
-          "\n";
+      ret += '  Starting Block : $startingBlock'
+          '\n'
+          '  Current Block : $currentBlock'
+          '\n'
+          '  Highest Block : $highestBlock'
+          '\n';
     }
 
     return ret;

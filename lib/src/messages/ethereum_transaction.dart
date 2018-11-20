@@ -11,72 +11,74 @@ part of ethereum;
 
 /// An ethereum transaction message
 class EthereumTransaction {
+  /// Constructor
   EthereumTransaction();
 
-  EthereumTransaction.fromMap(Map result) {
+  /// From map
+  EthereumTransaction.fromMap(Map<String, dynamic> result) {
     construct(result);
   }
 
-  /// Hash. hash of the transaction.
   BigInt _hash;
 
+  /// Hash. hash of the transaction.
   BigInt get hash => _hash;
 
-  /// Nonce. The number of transactions made by the sender prior to this one.
   int _nonce;
 
+  /// Nonce. The number of transactions made by the sender prior to this one.
   int get nonce => _nonce;
+
+  BigInt _blockHash;
 
   /// Block hash. Hash of the block where this transaction was in.
   /// Null when the transaction is pending.
-  BigInt _blockHash;
-
   BigInt get blockHash => _blockHash;
+
+  int _blockNumber;
 
   /// Block number. Block number of this transaction.
   /// Null when the transaction is pending.
-  int _blockNumber;
-
   int get blockNumber => _blockNumber;
+
+  int _transactionIndex;
 
   /// Transaction index. The transactions index position in the block.
   /// Null when the transaction is pending.
-  int _transactionIndex;
-
   int get transactionIndex => _transactionIndex;
 
-  /// From. Address of the sender.
   BigInt _from;
 
+  /// From. Address of the sender.
   BigInt get from => _from;
 
-  /// To. Address of the receiver. Null when a contract creation transaction.
   BigInt _to;
 
+  /// To. Address of the receiver. Null when a contract creation transaction.
   BigInt get to => _to;
 
-  /// Value. Value transferred in Wei.
   int _value;
 
+  /// Value. Value transferred in Wei.
   int get value => _value;
 
-  /// Gas price. Gas price provided by the sender in Wei.
   int _gasPrice;
 
+  /// Gas price. Gas price provided by the sender in Wei.
   int get gasPrice => _gasPrice;
 
-  /// Gas. Gas provided by the sender.
   int _gas;
 
+  /// Gas. Gas provided by the sender.
   int get gas => _gas;
 
-  /// Input. Data sent with the transaction.
   BigInt _input;
 
+  /// Input. Data sent with the transaction.
   BigInt get input => _input;
 
   /// Construct from the supplied Map, only check for the keys we need.
-  void construct(Map data) {
+  void construct(Map<String, dynamic> data) {
     if ((data == null) || (data[EthereumConstants.ethResultKey] == null)) {
       return;
     }
@@ -126,26 +128,26 @@ class EthereumTransaction {
     }
   }
 
-  // To string
+  @override
   String toString() {
-    final String ret = "Ethereum Transaction :" +
-        "\n" +
-        "  Hash : $hash" +
-        "\n" +
-        "  Block Number: $blockNumber" +
-        "\n" +
-        "  Block Hash : $blockHash" +
-        "\n" +
-        "  Transaction Index : $transactionIndex" +
-        "\n" +
-        "  From : $from" +
-        "\n" +
-        "  To : $to " +
-        "\n" +
-        "  Value : $value" +
-        "\n" +
-        "  Gas : $gas" +
-        "\n";
+    final String ret = 'Ethereum Transaction :'
+        '\n'
+        '  Hash : $hash'
+        '\n'
+        '  Block Number: $blockNumber'
+        '\n'
+        '  Block Hash : $blockHash'
+        '\n'
+        '  Transaction Index : $transactionIndex'
+        '\n'
+        '  From : $from'
+        '\n'
+        '  To : $to '
+        '\n'
+        '  Value : $value'
+        '\n'
+        '  Gas : $gas'
+        '\n';
 
     return ret;
   }

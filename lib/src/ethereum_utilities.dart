@@ -12,9 +12,16 @@ part of ethereum;
 /// General client support utilities
 class EthereumUtilities {
   /// Common pad values for intToHex
+  /// 4
   static const int pad4 = 4;
+
+  /// 8
   static const int pad8 = 8;
+
+  /// 16
   static const int pad16 = 16;
+
+  /// 32
   static const int pad32 = 32;
 
   /// Integer to hex string with leading 0x, lowercase.
@@ -26,26 +33,24 @@ class EthereumUtilities {
     if (pad != 0) {
       if (pad.isNegative || pad.isOdd) {
         throw FormatException(
-            "EthereumUtilities:: intToHex - invalid pad value, $pad");
+            'EthereumUtilities:: intToHex - invalid pad value, $pad');
       }
       if (ret.length.isOdd) {
-        ret = '0' + ret;
+        ret = '0$ret';
       }
       final int bytes = (ret.length / 2).round();
       if (bytes != pad) {
-        final int zeroNum = (pad - bytes);
+        final int zeroNum = pad - bytes;
         for (int i = 0; i < zeroNum; i++) {
-          ret = '00' + ret;
+          ret = '00$ret';
         }
       }
     }
-    return '0x' + ret;
+    return '0x$ret';
   }
 
   /// BigInt to hex string
-  static String bigIntegerToHex(BigInt val) {
-    return '0x' + val.toRadixString(16);
-  }
+  static String bigIntegerToHex(BigInt val) => '0x${val.toRadixString(16)}';
 
   /// Hex string to integer, a value of null indicates an error.
   /// The string must start with 0x
@@ -58,32 +63,27 @@ class EthereumUtilities {
   }
 
   /// Hex String list to Integer list
-  static List<int> hexToIntList(List<String> val) {
-    return List<int>.generate(val.length, (int index) => hexToInt(val[index]));
-  }
+  static List<int> hexToIntList(List<String> val) =>
+      List<int>.generate(val.length, (int index) => hexToInt(val[index]));
 
   /// Hex String list to BigInt list
-  static List<BigInt> hexToBigIntList(List val) {
-    return List<BigInt>.generate(
-        val.length, (int index) => EthereumUtilities.safeParse(val[index]));
-  }
+  static List<BigInt> hexToBigIntList(List<String> val) =>
+      List<BigInt>.generate(
+          val.length, (int index) => EthereumUtilities.safeParse(val[index]));
 
   /// Integer list to Hex String list
-  static List<String> intToHexList(List<int> val) {
-    return List<String>.generate(
-        val.length, (int index) => intToHex(val[index]));
-  }
+  static List<String> intToHexList(List<int> val) =>
+      List<String>.generate(val.length, (int index) => intToHex(val[index]));
 
   /// BigInt list to Hex String list
-  static List<String> bigIntegerToHexList(List<BigInt> val) {
-    return List<String>.generate(
-        val.length, (int index) => '0x' + val[index].toRadixString(16));
-  }
+  static List<String> bigIntegerToHexList(List<BigInt> val) =>
+      List<String>.generate(
+          val.length, (int index) => '0x${val[index].toRadixString(16)}');
 
   /// Remove null values from a map
-  static Map removeNull(Map theMap) {
-    final List values = theMap.values.toList();
-    final List keys = theMap.keys.toList();
+  static Map<dynamic,dynamic> removeNull(Map<dynamic,dynamic> theMap) {
+    final List<dynamic> values = theMap.values.toList();
+    final List<dynamic> keys = theMap.keys.toList();
     int index = 0;
     for (dynamic val in values) {
       if (val == null) {

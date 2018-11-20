@@ -11,71 +11,73 @@ part of ethereum;
 
 /// An ethereum transaction receipt message
 class EthereumTransactionReceipt {
+  /// Constructor
   EthereumTransactionReceipt();
 
-  EthereumTransactionReceipt.fromMap(Map result) {
+  /// From map
+  EthereumTransactionReceipt.fromMap(Map<String, dynamic> result) {
     construct(result);
   }
 
-  /// Transaction hash. Hash of the transaction.
   BigInt _transactionHash;
 
+  /// Transaction hash. Hash of the transaction.
   BigInt get transactionHash => _transactionHash;
 
-  /// Transaction index. Ihe transactions index position in the block.
   int _transactionIndex;
 
+  /// Transaction index. Ihe transactions index position in the block.
   int get transactionIndex => _transactionIndex;
 
-  /// Block hash. Hash of the block this transaction was in.
   BigInt _blockHash;
 
+  /// Block hash. Hash of the block this transaction was in.
   BigInt get blockHash => _blockHash;
 
-  /// Block number. Block number of this transaction.
   int _blockNumber;
 
+  /// Block number. Block number of this transaction.
   int get blockNumber => _blockNumber;
 
-  /// Cumulative gas used. The total amount of gas used when this transaction was executed in the block.
   int _cumulativeGasUsed;
 
+  /// Cumulative gas used. The total amount of gas used when this transaction was executed in the block.
   int get cumulativeGasUsed => _cumulativeGasUsed;
 
-  /// Gas used. The amount of gas used by this transaction.
   int _gasUsed;
 
+  /// Gas used. The amount of gas used by this transaction.
   int get gasUsed => _gasUsed;
 
-  /// Contract address. The contract address created, if the transaction was a contract creation, otherwise null.
   BigInt _contractAddress;
 
+  /// Contract address. The contract address created, if the transaction was a contract creation, otherwise null.
   BigInt get contractAddress => _contractAddress;
 
-  /// Logs. List of log objects, which this transaction generated.
   List<EthereumLog> _logs;
 
+  /// Logs. List of log objects, which this transaction generated.
   List<EthereumLog> get logs => _logs;
 
-  /// Logs bloom. Bloom filter for light clients to quickly retrieve related logs.
   BigInt _logsBloom;
 
+  /// Logs bloom. Bloom filter for light clients to quickly retrieve related logs.
   BigInt get logsBloom => _logsBloom;
+
+  BigInt _root;
 
   /// Root. Post-transaction stateroot (pre Byzantium)
   /// Null if status is present.
-  BigInt _root;
-
   BigInt get root => _root;
+
+  int _status;
 
   /// Status. Either 1 (success) or 0 (failure)
   /// Null if root is present
-  int _status;
-
   int get status => _status;
 
   /// Construct from the supplied Map, only check for the keys we need.
-  void construct(Map data) {
+  void construct(Map<String, dynamic> data) {
     if ((data == null) || (data[EthereumConstants.ethResultKey] == null)) {
       return;
     }
@@ -123,8 +125,9 @@ class EthereumTransactionReceipt {
       if ((data[EthereumConstants.ethResultKey]['logs'] != null) &&
           (data[EthereumConstants.ethResultKey]['logs'].isNotEmpty)) {
         _logs = List<EthereumLog>();
-        for (Map log in data[EthereumConstants.ethResultKey]['logs']) {
-          final Map buildLog = {EthereumConstants.ethResultKey: log};
+        for (Map<String, dynamic> log in data[EthereumConstants.ethResultKey]
+            ['logs']) {
+          final Map<String, dynamic> buildLog = <String, dynamic>{EthereumConstants.ethResultKey: log};
           final EthereumLog entry = EthereumLog.fromMap(buildLog);
           _logs.add(entry);
         }
@@ -132,22 +135,22 @@ class EthereumTransactionReceipt {
     }
   }
 
-  // To string
+  @override
   String toString() {
-    final String ret = "Ethereum Transaction Receipt:" +
-        "\n" +
-        "  Transaction Hash : $transactionHash" +
-        "\n" +
-        "  Block Number: $blockNumber" +
-        "\n" +
-        "  Block Hash : $blockHash" +
-        "\n" +
-        "  Transaction Index : $transactionIndex" +
-        "\n" +
-        "  Contract Address : $contractAddress" +
-        "\n" +
-        "  Gas used : $gasUsed" +
-        "\n";
+    final String ret = 'Ethereum Transaction Receipt:'
+        '\n'
+        '  Transaction Hash : $transactionHash'
+        '\n'
+        '  Block Number: $blockNumber'
+        '\n'
+        '  Block Hash : $blockHash'
+        '\n'
+        '  Transaction Index : $transactionIndex'
+        '\n'
+        '  Contract Address : $contractAddress'
+        '\n'
+        '  Gas used : $gasUsed'
+        '\n';
 
     return ret;
   }
