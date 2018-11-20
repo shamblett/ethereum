@@ -34,18 +34,18 @@ class EthereumFilter {
   /// Ethereum log objects, returned by
   /// Construct from the supplied Map, only check for the keys we need.
   void construct(Map data) {
-    if (data[ethResultKey] == null) {
+    if (data[EthereumConstants.ethResultKey] == null) {
       return;
     }
-    if (data[ethResultKey].isNotEmpty) {
-      if (data[ethResultKey][0] is String) {
+    if (data[EthereumConstants.ethResultKey].isNotEmpty) {
+      if (data[EthereumConstants.ethResultKey][0] is String) {
         // Hashes
-        _hashes = EthereumUtilities.hexToBigIntList(data[ethResultKey]);
+        _hashes = EthereumUtilities.hexToBigIntList(data[EthereumConstants.ethResultKey]);
       } else {
         // Logs
         _logs = List<EthereumLog>();
-        for (Map log in data[ethResultKey]) {
-          final Map buildLog = {ethResultKey: log};
+        for (Map log in data[EthereumConstants.ethResultKey]) {
+          final Map buildLog = {EthereumConstants.ethResultKey: log};
           final EthereumLog entry = EthereumLog.fromMap(buildLog);
           _logs.add(entry);
         }

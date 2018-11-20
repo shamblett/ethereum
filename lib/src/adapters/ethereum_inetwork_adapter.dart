@@ -10,10 +10,13 @@
 
 part of ethereum;
 
+/// Base class for all network adapters
 abstract class EthereumINetworkAdapter {
+  /// Construction
   EthereumINetworkAdapter();
 
   /// Processes the HTTP request returning the  HTTP response as
   /// a map
-  Future<Map> httpRequest(Uri uri, Map request);
+  Future<Map<dynamic, dynamic>> httpRequest(
+      Uri uri, Map<String, dynamic> request);
 }

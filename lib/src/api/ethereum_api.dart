@@ -11,6 +11,8 @@ part of ethereum;
 
 /// The API base class
 class EthereumApi {
+
+  /// Construction
   EthereumApi(this._client);
 
   /// Our client

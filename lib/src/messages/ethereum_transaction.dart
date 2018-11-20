@@ -77,43 +77,43 @@ class EthereumTransaction {
 
   /// Construct from the supplied Map, only check for the keys we need.
   void construct(Map data) {
-    if ((data == null) || (data[ethResultKey] == null)) {
+    if ((data == null) || (data[EthereumConstants.ethResultKey] == null)) {
       return;
     }
-    if (data[ethResultKey].containsKey('hash')) {
-      _hash = EthereumUtilities.safeParse(data[ethResultKey]['hash']);
+    if (data[EthereumConstants.ethResultKey].containsKey('hash')) {
+      _hash = EthereumUtilities.safeParse(data[EthereumConstants.ethResultKey]['hash']);
     }
-    if (data[ethResultKey].containsKey('nonce')) {
-      _nonce = EthereumUtilities.hexToInt(data[ethResultKey]['nonce']);
+    if (data[EthereumConstants.ethResultKey].containsKey('nonce')) {
+      _nonce = EthereumUtilities.hexToInt(data[EthereumConstants.ethResultKey]['nonce']);
     }
-    if (data[ethResultKey].containsKey('blockHash')) {
-      _blockHash = EthereumUtilities.safeParse(data[ethResultKey]['blockHash']);
+    if (data[EthereumConstants.ethResultKey].containsKey('blockHash')) {
+      _blockHash = EthereumUtilities.safeParse(data[EthereumConstants.ethResultKey]['blockHash']);
     }
-    if (data[ethResultKey].containsKey('blockNumber')) {
+    if (data[EthereumConstants.ethResultKey].containsKey('blockNumber')) {
       _blockNumber =
-          EthereumUtilities.hexToInt(data[ethResultKey]['blockNumber']);
+          EthereumUtilities.hexToInt(data[EthereumConstants.ethResultKey]['blockNumber']);
     }
-    if (data[ethResultKey].containsKey('transactionIndex')) {
+    if (data[EthereumConstants.ethResultKey].containsKey('transactionIndex')) {
       _transactionIndex =
-          EthereumUtilities.hexToInt(data[ethResultKey]['transactionIndex']);
+          EthereumUtilities.hexToInt(data[EthereumConstants.ethResultKey]['transactionIndex']);
     }
-    if (data[ethResultKey].containsKey('from')) {
-      _from = EthereumUtilities.safeParse(data[ethResultKey]['from']);
+    if (data[EthereumConstants.ethResultKey].containsKey('from')) {
+      _from = EthereumUtilities.safeParse(data[EthereumConstants.ethResultKey]['from']);
     }
-    if (data[ethResultKey].containsKey('to')) {
-      _to = EthereumUtilities.safeParse(data[ethResultKey]['to']);
+    if (data[EthereumConstants.ethResultKey].containsKey('to')) {
+      _to = EthereumUtilities.safeParse(data[EthereumConstants.ethResultKey]['to']);
     }
-    if (data[ethResultKey].containsKey('value')) {
-      _value = EthereumUtilities.hexToInt(data[ethResultKey]['value']);
+    if (data[EthereumConstants.ethResultKey].containsKey('value')) {
+      _value = EthereumUtilities.hexToInt(data[EthereumConstants.ethResultKey]['value']);
     }
-    if (data[ethResultKey].containsKey('gasPrice')) {
-      _gasPrice = EthereumUtilities.hexToInt(data[ethResultKey]['gasPrice']);
+    if (data[EthereumConstants.ethResultKey].containsKey('gasPrice')) {
+      _gasPrice = EthereumUtilities.hexToInt(data[EthereumConstants.ethResultKey]['gasPrice']);
     }
-    if (data[ethResultKey].containsKey('gas')) {
-      _gas = EthereumUtilities.hexToInt(data[ethResultKey]['gas']);
+    if (data[EthereumConstants.ethResultKey].containsKey('gas')) {
+      _gas = EthereumUtilities.hexToInt(data[EthereumConstants.ethResultKey]['gas']);
     }
-    if (data[ethResultKey].containsKey('input')) {
-      _input = EthereumUtilities.safeParse(data[ethResultKey]['input']);
+    if (data[EthereumConstants.ethResultKey].containsKey('input')) {
+      _input = EthereumUtilities.safeParse(data[EthereumConstants.ethResultKey]['input']);
     }
   }
 

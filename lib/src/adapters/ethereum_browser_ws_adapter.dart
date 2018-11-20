@@ -10,9 +10,12 @@
 
 part of ethereum_browser_ws_client;
 
+/// The browser web socket adapter
 class EthereumBrowserWSAdapter implements EthereumINetworkAdapter {
-  Future<Map> httpRequest(Uri uri, Map request) {
-    final completer = Completer<Map>();
+
+  @override
+  Future<Map<dynamic, dynamic>> httpRequest(Uri uri, Map<String, dynamic> request) {
+    final Completer<Map<String, dynamic>> completer = Completer<Map<String, dynamic>>();
     final WebSocket webSocket = WebSocket(uri.toString());
     final String message = json.encode(request);
     webSocket.onOpen.listen((Event e) {

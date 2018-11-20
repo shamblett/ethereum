@@ -11,6 +11,8 @@ import 'dart:async';
 
 part 'src/ethereum.dart';
 
+part 'src/ethereum_constants.dart';
+
 part 'src/ethereum_rpc_methods.dart';
 part 'src/ethereum_rpc_client.dart';
 
@@ -41,6 +43,3 @@ part 'src/api/ethereum_api_eth.dart';
 
 part 'src/api/ethereum_api_admin.dart';
 
-/// Constants
-const String ethResultKey = "result";
-const String ethErrorKey = "error";

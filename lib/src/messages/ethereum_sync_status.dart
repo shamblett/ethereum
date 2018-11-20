@@ -39,7 +39,7 @@ class EthereumSyncStatus {
 
   /// Construct from the supplied Map, only check for the keys we need.
   void construct(Map data) {
-    if (!(data[ethResultKey] is bool)) {
+    if (!(data[EthereumConstants.ethResultKey] is bool)) {
       _syncing = true;
       if (data.containsKey('startingBlock')) {
         _startingBlock = EthereumUtilities.hexToInt(data['startingBlock']);

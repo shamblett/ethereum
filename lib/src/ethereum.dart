@@ -135,7 +135,7 @@ class Ethereum {
       }
       return;
     }
-    final Map error = res[ethErrorKey];
+    final Map error = res[EthereumConstants.ethErrorKey];
     lastError.updateError(error['code'], error['message'], rpcClient.id);
     if (printError) {
       print("ERROR::$method - ${lastError.toString()}");

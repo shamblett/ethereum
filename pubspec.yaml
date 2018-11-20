@@ -1,6 +1,6 @@
 name: ethereum
 description: An ethereum JSON RPC 2.0 client for Dart. Interfaces ethereum API calls to Dart types and vice versa.
-version: 3.0.0
+version: 3.1.0
 author: Steve Hamblett <steve.hamblett@linux.com>
 homepage: https://github.com/shamblett/ethereum
 
@@ -14,7 +14,7 @@ dev_dependencies:
   coverage: '^0.12.2'
   #dart_dev: '^2.0.0-alpha'
   dart_style: '^1.1.3'
-  dartdoc: '^0.20.3'
-  build_runner: '^0.10.0'
+  dartdoc: '^0.25.0'
+  build_runner: '^1.1.2'
   build_test: '^0.10.2'
   build_web_compilers: '^0.4.0'

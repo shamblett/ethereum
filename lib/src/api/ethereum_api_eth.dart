@@ -11,14 +11,16 @@ part of ethereum;
 
 /// This class implements the Ethereuum eth API, sometimes referred to as DApp
 class EthereumApiEth extends EthereumApi {
+  
+  /// Construction
   EthereumApiEth(Ethereum client) : super(client);
 
   //// Client version
   Future<String> clientVersion() async {
-    final String method = EthereumRpcMethods.web3ClientVersion;
-    final res = await _client.rpcClient.request(method);
-    if (res != null && res.containsKey(ethResultKey)) {
-      return res[ethResultKey];
+    const String method = EthereumRpcMethods.web3ClientVersion;
+    final dynamic res = await _client.rpcClient.request(method);
+    if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
+      return res[EthereumConstants.ethResultKey];
     }
     _client.processError(method, res);
     return null;
@@ -27,13 +29,13 @@ class EthereumApiEth extends EthereumApi {
   /// Returns Keccak-256 (not the standardized SHA3-256) of the given data.
   Future<BigInt> sha3(BigInt data) async {
     if (data == null) {
-      throw ArgumentError.notNull("Ethereum::sha3 - data");
+      throw ArgumentError.notNull('Ethereum::sha3 - data');
     }
     final String method = EthereumRpcMethods.web3Sha3;
     final List params = [EthereumUtilities.bigIntegerToHex(data)];
     final res = await _client.rpcClient.request(method, params);
-    if (res != null && res.containsKey(ethResultKey)) {
-      return EthereumUtilities.safeParse(res[ethResultKey]);
+    if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
+      return EthereumUtilities.safeParse(res[EthereumConstants.ethResultKey]);
     }
     _client.processError(method, res);
     return null;
@@ -43,8 +45,8 @@ class EthereumApiEth extends EthereumApi {
   Future<String> netVersion() async {
     final String method = EthereumRpcMethods.netVersion;
     final res = await _client.rpcClient.request(method);
-    if (res != null && res.containsKey(ethResultKey)) {
-      return res[ethResultKey];
+    if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
+      return res[EthereumConstants.ethResultKey];
     }
     _client.processError(method, res);
     return null;
@@ -54,8 +56,8 @@ class EthereumApiEth extends EthereumApi {
   Future<bool> netListening() async {
     final String method = EthereumRpcMethods.netListening;
     final res = await _client.rpcClient.request(method);
-    if (res != null && res.containsKey(ethResultKey)) {
-      return res[ethResultKey];
+    if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
+      return res[EthereumConstants.ethResultKey];
     }
     _client.processError(method, res);
     return null;
@@ -65,8 +67,8 @@ class EthereumApiEth extends EthereumApi {
   Future<int> netPeerCount() async {
     final String method = EthereumRpcMethods.netPeerCount;
     final res = await _client.rpcClient.request(method);
-    if (res != null && res.containsKey(ethResultKey)) {
-      return EthereumUtilities.hexToInt(res[ethResultKey]);
+    if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
+      return EthereumUtilities.hexToInt(res[EthereumConstants.ethResultKey]);
     }
     _client.processError(method, res);
     return null;
@@ -76,8 +78,8 @@ class EthereumApiEth extends EthereumApi {
   Future<String> protocolVersion() async {
     final String method = EthereumRpcMethods.protocolVersion;
     final res = await _client.rpcClient.request(method);
-    if (res != null && res.containsKey(ethResultKey)) {
-      return res[ethResultKey];
+    if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
+      return res[EthereumConstants.ethResultKey];
     }
     _client.processError(method, res);
     return null;
@@ -87,7 +89,7 @@ class EthereumApiEth extends EthereumApi {
   Future<EthereumSyncStatus> syncStatus() async {
     final String method = EthereumRpcMethods.syncing;
     final res = await _client.rpcClient.request(method);
-    if (res != null && res.containsKey(ethResultKey)) {
+    if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
       return EthereumSyncStatus.fromMap(res);
     }
     _client.processError(method, res);
@@ -98,8 +100,8 @@ class EthereumApiEth extends EthereumApi {
   Future<BigInt> coinbaseAddress() async {
     final String method = EthereumRpcMethods.coinbaseAddress;
     final res = await _client.rpcClient.request(method);
-    if (res != null && res.containsKey(ethResultKey)) {
-      return EthereumUtilities.safeParse(res[ethResultKey]);
+    if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
+      return EthereumUtilities.safeParse(res[EthereumConstants.ethResultKey]);
     }
     _client.processError(method, res);
     return null;
@@ -109,8 +111,8 @@ class EthereumApiEth extends EthereumApi {
   Future<bool> mining() async {
     final String method = EthereumRpcMethods.mining;
     final res = await _client.rpcClient.request(method);
-    if (res != null && res.containsKey(ethResultKey)) {
-      return res[ethResultKey];
+    if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
+      return res[EthereumConstants.ethResultKey];
     }
     _client.processError(method, res);
     return null;
@@ -120,8 +122,8 @@ class EthereumApiEth extends EthereumApi {
   Future<int> hashrate() async {
     final String method = EthereumRpcMethods.hashrate;
     final res = await _client.rpcClient.request(method);
-    if (res != null && res.containsKey(ethResultKey)) {
-      return EthereumUtilities.hexToInt(res[ethResultKey]);
+    if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
+      return EthereumUtilities.hexToInt(res[EthereumConstants.ethResultKey]);
     }
     _client.processError(method, res);
     return null;
@@ -131,8 +133,8 @@ class EthereumApiEth extends EthereumApi {
   Future<int> gasPrice() async {
     final String method = EthereumRpcMethods.gasPrice;
     final res = await _client.rpcClient.request(method);
-    if (res != null && res.containsKey(ethResultKey)) {
-      return EthereumUtilities.hexToInt(res[ethResultKey]);
+    if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
+      return EthereumUtilities.hexToInt(res[EthereumConstants.ethResultKey]);
     }
     _client.processError(method, res);
     return null;
@@ -142,8 +144,8 @@ class EthereumApiEth extends EthereumApi {
   Future<List<BigInt>> accounts() async {
     final String method = EthereumRpcMethods.accounts;
     final res = await _client.rpcClient.request(method);
-    if (res != null && res.containsKey(ethResultKey)) {
-      return EthereumUtilities.hexToBigIntList(res[ethResultKey]);
+    if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
+      return EthereumUtilities.hexToBigIntList(res[EthereumConstants.ethResultKey]);
     }
     _client.processError(method, res);
     return null;
@@ -153,8 +155,8 @@ class EthereumApiEth extends EthereumApi {
   Future<int> blockNumber() async {
     final String method = EthereumRpcMethods.blockNumber;
     final res = await _client.rpcClient.request(method);
-    if (res != null && res.containsKey(ethResultKey)) {
-      return EthereumUtilities.hexToInt(res[ethResultKey]);
+    if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
+      return EthereumUtilities.hexToInt(res[EthereumConstants.ethResultKey]);
     }
     _client.processError(method, res);
     return null;
@@ -164,10 +166,10 @@ class EthereumApiEth extends EthereumApi {
   Future<int> getBalance(
       BigInt accountNumber, EthereumDefaultBlock block) async {
     if (accountNumber == null) {
-      throw ArgumentError.notNull("Ethereum::getBalance - accountNumber");
+      throw ArgumentError.notNull('Ethereum::getBalance - accountNumber');
     }
     if (block == null) {
-      throw ArgumentError.notNull("Ethereum::getBalance - block");
+      throw ArgumentError.notNull('Ethereum::getBalance - block');
     }
     final String method = EthereumRpcMethods.balance;
     final String blockString = block.getSelection();
@@ -176,8 +178,8 @@ class EthereumApiEth extends EthereumApi {
       blockString
     ];
     final res = await _client.rpcClient.request(method, params);
-    if (res != null && res.containsKey(ethResultKey)) {
-      return EthereumUtilities.hexToInt(res[ethResultKey]);
+    if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
+      return EthereumUtilities.hexToInt(res[EthereumConstants.ethResultKey]);
     }
     _client.processError(method, res);
     return null;
@@ -189,13 +191,13 @@ class EthereumApiEth extends EthereumApi {
   Future<BigInt> getStorageAt(
       BigInt address, int pos, EthereumDefaultBlock block) async {
     if (address == null) {
-      throw ArgumentError.notNull("Ethereum::getStorageAt - address");
+      throw ArgumentError.notNull('Ethereum::getStorageAt - address');
     }
     if (pos == null) {
-      throw ArgumentError.notNull("Ethereum::getStorageAt - pos");
+      throw ArgumentError.notNull('Ethereum::getStorageAt - pos');
     }
     if (block == null) {
-      throw ArgumentError.notNull("Ethereum::getStorageAt - block");
+      throw ArgumentError.notNull('Ethereum::getStorageAt - block');
     }
     final String method = EthereumRpcMethods.storageAt;
     final String blockString = block.getSelection();
@@ -205,8 +207,8 @@ class EthereumApiEth extends EthereumApi {
       blockString
     ];
     final res = await _client.rpcClient.request(method, params);
-    if (res != null && res.containsKey(ethResultKey)) {
-      return EthereumUtilities.safeParse(res[ethResultKey]);
+    if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
+      return EthereumUtilities.safeParse(res[EthereumConstants.ethResultKey]);
     }
     _client.processError(method, res);
     return null;
@@ -216,10 +218,10 @@ class EthereumApiEth extends EthereumApi {
   Future<int> getTransactionCount(
       BigInt address, EthereumDefaultBlock block) async {
     if (address == null) {
-      throw ArgumentError.notNull("Ethereum::getTransactionCount - address");
+      throw ArgumentError.notNull('Ethereum::getTransactionCount - address');
     }
     if (block == null) {
-      throw ArgumentError.notNull("Ethereum::getTransactionCount - block");
+      throw ArgumentError.notNull('Ethereum::getTransactionCount - block');
     }
     final String method = EthereumRpcMethods.transactionCount;
     final String blockString = block.getSelection();
@@ -228,8 +230,8 @@ class EthereumApiEth extends EthereumApi {
       blockString
     ];
     final res = await _client.rpcClient.request(method, params);
-    if (res != null && res.containsKey(ethResultKey)) {
-      return EthereumUtilities.hexToInt(res[ethResultKey]);
+    if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
+      return EthereumUtilities.hexToInt(res[EthereumConstants.ethResultKey]);
     }
     _client.processError(method, res);
     return null;
@@ -242,14 +244,14 @@ class EthereumApiEth extends EthereumApi {
   Future<int> getBlockTransactionCountByHash(BigInt blockHash) async {
     if (blockHash == null) {
       throw ArgumentError.notNull(
-          "Ethereum::getBlockTransactionCountByHash - blockHash");
+          'Ethereum::getBlockTransactionCountByHash - blockHash');
     }
     final String method = EthereumRpcMethods.blockTransactionCountByHash;
     final List params = [EthereumUtilities.bigIntegerToHex(blockHash)];
     final res = await _client.rpcClient.request(method, params);
-    if (res != null && res.containsKey(ethResultKey)) {
-      if (res[ethResultKey] != null) {
-        return EthereumUtilities.hexToInt(res[ethResultKey]);
+    if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
+      if (res[EthereumConstants.ethResultKey] != null) {
+        return EthereumUtilities.hexToInt(res[EthereumConstants.ethResultKey]);
       } else {
         return 0;
       }
@@ -266,15 +268,15 @@ class EthereumApiEth extends EthereumApi {
       EthereumDefaultBlock blockNumber) async {
     if (blockNumber == null) {
       throw ArgumentError.notNull(
-          "Ethereum::getBlockTransactionCountByNumber - blockNumber");
+          'Ethereum::getBlockTransactionCountByNumber - blockNumber');
     }
     final String method = EthereumRpcMethods.blockTransactionCountByNumber;
     final String blockString = blockNumber.getSelection();
     final List params = [blockString];
     final res = await _client.rpcClient.request(method, params);
-    if (res != null && res.containsKey(ethResultKey)) {
-      if (res[ethResultKey] != null) {
-        return EthereumUtilities.hexToInt(res[ethResultKey]);
+    if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
+      if (res[EthereumConstants.ethResultKey] != null) {
+        return EthereumUtilities.hexToInt(res[EthereumConstants.ethResultKey]);
       } else {
         return 0;
       }
@@ -289,14 +291,14 @@ class EthereumApiEth extends EthereumApi {
   /// this and an error.
   Future<int> getUncleCountByHash(BigInt blockHash) async {
     if (blockHash == null) {
-      throw ArgumentError.notNull("Ethereum::getUncleCountByHash - blockHash");
+      throw ArgumentError.notNull('Ethereum::getUncleCountByHash - blockHash');
     }
     final String method = EthereumRpcMethods.blockUncleCountByBlockHash;
     final List params = [EthereumUtilities.bigIntegerToHex(blockHash)];
     final res = await _client.rpcClient.request(method, params);
-    if (res != null && res.containsKey(ethResultKey)) {
-      if (res[ethResultKey] != null) {
-        return EthereumUtilities.hexToInt(res[ethResultKey]);
+    if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
+      if (res[EthereumConstants.ethResultKey] != null) {
+        return EthereumUtilities.hexToInt(res[EthereumConstants.ethResultKey]);
       } else {
         return 0;
       }
@@ -312,15 +314,15 @@ class EthereumApiEth extends EthereumApi {
   Future<int> getUncleCountByNumber(EthereumDefaultBlock blockNumber) async {
     if (blockNumber == null) {
       throw ArgumentError.notNull(
-          "Ethereum::getUncleCountByNumber - blockNumber");
+          'Ethereum::getUncleCountByNumber - blockNumber');
     }
     final String method = EthereumRpcMethods.blockUncleCountByBlockNumber;
     final String blockString = blockNumber.getSelection();
     final List params = [blockString];
     final res = await _client.rpcClient.request(method, params);
-    if (res != null && res.containsKey(ethResultKey)) {
-      if (res[ethResultKey] != null) {
-        return EthereumUtilities.hexToInt(res[ethResultKey]);
+    if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
+      if (res[EthereumConstants.ethResultKey] != null) {
+        return EthereumUtilities.hexToInt(res[EthereumConstants.ethResultKey]);
       } else {
         return 0;
       }
@@ -332,10 +334,10 @@ class EthereumApiEth extends EthereumApi {
   /// Get code, the code at the given address.
   Future<int> getCode(BigInt address, EthereumDefaultBlock block) async {
     if (address == null) {
-      throw ArgumentError.notNull("Ethereum::getCode - address");
+      throw ArgumentError.notNull('Ethereum::getCode - address');
     }
     if (block == null) {
-      throw ArgumentError.notNull("Ethereum::getCode - block");
+      throw ArgumentError.notNull('Ethereum::getCode - block');
     }
     final String method = EthereumRpcMethods.code;
     final String blockString = block.getSelection();
@@ -344,8 +346,8 @@ class EthereumApiEth extends EthereumApi {
       blockString
     ];
     final res = await _client.rpcClient.request(method, params);
-    if (res != null && res.containsKey(ethResultKey)) {
-      return EthereumUtilities.hexToInt(res[ethResultKey]);
+    if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
+      return EthereumUtilities.hexToInt(res[EthereumConstants.ethResultKey]);
     }
     _client.processError(method, res);
     return null;
@@ -353,14 +355,14 @@ class EthereumApiEth extends EthereumApi {
 
   /// Sign
   /// The sign method calculates an Ethereum specific signature with:
-  /// sign(keccak256("\x19Ethereum Signed Message:\n" + len(message) + message))).
+  /// sign(keccak256('\x19Ethereum Signed Message:\n' + len(message) + message))).
   /// Note the address to sign with must be unlocked.
   Future<int> sign(BigInt account, int message) async {
     if (account == null) {
-      throw ArgumentError.notNull("Ethereum::sign - account");
+      throw ArgumentError.notNull('Ethereum::sign - account');
     }
     if (message == null) {
-      throw ArgumentError.notNull("Ethereum::sign - message");
+      throw ArgumentError.notNull('Ethereum::sign - message');
     }
     final String method = EthereumRpcMethods.sign;
     final List params = [
@@ -368,8 +370,8 @@ class EthereumApiEth extends EthereumApi {
       EthereumUtilities.intToHex(message)
     ];
     final res = await _client.rpcClient.request(method, params);
-    if (res != null && res.containsKey(ethResultKey)) {
-      return EthereumUtilities.hexToInt(res[ethResultKey]);
+    if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
+      return EthereumUtilities.hexToInt(res[EthereumConstants.ethResultKey]);
     }
     _client.processError(method, res);
     return null;
@@ -388,27 +390,27 @@ class EthereumApiEth extends EthereumApi {
   Future<int> sendTransaction(BigInt address, BigInt data,
       {BigInt to, int gas = 9000, int gasPrice, int value, int nonce}) async {
     if (address == null) {
-      throw ArgumentError.notNull("Ethereum::sendTransaction - address");
+      throw ArgumentError.notNull('Ethereum::sendTransaction - address');
     }
     if (data == null) {
-      throw ArgumentError.notNull("Ethereum::sendTransaction - data");
+      throw ArgumentError.notNull('Ethereum::sendTransaction - data');
     }
     final String method = EthereumRpcMethods.sendTransaction;
     Map<String, String> paramBlock = {
-      "from": EthereumUtilities.bigIntegerToHex(address),
-      "to": to == null ? null : EthereumUtilities.bigIntegerToHex(to),
-      "gas": EthereumUtilities.intToHex(gas),
-      "gasPrice":
+      'from': EthereumUtilities.bigIntegerToHex(address),
+      'to': to == null ? null : EthereumUtilities.bigIntegerToHex(to),
+      'gas': EthereumUtilities.intToHex(gas),
+      'gasPrice':
           gasPrice == null ? null : EthereumUtilities.intToHex(gasPrice),
-      "value": value == null ? null : EthereumUtilities.intToHex(value),
-      "data": EthereumUtilities.bigIntegerToHex(data),
-      "nonce": nonce == null ? null : EthereumUtilities.intToHex(nonce)
+      'value': value == null ? null : EthereumUtilities.intToHex(value),
+      'data': EthereumUtilities.bigIntegerToHex(data),
+      'nonce': nonce == null ? null : EthereumUtilities.intToHex(nonce)
     };
     paramBlock = EthereumUtilities.removeNull(paramBlock);
     final dynamic params = [paramBlock];
     final res = await _client.rpcClient.request(method, params);
-    if (res != null && res.containsKey(ethResultKey)) {
-      return EthereumUtilities.hexToInt(res[ethResultKey]);
+    if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
+      return EthereumUtilities.hexToInt(res[EthereumConstants.ethResultKey]);
     }
     _client.processError(method, res);
     return null;
@@ -421,15 +423,15 @@ class EthereumApiEth extends EthereumApi {
   Future<int> sendRawTransaction(BigInt signedTransaction) async {
     if (signedTransaction == null) {
       throw ArgumentError.notNull(
-          "Ethereum::sendRawTransaction - signedTransaction");
+          'Ethereum::sendRawTransaction - signedTransaction');
     }
     final String method = EthereumRpcMethods.sendRawTransaction;
     final dynamic params = [
       EthereumUtilities.bigIntegerToHex(signedTransaction)
     ];
     final res = await _client.rpcClient.request(method, params);
-    if (res != null && res.containsKey(ethResultKey)) {
-      return EthereumUtilities.hexToInt(res[ethResultKey]);
+    if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
+      return EthereumUtilities.hexToInt(res[EthereumConstants.ethResultKey]);
     }
     _client.processError(method, res);
     return null;
@@ -449,27 +451,27 @@ class EthereumApiEth extends EthereumApi {
   Future<int> call(BigInt address, EthereumDefaultBlock block,
       {BigInt from, int gas, int gasPrice, int value, BigInt data}) async {
     if (address == null) {
-      throw ArgumentError.notNull("Ethereum::call - address");
+      throw ArgumentError.notNull('Ethereum::call - address');
     }
     if (block == null) {
-      throw ArgumentError.notNull("Ethereum::call - block");
+      throw ArgumentError.notNull('Ethereum::call - block');
     }
     final String method = EthereumRpcMethods.call;
     final String blockString = block.getSelection();
     Map<String, String> paramBlock = {
-      "from": from == null ? null : EthereumUtilities.bigIntegerToHex(from),
-      "to": EthereumUtilities.bigIntegerToHex(address),
-      "gas": gas == null ? null : EthereumUtilities.intToHex(gas),
-      "gasPrice":
+      'from': from == null ? null : EthereumUtilities.bigIntegerToHex(from),
+      'to': EthereumUtilities.bigIntegerToHex(address),
+      'gas': gas == null ? null : EthereumUtilities.intToHex(gas),
+      'gasPrice':
           gasPrice == null ? null : EthereumUtilities.intToHex(gasPrice),
-      "value": value == null ? null : EthereumUtilities.intToHex(value),
-      "data": data == null ? null : EthereumUtilities.bigIntegerToHex(data)
+      'value': value == null ? null : EthereumUtilities.intToHex(value),
+      'data': data == null ? null : EthereumUtilities.bigIntegerToHex(data)
     };
     paramBlock = EthereumUtilities.removeNull(paramBlock);
     final dynamic params = [paramBlock, blockString];
     final res = await _client.rpcClient.request(method, params);
-    if (res != null && res.containsKey(ethResultKey)) {
-      return EthereumUtilities.hexToInt(res[ethResultKey]);
+    if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
+      return EthereumUtilities.hexToInt(res[EthereumConstants.ethResultKey]);
     }
     _client.processError(method, res);
     return null;
@@ -491,20 +493,20 @@ class EthereumApiEth extends EthereumApi {
       int value,
       BigInt data}) async {
     Map<String, String> paramBlock = {
-      "from": from == null ? null : EthereumUtilities.bigIntegerToHex(from),
-      "to": address == null ? null : EthereumUtilities.bigIntegerToHex(address),
-      "gas": gas == null ? null : EthereumUtilities.intToHex(gas),
-      "gasPrice":
+      'from': from == null ? null : EthereumUtilities.bigIntegerToHex(from),
+      'to': address == null ? null : EthereumUtilities.bigIntegerToHex(address),
+      'gas': gas == null ? null : EthereumUtilities.intToHex(gas),
+      'gasPrice':
           gasPrice == null ? null : EthereumUtilities.intToHex(gasPrice),
-      "value": value == null ? null : EthereumUtilities.intToHex(value),
-      "data": data == null ? null : EthereumUtilities.bigIntegerToHex(data)
+      'value': value == null ? null : EthereumUtilities.intToHex(value),
+      'data': data == null ? null : EthereumUtilities.bigIntegerToHex(data)
     };
     paramBlock = EthereumUtilities.removeNull(paramBlock);
     final dynamic params = [paramBlock];
     final String method = EthereumRpcMethods.estimateGas;
     final res = await _client.rpcClient.request(method, params);
-    if (res != null && res.containsKey(ethResultKey)) {
-      return EthereumUtilities.hexToInt(res[ethResultKey]);
+    if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
+      return EthereumUtilities.hexToInt(res[EthereumConstants.ethResultKey]);
     }
     _client.processError(method, res);
     return null;
@@ -518,13 +520,13 @@ class EthereumApiEth extends EthereumApi {
   Future<EthereumBlock> getBlockByHash(BigInt blockHash,
       [bool full = true]) async {
     if (blockHash == null) {
-      throw ArgumentError.notNull("Ethereum::getBlockByHash - blockHash");
+      throw ArgumentError.notNull('Ethereum::getBlockByHash - blockHash');
     }
     final dynamic params = [EthereumUtilities.bigIntegerToHex(blockHash), full];
     final String method = EthereumRpcMethods.getBlockByHash;
     final res = await _client.rpcClient.request(method, params);
-    if (res != null && res.containsKey(ethResultKey)) {
-      return EthereumBlock.fromMap(res[ethResultKey]);
+    if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
+      return EthereumBlock.fromMap(res[EthereumConstants.ethResultKey]);
     }
     _client.processError(method, res);
     return null;
@@ -540,14 +542,14 @@ class EthereumApiEth extends EthereumApi {
   Future<EthereumBlock> getBlockByNumber(EthereumDefaultBlock blockNumber,
       [bool full = true]) async {
     if (blockNumber == null) {
-      throw ArgumentError.notNull("Ethereum::getBlockByNumber - blockNumber");
+      throw ArgumentError.notNull('Ethereum::getBlockByNumber - blockNumber');
     }
     final String blockString = blockNumber.getSelection();
     final dynamic params = [blockString, full];
     final String method = EthereumRpcMethods.getBlockByNumber;
     final res = await _client.rpcClient.request(method, params);
-    if (res != null && res.containsKey(ethResultKey)) {
-      return EthereumBlock.fromMap(res[ethResultKey]);
+    if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
+      return EthereumBlock.fromMap(res[EthereumConstants.ethResultKey]);
     }
     _client.processError(method, res);
     return null;
@@ -559,13 +561,13 @@ class EthereumApiEth extends EthereumApi {
   /// Returns a transaction object, or null when no transaction was found:
   Future<EthereumTransaction> getTransactionByHash(BigInt hash) async {
     if (hash == null) {
-      throw ArgumentError.notNull("Ethereum::getTransactionByHash - hash");
+      throw ArgumentError.notNull('Ethereum::getTransactionByHash - hash');
     }
     final dynamic params = [EthereumUtilities.bigIntegerToHex(hash)];
     final String method = EthereumRpcMethods.getTransactionByHash;
     final res = await _client.rpcClient.request(method, params);
-    if (res != null && res.containsKey(ethResultKey)) {
-      return EthereumTransaction.fromMap(res[ethResultKey]);
+    if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
+      return EthereumTransaction.fromMap(res[EthereumConstants.ethResultKey]);
     }
     _client.processError(method, res);
     return null;
@@ -579,11 +581,11 @@ class EthereumApiEth extends EthereumApi {
       BigInt blockHash, int index) async {
     if (blockHash == null) {
       throw ArgumentError.notNull(
-          "Ethereum::getTransactionByBlockHashAndIndex - blockHash");
+          'Ethereum::getTransactionByBlockHashAndIndex - blockHash');
     }
     if (index == null) {
       throw ArgumentError.notNull(
-          "Ethereum::getTransactionByBlockHashAndIndex - index");
+          'Ethereum::getTransactionByBlockHashAndIndex - index');
     }
     final dynamic params = [
       EthereumUtilities.bigIntegerToHex(blockHash),
@@ -591,8 +593,8 @@ class EthereumApiEth extends EthereumApi {
     ];
     final String method = EthereumRpcMethods.getTransactionByBlockHashAndIndex;
     final res = await _client.rpcClient.request(method, params);
-    if (res != null && res.containsKey(ethResultKey)) {
-      return EthereumTransaction.fromMap(res[ethResultKey]);
+    if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
+      return EthereumTransaction.fromMap(res[EthereumConstants.ethResultKey]);
     }
     _client.processError(method, res);
     return null;
@@ -606,11 +608,11 @@ class EthereumApiEth extends EthereumApi {
       EthereumDefaultBlock blockNumber, int index) async {
     if (blockNumber == null) {
       throw ArgumentError.notNull(
-          "Ethereum::getTransactionByBlockNumberAndIndex - blockNumber");
+          'Ethereum::getTransactionByBlockNumberAndIndex - blockNumber');
     }
     if (index == null) {
       throw ArgumentError.notNull(
-          "Ethereum::getTransactionByBlockNumberAndIndex - index");
+          'Ethereum::getTransactionByBlockNumberAndIndex - index');
     }
     final String blockNumberString = blockNumber.getSelection();
     final dynamic params = [
@@ -620,8 +622,8 @@ class EthereumApiEth extends EthereumApi {
     final String method =
         EthereumRpcMethods.getTransactionByBlockNumberAndIndex;
     final res = await _client.rpcClient.request(method, params);
-    if (res != null && res.containsKey(ethResultKey)) {
-      return EthereumTransaction.fromMap(res[ethResultKey]);
+    if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
+      return EthereumTransaction.fromMap(res[EthereumConstants.ethResultKey]);
     }
     _client.processError(method, res);
     return null;
@@ -636,13 +638,13 @@ class EthereumApiEth extends EthereumApi {
       BigInt transactionHash) async {
     if (transactionHash == null) {
       throw ArgumentError.notNull(
-          "Ethereum::getTransactionReceipt - transactionHash");
+          'Ethereum::getTransactionReceipt - transactionHash');
     }
     final dynamic params = [EthereumUtilities.bigIntegerToHex(transactionHash)];
     final String method = EthereumRpcMethods.getTransactionReceipt;
     final res = await _client.rpcClient.request(method, params);
-    if (res != null && res.containsKey(ethResultKey)) {
-      return EthereumTransactionReceipt.fromMap(res[ethResultKey]);
+    if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
+      return EthereumTransactionReceipt.fromMap(res[EthereumConstants.ethResultKey]);
     }
     _client.processError(method, res);
     return null;
@@ -657,11 +659,11 @@ class EthereumApiEth extends EthereumApi {
       BigInt blockHash, int index) async {
     if (blockHash == null) {
       throw ArgumentError.notNull(
-          "Ethereum::getUncleByBlockHashAndIndex - blockHash");
+          'Ethereum::getUncleByBlockHashAndIndex - blockHash');
     }
     if (index == null) {
       throw ArgumentError.notNull(
-          "Ethereum::getUncleByBlockHashAndIndex - index");
+          'Ethereum::getUncleByBlockHashAndIndex - index');
     }
     final dynamic params = [
       EthereumUtilities.bigIntegerToHex(blockHash),
@@ -669,8 +671,8 @@ class EthereumApiEth extends EthereumApi {
     ];
     final String method = EthereumRpcMethods.getUncleByBlockHashAndIndex;
     final res = await _client.rpcClient.request(method, params);
-    if (res != null && res.containsKey(ethResultKey)) {
-      return EthereumBlock.fromMap(res[ethResultKey]);
+    if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
+      return EthereumBlock.fromMap(res[EthereumConstants.ethResultKey]);
     }
     _client.processError(method, res);
     return null;
@@ -685,11 +687,11 @@ class EthereumApiEth extends EthereumApi {
       EthereumDefaultBlock blockNumber, int index) async {
     if (blockNumber == null) {
       throw ArgumentError.notNull(
-          "Ethereum::getUncleByBlockNumberAndIndex - blockNumber");
+          'Ethereum::getUncleByBlockNumberAndIndex - blockNumber');
     }
     if (index == null) {
       throw ArgumentError.notNull(
-          "Ethereum::getUncleByBlockNumberAndIndex - index");
+          'Ethereum::getUncleByBlockNumberAndIndex - index');
     }
     final String blockNumberString = blockNumber.getSelection();
     final dynamic params = [
@@ -698,8 +700,8 @@ class EthereumApiEth extends EthereumApi {
     ];
     final String method = EthereumRpcMethods.getUncleByBlockNumberAndIndex;
     final res = await _client.rpcClient.request(method, params);
-    if (res != null && res.containsKey(ethResultKey)) {
-      return EthereumBlock.fromMap(res[ethResultKey]);
+    if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
+      return EthereumBlock.fromMap(res[EthereumConstants.ethResultKey]);
     }
     _client.processError(method, res);
     return null;
@@ -710,14 +712,14 @@ class EthereumApiEth extends EthereumApi {
   /// To check if the state has changed, call getFilterChanges.
   /// note on specifying topic filters:
   /// Topics are order-dependent. A transaction with a log with topics [A, B] will be matched by the following topic filters:
-  /// [] "anything"
-  /// ['A'] "A in first position (and anything after)"
-  /// [null, B] "anything in first position AND B in second position (and anything after)"
-  /// [A, B] "A in first position AND B in second position (and anything after)"
-  /// [[A, B], [A, B]] "(A OR B) in first position AND (A OR B) in second position (and anything after)"
-  /// fromBlock: - (optional, default: "latest") Integer block number, or "latest" for the last mined block or "pending",
-  /// "earliest" for not yet mined transactions.
-  /// toBlock: - (optional, default: "latest") Integer block number, or "latest" for the last mined block or "pending", "earliest" for not
+  /// [] 'anything'
+  /// ['A'] 'A in first position (and anything after)'
+  /// [null, B] 'anything in first position AND B in second position (and anything after)'
+  /// [A, B] 'A in first position AND B in second position (and anything after)'
+  /// [[A, B], [A, B]] '(A OR B) in first position AND (A OR B) in second position (and anything after)'
+  /// fromBlock: - (optional, default: 'latest') Integer block number, or 'latest' for the last mined block or 'pending',
+  /// 'earliest' for not yet mined transactions.
+  /// toBlock: - (optional, default: 'latest') Integer block number, or 'latest' for the last mined block or 'pending', 'earliest' for not
   /// yet mined transactions.
   /// address: - (optional) Contract address or a list of addresses from which logs should originate.
   /// topics: - (optional) topics. Topics are order-dependent.
@@ -731,24 +733,24 @@ class EthereumApiEth extends EthereumApi {
       List<BigInt> topics}) async {
     final String fromBlockString = fromBlock.getSelection();
     final String toBlockString = toBlock.getSelection();
-    final Map params = {"toBlock": toBlockString, "fromBlock": fromBlockString};
+    final Map params = {'toBlock': toBlockString, 'fromBlock': fromBlockString};
     if (address != null) {
       if (address is List) {
         final List<String> addresses =
             EthereumUtilities.bigIntegerToHexList(address);
-        params["address"] = addresses;
+        params['address'] = addresses;
       } else {
-        params["address"] = (EthereumUtilities.bigIntegerToHex(address));
+        params['address'] = (EthereumUtilities.bigIntegerToHex(address));
       }
     }
     if (topics != null) {
-      params["topics"] = EthereumUtilities.bigIntegerToHexList(topics);
+      params['topics'] = EthereumUtilities.bigIntegerToHexList(topics);
     }
     final List paramBlock = [params];
     final String method = EthereumRpcMethods.newFilter;
     final res = await _client.rpcClient.request(method, paramBlock);
-    if (res != null && res.containsKey(ethResultKey)) {
-      return EthereumUtilities.hexToInt(res[ethResultKey]);
+    if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
+      return EthereumUtilities.hexToInt(res[EthereumConstants.ethResultKey]);
     }
     _client.processError(method, res);
     return null;
@@ -762,8 +764,8 @@ class EthereumApiEth extends EthereumApi {
     final List params = [];
     final String method = EthereumRpcMethods.newBlockFilter;
     final res = await _client.rpcClient.request(method, params);
-    if (res != null && res.containsKey(ethResultKey)) {
-      return EthereumUtilities.hexToInt(res[ethResultKey]);
+    if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
+      return EthereumUtilities.hexToInt(res[EthereumConstants.ethResultKey]);
     }
     _client.processError(method, res);
     return null;
@@ -777,8 +779,8 @@ class EthereumApiEth extends EthereumApi {
     final List params = [];
     final String method = EthereumRpcMethods.newPendingTransactionFilter;
     final res = await _client.rpcClient.request(method, params);
-    if (res != null && res.containsKey(ethResultKey)) {
-      return EthereumUtilities.hexToInt(res[ethResultKey]);
+    if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
+      return EthereumUtilities.hexToInt(res[EthereumConstants.ethResultKey]);
     }
     _client.processError(method, res);
     return null;
@@ -791,13 +793,13 @@ class EthereumApiEth extends EthereumApi {
   /// Returns true if the filter was successfully uninstalled, otherwise false.
   Future<bool> uninstallFilter(int filterId) async {
     if (filterId == null) {
-      throw ArgumentError.notNull("Ethereum::uninstallFilter - filterId");
+      throw ArgumentError.notNull('Ethereum::uninstallFilter - filterId');
     }
     final List params = [EthereumUtilities.intToHex(filterId)];
     final String method = EthereumRpcMethods.uninstallFilter;
     final res = await _client.rpcClient.request(method, params);
-    if (res != null && res.containsKey(ethResultKey)) {
-      return res[ethResultKey];
+    if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
+      return res[EthereumConstants.ethResultKey];
     }
     _client.processError(method, res);
     return null;
@@ -809,13 +811,13 @@ class EthereumApiEth extends EthereumApi {
   /// Returns an EthereumFilter object or null
   Future<EthereumFilter> getFilterChanges(int filterId) async {
     if (filterId == null) {
-      throw ArgumentError.notNull("Ethereum::getFilterChanges - filterId");
+      throw ArgumentError.notNull('Ethereum::getFilterChanges - filterId');
     }
     final List params = [EthereumUtilities.intToHex(filterId)];
     final String method = EthereumRpcMethods.getFilterChanges;
     final res = await _client.rpcClient.request(method, params);
-    if (res != null && res.containsKey(ethResultKey)) {
-      return EthereumFilter.fromMap(res[ethResultKey]);
+    if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
+      return EthereumFilter.fromMap(res[EthereumConstants.ethResultKey]);
     }
     _client.processError(method, res);
     return null;
@@ -826,13 +828,13 @@ class EthereumApiEth extends EthereumApi {
   /// Returns see getFilterChanges
   Future<EthereumFilter> getFilterLogs(int filterId) async {
     if (filterId == null) {
-      throw ArgumentError.notNull("Ethereum::getFilterLogs - filterId");
+      throw ArgumentError.notNull('Ethereum::getFilterLogs - filterId');
     }
     final List params = [EthereumUtilities.intToHex(filterId)];
     final String method = EthereumRpcMethods.getFilterLogs;
     final res = await _client.rpcClient.request(method, params);
-    if (res != null && res.containsKey(ethResultKey)) {
-      return EthereumFilter.fromMap(res[ethResultKey]);
+    if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
+      return EthereumFilter.fromMap(res[EthereumConstants.ethResultKey]);
     }
     _client.processError(method, res);
     return null;
@@ -848,38 +850,38 @@ class EthereumApiEth extends EthereumApi {
       List<BigInt> topics}) async {
     final String fromBlockString = fromBlock.getSelection();
     final String toBlockString = toBlock.getSelection();
-    final Map params = {"toBlock": toBlockString, "fromBlock": fromBlockString};
+    final Map params = {'toBlock': toBlockString, 'fromBlock': fromBlockString};
     if (address != null) {
       if (address is List) {
         final List<String> addresses =
             EthereumUtilities.bigIntegerToHexList(address);
-        params["address"] = addresses;
+        params['address'] = addresses;
       } else {
-        params["address"] = (EthereumUtilities.bigIntegerToHex(address));
+        params['address'] = (EthereumUtilities.bigIntegerToHex(address));
       }
     }
     if (topics != null) {
-      params["topics"] = EthereumUtilities.bigIntegerToHexList(topics);
+      params['topics'] = EthereumUtilities.bigIntegerToHexList(topics);
     }
     final List paramBlock = [params];
     final String method = EthereumRpcMethods.getLogs;
     final res = await _client.rpcClient.request(method, paramBlock);
-    if (res != null && res.containsKey(ethResultKey)) {
-      return EthereumFilter.fromMap(res[ethResultKey]);
+    if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
+      return EthereumFilter.fromMap(res[EthereumConstants.ethResultKey]);
     }
     _client.processError(method, res);
     return null;
   }
 
   /// Get work
-  /// Returns the hash of the current block, the seedHash, and the boundary condition to be met ("target").
+  /// Returns the hash of the current block, the seedHash, and the boundary condition to be met ('target').
   /// Returns an EthereumWork object or null
   Future<EthereumWork> getWork() async {
     final List paramBlock = [];
     final String method = EthereumRpcMethods.getWork;
     final res = await _client.rpcClient.request(method, paramBlock);
-    if (res != null && res.containsKey(ethResultKey)) {
-      return EthereumWork.fromList(res[ethResultKey]);
+    if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
+      return EthereumWork.fromList(res[EthereumConstants.ethResultKey]);
     }
     _client.processError(method, res);
     return null;
@@ -893,13 +895,13 @@ class EthereumApiEth extends EthereumApi {
   /// Returns  true if the provided solution is valid, otherwise false.
   Future<bool> submitWork(BigInt nonce, BigInt powHash, BigInt digest) async {
     if (nonce == null) {
-      throw ArgumentError.notNull("Ethereum::submitWork - nonce");
+      throw ArgumentError.notNull('Ethereum::submitWork - nonce');
     }
     if (powHash == null) {
-      throw ArgumentError.notNull("Ethereum::submitWork - powHash");
+      throw ArgumentError.notNull('Ethereum::submitWork - powHash');
     }
     if (digest == null) {
-      throw ArgumentError.notNull("Ethereum::submitWork - digest");
+      throw ArgumentError.notNull('Ethereum::submitWork - digest');
     }
     final List params = [
       EthereumUtilities.bigIntegerToHex(nonce),
@@ -908,8 +910,8 @@ class EthereumApiEth extends EthereumApi {
     ];
     final String method = EthereumRpcMethods.submitWork;
     final res = await _client.rpcClient.request(method, params);
-    if (res != null && res.containsKey(ethResultKey)) {
-      return res[ethResultKey];
+    if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
+      return res[EthereumConstants.ethResultKey];
     }
     _client.processError(method, res);
     return null;
@@ -922,16 +924,16 @@ class EthereumApiEth extends EthereumApi {
   /// Returns true if submitting went through successfully and false otherwise.
   Future<bool> submitHashrate(BigInt hashRate, String id) async {
     if (hashRate == null) {
-      throw ArgumentError.notNull("Ethereum::submitHashRate - hashRate");
+      throw ArgumentError.notNull('Ethereum::submitHashRate - hashRate');
     }
     if (id == null) {
-      throw ArgumentError.notNull("Ethereum::submitHashRate - id");
+      throw ArgumentError.notNull('Ethereum::submitHashRate - id');
     }
     final List params = [EthereumUtilities.bigIntegerToHex(hashRate), id];
     final String method = EthereumRpcMethods.submitHashrate;
     final res = await _client.rpcClient.request(method, params);
-    if (res != null && res.containsKey(ethResultKey)) {
-      return res[ethResultKey];
+    if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
+      return res[EthereumConstants.ethResultKey];
     }
     _client.processError(method, res);
     return null;
@@ -943,8 +945,8 @@ class EthereumApiEth extends EthereumApi {
     final List params = [];
     final String method = EthereumRpcMethods.shhVersion;
     final res = await _client.rpcClient.request(method, params);
-    if (res != null && res.containsKey(ethResultKey)) {
-      return res[ethResultKey];
+    if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
+      return res[EthereumConstants.ethResultKey];
     }
     _client.processError(method, res);
     return null;
@@ -964,31 +966,31 @@ class EthereumApiEth extends EthereumApi {
       List<BigInt> topics, BigInt payload, int priority, int ttl,
       {BigInt to, BigInt from}) async {
     if (topics == null) {
-      throw ArgumentError.notNull("Ethereum::shhPost - topics");
+      throw ArgumentError.notNull('Ethereum::shhPost - topics');
     }
     if (payload == null) {
-      throw ArgumentError.notNull("Ethereum::shhPost - payload");
+      throw ArgumentError.notNull('Ethereum::shhPost - payload');
     }
     if (priority == null) {
-      throw ArgumentError.notNull("Ethereum::shhPost - priority");
+      throw ArgumentError.notNull('Ethereum::shhPost - priority');
     }
     if (ttl == null) {
-      throw ArgumentError.notNull("Ethereum::shhPost - ttl");
+      throw ArgumentError.notNull('Ethereum::shhPost - ttl');
     }
     Map<String, dynamic> params = {
-      "topics": EthereumUtilities.bigIntegerToHexList(topics),
-      "payload": EthereumUtilities.bigIntegerToHex(payload),
-      "priority": EthereumUtilities.intToHex(priority),
-      "ttl": ttl,
-      "to": EthereumUtilities.bigIntegerToHex(to),
-      "from": EthereumUtilities.bigIntegerToHex(from)
+      'topics': EthereumUtilities.bigIntegerToHexList(topics),
+      'payload': EthereumUtilities.bigIntegerToHex(payload),
+      'priority': EthereumUtilities.intToHex(priority),
+      'ttl': ttl,
+      'to': EthereumUtilities.bigIntegerToHex(to),
+      'from': EthereumUtilities.bigIntegerToHex(from)
     };
     params = EthereumUtilities.removeNull(params);
     final List paramBlock = [params];
     final String method = EthereumRpcMethods.shhPost;
     final res = await _client.rpcClient.request(method, paramBlock);
-    if (res != null && res.containsKey(ethResultKey)) {
-      return res[ethResultKey];
+    if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
+      return res[EthereumConstants.ethResultKey];
     }
     _client.processError(method, res);
     return null;

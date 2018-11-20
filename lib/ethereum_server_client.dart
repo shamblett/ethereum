@@ -9,20 +9,24 @@
 
 library ethereum_server_client;
 
-import 'dart:io';
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'package:ethereum/ethereum.dart';
 
 part 'src/adapters/ethereum_server_http_adapter.dart';
 
+/// The server HTTP client
 class EthereumServerClient extends Ethereum {
-  static EthereumServerHTTPAdapter serverHttpAdapter =
-      EthereumServerHTTPAdapter();
-
+  /// Default constructor
   EthereumServerClient() : super(serverHttpAdapter);
 
-  EthereumServerClient.withConnectionParameters(hostname, [port])
+  /// With connection parameters
+  EthereumServerClient.withConnectionParameters(String hostname, [int port])
       : super.withConnectionParameters(
             serverHttpAdapter, hostname, Ethereum.rpcHttpScheme, port);
+
+  /// The adapter
+  static EthereumServerHTTPAdapter serverHttpAdapter =
+      EthereumServerHTTPAdapter();
 }

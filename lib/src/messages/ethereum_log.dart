@@ -66,41 +66,41 @@ class EthereumLog {
 
   /// Construct from the supplied Map, only check for the keys we need.
   void construct(Map data) {
-    if (data[ethResultKey] == null) {
+    if (data[EthereumConstants.ethResultKey] == null) {
       return;
     }
-    if (data[ethResultKey].containsKey('removed')) {
-      _removed = data[ethResultKey]['removed'];
+    if (data[EthereumConstants.ethResultKey].containsKey('removed')) {
+      _removed = data[EthereumConstants.ethResultKey]['removed'];
     }
-    if (data[ethResultKey].containsKey('logIndex')) {
-      _logIndex = EthereumUtilities.hexToInt(data[ethResultKey]['logIndex']);
+    if (data[EthereumConstants.ethResultKey].containsKey('logIndex')) {
+      _logIndex = EthereumUtilities.hexToInt(data[EthereumConstants.ethResultKey]['logIndex']);
     }
-    if (data[ethResultKey].containsKey('transactionIndex')) {
+    if (data[EthereumConstants.ethResultKey].containsKey('transactionIndex')) {
       _transactionIndex =
-          EthereumUtilities.hexToInt(data[ethResultKey]['transactionIndex']);
+          EthereumUtilities.hexToInt(data[EthereumConstants.ethResultKey]['transactionIndex']);
     }
-    if (data[ethResultKey].containsKey('transactionHash')) {
+    if (data[EthereumConstants.ethResultKey].containsKey('transactionHash')) {
       _transactionHash =
-          EthereumUtilities.safeParse(data[ethResultKey]['transactionHash']);
+          EthereumUtilities.safeParse(data[EthereumConstants.ethResultKey]['transactionHash']);
     }
-    if (data[ethResultKey].containsKey('blockHash')) {
-      _blockHash = EthereumUtilities.safeParse(data[ethResultKey]['blockHash']);
+    if (data[EthereumConstants.ethResultKey].containsKey('blockHash')) {
+      _blockHash = EthereumUtilities.safeParse(data[EthereumConstants.ethResultKey]['blockHash']);
     }
-    if (data[ethResultKey].containsKey('blockNumber')) {
+    if (data[EthereumConstants.ethResultKey].containsKey('blockNumber')) {
       _blockNumber =
-          EthereumUtilities.hexToInt(data[ethResultKey]['blockNumber']);
+          EthereumUtilities.hexToInt(data[EthereumConstants.ethResultKey]['blockNumber']);
     }
-    if (data[ethResultKey].containsKey('address')) {
-      _address = EthereumUtilities.safeParse(data[ethResultKey]['address']);
+    if (data[EthereumConstants.ethResultKey].containsKey('address')) {
+      _address = EthereumUtilities.safeParse(data[EthereumConstants.ethResultKey]['address']);
     }
-    if (data[ethResultKey].containsKey('data')) {
-      _data = EthereumUtilities.safeParse(data[ethResultKey]['data']);
+    if (data[EthereumConstants.ethResultKey].containsKey('data')) {
+      _data = EthereumUtilities.safeParse(data[EthereumConstants.ethResultKey]['data']);
     }
-    if (data[ethResultKey].containsKey('topics')) {
-      if ((data[ethResultKey]['topics'] != null) &&
-          (data[ethResultKey]['topics'].isNotEmpty)) {
+    if (data[EthereumConstants.ethResultKey].containsKey('topics')) {
+      if ((data[EthereumConstants.ethResultKey]['topics'] != null) &&
+          (data[EthereumConstants.ethResultKey]['topics'].isNotEmpty)) {
         _topics = List<BigInt>();
-        for (String topic in data[ethResultKey]['topics']) {
+        for (String topic in data[EthereumConstants.ethResultKey]['topics']) {
           final BigInt entry = EthereumUtilities.safeParse(topic);
           _topics.add(entry);
         }
