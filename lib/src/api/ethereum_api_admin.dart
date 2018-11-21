@@ -40,7 +40,7 @@ class EthereumApiAdmin extends EthereumApi {
     final dynamic res = await _client.rpcClient.request(method);
     if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
       return EthereumUtilities.hexToBigIntList(
-          res[EthereumConstants.ethResultKey]);
+          res[EthereumConstants.ethResultKey].cast<String>());
     }
     _client.processError(method, res);
     return null;
