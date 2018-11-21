@@ -165,7 +165,7 @@ class EthereumApiEth extends EthereumApi {
   }
 
   /// Get balance, the balance of the account of the given address.
-  Future<int> getBalance(
+  Future<BigInt> getBalance(
       BigInt accountNumber, EthereumDefaultBlock block) async {
     if (accountNumber == null) {
       throw ArgumentError.notNull('Ethereum::getBalance - accountNumber');
@@ -181,7 +181,7 @@ class EthereumApiEth extends EthereumApi {
     ];
     final dynamic res = await _client.rpcClient.request(method, params);
     if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
-      return EthereumUtilities.hexToInt(res[EthereumConstants.ethResultKey]);
+      return EthereumUtilities.safeParse(res[EthereumConstants.ethResultKey]);
     }
     _client.processError(method, res);
     return null;

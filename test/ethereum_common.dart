@@ -122,7 +122,7 @@ class EthereumCommon {
       test('Balance - number', () async {
         final EthereumDefaultBlock block = EthereumDefaultBlock();
         block.number = 0;
-        final int balance = await client.eth.getBalance(
+        final BigInt balance = await client.eth.getBalance(
             EthereumUtilities.safeParse(
                 '0x407d73d8a49eeb85d32cf465507dd71d507100c1'),
             block);
@@ -133,7 +133,7 @@ class EthereumCommon {
       test('Balance - latest', () async {
         final EthereumDefaultBlock block = EthereumDefaultBlock();
         block.latest = true;
-        final int balance = await client.eth.getBalance(
+        final BigInt balance = await client.eth.getBalance(
             EthereumUtilities.safeParse(
                 '0x407d73d8a49eeb85d32cf465507dd71d507100c1'),
             block);
@@ -144,7 +144,7 @@ class EthereumCommon {
       test('Balance - earliest', () async {
         final EthereumDefaultBlock block = EthereumDefaultBlock();
         block.earliest = true;
-        final int balance = await client.eth.getBalance(
+        final BigInt balance = await client.eth.getBalance(
             EthereumUtilities.safeParse(
                 '0x407d73d8a49eeb85d32cf465507dd71d507100c1'),
             block);
@@ -155,7 +155,7 @@ class EthereumCommon {
       test('Balance - pending', () async {
         final EthereumDefaultBlock block = EthereumDefaultBlock();
         block.pending = true;
-        final int balance = await client.eth.getBalance(
+        final BigInt balance = await client.eth.getBalance(
             EthereumUtilities.safeParse(
                 '0x407d73d8a49eeb85d32cf465507dd71d507100c1'),
             block);
