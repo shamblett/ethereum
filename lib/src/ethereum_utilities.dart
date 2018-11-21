@@ -81,7 +81,7 @@ class EthereumUtilities {
           val.length, (int index) => '0x${val[index].toRadixString(16)}');
 
   /// Remove null values from a map
-  static Map<dynamic,dynamic> removeNull(Map<dynamic,dynamic> theMap) {
+  static Map<dynamic, dynamic> removeNull(Map<dynamic, dynamic> theMap) {
     final List<dynamic> values = theMap.values.toList();
     final List<dynamic> keys = theMap.keys.toList();
     int index = 0;

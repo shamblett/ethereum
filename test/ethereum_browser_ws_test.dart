@@ -5,7 +5,7 @@
  * Copyright :  S.Hamblett
  */
 
-@TestOn("browser")
+@TestOn('browser')
 import 'package:ethereum/ethereum_browser_ws_client.dart';
 import 'package:test/test.dart';
 import 'ethereum_common.dart';
@@ -15,11 +15,11 @@ void main() {
   if (EthereumTestConfiguration.runBrowserWS) {
     // Run the common API tests
     final EthereumBrowserWSClient client =
-        EthereumBrowserWSClient.withConnectionParameters("localhost", 8546);
+        EthereumBrowserWSClient.withConnectionParameters('localhost', 8546);
     // Print errors
     client.printError = true;
     EthereumCommon.run(client);
   } else {
-    print("WS browser tests not selected in configuration file");
+    print('WS browser tests not selected in configuration file');
   }
 }

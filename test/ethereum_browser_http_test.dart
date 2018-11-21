@@ -5,7 +5,7 @@
  * Copyright :  S.Hamblett
  */
 
-@TestOn("browser")
+@TestOn('browser')
 import 'package:ethereum/ethereum_browser_http_client.dart';
 import 'package:test/test.dart';
 import 'ethereum_common.dart';
@@ -15,11 +15,11 @@ void main() {
   if (EthereumTestConfiguration.runBrowserHttp) {
     // Run the common API tests
     final EthereumBrowserHTTPClient client =
-        EthereumBrowserHTTPClient.withConnectionParameters("localhost");
+        EthereumBrowserHTTPClient.withConnectionParameters('localhost');
     // Print errors
     client.printError = true;
     EthereumCommon.run(client);
   } else {
-    print("HTTP browser tests not selected in configuration file");
+    print('HTTP browser tests not selected in configuration file');
   }
 }

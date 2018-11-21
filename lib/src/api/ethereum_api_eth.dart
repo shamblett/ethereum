@@ -755,7 +755,9 @@ class EthereumApiEth extends EthereumApi {
             EthereumUtilities.bigIntegerToHexList(address);
         params['address'] = addresses;
       } else {
-        params['address'] = <String>[EthereumUtilities.bigIntegerToHex(address)];
+        params['address'] = <String>[
+          EthereumUtilities.bigIntegerToHex(address)
+        ];
       }
     }
     if (topics != null) {

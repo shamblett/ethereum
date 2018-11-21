@@ -127,7 +127,9 @@ class EthereumTransactionReceipt {
         _logs = List<EthereumLog>();
         for (Map<String, dynamic> log in data[EthereumConstants.ethResultKey]
             ['logs']) {
-          final Map<String, dynamic> buildLog = <String, dynamic>{EthereumConstants.ethResultKey: log};
+          final Map<String, dynamic> buildLog = <String, dynamic>{
+            EthereumConstants.ethResultKey: log
+          };
           final EthereumLog entry = EthereumLog.fromMap(buildLog);
           _logs.add(entry);
         }

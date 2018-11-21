@@ -14,13 +14,18 @@ part of ethereum;
 /// Note that the setters ignore the passed state value and simply set the property to true.
 class EthereumDefaultBlock {
   /// Constants
-  static const String ethEarliest = "earliest";
-  static const String ethLatest = "latest";
-  static const String ethPending = "pending";
+  /// Earliest
+  static const String ethEarliest = 'earliest';
 
-  /// Latest indicator. Default
+  /// Latest
+  static const String ethLatest = 'latest';
+
+  /// Pending
+  static const String ethPending = 'pending';
+
   bool _latest = true;
 
+  /// Latest indicator. Default
   bool get latest => _latest;
 
   set latest(bool state) {
@@ -30,9 +35,9 @@ class EthereumDefaultBlock {
     _number = null;
   }
 
-  /// Earliest indicator
   bool _earliest = false;
 
+  /// Earliest indicator
   bool get earliest => _earliest;
 
   set earliest(bool state) {
@@ -42,9 +47,9 @@ class EthereumDefaultBlock {
     _number = null;
   }
 
-  /// Pending indicator
   bool _pending = false;
 
+  /// Pending indicator
   bool get pending => _pending;
 
   set pending(bool state) {
@@ -54,9 +59,9 @@ class EthereumDefaultBlock {
     _number = null;
   }
 
-  /// Block number
   int _number;
 
+  /// Block number
   int get number => _number;
 
   set number(int value) {
