@@ -1,5 +1,5 @@
 #3.1.0
-Issue 5
+Issue 4 fixes, linter updates
 
 #3.0.0
 Issue 4, Interface updates - admin
