@@ -762,9 +762,9 @@ class EthereumCommon {
         expect(client.admin.id, ++id);
       });
       test('Personal Send Transaction', () async {
-        final bool ret = await client.admin
+        final BigInt ret = await client.admin
             .personalSendTransaction(lockAddress, lockAddress, 'password');
-        if (!ret) {
+        if (ret == null) {
           expect(client.eth.lastError.code, -32000);
           expect(client.eth.lastError.message, 'exceeds block gas limit');
         }
