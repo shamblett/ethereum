@@ -762,8 +762,8 @@ class EthereumCommon {
         expect(client.admin.id, ++id);
       });
       test('Personal Send Transaction', () async {
-        final BigInt ret = await client.admin
-            .personalSendTransaction(lockAddress, lockAddress, 'password');
+        final BigInt ret =
+            await client.admin.personalSendTransaction(lockAddress, 'password');
         if (ret == null) {
           expect(client.eth.lastError.code, -32000);
           expect(client.eth.lastError.message, 'exceeds block gas limit');
