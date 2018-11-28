@@ -140,9 +140,13 @@ class EthereumApiAdmin extends EthereumApi {
       conditionObject = null;
     } else {
       if (conditionIsTimestamp) {
-        conditionObject = <String,String>{'timestamp': EthereumUtilities.intToHex(condition)};
+        conditionObject = <String, String>{
+          'timestamp': EthereumUtilities.intToHex(condition)
+        };
       } else {
-        conditionObject = <String,String>{'block': EthereumUtilities.intToHex(condition)};
+        conditionObject = <String, String>{
+          'block': EthereumUtilities.intToHex(condition)
+        };
       }
     }
     final Map<String, dynamic> paramBlock = <String, dynamic>{
@@ -152,7 +156,7 @@ class EthereumApiAdmin extends EthereumApi {
       'gasPrice':
           gasPrice == null ? null : EthereumUtilities.intToHex(gasPrice),
       'value': value == null ? null : EthereumUtilities.intToHex(value),
-      'data': EthereumUtilities.bigIntegerToHex(data),
+      'data': data == null ? null : EthereumUtilities.bigIntegerToHex(data),
       'nonce': nonce == null ? null : EthereumUtilities.intToHex(nonce),
       'condition': conditionObject
     };
