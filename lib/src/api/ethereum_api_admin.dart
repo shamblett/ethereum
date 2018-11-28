@@ -140,9 +140,9 @@ class EthereumApiAdmin extends EthereumApi {
       conditionObject = null;
     } else {
       if (conditionIsTimestamp) {
-        conditionObject = {'timestamp': EthereumUtilities.intToHex(condition)};
+        conditionObject = <String,String>{'timestamp': EthereumUtilities.intToHex(condition)};
       } else {
-        conditionObject = {'block': EthereumUtilities.intToHex(condition)};
+        conditionObject = <String,String>{'block': EthereumUtilities.intToHex(condition)};
       }
     }
     final Map<String, dynamic> paramBlock = <String, dynamic>{
