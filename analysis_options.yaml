@@ -5,6 +5,7 @@
 
 analyzer:
    exclude:
+   - test/issues/**
 
 linter:
    rules:
