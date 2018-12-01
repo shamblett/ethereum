@@ -10,7 +10,6 @@ import 'package:ethereum/ethereum.dart';
 import 'package:test/test.dart';
 
 class EthereumBigInt {
-
   EthereumBigInt(this._raw) {
     _val = EthereumUtilities.safeParse(_raw);
   }
@@ -23,12 +22,10 @@ class EthereumBigInt {
 
 /// Tests for issue 5, safeParse tests
 void main() {
-  test('Safe parse reversability', ()
-  {
+  test('Safe parse reversability', () {
     const String str = '0x01';
     final EthereumBigInt b = EthereumBigInt(str);
     expect(b.raw, '0x01');
     expect(b.val.toInt(), 1);
-
   });
 }

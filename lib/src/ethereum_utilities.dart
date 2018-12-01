@@ -103,5 +103,4 @@ class EthereumUtilities {
     }
     return temp;
   }
-
 }

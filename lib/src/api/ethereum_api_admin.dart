@@ -112,27 +112,55 @@ class EthereumApiAdmin extends EthereumApi {
 
   /// Validate the given passphrase and submit transaction.
   /// The transaction is the same argument as for eth.sendTransaction and contains the from address.
+  /// Note that an extra parameter is condition :-
+  /// Conditional submission of the transaction. Can be either an integer block number { block: 1 } or
+  /// UTC timestamp (in seconds) { time: 1491290692 } or null.
   /// If the passphrase can be used to decrypt the private key belonging to tx.from the transaction is verified,
   /// signed and send onto the network. The account is not unlocked globally in the node and cannot be
   /// used in other RPC calls.
-  Future<BigInt> personalSendTransaction(
-      BigInt address, BigInt to, String passphrase) async {
+  Future<BigInt> personalSendTransaction(BigInt address, String passphrase,
+      {BigInt to,
+      BigInt data,
+      int gas,
+      int gasPrice,
+      int value,
+      int nonce,
+      int condition,
+      bool conditionIsTimestamp = false}) async {
     if (address == null) {
       throw ArgumentError.notNull(
           'Ethereum::personalSendTransaction - address');
-    }
-    if (to == null) {
-      throw ArgumentError.notNull('Ethereum::personalSendTransaction - to');
     }
     if (passphrase == null) {
       throw ArgumentError.notNull(
           'Ethereum::personalSendTransaction - passphrase');
     }
-    const String method = EthereumRpcMethods.psendTransaction;
-    final Map<String, String> paramBlock = <String, String>{
+    Map<String, String> conditionObject = Map<String, String>();
+    if (condition == null) {
+      conditionObject = null;
+    } else {
+      if (conditionIsTimestamp) {
+        conditionObject = <String, String>{
+          'timestamp': EthereumUtilities.intToHex(condition)
+        };
+      } else {
+        conditionObject = <String, String>{
+          'block': EthereumUtilities.intToHex(condition)
+        };
+      }
+    }
+    final Map<String, dynamic> paramBlock = <String, dynamic>{
       'from': EthereumUtilities.bigIntegerToHex(address),
-      'to': EthereumUtilities.bigIntegerToHex(to)
+      'to': to == null ? null : EthereumUtilities.bigIntegerToHex(to),
+      'gas': gas == null ? null : EthereumUtilities.intToHex(gas),
+      'gasPrice':
+          gasPrice == null ? null : EthereumUtilities.intToHex(gasPrice),
+      'value': value == null ? null : EthereumUtilities.intToHex(value),
+      'data': data == null ? null : EthereumUtilities.bigIntegerToHex(data),
+      'nonce': nonce == null ? null : EthereumUtilities.intToHex(nonce),
+      'condition': conditionObject
     };
+    const String method = EthereumRpcMethods.psendTransaction;
     final dynamic params = <dynamic>[paramBlock, passphrase];
     final dynamic res = await _client.rpcClient.request(method, params);
     if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
