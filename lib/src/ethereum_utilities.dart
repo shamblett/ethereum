@@ -24,6 +24,9 @@ class EthereumUtilities {
   /// 32
   static const int pad32 = 32;
 
+  /// Address character length
+  static const int addressCharacterLength = 40;
+
   /// Integer to hex string with leading 0x, lowercase.
   /// The optional pad value pads the string out to the number of bytes
   /// specified, i.e if 8 is specified the string 0x1 becomes 0x0000000000000001
@@ -50,7 +53,15 @@ class EthereumUtilities {
   }
 
   /// BigInt to hex string
-  static String bigIntegerToHex(BigInt val) => '0x${val.toRadixString(16)}';
+  static String bigIntegerToHex(BigInt val) {
+    final String hexString = val.toRadixString(16);
+    // Check for a length of 40 characters, if 39 then add a leading zero
+    if (hexString.length != addressCharacterLength) {
+      return '0x0$hexString';
+    } else {
+      return '0x$hexString';
+    }
+  }
 
   /// Hex string to integer, a value of null indicates an error.
   /// The string must start with 0x

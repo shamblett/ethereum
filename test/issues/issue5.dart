@@ -9,23 +9,19 @@
 import 'package:ethereum/ethereum.dart';
 import 'package:test/test.dart';
 
-class EthereumBigInt {
-  EthereumBigInt(this._raw) {
-    _val = EthereumUtilities.safeParse(_raw);
-  }
-
-  BigInt _val;
-  BigInt get val => _val;
-  String _raw;
-  String get raw => _raw;
-}
-
 /// Tests for issue 5, safeParse tests
 void main() {
-  test('Safe parse reversability', () {
+  test('Safe parse reversability 1', () {
     const String str = '0x01';
-    final EthereumBigInt b = EthereumBigInt(str);
-    expect(b.raw, '0x01');
-    expect(b.val.toInt(), 1);
+    final BigInt b = EthereumUtilities.safeParse(str);
+    expect(b.toInt(), 1);
+  });
+
+  test('Safe parse reversability 2', () {
+    const String str = '0x0472ec0185ebb8202f3d4ddb0226998889663cf2 ';
+    final BigInt b = EthereumUtilities.safeParse(str);
+    expect(b.toInt(), 9223372036854775807);
+    expect(EthereumUtilities.bigIntegerToHex(b),
+        '0x0472ec0185ebb8202f3d4ddb0226998889663cf2');
   });
 }
