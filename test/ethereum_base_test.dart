@@ -6,6 +6,7 @@
  */
 
 @TestOn('vm')
+import 'dart:typed_data';
 import 'package:ethereum/ethereum_server_client.dart';
 import 'package:ethereum/ethereum.dart';
 import 'package:test/test.dart';
@@ -718,6 +719,361 @@ void main() {
         thrown = true;
       }
       expect(thrown, isTrue);
+    });
+  });
+
+  group('Datatypes', () {
+    group('Byte address', () {
+      ByteData fromList(List<int> data) {
+        final ByteData tmp = ByteData(data.length);
+        for (int i = 0; i < data.length; i++) {
+          tmp.setUint8(i, data[i]);
+        }
+        return tmp;
+      }
+
+      test('Exact', () {
+        const List<int> data = <int>[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20
+        ];
+        final EthereumByteAddress address = EthereumByteAddress(fromList(data));
+        expect(address.toList(), data);
+      });
+      test('Bigger', () {
+        const List<int> data = <int>[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          67,
+          98,
+          76,
+          100
+        ];
+        const List<int> checkdata = <int>[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20
+        ];
+        final EthereumByteAddress address = EthereumByteAddress(fromList(data));
+        expect(address.toList(), checkdata);
+      });
+      test('Smaller', () {
+        const List<int> data = <int>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        const List<int> checkdata = <int>[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ];
+        final EthereumByteAddress address = EthereumByteAddress(fromList(data));
+        expect(address.toList(), checkdata);
+      });
+      test('From List all valid', () {
+        const List<int> data = <int>[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20
+        ];
+        final EthereumByteAddress address =
+            EthereumByteAddress.fromIntList(data);
+        expect(address.toList(), data);
+      });
+      test('From list invalid', () {
+        const List<int> data = <int>[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          300,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          400
+        ];
+        const List<int> checkdata = <int>[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          0,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          0
+        ];
+        final EthereumByteAddress address =
+            EthereumByteAddress.fromIntList(data);
+        expect(address.toList(), checkdata);
+      });
+      test('toString', () {
+        const List<int> data = <int>[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20
+        ];
+        final EthereumByteAddress address = EthereumByteAddress(fromList(data));
+        expect(address.toString(),
+            '[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]');
+      });
+      test('Equals', () {
+        const List<int> data = <int>[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20
+        ];
+        final EthereumByteAddress address1 =
+            EthereumByteAddress(fromList(data));
+        final EthereumByteAddress address2 =
+            EthereumByteAddress(fromList(data));
+        expect(address1 == address2, isTrue);
+      });
+      test('Not Equals', () {
+        const List<int> data1 = <int>[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20
+        ];
+        const List<int> data2 = <int>[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          11,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20
+        ];
+        final EthereumByteAddress address1 =
+            EthereumByteAddress(fromList(data1));
+        final EthereumByteAddress address2 =
+            EthereumByteAddress(fromList(data2));
+        expect(address1 == address2, isFalse);
+      });
+      test('Not Equals bad type', () {
+        const List<int> data1 = <int>[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20
+        ];
+        const List<int> data2 = <int>[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          11,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20
+        ];
+        final EthereumByteAddress address2 =
+            EthereumByteAddress(fromList(data2));
+        expect(data1 == address2, isFalse);
+      });
     });
   });
 
