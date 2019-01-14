@@ -55,8 +55,9 @@ class EthereumUtilities {
   /// BigInt to hex string
   static String bigIntegerToHex(BigInt val) {
     final String hexString = val.toRadixString(16);
-    // Check for a length of 40 characters, if 39 then add a leading zero
-    if (hexString.length != addressCharacterLength) {
+    // A Hex digit string must be composed of two characters per byte, so must be even
+    // if the length is odd even it out.
+    if (hexString.length.isOdd) {
       return '0x0$hexString';
     } else {
       return '0x$hexString';

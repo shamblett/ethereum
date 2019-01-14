@@ -8,6 +8,7 @@
 library ethereum;
 
 import 'dart:async';
+import 'dart:typed_data';
 
 part 'src/ethereum.dart';
 
@@ -42,3 +43,5 @@ part 'src/api/ethereum_api.dart';
 part 'src/api/ethereum_api_eth.dart';
 
 part 'src/api/ethereum_api_admin.dart';
+
+part 'src/datatypes/ethereum_address.dart';
