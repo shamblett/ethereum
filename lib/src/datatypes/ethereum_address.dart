@@ -95,7 +95,9 @@ class EthereumByteAddress {
 /// The address data type. If any supplied value cannot be safely represented as
 /// an Ethereum address FormatException will be thrown.
 class EthereumAddress {
-  /// From a BigInt
+  /// From a BigInt. The value must be convertible into the standard Ethereum address
+  /// format of 20 bytes, however unlike the string constructor smaller values will be
+  /// 00 padded to make up the 20 byte length.
   EthereumAddress.fromBigInt(BigInt val) {
     _bigint = val;
     _string = _bigIntToHexString(val);
