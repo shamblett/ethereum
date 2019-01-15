@@ -52,7 +52,7 @@ class EthereumByteAddress {
   /// As an address string, i.e 40 hex chars with a leading 0x
   String asString() {
     const HexEncoder encoder = HexEncoder();
-    String hex = encoder.convert(toList());
+    final String hex = encoder.convert(toList());
     return '0x$hex';
   }
 
@@ -104,6 +104,7 @@ class EthereumAddress {
   /// From a string, must be a valid Ethereum address string, i.e 40 characters
   /// with a leading 0x
   EthereumAddress.fromString(String val) {
+    _checkString(val);
     _string = val;
     _bigint = _safeParse(_string);
   }
@@ -117,6 +118,9 @@ class EthereumAddress {
 
   /// The address length in characters
   static const int addressCharacterLength = 40;
+
+  /// The leading hex indicator
+  static const String leadingHexString = '0x';
 
   /// The BigInt
   BigInt _bigint;
@@ -155,8 +159,17 @@ class EthereumAddress {
         }
       }
     }
-    return '0x$hexString';
+    return '$leadingHexString$hexString';
   }
 
   BigInt _safeParse(String val) => BigInt.parse(val);
+
+  void _checkString(String val) {
+    // Check for a leading 0x and a total length of 42 characters
+    if (!val.startsWith(leadingHexString) ||
+        val.length != addressCharacterLength + 2) {
+      throw const FormatException(
+          'EthereumAddress - address string is badly formed');
+    }
+  }
 }

@@ -1098,7 +1098,50 @@ void main() {
           20
         ];
         final EthereumByteAddress address = EthereumByteAddress(fromList(data));
-        expect(address.asString(), '0x0102030405060708090a0b0c0d0e0f1011121314');
+        expect(
+            address.asString(), '0x0102030405060708090a0b0c0d0e0f1011121314');
+      });
+    });
+    group('Ethereum address', () {
+      test('From string 40 chars leading 0x', () {
+        const String val = '0x0102030405060708090a0b0c0d0e0f1011121314';
+        final EthereumAddress address = EthereumAddress.fromString(val);
+        final BigInt check = BigInt.parse(val);
+        expect(address.asString, val);
+        expect(address.asBigInt, check);
+      });
+      test('From string 40 chars no leading 0x', () {
+        bool thrown = false;
+        const String val = '0102030405060708090a0b0c0d0e0f1011121314';
+        try {
+          final EthereumAddress address = EthereumAddress.fromString(val);
+        } on FormatException catch (e) {
+          print(e);
+          thrown = true;
+        }
+        expect(thrown, isTrue);
+      });
+      test('From string 39 chars leading 0x', () {
+        bool thrown = false;
+        const String val = '0x0102030405060708090a0b0c00e0f1011121314';
+        try {
+          final EthereumAddress address = EthereumAddress.fromString(val);
+        } on FormatException catch (e) {
+          print(e);
+          thrown = true;
+        }
+        expect(thrown, isTrue);
+      });
+      test('From string 41 chars leading 0x', () {
+        bool thrown = false;
+        const String val = '0x0102030405060708090a0b0c0d0e0f10111213141';
+        try {
+          final EthereumAddress address = EthereumAddress.fromString(val);
+        } on FormatException catch (e) {
+          print(e);
+          thrown = true;
+        }
+        expect(thrown, isTrue);
       });
     });
   });
