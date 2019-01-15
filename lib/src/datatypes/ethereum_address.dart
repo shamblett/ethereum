@@ -49,6 +49,13 @@ class EthereumByteAddress {
     return tmp;
   }
 
+  /// As an address string, i.e 40 hex chars with a leading 0x
+  String asString() {
+    const HexEncoder encoder = HexEncoder();
+    String hex = encoder.convert(toList());
+    return '0x$hex';
+  }
+
   @override
   String toString() => toList().toString();
 
@@ -85,24 +92,32 @@ class EthereumByteAddress {
   }
 }
 
-/// The address data type
+/// The address data type. If any supplied value cannot be safely represented as
+/// an Ethereum address FormatException will be thrown.
 class EthereumAddress {
   /// From a BigInt
   EthereumAddress.fromBigInt(BigInt val) {
     _bigint = val;
-    _string = _convertToString(val);
+    _string = _bigIntToHexString(val);
   }
 
-  /// From a string
+  /// From a string, must be a valid Ethereum address string, i.e 40 characters
+  /// with a leading 0x
   EthereumAddress.fromString(String val) {
-    _checkString(val);
-    _convertToBigInt(val);
+    _string = val;
+    _bigint = _safeParse(_string);
   }
 
   /// From a byte address
-  EthereumAddress.fromByteAddress(EthereumByteAddress val) {}
+  EthereumAddress.fromByteAddress(EthereumByteAddress val) {
+    // This is safe, a byte address is already validated.
+    _string = val.asString();
+    _bigint = _safeParse(_string);
+  }
 
-  /// From a
+  /// The address length in characters
+  static const int addressCharacterLength = 40;
+
   /// The BigInt
   BigInt _bigint;
 
@@ -118,9 +133,30 @@ class EthereumAddress {
   @override
   String toString() => asString;
 
-  String _convertToString(BigInt val) {}
+  String _bigIntToHexString(BigInt val) {
+    String hexString = val.toRadixString(16);
+    // A Hex digit string must be composed of two characters per byte, so must be even
+    // if the length is odd even it out.
+    if (hexString.length.isOdd) {
+      hexString = '0$hexString';
+    }
 
-  void _checkString(String val) {}
+    // We have an even sized hex string, if the string is > 40 characters
+    // its not an Ethereum address, if its less then it needs to be padded with 00
+    if (hexString.length > addressCharacterLength) {
+      throw const FormatException(
+          'EthereumAddress - address has more than 40 characters');
+    } else {
+      if (hexString.length < addressCharacterLength) {
+        // Must be even
+        final int shortfall = (addressCharacterLength - hexString.length) % 2;
+        for (int i = 0; i < shortfall; i++) {
+          hexString = '00$hexString';
+        }
+      }
+    }
+    return '0x$hexString';
+  }
 
-  BigInt _convertToBigInt(String val) {}
+  BigInt _safeParse(String val) => BigInt.parse(val);
 }

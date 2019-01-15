@@ -1074,6 +1074,32 @@ void main() {
             EthereumByteAddress(fromList(data2));
         expect(data1 == address2, isFalse);
       });
+      test('As Hex', () {
+        const List<int> data = <int>[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20
+        ];
+        final EthereumByteAddress address = EthereumByteAddress(fromList(data));
+        expect(address.asString(), '0x0102030405060708090a0b0c0d0e0f1011121314');
+      });
     });
   });
 

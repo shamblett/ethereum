@@ -9,6 +9,7 @@ library ethereum;
 
 import 'dart:async';
 import 'dart:typed_data';
+import 'package:hex/hex.dart';
 
 part 'src/ethereum.dart';
 
