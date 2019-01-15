@@ -50,7 +50,7 @@ class EthereumByteAddress {
   }
 
   /// As an address string, i.e 40 hex chars with a leading 0x
-  String asString() {
+  String get asString {
     const HexEncoder encoder = HexEncoder();
     final String hex = encoder.convert(toList());
     return '0x$hex';
@@ -114,7 +114,7 @@ class EthereumAddress {
   /// From a byte address
   EthereumAddress.fromByteAddress(EthereumByteAddress val) {
     // This is safe, a byte address is already validated.
-    _string = val.asString();
+    _string = val.asString;
     _bigint = _safeParse(_string);
   }
 
@@ -139,6 +139,14 @@ class EthereumAddress {
   @override
   String toString() => asString;
 
+  @override
+  bool operator ==(dynamic other) =>
+      identical(this, other) ||
+          other.runtimeType == runtimeType && _bigint == other._bigint;
+
+  @override
+  int get hashCode => _bigint.hashCode;
+
   String _bigIntToHexString(BigInt val) {
     String hexString = val.toRadixString(16);
     // A Hex digit string must be composed of two characters per byte, so must be even
@@ -155,7 +163,7 @@ class EthereumAddress {
     } else {
       if (hexString.length < addressCharacterLength) {
         // Must be even
-        final int shortfall = (addressCharacterLength - hexString.length) % 2;
+        final int shortfall = (addressCharacterLength - hexString.length) ~/ 2;
         for (int i = 0; i < shortfall; i++) {
           hexString = '00$hexString';
         }

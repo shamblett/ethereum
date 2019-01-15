@@ -723,15 +723,15 @@ void main() {
   });
 
   group('Datatypes', () {
-    group('Byte address', () {
-      ByteData fromList(List<int> data) {
-        final ByteData tmp = ByteData(data.length);
-        for (int i = 0; i < data.length; i++) {
-          tmp.setUint8(i, data[i]);
-        }
-        return tmp;
+    ByteData fromList(List<int> data) {
+      final ByteData tmp = ByteData(data.length);
+      for (int i = 0; i < data.length; i++) {
+        tmp.setUint8(i, data[i]);
       }
+      return tmp;
+    }
 
+    group('Byte address', () {
       test('Exact', () {
         const List<int> data = <int>[
           1,
@@ -1098,8 +1098,7 @@ void main() {
           20
         ];
         final EthereumByteAddress address = EthereumByteAddress(fromList(data));
-        expect(
-            address.asString(), '0x0102030405060708090a0b0c0d0e0f1011121314');
+        expect(address.asString, '0x0102030405060708090a0b0c0d0e0f1011121314');
       });
     });
     group('Ethereum address', () {
@@ -1142,6 +1141,83 @@ void main() {
           thrown = true;
         }
         expect(thrown, isTrue);
+      });
+      test('From Byte Address', () {
+        const List<int> data = <int>[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20
+        ];
+        final EthereumByteAddress address = EthereumByteAddress(fromList(data));
+        final EthereumAddress eaddress =
+            EthereumAddress.fromByteAddress(address);
+        expect(eaddress.asString, '0x0102030405060708090a0b0c0d0e0f1011121314');
+      });
+      test('From BigInt Exact', () {
+        const String str = '0x0102030405060708090a0b0c0d0e0f1011121314';
+        final BigInt bint = BigInt.parse(str);
+        final EthereumAddress eaddress = EthereumAddress.fromBigInt(bint);
+        expect(eaddress.asString, str);
+      });
+      test('From BigInt smaller half', () {
+        const String str = '0x08090a0b0c0d0e0f1011121314';
+        const String checkStr = '0x0000000000000008090a0b0c0d0e0f1011121314';
+        final BigInt bint = BigInt.parse(str);
+        final EthereumAddress eaddress = EthereumAddress.fromBigInt(bint);
+        expect(eaddress.asString, checkStr);
+      });
+      test('From BigInt one', () {
+        const String str = '0x01';
+        const String checkStr = '0x0000000000000000000000000000000000000001';
+        final BigInt bint = BigInt.parse(str);
+        final EthereumAddress eaddress = EthereumAddress.fromBigInt(bint);
+        expect(eaddress.asString, checkStr);
+      });
+      test('From BigInt bigger', () {
+        const String str = '0x0102030405060708090a0b0c0d0e0f1011121314161718';
+        final BigInt bint = BigInt.parse(str);
+        bool thrown = false;
+        try {
+          final EthereumAddress eaddress = EthereumAddress.fromBigInt(bint);
+        } on FormatException catch (e) {
+          print(e);
+          thrown = true;
+        }
+        expect(thrown, isTrue);
+      });
+      test('Equals', () {
+        const String str = '0x0102030405060708090a0b0c0d0e0f1011121314';
+        final BigInt bint1 = BigInt.parse(str);
+        final BigInt bint2 = BigInt.parse(str);
+        final EthereumAddress eaddress1 = EthereumAddress.fromBigInt(bint1);
+        final EthereumAddress eaddress2 = EthereumAddress.fromBigInt(bint2);
+        expect(eaddress1 == eaddress2, isTrue);
+      });
+      test('Not Equals', () {
+        const String str1 = '0x0102030405060708090a0b0c0d0e0f1011121314';
+        const String str2 = '0x0102030405060708090a0b04';
+        final BigInt bint1 = BigInt.parse(str1);
+        final BigInt bint2 = BigInt.parse(str2);
+        final EthereumAddress eaddress1 = EthereumAddress.fromBigInt(bint1);
+        final EthereumAddress eaddress2 = EthereumAddress.fromBigInt(bint2);
+        expect(eaddress1 == eaddress2, isFalse);
       });
     });
   });
