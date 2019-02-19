@@ -1072,7 +1072,7 @@ void main() {
         ];
         final EthereumByteAddress address2 =
             EthereumByteAddress(fromList(data2));
-        expect(data1 == address2, isFalse);
+        expect(data1 == address2.toList(), isFalse);
       });
       test('As Hex', () {
         const List<int> data = <int>[
@@ -1114,6 +1114,7 @@ void main() {
         const String val = '0102030405060708090a0b0c0d0e0f1011121314';
         try {
           final EthereumAddress address = EthereumAddress.fromString(val);
+          print(address);
         } on FormatException catch (e) {
           print(e);
           thrown = true;
@@ -1125,6 +1126,7 @@ void main() {
         const String val = '0x0102030405060708090a0b0c00e0f1011121314';
         try {
           final EthereumAddress address = EthereumAddress.fromString(val);
+          print(address);
         } on FormatException catch (e) {
           print(e);
           thrown = true;
@@ -1136,6 +1138,7 @@ void main() {
         const String val = '0x0102030405060708090a0b0c0d0e0f10111213141';
         try {
           final EthereumAddress address = EthereumAddress.fromString(val);
+          print(address);
         } on FormatException catch (e) {
           print(e);
           thrown = true;
@@ -1196,6 +1199,7 @@ void main() {
         bool thrown = false;
         try {
           final EthereumAddress eaddress = EthereumAddress.fromBigInt(bint);
+          print(eaddress);
         } on FormatException catch (e) {
           print(e);
           thrown = true;
