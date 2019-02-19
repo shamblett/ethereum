@@ -38,9 +38,6 @@ class EthereumAddress {
   /// The address length in characters
   static const int addressCharacterLength = 40;
 
-  /// The leading hex indicator
-  static const String leadingHexString = '0x';
-
   /// The BigInt
   BigInt _bigint;
 
@@ -86,14 +83,14 @@ class EthereumAddress {
         }
       }
     }
-    return '$leadingHexString$hexString';
+    return '$EthereumConstants.leadingHexString$hexString';
   }
 
   BigInt _safeParse(String val) => BigInt.parse(val);
 
   void _checkString(String val) {
     // Check for a leading 0x and a total length of 42 characters
-    if (!val.startsWith(leadingHexString) ||
+    if (!val.startsWith(EthereumConstants.leadingHexString) ||
         val.length != addressCharacterLength + 2) {
       throw const FormatException(
           'EthereumAddress - address string is badly formed');
