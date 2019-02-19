@@ -61,6 +61,11 @@ class EthereumAddress {
   @override
   int get hashCode => _bigint.hashCode;
 
+  /// Address string list to EthereumAddress list
+  static List<EthereumAddress> toList(List<String> val) =>
+      List<EthereumAddress>.generate(
+          val.length, (int index) => EthereumAddress.fromString(val[index]));
+
   String _bigIntToHexString(BigInt val) {
     String hexString = val.toRadixString(16);
     // A Hex digit string must be composed of two characters per byte, so must be even
