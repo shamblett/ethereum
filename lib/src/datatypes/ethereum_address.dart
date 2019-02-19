@@ -83,7 +83,7 @@ class EthereumAddress {
         }
       }
     }
-    return '$EthereumConstants.leadingHexString$hexString';
+    return EthereumConstants.leadingHexString + hexString;
   }
 
   BigInt _safeParse(String val) => BigInt.parse(val);

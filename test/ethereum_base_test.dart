@@ -1224,6 +1224,57 @@ void main() {
         expect(eaddress1 == eaddress2, isFalse);
       });
     });
+    group('Ethereum data', () {
+      test('From string leading 0x', () {
+        const String val = '0x0102030405060708090a0b0c0d0e0f1011121314';
+        final EthereumData data = EthereumData.fromString(val);
+        final BigInt check = BigInt.parse(val);
+        expect(data.asString, val);
+        expect(data.asBigInt, check);
+      });
+      test('From string no leading 0x', () {
+        bool thrown = false;
+        const String val = '0102030405060708090a0b0c0d0e0f1011121314';
+        try {
+          final EthereumData data = EthereumData.fromString(val);
+          print(data);
+        } on FormatException catch (e) {
+          print(e);
+          thrown = true;
+        }
+        expect(thrown, isTrue);
+      });
+      test('From BigInt Exact', () {
+        const String str = '0x0102030405060708090a0b0c0d0e0f1011121314';
+        final BigInt bint = BigInt.parse(str);
+        final EthereumData edata = EthereumData.fromBigInt(bint);
+        expect(edata.asString, str);
+      });
+      test('From BigInt one', () {
+        const String str = '0x01';
+        const String checkStr = '0x01';
+        final BigInt bint = BigInt.parse(str);
+        final EthereumData edata = EthereumData.fromBigInt(bint);
+        expect(edata.asString, checkStr);
+      });
+      test('Equals', () {
+        const String str = '0x0102030405060708090a0b0c0d0e0f1011121314';
+        final BigInt bint1 = BigInt.parse(str);
+        final BigInt bint2 = BigInt.parse(str);
+        final EthereumData edata1 = EthereumData.fromBigInt(bint1);
+        final EthereumData edata2 = EthereumData.fromBigInt(bint2);
+        expect(edata1 == edata2, isTrue);
+      });
+      test('Not Equals', () {
+        const String str1 = '0x0102030405060708090a0b0c0d0e0f1011121314';
+        const String str2 = '0x0102030405060708090a0b04';
+        final BigInt bint1 = BigInt.parse(str1);
+        final BigInt bint2 = BigInt.parse(str2);
+        final EthereumData edata1 = EthereumData.fromBigInt(bint1);
+        final EthereumData edata2 = EthereumData.fromBigInt(bint2);
+        expect(edata1 == edata2, isFalse);
+      });
+    });
   });
 
   group('Message tests', () {

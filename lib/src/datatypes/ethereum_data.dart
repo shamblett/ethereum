@@ -56,7 +56,7 @@ class EthereumData {
       hexString = '0$hexString';
     }
 
-    return '$EthereumConstants.leadingHexString$hexString';
+    return EthereumConstants.leadingHexString + hexString;
   }
 
   BigInt _safeParse(String val) => BigInt.parse(val);
@@ -64,7 +64,7 @@ class EthereumData {
   void _checkString(String val) {
     // Check for a leading 0x and a total length of 42 characters
     if (!val.startsWith(EthereumConstants.leadingHexString)) {
-      throw const FormatException('Ethereumdata - data string is badly formed');
+      throw const FormatException('EthereumData - data string is badly formed');
     }
   }
 }
