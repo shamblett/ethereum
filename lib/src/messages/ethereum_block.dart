@@ -24,50 +24,50 @@ class EthereumBlock {
   /// The block number. Null when its a pending block.
   int get number => _number;
 
-  BigInt _hash;
+  EthereumData _hash;
 
   /// Hash of the block. Null when its a pending block.
-  BigInt get hash => _hash;
+  EthereumData get hash => _hash;
 
-  BigInt _parentHash;
+  EthereumData _parentHash;
 
   /// Parent hash. Hash of the parent block.
-  BigInt get parentHash => _parentHash;
+  EthereumData get parentHash => _parentHash;
 
-  BigInt _nonce;
+  EthereumData _nonce;
 
   /// Nonce. Hash of the generated proof-of-work. Null when its pending block.
-  BigInt get nonce => _nonce;
+  EthereumData get nonce => _nonce;
 
-  BigInt _sha3Uncles;
+  EthereumData _sha3Uncles;
 
   /// Sha3 Uncles. SHA3 of the uncles data in the block.
-  BigInt get sha3Uncles => _sha3Uncles;
+  EthereumData get sha3Uncles => _sha3Uncles;
 
-  BigInt _logsBloom;
+  EthereumData _logsBloom;
 
   /// Logs bloom. The bloom filter for the logs of the block. Null when its pending block.
-  BigInt get logsBloom => _logsBloom;
+  EthereumData get logsBloom => _logsBloom;
 
-  BigInt _transactionsRoot;
+  EthereumData _transactionsRoot;
 
   /// Transactions root. The root of the transaction tree of the block.
-  BigInt get transactionsRoot => _transactionsRoot;
+  EthereumData get transactionsRoot => _transactionsRoot;
 
-  BigInt _stateRoot;
+  EthereumData _stateRoot;
 
   /// State root. The root of the final state tree of the block.
-  BigInt get stateRoot => _stateRoot;
+  EthereumData get stateRoot => _stateRoot;
 
-  BigInt _receiptsRoot;
+  EthereumData _receiptsRoot;
 
   /// Receipts root. The root of the receipts tree of the block.
-  BigInt get receiptsRoot => _receiptsRoot;
+  EthereumData get receiptsRoot => _receiptsRoot;
 
-  BigInt _miner;
+  EthereumData _miner;
 
   /// Miner. The address of the beneficiary to whom the mining rewards were given.
-  BigInt get miner => _miner;
+  EthereumData get miner => _miner;
 
   int _difficulty;
 
@@ -79,10 +79,10 @@ class EthereumBlock {
   /// Total difficulty. Integer of the total difficulty of the chain until this block.
   int get totalDifficulty => _totalDifficulty;
 
-  BigInt _extraData;
+  EthereumData _extraData;
 
   /// Extra data. The 'extra data' field of this block.
-  BigInt get extraData => _extraData;
+  EthereumData get extraData => _extraData;
 
   int _size;
 
@@ -115,10 +115,10 @@ class EthereumBlock {
   /// Indicates if the transactions are hashes or transaction objects
   bool get transactionsAreHashes => _transactionsAreHashes;
 
-  List<BigInt> _uncles;
+  List<EthereumData> _uncles;
 
   /// Uncles. A list of uncle hashes.
-  List<BigInt> get uncles => _uncles;
+  List<EthereumData> get uncles => _uncles;
 
   /// Construct from the supplied Map, only check for the keys we need.
   void construct(Map<String, dynamic> data) {
@@ -130,39 +130,39 @@ class EthereumBlock {
           data[EthereumConstants.ethResultKey]['number']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('hash')) {
-      _hash = EthereumUtilities.safeParse(
-          data[EthereumConstants.ethResultKey]['hash']);
+      _hash =
+          EthereumData.fromString(data[EthereumConstants.ethResultKey]['hash']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('parentHash')) {
-      _parentHash = EthereumUtilities.safeParse(
+      _parentHash = EthereumData.fromString(
           data[EthereumConstants.ethResultKey]['parentHash']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('nonce')) {
-      _nonce = EthereumUtilities.safeParse(
+      _nonce = EthereumData.fromString(
           data[EthereumConstants.ethResultKey]['nonce']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('sha3Uncles')) {
-      _sha3Uncles = EthereumUtilities.safeParse(
+      _sha3Uncles = EthereumData.fromString(
           data[EthereumConstants.ethResultKey]['sha3Uncles']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('logsBloom')) {
-      _logsBloom = EthereumUtilities.safeParse(
+      _logsBloom = EthereumData.fromString(
           data[EthereumConstants.ethResultKey]['logsBloom']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('transactionsRoot')) {
-      _transactionsRoot = EthereumUtilities.safeParse(
+      _transactionsRoot = EthereumData.fromString(
           data[EthereumConstants.ethResultKey]['transactionsRoot']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('stateRoot')) {
-      _stateRoot = EthereumUtilities.safeParse(
+      _stateRoot = EthereumData.fromString(
           data[EthereumConstants.ethResultKey]['stateRoot']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('receiptsRoot')) {
-      _receiptsRoot = EthereumUtilities.safeParse(
+      _receiptsRoot = EthereumData.fromString(
           data[EthereumConstants.ethResultKey]['receiptsRoot']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('miner')) {
-      _miner = EthereumUtilities.safeParse(
+      _miner = EthereumData.fromString(
           data[EthereumConstants.ethResultKey]['miner']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('difficulty')) {
@@ -174,7 +174,7 @@ class EthereumBlock {
           data[EthereumConstants.ethResultKey]['totalDifficulty']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('extraData')) {
-      _extraData = EthereumUtilities.safeParse(
+      _extraData = EthereumData.fromString(
           data[EthereumConstants.ethResultKey]['extraData']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('size')) {
@@ -195,8 +195,8 @@ class EthereumBlock {
               data[EthereumConstants.ethResultKey]['timestamp']));
     }
     if (data[EthereumConstants.ethResultKey].containsKey('uncles')) {
-      _uncles = EthereumUtilities.hexToBigIntList(
-          data[EthereumConstants.ethResultKey]['uncles']);
+      _uncles =
+          EthereumData.toList(data[EthereumConstants.ethResultKey]['uncles']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('transactions')) {
       if ((data[EthereumConstants.ethResultKey]['transactions'] != null) &&
