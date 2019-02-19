@@ -53,6 +53,10 @@ class EthereumData {
       List<EthereumData>.generate(
           val.length, (int index) => EthereumData.fromString(val[index]));
 
+  /// EthereumData list to string list
+  static List<String> toStringList(List<EthereumData> val) =>
+      List<String>.generate(val.length, (int index) => val[index].asString);
+
   String _bigIntToHexString(BigInt val) {
     String hexString = val.toRadixString(16);
     // A Hex digit string must be composed of two characters per byte, so must be even
