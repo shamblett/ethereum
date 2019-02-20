@@ -1631,24 +1631,18 @@ void main() {
       expect(message.removed, false);
       expect(message.logIndex, 1);
       expect(message.blockNumber, 436);
-      expect(
-          message.blockHash.asString,
-              '0x8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcfdf829c5a142f1fccd7d');
-      expect(
-          message.transactionHash.asString,
-
-              '0xdf829c5a142f1fccd7d8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcf');
+      expect(message.blockHash.asString,
+          '0x8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcfdf829c5a142f1fccd7d');
+      expect(message.transactionHash.asString,
+          '0xdf829c5a142f1fccd7d8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcf');
       expect(message.transactionIndex, 0);
-      expect(
-          message.address.asString,
-
-              '0x16c5785ac562ff41e2dcfdf829c5a142f1fccd7d');
+      expect(message.address.asString,
+          '0x16c5785ac562ff41e2dcfdf829c5a142f1fccd7d');
       expect(message.data.asBigInt, BigInt.zero);
       expect(message.topics, isNotNull);
       expect(message.topics.length, 1);
-      expect(
-          message.topics[0].asString,
-              '0x59ebeb90bc63057b6515673c3ecf9438e5058bca0f92585014eced636878c9a5');
+      expect(message.topics[0].asString,
+          '0x59ebeb90bc63057b6515673c3ecf9438e5058bca0f92585014eced636878c9a5');
       print(message);
     });
     test('Transaction receipt - null', () {
@@ -1803,31 +1797,23 @@ void main() {
       };
       final EthereumTransactionReceipt message =
           EthereumTransactionReceipt.fromMap(tr);
-      expect(
-          message.transactionHash,
-          EthereumUtilities.safeParse(
-              '0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238'));
+      expect(message.transactionHash.asString,
+          '0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238');
       expect(message.transactionIndex, 1);
       expect(message.blockNumber, 11);
-      expect(
-          message.blockHash,
-          EthereumUtilities.safeParse(
-              '0xc6ef2fc5426d6ad6fd9e2a26abeab0aa2411b7ab17f30a99d3cb96aed1d1055b'));
+      expect(message.blockHash.asString,
+          '0xc6ef2fc5426d6ad6fd9e2a26abeab0aa2411b7ab17f30a99d3cb96aed1d1055b');
       expect(message.cumulativeGasUsed, 13244);
       expect(message.gasUsed, 1244);
-      expect(
-          message.contractAddress,
-          EthereumUtilities.safeParse(
-              '0xb60e8dd61c5d32be8058bb8eb970870f07233155'));
+      expect(message.contractAddress.asString,
+          '0xb60e8dd61c5d32be8058bb8eb970870f07233155');
       expect(message.logs, isNotNull);
       expect(message.logs.length, 2);
       expect(message.logs[0].logIndex, 1);
       expect(message.logs[1].logIndex, 2);
-      expect(message.logsBloom, BigInt.zero);
-      expect(
-          message.root,
-          EthereumUtilities.safeParse(
-              '0x59ebeb90bc63057b6515673c3ecf9438e5058bca0f92585014eced636878c9a5'));
+      expect(message.logsBloom.asBigInt, BigInt.zero);
+      expect(message.root.asString,
+          '0x59ebeb90bc63057b6515673c3ecf9438e5058bca0f92585014eced636878c9a5');
       expect(message.status, isNull);
     });
   });
@@ -1852,14 +1838,10 @@ void main() {
     expect(message.logs, isNull);
     expect(message.hashes, isNotNull);
     expect(message.hashes.length, 2);
-    expect(
-        message.hashes[0],
-        EthereumUtilities.safeParse(
-            '0x8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcfdf829c5a142f1fccd7d'));
-    expect(
-        message.hashes[1],
-        EthereumUtilities.safeParse(
-            '0x8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcfdf829c5a142f1fccd7e'));
+    expect(message.hashes[0].asString,
+        '0x8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcfdf829c5a142f1fccd7d');
+    expect(message.hashes[1].asString,
+        '0x8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcfdf829c5a142f1fccd7e');
   });
   test('Filter - logs', () {
     final Map<String, dynamic> filter = <String, dynamic>{
@@ -1917,18 +1899,12 @@ void main() {
       '0xd1ff1c01710000000000000000000000d1ff1c01710000000000000000000000'
     ];
     final EthereumWork message = EthereumWork.fromList(work);
-    expect(
-        message.powHash,
-        EthereumUtilities.safeParse(
-            '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef'));
-    expect(
-        message.seedHash,
-        EthereumUtilities.safeParse(
-            '0x5EED00000000000000000000000000005EED0000000000000000000000000000'));
-    expect(
-        message.boundaryCondition,
-        EthereumUtilities.safeParse(
-            '0xd1ff1c01710000000000000000000000d1ff1c01710000000000000000000000'));
+    expect(message.powHash.asString,
+        '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef');
+    expect(message.seedHash.asString,
+        '0x5EED00000000000000000000000000005EED0000000000000000000000000000');
+    expect(message.boundaryCondition.asString,
+        '0xd1ff1c01710000000000000000000000d1ff1c01710000000000000000000000');
     print(message);
     final EthereumWork message1 = EthereumWork();
     print(message1);
