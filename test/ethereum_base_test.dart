@@ -10,6 +10,7 @@ import 'dart:typed_data';
 import 'package:ethereum/ethereum_server_client.dart';
 import 'package:ethereum/ethereum.dart';
 import 'package:test/test.dart';
+import 'ethereum_test_utilities.dart';
 
 /// These test are common to both server and client, we use the server client for convenience.
 
@@ -61,12 +62,12 @@ void main() {
     });
     test('Hex to int list', () {
       final List<String> testString = <String>['0xabcdef12345', '0xaabbcc'];
-      final List<int> val = EthereumUtilities.hexToIntList(testString);
+      final List<int> val = EthereumTestUtilities.hexToIntList(testString);
       expect(val, <int>[0xabcdef12345, 0xaabbcc]);
     });
     test('Int to hex list', () {
       final List<int> testList = <int>[0xabcdef12345, 0xaabbcc];
-      final List<String> val = EthereumUtilities.intToHexList(testList);
+      final List<String> val = EthereumTestUtilities.intToHexList(testList);
       expect(val, <String>['0xabcdef12345', '0xaabbcc']);
     });
   });
@@ -2143,7 +2144,8 @@ void main() {
     test('personalUnlockAccount - passphrase', () async {
       bool thrown = false;
       try {
-        await client.admin.personalUnlockAccount(BigInt.zero, null);
+        await client.admin.personalUnlockAccount(
+            EthereumAddress.fromBigInt(BigInt.zero), null);
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
         expect(e.toString(),
@@ -2167,7 +2169,8 @@ void main() {
     test('personalSendTransaction - passphrase', () async {
       bool thrown = false;
       try {
-        await client.admin.personalSendTransaction(BigInt.zero, null);
+        await client.admin.personalSendTransaction(
+            EthereumAddress.fromBigInt(BigInt.zero), null);
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
         expect(e.toString(),
@@ -2179,7 +2182,8 @@ void main() {
     test('personalSign - message', () async {
       bool thrown = false;
       try {
-        await client.admin.personalSign(null, BigInt.zero, 'password');
+        await client.admin.personalSign(
+            null, EthereumAddress.fromBigInt(BigInt.zero), 'password');
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
         expect(e.toString(),
@@ -2191,7 +2195,8 @@ void main() {
     test('personalSign - address', () async {
       bool thrown = false;
       try {
-        await client.admin.personalSign(BigInt.zero, null, 'password');
+        await client.admin.personalSign(
+            EthereumData.fromBigInt(BigInt.zero), null, 'password');
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
         expect(e.toString(),
@@ -2203,7 +2208,8 @@ void main() {
     test('personalEcRecover - message', () async {
       bool thrown = false;
       try {
-        await client.admin.personalEcRecover(null, BigInt.zero);
+        await client.admin
+            .personalEcRecover(null, EthereumData.fromBigInt(BigInt.zero));
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
         expect(e.toString(),
@@ -2215,7 +2221,8 @@ void main() {
     test('personalEcRecover - signature', () async {
       bool thrown = false;
       try {
-        await client.admin.personalEcRecover(BigInt.zero, null);
+        await client.admin
+            .personalEcRecover(EthereumData.fromBigInt(BigInt.zero), null);
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
         expect(e.toString(),

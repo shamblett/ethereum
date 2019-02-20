@@ -204,7 +204,7 @@ class EthereumBlock {
         if (data[EthereumConstants.ethResultKey]['transactions'][0] is String) {
           // Hashes
           _transactionsAreHashes = true;
-          _transactions = EthereumUtilities.hexToBigIntList(
+          _transactions = EthereumData.toStringList(
               data[EthereumConstants.ethResultKey]['transactions']);
         } else {
           // Transaction objects

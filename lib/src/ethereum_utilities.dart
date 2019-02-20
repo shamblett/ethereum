@@ -52,18 +52,6 @@ class EthereumUtilities {
     return '0x$ret';
   }
 
-  /// BigInt to hex string
-  static String bigIntegerToHex(BigInt val) {
-    final String hexString = val.toRadixString(16);
-    // A Hex digit string must be composed of two characters per byte, so must be even
-    // if the length is odd even it out.
-    if (hexString.length.isOdd) {
-      return '0x0$hexString';
-    } else {
-      return '0x$hexString';
-    }
-  }
-
   /// Hex string to integer, a value of null indicates an error.
   /// The string must start with 0x
   static int hexToInt(String val) {
@@ -73,24 +61,6 @@ class EthereumUtilities {
     }
     return temp;
   }
-
-  /// Hex String list to Integer list
-  static List<int> hexToIntList(List<String> val) =>
-      List<int>.generate(val.length, (int index) => hexToInt(val[index]));
-
-  /// Hex String list to BigInt list
-  static List<BigInt> hexToBigIntList(List<String> val) =>
-      List<BigInt>.generate(
-          val.length, (int index) => EthereumUtilities.safeParse(val[index]));
-
-  /// Integer list to Hex String list
-  static List<String> intToHexList(List<int> val) =>
-      List<String>.generate(val.length, (int index) => intToHex(val[index]));
-
-  /// BigInt list to Hex String list
-  static List<String> bigIntegerToHexList(List<BigInt> val) =>
-      List<String>.generate(
-          val.length, (int index) => '0x${val[index].toRadixString(16)}');
 
   /// Remove null values from a map
   static Map<dynamic, dynamic> removeNull(Map<dynamic, dynamic> theMap) {

@@ -731,14 +731,14 @@ class EthereumCommon {
     });
 
     group('Admin', () {
-      BigInt lockAddress;
-      BigInt signature;
+      EthereumAddress lockAddress;
+      EthereumData signature;
       test('Personal ImportRawKey', () async {
-        final BigInt address = await client.admin.personalImportRawKey(
+        final EthereumData key = await client.admin.personalImportRawKey(
             'b5b1870957d373ef0eeffecc6e4812c0fd08f554b37b233526acc331bf1544f7',
             'password');
-        if (address != null) {
-          expect(address.isValidInt, true);
+        if (key != null) {
+          expect(key.asBigInt.isValidInt, true);
         } else {
           expect(client.eth.lastError.code, -32000);
           expect(client.eth.lastError.message, 'account already exists');
@@ -746,7 +746,8 @@ class EthereumCommon {
         expect(client.admin.id, ++id);
       });
       test('Personal List Accounts', () async {
-        final List<BigInt> ret = await client.admin.personalListAccounts();
+        final List<EthereumAddress> ret =
+            await client.admin.personalListAccounts();
         expect(ret, isNotNull);
         lockAddress = ret[0];
         print(ret);
@@ -758,9 +759,9 @@ class EthereumCommon {
         expect(client.admin.id, ++id);
       });
       test('Personal New Account', () async {
-        final BigInt ret = await client.admin.personalNewAccount('password');
+        final EthereumData ret =
+            await client.admin.personalNewAccount('password');
         expect(ret, isNotNull);
-        lockAddress = ret;
         print(ret);
         expect(client.admin.id, ++id);
       });
@@ -773,17 +774,19 @@ class EthereumCommon {
         expect(client.admin.id, ++id);
       });
       test('Personal Sign', () async {
-        final BigInt message = BigInt.from(0xdeadbeaf);
-        final BigInt ret =
+        final EthereumData message =
+            EthereumData.fromBigInt(BigInt.from(0xdeadbeaf));
+        final EthereumData ret =
             await client.admin.personalSign(message, lockAddress, 'password');
         expect(ret, isNotNull);
         signature = ret;
-        print(EthereumUtilities.bigIntegerToHex(ret));
+        print(ret.asString);
         expect(client.admin.id, ++id);
       });
       test('Personal EcRecover', () async {
-        final BigInt message = BigInt.from(0xdeadbeaf);
-        final BigInt ret =
+        final EthereumData message =
+            EthereumData.fromBigInt(BigInt.from(0xdeadbeaf));
+        final EthereumAddress ret =
             await client.admin.personalEcRecover(message, signature);
         expect(ret, isNotNull);
         expect(ret, lockAddress);
