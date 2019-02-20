@@ -1,3 +1,6 @@
+#4.0.0
+Issue 5, new datatypes
+
 #3.1.0
 Issue 4 fixes, linter updates
 
