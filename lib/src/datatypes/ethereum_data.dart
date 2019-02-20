@@ -68,7 +68,14 @@ class EthereumData {
     return EthereumConstants.leadingHexString + hexString;
   }
 
-  BigInt _safeParse(String val) => BigInt.parse(val);
+  BigInt _safeParse(String val) {
+    // If the string is zero trap this
+    if (val.contains(RegExp(r'[1-9]'))) {
+      return BigInt.parse(val);
+    } else {
+      return BigInt.zero;
+    }
+  }
 
   void _checkString(String val) {
     // Check for a leading 0x and a total length of 42 characters

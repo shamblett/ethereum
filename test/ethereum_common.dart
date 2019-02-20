@@ -107,7 +107,7 @@ class EthereumCommon {
         expect(client.eth.id, ++id);
         if (accounts.isNotEmpty) {
           print('Accounts are $accountsStr');
-          expect(accounts[0], EthereumTestConfiguration.defaultAccount);
+          expect(accounts[0].asString, EthereumTestConfiguration.defaultAccount);
         } else {
           print('There are no accounts');
         }
@@ -207,7 +207,7 @@ class EthereumCommon {
             0x0,
             block);
         if (storage != null) {
-          expect(storage, BigInt.zero);
+          expect(storage.asBigInt, BigInt.zero);
         }
         expect(client.eth.id, ++id);
         print('Storage at block is $storage');
@@ -580,7 +580,7 @@ class EthereumCommon {
         filterId = await client.eth.newFilter(
             fromBlock: from,
             toBlock: to,
-            address: EthereumUtilities.safeParse(
+            address: EthereumAddress.fromString(
                 '0x8888f1f195afa192cfee860698584c030f4c9db1'),
             topics: <EthereumData>[
               EthereumData.fromString(
@@ -599,10 +599,10 @@ class EthereumCommon {
         final EthereumDefaultBlock to = EthereumDefaultBlock();
         from.number = 2;
         filterId = await client.eth
-            .newFilter(fromBlock: from, toBlock: to, address: <BigInt>[
-          EthereumUtilities.safeParse(
+            .newFilter(fromBlock: from, toBlock: to, address: <EthereumAddress>[
+          EthereumAddress.fromString(
               '0x8888f1f195afa192cfee860698584c030f4c9db1'),
-          EthereumUtilities.safeParse(
+          EthereumAddress.fromString(
               '0x8888f1f195afa192cfee860698584c030f4c9db2')
         ], topics: <EthereumData>[
           EthereumData.fromString(
