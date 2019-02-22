@@ -14,7 +14,7 @@
 ///
 /// Test configuration options
 class EthereumTestConfiguration {
-  static String defaultAccount = '0x12890d2cce102216644c59dae5baed380d84830c';
+  static String defaultAccount = '0xad52b73690c35b9211a18c9293e805d792474168';
 
   /// True runs the browser HTTP tests, you will need CORS support for this as above
   static bool runBrowserHttp = false;
