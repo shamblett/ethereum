@@ -19,21 +19,21 @@ class EthereumTransaction {
     construct(result);
   }
 
-  BigInt _hash;
+  EthereumData _hash;
 
   /// Hash. hash of the transaction.
-  BigInt get hash => _hash;
+  EthereumData get hash => _hash;
 
   int _nonce;
 
   /// Nonce. The number of transactions made by the sender prior to this one.
   int get nonce => _nonce;
 
-  BigInt _blockHash;
+  EthereumData _blockHash;
 
   /// Block hash. Hash of the block where this transaction was in.
   /// Null when the transaction is pending.
-  BigInt get blockHash => _blockHash;
+  EthereumData get blockHash => _blockHash;
 
   int _blockNumber;
 
@@ -47,15 +47,15 @@ class EthereumTransaction {
   /// Null when the transaction is pending.
   int get transactionIndex => _transactionIndex;
 
-  BigInt _from;
+  EthereumAddress _from;
 
   /// From. Address of the sender.
-  BigInt get from => _from;
+  EthereumAddress get from => _from;
 
-  BigInt _to;
+  EthereumAddress _to;
 
   /// To. Address of the receiver. Null when a contract creation transaction.
-  BigInt get to => _to;
+  EthereumAddress get to => _to;
 
   int _value;
 
@@ -72,10 +72,10 @@ class EthereumTransaction {
   /// Gas. Gas provided by the sender.
   int get gas => _gas;
 
-  BigInt _input;
+  EthereumData _input;
 
   /// Input. Data sent with the transaction.
-  BigInt get input => _input;
+  EthereumData get input => _input;
 
   /// Construct from the supplied Map, only check for the keys we need.
   void construct(Map<String, dynamic> data) {
@@ -83,15 +83,15 @@ class EthereumTransaction {
       return;
     }
     if (data[EthereumConstants.ethResultKey].containsKey('hash')) {
-      _hash = EthereumUtilities.safeParse(
-          data[EthereumConstants.ethResultKey]['hash']);
+      _hash =
+          EthereumData.fromString(data[EthereumConstants.ethResultKey]['hash']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('nonce')) {
       _nonce = EthereumUtilities.hexToInt(
           data[EthereumConstants.ethResultKey]['nonce']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('blockHash')) {
-      _blockHash = EthereumUtilities.safeParse(
+      _blockHash = EthereumData.fromString(
           data[EthereumConstants.ethResultKey]['blockHash']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('blockNumber')) {
@@ -103,11 +103,11 @@ class EthereumTransaction {
           data[EthereumConstants.ethResultKey]['transactionIndex']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('from')) {
-      _from = EthereumUtilities.safeParse(
+      _from = EthereumAddress.fromString(
           data[EthereumConstants.ethResultKey]['from']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('to')) {
-      _to = EthereumUtilities.safeParse(
+      _to = EthereumAddress.fromString(
           data[EthereumConstants.ethResultKey]['to']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('value')) {
@@ -123,7 +123,7 @@ class EthereumTransaction {
           data[EthereumConstants.ethResultKey]['gas']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('input')) {
-      _input = EthereumUtilities.safeParse(
+      _input = EthereumData.fromString(
           data[EthereumConstants.ethResultKey]['input']);
     }
   }

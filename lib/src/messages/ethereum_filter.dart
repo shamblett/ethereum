@@ -23,10 +23,10 @@ class EthereumFilter {
     construct(result);
   }
 
-  List<BigInt> _hashes;
+  List<EthereumData> _hashes;
 
   /// Hashes, block or transaction
-  List<BigInt> get hashes => _hashes;
+  List<EthereumData> get hashes => _hashes;
 
   List<EthereumLog> _logs;
 
@@ -42,8 +42,7 @@ class EthereumFilter {
     if (data[EthereumConstants.ethResultKey].isNotEmpty) {
       if (data[EthereumConstants.ethResultKey][0] is String) {
         // Hashes
-        _hashes = EthereumUtilities.hexToBigIntList(
-            data[EthereumConstants.ethResultKey]);
+        _hashes = EthereumData.toList(data[EthereumConstants.ethResultKey]);
       } else {
         // Logs
         _logs = List<EthereumLog>();

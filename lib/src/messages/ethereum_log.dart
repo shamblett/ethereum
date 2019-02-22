@@ -19,6 +19,19 @@ class EthereumLog {
     construct(result);
   }
 
+  /// From list
+  static List<EthereumLog> fromList(dynamic res) {
+    final List<EthereumLog> logs = List<EthereumLog>();
+    for (dynamic log in res) {
+      final Map<String, dynamic> buildLog = <String, dynamic>{
+        EthereumConstants.ethResultKey: log
+      };
+      final EthereumLog entry = EthereumLog.fromMap(buildLog);
+      logs.add(entry);
+    }
+    return logs;
+  }
+
   bool _removed;
 
   /// Removed. True when the log was removed, due to a chain reorganization. false if its a valid log.
@@ -34,37 +47,37 @@ class EthereumLog {
   /// Transaction index. The transactions index position the log was created from. Null when the log is pending.
   int get transactionIndex => _transactionIndex;
 
-  BigInt _transactionHash;
+  EthereumData _transactionHash;
 
   /// Transaction hash. Hash of the transactions this log was created from. Null when the log is pending.
-  BigInt get transactionHash => _transactionHash;
+  EthereumData get transactionHash => _transactionHash;
 
-  BigInt _blockHash;
+  EthereumData _blockHash;
 
   /// Block hash. Hash of the block where this log was in. Null when the log is pending.
-  BigInt get blockHash => _blockHash;
+  EthereumData get blockHash => _blockHash;
 
   int _blockNumber;
 
   /// Block number. The block number of this log. Null when the log is pending.
   int get blockNumber => _blockNumber;
 
-  BigInt _address;
+  EthereumAddress _address;
 
   /// Address. Address from which this log originated.
-  BigInt get address => _address;
+  EthereumAddress get address => _address;
 
-  BigInt _data;
+  EthereumData _data;
 
   /// Data. Contains one or more 32 Bytes non-indexed arguments of the log.
-  BigInt get data => _data;
+  EthereumData get data => _data;
 
-  List<BigInt> _topics;
+  List<EthereumData> _topics;
 
   /// Topics. List of 0 to 4 32 of indexed log arguments. (In solidity:
   /// The first topic is the hash of the signature of the event (e.g. Deposit(address,bytes32,uint256)),
   /// except you declared the event with the anonymous specifier.)
-  List<BigInt> get topics => _topics;
+  List<EthereumData> get topics => _topics;
 
   /// Construct from the supplied Map, only check for the keys we need.
   void construct(Map<String, dynamic> data) {
@@ -83,11 +96,11 @@ class EthereumLog {
           data[EthereumConstants.ethResultKey]['transactionIndex']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('transactionHash')) {
-      _transactionHash = EthereumUtilities.safeParse(
+      _transactionHash = EthereumData.fromString(
           data[EthereumConstants.ethResultKey]['transactionHash']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('blockHash')) {
-      _blockHash = EthereumUtilities.safeParse(
+      _blockHash = EthereumData.fromString(
           data[EthereumConstants.ethResultKey]['blockHash']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('blockNumber')) {
@@ -95,21 +108,18 @@ class EthereumLog {
           data[EthereumConstants.ethResultKey]['blockNumber']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('address')) {
-      _address = EthereumUtilities.safeParse(
+      _address = EthereumAddress.fromString(
           data[EthereumConstants.ethResultKey]['address']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('data')) {
-      _data = EthereumUtilities.safeParse(
-          data[EthereumConstants.ethResultKey]['data']);
+      _data =
+          EthereumData.fromString(data[EthereumConstants.ethResultKey]['data']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('topics')) {
       if ((data[EthereumConstants.ethResultKey]['topics'] != null) &&
           (data[EthereumConstants.ethResultKey]['topics'].isNotEmpty)) {
-        _topics = List<BigInt>();
-        for (String topic in data[EthereumConstants.ethResultKey]['topics']) {
-          final BigInt entry = EthereumUtilities.safeParse(topic);
-          _topics.add(entry);
-        }
+        _topics =
+            EthereumData.toList(data[EthereumConstants.ethResultKey]['topics']);
       }
     }
   }

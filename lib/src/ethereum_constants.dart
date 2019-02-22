@@ -16,4 +16,7 @@ class EthereumConstants {
 
   /// Error key
   static const String ethErrorKey = 'error';
+
+  /// The leading hex indicator
+  static const String leadingHexString = '0x';
 }

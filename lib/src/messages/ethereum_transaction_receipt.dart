@@ -19,20 +19,20 @@ class EthereumTransactionReceipt {
     construct(result);
   }
 
-  BigInt _transactionHash;
+  EthereumData _transactionHash;
 
   /// Transaction hash. Hash of the transaction.
-  BigInt get transactionHash => _transactionHash;
+  EthereumData get transactionHash => _transactionHash;
 
   int _transactionIndex;
 
   /// Transaction index. Ihe transactions index position in the block.
   int get transactionIndex => _transactionIndex;
 
-  BigInt _blockHash;
+  EthereumData _blockHash;
 
   /// Block hash. Hash of the block this transaction was in.
-  BigInt get blockHash => _blockHash;
+  EthereumData get blockHash => _blockHash;
 
   int _blockNumber;
 
@@ -49,26 +49,26 @@ class EthereumTransactionReceipt {
   /// Gas used. The amount of gas used by this transaction.
   int get gasUsed => _gasUsed;
 
-  BigInt _contractAddress;
+  EthereumAddress _contractAddress;
 
   /// Contract address. The contract address created, if the transaction was a contract creation, otherwise null.
-  BigInt get contractAddress => _contractAddress;
+  EthereumAddress get contractAddress => _contractAddress;
 
   List<EthereumLog> _logs;
 
   /// Logs. List of log objects, which this transaction generated.
   List<EthereumLog> get logs => _logs;
 
-  BigInt _logsBloom;
+  EthereumData _logsBloom;
 
   /// Logs bloom. Bloom filter for light clients to quickly retrieve related logs.
-  BigInt get logsBloom => _logsBloom;
+  EthereumData get logsBloom => _logsBloom;
 
-  BigInt _root;
+  EthereumData _root;
 
   /// Root. Post-transaction stateroot (pre Byzantium)
   /// Null if status is present.
-  BigInt get root => _root;
+  EthereumData get root => _root;
 
   int _status;
 
@@ -82,7 +82,7 @@ class EthereumTransactionReceipt {
       return;
     }
     if (data[EthereumConstants.ethResultKey].containsKey('transactionHash')) {
-      _transactionHash = EthereumUtilities.safeParse(
+      _transactionHash = EthereumData.fromString(
           data[EthereumConstants.ethResultKey]['transactionHash']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('transactionIndex')) {
@@ -90,7 +90,7 @@ class EthereumTransactionReceipt {
           data[EthereumConstants.ethResultKey]['transactionIndex']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('blockHash')) {
-      _blockHash = EthereumUtilities.safeParse(
+      _blockHash = EthereumData.fromString(
           data[EthereumConstants.ethResultKey]['blockHash']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('blockNumber')) {
@@ -106,16 +106,16 @@ class EthereumTransactionReceipt {
           data[EthereumConstants.ethResultKey]['gasUsed']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('contractAddress')) {
-      _contractAddress = EthereumUtilities.safeParse(
+      _contractAddress = EthereumAddress.fromString(
           data[EthereumConstants.ethResultKey]['contractAddress']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('logsBloom')) {
-      _logsBloom = EthereumUtilities.safeParse(
+      _logsBloom = EthereumData.fromString(
           data[EthereumConstants.ethResultKey]['logsBloom']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('root')) {
-      _root = EthereumUtilities.safeParse(
-          data[EthereumConstants.ethResultKey]['root']);
+      _root =
+          EthereumData.fromString(data[EthereumConstants.ethResultKey]['root']);
     }
     if (data[EthereumConstants.ethResultKey].containsKey('status')) {
       _status = EthereumUtilities.hexToInt(

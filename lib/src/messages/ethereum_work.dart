@@ -20,20 +20,20 @@ class EthereumWork {
     construct(result);
   }
 
-  BigInt _powHash;
+  EthereumData _powHash;
 
   /// Current block header pow-hash
-  BigInt get powHash => _powHash;
+  EthereumData get powHash => _powHash;
 
-  BigInt _seedHash;
+  EthereumData _seedHash;
 
   /// Seed hash used for the DAG.
-  BigInt get seedHash => _seedHash;
+  EthereumData get seedHash => _seedHash;
 
-  BigInt _boundaryCondition;
+  EthereumData _boundaryCondition;
 
   /// The boundary condition ('target'), 2^256 / difficulty.
-  BigInt get boundaryCondition => _boundaryCondition;
+  EthereumData get boundaryCondition => _boundaryCondition;
 
   /// Construct from the supplied list.
   void construct(List<String> data) {
@@ -43,9 +43,9 @@ class EthereumWork {
     if (data.length != 3) {
       return;
     }
-    _powHash = EthereumUtilities.safeParse(data[0]);
-    _seedHash = EthereumUtilities.safeParse(data[1]);
-    _boundaryCondition = EthereumUtilities.safeParse(data[2]);
+    _powHash = EthereumData.fromString(data[0]);
+    _seedHash = EthereumData.fromString(data[1]);
+    _boundaryCondition = EthereumData.fromString(data[2]);
   }
 
   @override
