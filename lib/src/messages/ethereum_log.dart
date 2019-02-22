@@ -19,6 +19,19 @@ class EthereumLog {
     construct(result);
   }
 
+  /// From list
+  static List<EthereumLog> fromList(dynamic res) {
+    final List<EthereumLog> logs = List<EthereumLog>();
+    for (dynamic log in res) {
+      final Map<String, dynamic> buildLog = <String, dynamic>{
+        EthereumConstants.ethResultKey: log
+      };
+      final EthereumLog entry = EthereumLog.fromMap(buildLog);
+      logs.add(entry);
+    }
+    return logs;
+  }
+
   bool _removed;
 
   /// Removed. True when the log was removed, due to a chain reorganization. false if its a valid log.

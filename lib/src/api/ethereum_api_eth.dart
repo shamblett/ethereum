@@ -842,9 +842,9 @@ class EthereumApiEth extends EthereumApi {
   }
 
   /// Get logs
+  /// Returns an array of all logs matching a given filter object.
   /// The filter definition, see newFilter parameters.
-  /// Returns see getFilterChanges
-  Future<EthereumFilter> getLogs(
+  Future<List<EthereumLog>> getLogs(
       {EthereumDefaultBlock fromBlock,
       EthereumDefaultBlock toBlock,
       dynamic address,
@@ -870,7 +870,7 @@ class EthereumApiEth extends EthereumApi {
     const String method = EthereumRpcMethods.getLogs;
     final dynamic res = await _client.rpcClient.request(method, paramBlock);
     if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
-      return EthereumFilter.fromMap(res[EthereumConstants.ethResultKey]);
+      return EthereumLog.fromList(res[EthereumConstants.ethResultKey]);
     }
     _client.processError(method, res);
     return null;
