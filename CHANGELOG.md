@@ -1,3 +1,6 @@
+#4.0.1
+Update for use with Dart 2.1.1
+
 #4.0.0
 Issue 5, new datatypes
 
