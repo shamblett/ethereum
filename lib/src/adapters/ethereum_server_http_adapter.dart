@@ -10,6 +10,13 @@
 
 part of ethereum_server_client;
 
+// ignore_for_file: omit_local_variable_types
+// ignore_for_file: unnecessary_final
+// ignore_for_file: cascade_invocations
+// ignore_for_file: avoid_print
+// ignore_for_file: avoid_types_on_closure_parameters
+// ignore_for_file: avoid_annotating_with_dynamic
+
 /// The server HTTP adapter
 class EthereumServerHTTPAdapter implements EthereumINetworkAdapter {
   /// Mime type

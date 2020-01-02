@@ -9,10 +9,17 @@
 
 part of ethereum;
 
+// ignore_for_file: omit_local_variable_types
+// ignore_for_file: unnecessary_final
+// ignore_for_file: avoid_types_on_closure_parameters
+// ignore_for_file: avoid_annotating_with_dynamic
+// ignore_for_file: avoid_equals_and_hash_code_on_mutable_classes
+
 /// Ethereum address as a byte array, 20 bytes long
 class EthereumByteAddress {
-  /// If the length is greater than addressByteLength then only addressByteLength
-  /// are taken. If the length is less than addressByteLength the size is padded
+  /// If the length is greater than addressByteLength then only
+  /// addressByteLength are taken.
+  /// If the length is less than addressByteLength the size is padded
   /// to addressByteLength with 0's
   EthereumByteAddress(ByteData data) {
     _setData(data);
@@ -20,8 +27,8 @@ class EthereumByteAddress {
 
   /// If the length is greater than addressByteLength then addressByteLength
   /// are taken. If the length is less than addressByteLength the size is padded
-  /// to addressByteLength with 0's. Each int must be < 255, if not it is discarded
-  /// and the value set to 0.
+  /// to addressByteLength with 0's. Each int must be < 255,
+  /// if not it is discarded and the value set to 0.
   EthereumByteAddress.fromIntList(List<int> data) {
     final ByteData tmp = ByteData(data.length);
     for (int i = 0; i < tmp.lengthInBytes; i++) {

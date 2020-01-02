@@ -9,11 +9,19 @@
 
 part of ethereum;
 
+// ignore_for_file: omit_local_variable_types
+// ignore_for_file: unnecessary_final
+// ignore_for_file: avoid_types_on_closure_parameters
+// ignore_for_file: avoid_annotating_with_dynamic
+// ignore_for_file: avoid_equals_and_hash_code_on_mutable_classes
+
 /// The address data type. If any supplied value cannot be safely represented as
 /// an Ethereum address FormatException will be thrown.
 class EthereumAddress {
-  /// From a BigInt. The value must be convertible into the standard Ethereum address
-  /// format of 20 bytes, however unlike the string constructor smaller values will be
+  /// From a BigInt. The value must be convertible into the
+  /// standard Ethereum address
+  /// format of 20 bytes, however unlike the string constructor
+  /// smaller values will be
   /// 00 padded to make up the 20 byte length.
   EthereumAddress.fromBigInt(BigInt val) {
     _bigint = val;
@@ -72,14 +80,15 @@ class EthereumAddress {
 
   String _bigIntToHexString(BigInt val) {
     String hexString = val.toRadixString(16);
-    // A Hex digit string must be composed of two characters per byte, so must be even
-    // if the length is odd even it out.
+    // A Hex digit string must be composed of two characters
+    // per byte, so must be even if the length is odd even it out.
     if (hexString.length.isOdd) {
       hexString = '0$hexString';
     }
 
     // We have an even sized hex string, if the string is > 40 characters
-    // its not an Ethereum address, if its less then it needs to be padded with 00
+    // its not an Ethereum address, if its less then it needs
+    // to be padded with 00
     if (hexString.length > addressCharacterLength) {
       throw const FormatException(
           'EthereumAddress - address has more than 40 characters');

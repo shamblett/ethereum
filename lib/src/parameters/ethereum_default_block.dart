@@ -11,7 +11,8 @@ part of ethereum;
 
 /// The Default Block parameter.
 /// The parameter selections are mutually exclusive.
-/// Note that the setters ignore the passed state value and simply set the property to true.
+/// Note that the setters ignore the passed state value and
+/// simply set the property to true.
 class EthereumDefaultBlock {
   /// Constants
   /// Earliest

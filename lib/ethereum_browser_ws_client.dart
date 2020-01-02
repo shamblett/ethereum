@@ -12,7 +12,7 @@ library ethereum_browser_ws_client;
 import 'dart:async';
 import 'dart:convert';
 import 'dart:html';
-import 'package:ethereum/ethereum.dart';
+import 'ethereum.dart';
 
 part 'src/adapters/ethereum_browser_ws_adapter.dart';
 

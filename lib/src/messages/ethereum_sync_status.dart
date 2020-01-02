@@ -9,6 +9,10 @@
 
 part of ethereum;
 
+// ignore_for_file: omit_local_variable_types
+// ignore_for_file: unnecessary_final
+// ignore_for_file: avoid_annotating_with_dynamic
+
 /// Sync status message
 class EthereumSyncStatus {
   /// Constructor
@@ -41,7 +45,7 @@ class EthereumSyncStatus {
 
   /// Construct from the supplied Map, only check for the keys we need.
   void construct(Map<String, dynamic> data) {
-    if (!(data[EthereumConstants.ethResultKey] is bool)) {
+    if (data[EthereumConstants.ethResultKey] is! bool) {
       _syncing = true;
       if (data.containsKey('startingBlock')) {
         _startingBlock = EthereumUtilities.hexToInt(data['startingBlock']);

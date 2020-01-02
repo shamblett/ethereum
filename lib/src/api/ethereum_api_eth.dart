@@ -9,6 +9,15 @@
 
 part of ethereum;
 
+// ignore_for_file: omit_local_variable_types
+// ignore_for_file: unnecessary_final
+// ignore_for_file: cascade_invocations
+// ignore_for_file: avoid_print
+// ignore_for_file: avoid_types_on_closure_parameters
+// ignore_for_file: avoid_annotating_with_dynamic
+// ignore_for_file: prefer_if_null_operators
+// ignore_for_file: prefer_null_aware_operators
+
 /// This class implements the Ethereuum eth API, sometimes referred to as DApp
 class EthereumApiEth extends EthereumApi {
   /// Construction
@@ -84,7 +93,8 @@ class EthereumApiEth extends EthereumApi {
     return null;
   }
 
-  /// Sync status, an object with data about the sync status if syncing or false if not.
+  /// Sync status, an object with data about the sync status
+  /// if syncing or false if not.
   Future<EthereumSyncStatus> syncStatus() async {
     const String method = EthereumRpcMethods.syncing;
     final dynamic res = await _client.rpcClient.request(method);
@@ -117,7 +127,8 @@ class EthereumApiEth extends EthereumApi {
     return null;
   }
 
-  /// Hashrate, returns the number of hashes per second that the node is mining with.
+  /// Hashrate, returns the number of hashes per second that
+  /// the node is mining with.
   Future<int> hashrate() async {
     const String method = EthereumRpcMethods.hashrate;
     final dynamic res = await _client.rpcClient.request(method);
@@ -183,8 +194,8 @@ class EthereumApiEth extends EthereumApi {
   }
 
   /// Get Storage at, the value from a storage position at a given address.
-  /// Parameters are the address of the storage, the integer position of the storage and
-  // the default block parameter.
+  /// Parameters are the address of the storage, the integer position
+  /// of the storage and the default block parameter.
   Future<EthereumData> getStorageAt(
       EthereumAddress address, int pos, EthereumDefaultBlock block) async {
     if (address == null) {
@@ -211,7 +222,8 @@ class EthereumApiEth extends EthereumApi {
     return null;
   }
 
-  /// Transaction count, returns the number of transactions sent from an address.
+  /// Transaction count, returns the number of transactions sent
+  /// from an address.
   Future<int> getTransactionCount(
       EthereumAddress address, EthereumDefaultBlock block) async {
     if (address == null) {
@@ -232,9 +244,10 @@ class EthereumApiEth extends EthereumApi {
   }
 
   /// Block Transaction Count By Hash
-  /// The number of transactions in a block from a block matching the given block hash.
-  /// If the method returns null a count of 0 is returned, this is to distinguish between
-  /// this and an error.
+  /// The number of transactions in a block from a block matching
+  /// the given block hash.
+  /// If the method returns null a count of 0 is returned, this is to
+  /// distinguish between this and an error.
   Future<int> getBlockTransactionCountByHash(EthereumData blockHash) async {
     if (blockHash == null) {
       throw ArgumentError.notNull(
@@ -256,8 +269,8 @@ class EthereumApiEth extends EthereumApi {
 
   /// Block Transaction Count By Number
   /// The number of transactions in a block matching the given block number.
-  /// If the method returns null a count of 0 is returned, this is to distinguish between
-  /// this and an error.
+  /// If the method returns null a count of 0 is returned, this is to
+  /// distinguish between this and an error.
   Future<int> getBlockTransactionCountByNumber(
       EthereumDefaultBlock blockNumber) async {
     if (blockNumber == null) {
@@ -280,9 +293,10 @@ class EthereumApiEth extends EthereumApi {
   }
 
   /// Block Uncle Count By Hash
-  /// The number of uncles in a block from a block matching the given block hash.
-  /// If the method returns null a count of 0 is returned, this is to distinguish between
-  /// this and an error.
+  /// The number of uncles in a block from a block matching the
+  /// given block hash.
+  /// If the method returns null a count of 0 is returned, this is
+  /// to distinguish between this and an error.
   Future<int> getUncleCountByHash(EthereumData blockHash) async {
     if (blockHash == null) {
       throw ArgumentError.notNull('Ethereum::getUncleCountByHash - blockHash');
@@ -303,8 +317,8 @@ class EthereumApiEth extends EthereumApi {
 
   /// Block Uncle Count By Number
   /// The number of uncles in a block matching the given block number.
-  /// If the method returns null a count of 0 is returned, this is to distinguish between
-  /// this and an error.
+  /// If the method returns null a count of 0 is returned,
+  /// this is to distinguish between this and an error.
   Future<int> getUncleCountByNumber(EthereumDefaultBlock blockNumber) async {
     if (blockNumber == null) {
       throw ArgumentError.notNull(
@@ -368,15 +382,24 @@ class EthereumApiEth extends EthereumApi {
   }
 
   /// Send transaction
-  /// Creates new message call transaction or a contract creation, if the data field contains code.
+  /// Creates new message call transaction or a contract creation,
+  /// if the data field contains code.
   /// address: The address the transaction is sent from.
-  /// to: (optional when creating new contract) The address the transaction is directed to.
-  /// gas: (optional, default: 90000) Integer of the gas provided for the transaction execution. It will return unused gas.
-  /// gasPrice: (optional, default: To-Be-Determined) Integer of the gasPrice used for each paid gas
+  /// to: (optional when creating new contract)
+  /// The address the transaction is directed to.
+  /// gas: (optional, default: 90000)
+  /// Integer of the gas provided for the transaction execution.
+  /// It will return unused gas.
+  /// gasPrice: (optional, default:
+  /// To-Be-Determined) Integer of the gasPrice used for each paid gas
   /// value: (optional) Integer of the value send with this transaction
-  /// data: The compiled code of a contract OR the hash of the invoked method signature and encoded parameters. For details see Ethereum Contract ABI
-  /// nonce: optional) Integer of a nonce. This allows to overwrite your own pending transactions that use the same nonce.
-  /// Returns the transaction hash, or the zero hash if the transaction is not yet available.
+  /// data: The compiled code of a contract OR the hash of the invoked method
+  /// signature and encoded parameters. For details see Ethereum Contract ABI
+  /// nonce: (optional)
+  /// Integer of a nonce. This allows to overwrite your own pending
+  /// transactions that use the same nonce.
+  /// Returns the transaction hash, or the zero hash if the
+  /// transaction is not yet available.
   Future<EthereumData> sendTransaction(
       EthereumAddress address, EthereumData data,
       {EthereumAddress to,
@@ -412,9 +435,11 @@ class EthereumApiEth extends EthereumApi {
   }
 
   /// Send raw transaction
-  /// Creates new message call transaction or a contract creation for signed transactions.
+  /// Creates new message call transaction or a contract creation
+  /// for signed transactions.
   /// Takes the signed transaction data.
-  /// Returns the transaction hash, or the zero hash if the transaction is not yet available.
+  /// Returns the transaction hash, or the zero hash if the transaction
+  /// is not yet available.
   Future<EthereumData> sendRawTransaction(
       EthereumData signedTransaction) async {
     if (signedTransaction == null) {
@@ -432,14 +457,18 @@ class EthereumApiEth extends EthereumApi {
   }
 
   /// Call
-  /// Executes a new message call immediately without creating a transaction on the block chain.
+  /// Executes a new message call immediately without creating a
+  /// transaction on the block chain.
   /// address: The address the transaction is sent to.
   /// from: (optional) The address the transaction is sent from.
-  /// gas: (optional) Integer of the gas provided for the transaction execution. eth_call consumes zero gas,
-  /// but this parameter may be needed by some executions.
+  /// gas: (optional)
+  /// Integer of the gas provided for the transaction execution.
+  /// eth_call consumes zero gas, but this parameter may be needed by
+  /// some executions.
   /// gasPrice: (optional) Integer of the gasPrice used for each paid gas
   /// value: (optional) Integer of the value send with this transaction
-  /// data: (optional) Hash of the method signature and encoded parameters. For details see Ethereum Contract ABI
+  /// data: (optional) Hash of the method signature and encoded parameters.
+  /// For details see Ethereum Contract ABI
   /// block: default block parameter
   /// Returns the return value of executed contract.
   Future<EthereumData> call(EthereumAddress address, EthereumDefaultBlock block,
@@ -476,12 +505,14 @@ class EthereumApiEth extends EthereumApi {
   }
 
   /// Estimate gas
-  /// Makes a call or transaction, which won't be added to the blockchain and returns the used gas,
+  /// Makes a call or transaction, which won't be added to the blockchain
+  /// and returns the used gas,
   /// which can be used for estimating the used gas.
-  /// See eth_call parameters, expect that all properties are optional. If no gas limit is specified geth
-  /// uses the block gas limit from the pending block as an upper bound. As a result the returned estimate
-  /// might not be enough to executed the call/transaction when the amount of gas is higher than the
-  /// pending block gas limit.
+  /// See eth_call parameters, expect that all properties are optional.
+  /// If no gas limit is specified geth uses the block gas limit from
+  /// the pending block as an upper bound. As a result the returned estimate
+  /// might not be enough to executed the call/transaction when the
+  /// amount of gas is higher than the pending block gas limit.
   /// Returns the amount of gas used.
   Future<int> estimateGas(
       {EthereumAddress address,
@@ -512,7 +543,8 @@ class EthereumApiEth extends EthereumApi {
 
   /// Get block by hash
   /// Returns information about a block by hash
-  /// Hash of a block and a boolean, if true it returns the full transaction objects,
+  /// Hash of a block and a boolean, if true it returns the
+  /// full transaction objects,
   /// if false only the hashes of the transactions, defaults to true.
   /// Returns A block object, or null when no block was found :
   Future<EthereumBlock> getBlockByHash(EthereumData blockHash,
@@ -572,7 +604,8 @@ class EthereumApiEth extends EthereumApi {
   }
 
   /// Get transaction by block hash and index.
-  /// Returns information about a transaction by block hash and transaction index position.
+  /// Returns information about a transaction by block hash and
+  /// transaction index position.
   /// Hash of a block and integer of the transaction index position.
   /// Returns see getTransactionByHash.
   Future<EthereumTransaction> getTransactionByBlockHashAndIndex(
@@ -599,7 +632,8 @@ class EthereumApiEth extends EthereumApi {
   }
 
   /// Get transaction by block number and index.
-  /// Returns information about a transaction by block number and transaction index position.
+  /// Returns information about a transaction by block number
+  /// and transaction index position.
   /// A block number as in the default block parameter.
   /// Returns see getTransactionByHash.
   Future<EthereumTransaction> getTransactionByBlockNumberAndIndex(
@@ -678,7 +712,8 @@ class EthereumApiEth extends EthereumApi {
   }
 
   /// Get uncle by block number and index.
-  /// Returns information about an uncle by block number and uncle index position.
+  /// Returns information about an uncle by block number
+  /// and uncle index position.
   /// Note: An uncle doesn't contain individual transactions.
   /// A block number as in the default block parameter.
   /// Returns see getBlockByHash.
@@ -707,22 +742,30 @@ class EthereumApiEth extends EthereumApi {
   }
 
   /// New filter
-  /// Creates a filter object, based on filter options, to notify when the state changes (logs).
+  /// Creates a filter object, based on filter options, to notify when
+  /// the state changes (logs).
   /// To check if the state has changed, call getFilterChanges.
   /// note on specifying topic filters:
-  /// Topics are order-dependent. A transaction with a log with topics [A, B] will be matched by the following topic filters:
+  /// Topics are order-dependent. A transaction with a log with topics [A, B]
+  /// will be matched by the following topic filters:
   /// [] 'anything'
   /// ['A'] 'A in first position (and anything after)'
-  /// [null, B] 'anything in first position AND B in second position (and anything after)'
+  /// [null, B] 'anything in first position AND B in second position
+  /// (and anything after)'
   /// [A, B] 'A in first position AND B in second position (and anything after)'
-  /// [[A, B], [A, B]] '(A OR B) in first position AND (A OR B) in second position (and anything after)'
-  /// fromBlock: - (optional, default: 'latest') Integer block number, or 'latest' for the last mined block or 'pending',
+  /// [[A, B], [A, B]] '(A OR B) in first position AND (A OR B)
+  /// in second position (and anything after)'
+  /// fromBlock: - (optional, default: 'latest')
+  /// Integer block number, or 'latest' for the last mined block or 'pending',
   /// 'earliest' for not yet mined transactions.
-  /// toBlock: - (optional, default: 'latest') Integer block number, or 'latest' for the last mined block or 'pending', 'earliest' for not
-  /// yet mined transactions.
-  /// address: - (optional) Contract address or a list of addresses from which logs should originate.
+  /// toBlock: - (optional, default: 'latest')
+  /// Integer block number, or 'latest' for the last mined block or
+  /// 'pending', 'earliest' for not yet mined transactions.
+  /// address: - (optional) Contract address or a list of addresses
+  /// from which logs should originate.
   /// topics: - (optional) topics. Topics are order-dependent.
-  /// Note: the user must build this structure using the utilities in the EthereumUtilities class. See the Ethereum
+  /// Note: the user must build this structure using the utilities in the
+  /// [EthereumUtilities] class. See the Ethereum
   /// Wiki RPC page for examples.
   /// Returns a filter id.
   Future<int> newFilter(
@@ -773,7 +816,8 @@ class EthereumApiEth extends EthereumApi {
   }
 
   /// New pending transaction filter
-  /// Creates a filter in the node, to notify when a new pending transaction arrives.
+  /// Creates a filter in the node, to notify when a new pending
+  /// transaction arrives.
   /// To check if the state has changed, call getFilterChanges.
   /// Returns a filter id.
   Future<int> newPendingTransactionFilter() async {
@@ -788,8 +832,10 @@ class EthereumApiEth extends EthereumApi {
   }
 
   /// Uninstall filter
-  /// Uninstalls a filter with given id. Should always be called when watch is no longer needed.
-  /// Additionally Filters timeout when they aren't requested with getFilterChanges for a period of time.
+  /// Uninstalls a filter with given id. Should always be called when
+  /// watch is no longer needed.
+  /// Additionally Filters timeout when they aren't requested with
+  /// getFilterChanges for a period of time.
   /// Filter id
   /// Returns true if the filter was successfully uninstalled, otherwise false.
   Future<bool> uninstallFilter(int filterId) async {
@@ -807,7 +853,8 @@ class EthereumApiEth extends EthereumApi {
   }
 
   /// Get filter changes
-  /// Polling method for a filter, which returns an list of logs which occurred since last poll.
+  /// Polling method for a filter, which returns an list of logs
+  /// which occurred since last poll.
   /// Filter Id
   /// Returns an EthereumFilter object or null
   Future<EthereumFilter> getFilterChanges(int filterId) async {
@@ -877,7 +924,8 @@ class EthereumApiEth extends EthereumApi {
   }
 
   /// Get work
-  /// Returns the hash of the current block, the seedHash, and the boundary condition to be met ('target').
+  /// Returns the hash of the current block, the seedHash,
+  /// and the boundary condition to be met ('target').
   /// Returns an EthereumWork object or null
   Future<EthereumWork> getWork() async {
     final List<dynamic> paramBlock = <dynamic>[];
@@ -959,7 +1007,8 @@ class EthereumApiEth extends EthereumApi {
   /// SHH post
   /// Sends a whisper message
   /// from: - (optional) The identity of the sender.
-  /// to: - (optional) The identity of the receiver. When present whisper will encrypt the message so that only
+  /// to: - (optional) The identity of the receiver.
+  /// When present whisper will encrypt the message so that only
   ///  the receiver can decrypt it.
   /// topics: - List of topics, for the receiver to identify messages.
   /// payload: - The payload of the message.

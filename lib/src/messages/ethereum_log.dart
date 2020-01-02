@@ -9,6 +9,10 @@
 
 part of ethereum;
 
+// ignore_for_file: omit_local_variable_types
+// ignore_for_file: unnecessary_final
+// ignore_for_file: avoid_annotating_with_dynamic
+
 /// Ethereum log message
 class EthereumLog {
   /// Construction
@@ -21,8 +25,8 @@ class EthereumLog {
 
   /// From list
   static List<EthereumLog> fromList(dynamic res) {
-    final List<EthereumLog> logs = List<EthereumLog>();
-    for (dynamic log in res) {
+    final List<EthereumLog> logs = <EthereumLog>[];
+    for (final dynamic log in res) {
       final Map<String, dynamic> buildLog = <String, dynamic>{
         EthereumConstants.ethResultKey: log
       };
@@ -34,27 +38,32 @@ class EthereumLog {
 
   bool _removed;
 
-  /// Removed. True when the log was removed, due to a chain reorganization. false if its a valid log.
+  /// Removed. True when the log was removed, due to a chain
+  /// reorganization. false if its a valid log.
   bool get removed => _removed;
 
   int _logIndex;
 
-  /// Log index. The log index position in the block. Null when the log is pending.
+  /// Log index. The log index position in the block.
+  /// Null when the log is pending.
   int get logIndex => _logIndex;
 
   int _transactionIndex;
 
-  /// Transaction index. The transactions index position the log was created from. Null when the log is pending.
+  /// Transaction index. The transactions index position the log was
+  /// created from. Null when the log is pending.
   int get transactionIndex => _transactionIndex;
 
   EthereumData _transactionHash;
 
-  /// Transaction hash. Hash of the transactions this log was created from. Null when the log is pending.
+  /// Transaction hash. Hash of the transactions this log was created
+  /// from. Null when the log is pending.
   EthereumData get transactionHash => _transactionHash;
 
   EthereumData _blockHash;
 
-  /// Block hash. Hash of the block where this log was in. Null when the log is pending.
+  /// Block hash. Hash of the block where this log was in.
+  /// Null when the log is pending.
   EthereumData get blockHash => _blockHash;
 
   int _blockNumber;
@@ -75,7 +84,8 @@ class EthereumLog {
   List<EthereumData> _topics;
 
   /// Topics. List of 0 to 4 32 of indexed log arguments. (In solidity:
-  /// The first topic is the hash of the signature of the event (e.g. Deposit(address,bytes32,uint256)),
+  /// The first topic is the hash of the signature of the event
+  /// (e.g. Deposit(address,bytes32,uint256)),
   /// except you declared the event with the anonymous specifier.)
   List<EthereumData> get topics => _topics;
 

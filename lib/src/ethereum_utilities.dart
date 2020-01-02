@@ -9,6 +9,10 @@
 
 part of ethereum;
 
+// ignore_for_file: omit_local_variable_types
+// ignore_for_file: unnecessary_final
+// ignore_for_file: avoid_annotating_with_dynamic
+
 /// General client support utilities
 class EthereumUtilities {
   /// Common pad values for intToHex
@@ -57,6 +61,7 @@ class EthereumUtilities {
   static int hexToInt(String val) {
     final int temp = int.tryParse(val);
     if (temp == null) {
+      // ignore: avoid_returning_null
       return null;
     }
     return temp;
@@ -67,7 +72,7 @@ class EthereumUtilities {
     final List<dynamic> values = theMap.values.toList();
     final List<dynamic> keys = theMap.keys.toList();
     int index = 0;
-    for (dynamic val in values) {
+    for (final dynamic val in values) {
       if (val == null) {
         theMap.remove(keys[index]);
       }

@@ -12,6 +12,14 @@ import 'package:ethereum/ethereum.dart';
 import 'package:test/test.dart';
 import 'ethereum_test_utilities.dart';
 
+// ignore_for_file: omit_local_variable_types
+// ignore_for_file: unnecessary_final
+// ignore_for_file: avoid_annotating_with_dynamic
+// ignore_for_file: lines_longer_than_80_chars
+// ignore_for_file: avoid_catching_errors
+// ignore_for_file: avoid_print
+// ignore_for_file: cascade_invocations
+
 /// These test are common to both server and client, we use the server client for convenience.
 
 void main() {

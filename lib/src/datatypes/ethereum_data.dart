@@ -9,6 +9,12 @@
 
 part of ethereum;
 
+// ignore_for_file: omit_local_variable_types
+// ignore_for_file: unnecessary_final
+// ignore_for_file: avoid_types_on_closure_parameters
+// ignore_for_file: avoid_annotating_with_dynamic
+// ignore_for_file: avoid_equals_and_hash_code_on_mutable_classes
+
 /// The Ethereum data type. This is not as constrained as the address type.
 class EthereumData {
   /// From a BigInt.
@@ -59,8 +65,8 @@ class EthereumData {
 
   String _bigIntToHexString(BigInt val) {
     String hexString = val.toRadixString(16);
-    // A Hex digit string must be composed of two characters per byte, so must be even
-    // if the length is odd even it out.
+    // A Hex digit string must be composed of two characters
+    // per byte, so must be even if the length is odd even it out.
     if (hexString.length.isOdd) {
       hexString = '0$hexString';
     }

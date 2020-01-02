@@ -9,9 +9,16 @@
 
 part of ethereum;
 
+// ignore_for_file: omit_local_variable_types
+// ignore_for_file: unnecessary_final
+// ignore_for_file: avoid_types_on_closure_parameters
+// ignore_for_file: avoid_annotating_with_dynamic
+// ignore_for_file: avoid_equals_and_hash_code_on_mutable_classes
+// ignore_for_file: avoid_print
+
 /// The Ethereum JSON-RPC client class.
-/// Further details of this interface and its Dapp API specification can be found at
-/// https://github.com/ethereum/wiki/wiki/JSON-RPC#web3_clientversion.
+/// Further details of this interface and its Dapp API specification
+/// can be found at https://github.com/ethereum/wiki/wiki/JSON-RPC#web3_clientversion.
 /// The API calls return null if an ethereum error occurred.
 class Ethereum {
   /// Default constructor
@@ -65,6 +72,7 @@ class Ethereum {
   EthereumINetworkAdapter _networkAdapter;
 
   /// HTTP Adapter
+  // ignore: avoid_setters_without_getters
   set httpAdapter(EthereumINetworkAdapter adapter) => _networkAdapter = adapter;
 
   /// Json RPC client

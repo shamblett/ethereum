@@ -9,6 +9,10 @@
 
 part of ethereum;
 
+// ignore_for_file: omit_local_variable_types
+// ignore_for_file: unnecessary_final
+// ignore_for_file: avoid_annotating_with_dynamic
+
 /// An ethereum block descriptor message
 class EthereumBlock {
   /// Constructor
@@ -46,7 +50,8 @@ class EthereumBlock {
 
   EthereumData _logsBloom;
 
-  /// Logs bloom. The bloom filter for the logs of the block. Null when its pending block.
+  /// Logs bloom. The bloom filter for the logs of the block.
+  /// Null when its pending block.
   EthereumData get logsBloom => _logsBloom;
 
   EthereumData _transactionsRoot;
@@ -66,7 +71,8 @@ class EthereumBlock {
 
   EthereumData _miner;
 
-  /// Miner. The address of the beneficiary to whom the mining rewards were given.
+  /// Miner. The address of the beneficiary to whom the
+  /// mining rewards were given.
   EthereumData get miner => _miner;
 
   int _difficulty;
@@ -76,7 +82,8 @@ class EthereumBlock {
 
   int _totalDifficulty;
 
-  /// Total difficulty. Integer of the total difficulty of the chain until this block.
+  /// Total difficulty. Integer of the total difficulty
+  /// of the chain until this block.
   int get totalDifficulty => _totalDifficulty;
 
   EthereumData _extraData;
@@ -106,8 +113,8 @@ class EthereumBlock {
 
   List<dynamic> _transactions;
 
-  /// Transactions. A list of transaction objects, or 32 Bytes transaction hashes
-  /// depending on the last given parameter.
+  /// Transactions. A list of transaction objects,
+  /// or 32 Bytes transaction hashes depending on the last given parameter.
   List<dynamic> get transactions => _transactions;
 
   bool _transactionsAreHashes = false;
@@ -208,8 +215,8 @@ class EthereumBlock {
               data[EthereumConstants.ethResultKey]['transactions']);
         } else {
           // Transaction objects
-          _transactions = List<EthereumTransaction>();
-          for (Map<dynamic, dynamic> transaction
+          _transactions = <EthereumTransaction>[];
+          for (final Map<dynamic, dynamic> transaction
               in data[EthereumConstants.ethResultKey]['transactions']) {
             final Map<String, dynamic> buildTrans = <String, dynamic>{
               EthereumConstants.ethResultKey: transaction

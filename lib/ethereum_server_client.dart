@@ -12,7 +12,7 @@ library ethereum_server_client;
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'package:ethereum/ethereum.dart';
+import 'ethereum.dart';
 
 part 'src/adapters/ethereum_server_http_adapter.dart';
 

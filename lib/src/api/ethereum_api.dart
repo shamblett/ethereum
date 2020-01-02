@@ -9,13 +9,15 @@
 
 part of ethereum;
 
+// ignore_for_file: unnecessary_final
+
 /// The API base class
 class EthereumApi {
   /// Construction
   EthereumApi(this._client);
 
   /// Our client
-  Ethereum _client;
+  final Ethereum _client;
 
   /// Message Id
   int get id => _client.id;

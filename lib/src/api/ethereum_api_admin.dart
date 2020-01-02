@@ -9,13 +9,22 @@
 
 part of ethereum;
 
+// ignore_for_file: omit_local_variable_types
+// ignore_for_file: unnecessary_final
+// ignore_for_file: cascade_invocations
+// ignore_for_file: avoid_print
+// ignore_for_file: avoid_types_on_closure_parameters
+// ignore_for_file: avoid_annotating_with_dynamic
+// ignore_for_file: prefer_if_null_operators
+// ignore_for_file: prefer_null_aware_operators
+
 /// This class implements the Ethereuum Admin API
 class EthereumApiAdmin extends EthereumApi {
   /// Construction
   EthereumApiAdmin(Ethereum client) : super(client);
 
-  /// Imports the given unencrypted private key (byte string) into the key store,
-  /// encrypting it with the passphrase.
+  /// Imports the given unencrypted private key (byte string)
+  /// into the key store, encrypting it with the passphrase.
   Future<EthereumData> personalImportRawKey(
       String keydata, String passphrase) async {
     if (keydata == null) {
@@ -81,10 +90,12 @@ class EthereumApiAdmin extends EthereumApi {
   }
 
   /// Decrypts the key with the given address from the key store.
-  /// The unencrypted key will be held in memory until the unlock duration expires.
-  /// The unlock duration defaults to 300 seconds. An explicit duration of zero seconds
-  /// unlocks the key until geth exits.
-  /// The account can be used with eth_sign and eth_sendTransaction while it is unlocked.
+  /// The unencrypted key will be held in memory until the unlock
+  /// duration expires.
+  /// The unlock duration defaults to 300 seconds.
+  /// An explicit duration of zero seconds unlocks the key until geth exits.
+  /// The account can be used with eth_sign and eth_sendTransaction
+  /// while it is unlocked.
   Future<bool> personalUnlockAccount(EthereumAddress address, String passphrase,
       [int duration = 300]) async {
     if (address == null) {
@@ -110,12 +121,17 @@ class EthereumApiAdmin extends EthereumApi {
   }
 
   /// Validate the given passphrase and submit transaction.
-  /// The transaction is the same argument as for eth.sendTransaction and contains the from address.
+  /// The transaction is the same argument as for eth.sendTransaction and
+  /// contains the from address.
+  ///
   /// Note that an extra parameter is condition :-
-  /// Conditional submission of the transaction. Can be either an integer block number { block: 1 } or
-  /// UTC timestamp (in seconds) { time: 1491290692 } or null.
-  /// If the passphrase can be used to decrypt the private key belonging to tx.from the transaction is verified,
-  /// signed and send onto the network. The account is not unlocked globally in the node and cannot be
+  /// Conditional submission of the transaction. Can be either an integer
+  /// block number { block: 1 } or UTC timestamp (in seconds)
+  /// { time: 1491290692 } or null.
+  ///
+  /// If the passphrase can be used to decrypt the private key belonging to
+  /// tx.from the transaction is verified, signed and send onto the network.
+  /// The account is not unlocked globally in the node and cannot be
   /// used in other RPC calls.
   Future<EthereumData> personalSendTransaction(
       EthereumAddress address, String passphrase,
@@ -135,7 +151,7 @@ class EthereumApiAdmin extends EthereumApi {
       throw ArgumentError.notNull(
           'Ethereum::personalSendTransaction - passphrase');
     }
-    Map<String, String> conditionObject = Map<String, String>();
+    Map<String, String> conditionObject = <String, String>{};
     if (condition == null) {
       conditionObject = null;
     } else {
@@ -172,8 +188,9 @@ class EthereumApiAdmin extends EthereumApi {
 
   /// The sign method calculates an Ethereum specific signature with:
   /// sign(keccack256('\x19Ethereum Signed Message:\n' + len(message) + message))).
-  /// By adding a prefix to the message makes the calculated signature recognisable as an Ethereum
-  /// specific signature. This prevents misuse where a malicious DApp can sign arbitrary data
+  /// By adding a prefix to the message makes the calculated signature
+  /// recognisable as an Ethereum specific signature.
+  /// This prevents misuse where a malicious DApp can sign arbitrary data
   /// (e.g. transaction) and use the signature to impersonate the victim.
   /// See personalEcRecover to verify the signature.
   Future<EthereumData> personalSign(

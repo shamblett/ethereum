@@ -1,3 +1,6 @@
+#4.0.2
+Linter updates
+
 #4.0.1
 Update for use with Dart 2.1.1
 

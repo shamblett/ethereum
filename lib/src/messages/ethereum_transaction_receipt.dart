@@ -9,6 +9,10 @@
 
 part of ethereum;
 
+// ignore_for_file: omit_local_variable_types
+// ignore_for_file: unnecessary_final
+// ignore_for_file: avoid_annotating_with_dynamic
+
 /// An ethereum transaction receipt message
 class EthereumTransactionReceipt {
   /// Constructor
@@ -41,7 +45,8 @@ class EthereumTransactionReceipt {
 
   int _cumulativeGasUsed;
 
-  /// Cumulative gas used. The total amount of gas used when this transaction was executed in the block.
+  /// Cumulative gas used. The total amount of gas used when this
+  /// transaction was executed in the block.
   int get cumulativeGasUsed => _cumulativeGasUsed;
 
   int _gasUsed;
@@ -51,7 +56,8 @@ class EthereumTransactionReceipt {
 
   EthereumAddress _contractAddress;
 
-  /// Contract address. The contract address created, if the transaction was a contract creation, otherwise null.
+  /// Contract address. The contract address created, if the transaction was
+  /// a contract creation, otherwise null.
   EthereumAddress get contractAddress => _contractAddress;
 
   List<EthereumLog> _logs;
@@ -61,7 +67,8 @@ class EthereumTransactionReceipt {
 
   EthereumData _logsBloom;
 
-  /// Logs bloom. Bloom filter for light clients to quickly retrieve related logs.
+  /// Logs bloom. Bloom filter for light clients to quickly
+  /// retrieve related logs.
   EthereumData get logsBloom => _logsBloom;
 
   EthereumData _root;
@@ -124,9 +131,9 @@ class EthereumTransactionReceipt {
     if (data[EthereumConstants.ethResultKey].containsKey('logs')) {
       if ((data[EthereumConstants.ethResultKey]['logs'] != null) &&
           (data[EthereumConstants.ethResultKey]['logs'].isNotEmpty)) {
-        _logs = List<EthereumLog>();
-        for (Map<String, dynamic> log in data[EthereumConstants.ethResultKey]
-            ['logs']) {
+        _logs = <EthereumLog>[];
+        for (final Map<String, dynamic> log
+            in data[EthereumConstants.ethResultKey]['logs']) {
           final Map<String, dynamic> buildLog = <String, dynamic>{
             EthereumConstants.ethResultKey: log
           };

@@ -10,6 +10,12 @@
 
 part of ethereum_browser_ws_client;
 
+// ignore_for_file: omit_local_variable_types
+// ignore_for_file: unnecessary_final
+// ignore_for_file: cascade_invocations
+// ignore_for_file: avoid_print
+// ignore_for_file: avoid_types_on_closure_parameters
+
 /// The browser web socket adapter
 class EthereumBrowserWSAdapter implements EthereumINetworkAdapter {
   @override
@@ -23,8 +29,8 @@ class EthereumBrowserWSAdapter implements EthereumINetworkAdapter {
       webSocket.sendString(message);
     });
     webSocket.onError.listen((Event e) {
-      print(
-          'EthereumBrowserWSAdapter::WebSocket error, message not sent, state is ${webSocket.readyState.toString()}');
+      print('EthereumBrowserWSAdapter::WebSocket error, message not sent, '
+          'state is ${webSocket.readyState.toString()}');
       webSocket.close();
       return completer.complete(null);
     });
