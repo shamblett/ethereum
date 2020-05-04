@@ -9,12 +9,6 @@
 
 part of ethereum;
 
-// ignore_for_file: omit_local_variable_types
-// ignore_for_file: unnecessary_final
-// ignore_for_file: avoid_types_on_closure_parameters
-// ignore_for_file: avoid_annotating_with_dynamic
-// ignore_for_file: avoid_equals_and_hash_code_on_mutable_classes
-
 /// Ethereum address as a byte array, 20 bytes long
 class EthereumByteAddress {
   /// If the length is greater than addressByteLength then only
@@ -30,8 +24,8 @@ class EthereumByteAddress {
   /// to addressByteLength with 0's. Each int must be < 255,
   /// if not it is discarded and the value set to 0.
   EthereumByteAddress.fromIntList(List<int> data) {
-    final ByteData tmp = ByteData(data.length);
-    for (int i = 0; i < tmp.lengthInBytes; i++) {
+    final tmp = ByteData(data.length);
+    for (var i = 0; i < tmp.lengthInBytes; i++) {
       if (data[i] <= 255) {
         tmp.setUint8(i, data[i]);
       }
@@ -49,8 +43,8 @@ class EthereumByteAddress {
 
   /// To integer list
   List<int> toList() {
-    final List<int> tmp = List<int>(addressByteLength);
-    for (int i = 0; i <= addressByteLength - 1; i++) {
+    final tmp = List<int>(addressByteLength);
+    for (var i = 0; i <= addressByteLength - 1; i++) {
       tmp[i] = _data.getUint8(i);
     }
     return tmp;
@@ -58,8 +52,8 @@ class EthereumByteAddress {
 
   /// As an address string, i.e 40 hex chars with a leading 0x
   String get asString {
-    const HexEncoder encoder = HexEncoder();
-    final String hex = encoder.convert(toList());
+    const encoder = HexEncoder();
+    final hex = encoder.convert(toList());
     return '0x$hex';
   }
 
@@ -75,7 +69,7 @@ class EthereumByteAddress {
   int get hashCode => _data.hashCode;
 
   bool _isEqual(ByteData data) {
-    for (int i = 0; i <= _data.lengthInBytes - 1; i++) {
+    for (var i = 0; i <= _data.lengthInBytes - 1; i++) {
       if (data.getUint8(i) != _data.getUint8(i)) {
         return false;
       }
@@ -91,7 +85,7 @@ class EthereumByteAddress {
         _data = data.buffer.asByteData(0, addressByteLength);
       } else {
         _data = ByteData(addressByteLength);
-        for (int i = 0; i < data.lengthInBytes; i++) {
+        for (var i = 0; i < data.lengthInBytes; i++) {
           _data.setUint8(i, data.getUint8(i));
         }
       }

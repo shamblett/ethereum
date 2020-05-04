@@ -9,10 +9,6 @@
 
 part of ethereum;
 
-// ignore_for_file: omit_local_variable_types
-// ignore_for_file: unnecessary_final
-// ignore_for_file: avoid_annotating_with_dynamic
-
 /// An ethereum transaction message
 class EthereumTransaction {
   /// Constructor
@@ -134,7 +130,7 @@ class EthereumTransaction {
 
   @override
   String toString() {
-    final String ret = 'Ethereum Transaction :'
+    final ret = 'Ethereum Transaction :'
         '\n'
         '  Hash : $hash'
         '\n'

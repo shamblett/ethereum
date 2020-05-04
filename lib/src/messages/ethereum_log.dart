@@ -9,10 +9,6 @@
 
 part of ethereum;
 
-// ignore_for_file: omit_local_variable_types
-// ignore_for_file: unnecessary_final
-// ignore_for_file: avoid_annotating_with_dynamic
-
 /// Ethereum log message
 class EthereumLog {
   /// Construction
@@ -25,12 +21,10 @@ class EthereumLog {
 
   /// From list
   static List<EthereumLog> fromList(dynamic res) {
-    final List<EthereumLog> logs = <EthereumLog>[];
+    final logs = <EthereumLog>[];
     for (final dynamic log in res) {
-      final Map<String, dynamic> buildLog = <String, dynamic>{
-        EthereumConstants.ethResultKey: log
-      };
-      final EthereumLog entry = EthereumLog.fromMap(buildLog);
+      final buildLog = <String, dynamic>{EthereumConstants.ethResultKey: log};
+      final entry = EthereumLog.fromMap(buildLog);
       logs.add(entry);
     }
     return logs;
@@ -136,7 +130,7 @@ class EthereumLog {
 
   @override
   String toString() {
-    final String ret = 'Ethereum Log :'
+    final ret = 'Ethereum Log :'
         '\n'
         '  Removed : $removed'
         '\n'

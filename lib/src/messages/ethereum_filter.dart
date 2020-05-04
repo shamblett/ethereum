@@ -9,10 +9,6 @@
 
 part of ethereum;
 
-// ignore_for_file: omit_local_variable_types
-// ignore_for_file: unnecessary_final
-// ignore_for_file: avoid_annotating_with_dynamic
-
 /// Filter message
 /// For filters created with newBlockFilter the object contains block hashes.
 /// For filters created with pendingTransactionFilter the class
@@ -53,10 +49,10 @@ class EthereumFilter {
         _logs = <EthereumLog>[];
         for (final Map<String, dynamic> log
             in data[EthereumConstants.ethResultKey]) {
-          final Map<String, dynamic> buildLog = <String, dynamic>{
+          final buildLog = <String, dynamic>{
             EthereumConstants.ethResultKey: log
           };
-          final EthereumLog entry = EthereumLog.fromMap(buildLog);
+          final entry = EthereumLog.fromMap(buildLog);
           _logs.add(entry);
         }
       }

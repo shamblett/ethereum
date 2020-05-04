@@ -9,10 +9,6 @@
 
 part of ethereum;
 
-// ignore_for_file: omit_local_variable_types
-// ignore_for_file: unnecessary_final
-// ignore_for_file: avoid_annotating_with_dynamic
-
 /// Sync status message
 class EthereumSyncStatus {
   /// Constructor
@@ -61,7 +57,7 @@ class EthereumSyncStatus {
 
   @override
   String toString() {
-    String ret = 'Ethereum Sync Status :' '\n' '  Syncing : $syncing' '\n';
+    var ret = 'Ethereum Sync Status :' '\n' '  Syncing : $syncing' '\n';
     if (syncing) {
       ret += '  Starting Block : $startingBlock'
           '\n'

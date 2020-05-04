@@ -9,8 +9,6 @@
 
 import 'package:ethereum/ethereum.dart';
 
-// ignore_for_file: avoid_types_on_closure_parameters
-
 /// General client test support utilities
 class EthereumTestUtilities {
   /// Hex String list to Integer list

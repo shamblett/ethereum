@@ -9,10 +9,6 @@
 
 part of ethereum;
 
-// ignore_for_file: omit_local_variable_types
-// ignore_for_file: unnecessary_final
-// ignore_for_file: avoid_annotating_with_dynamic
-
 /// An ethereum work message.
 /// All elements of the work message must be present.
 class EthereumWork {
@@ -54,7 +50,7 @@ class EthereumWork {
 
   @override
   String toString() {
-    final String ret = 'Ethereum Work :'
+    final ret = 'Ethereum Work :'
         '\n'
         '  Pow Hash : $powHash'
         '\n'

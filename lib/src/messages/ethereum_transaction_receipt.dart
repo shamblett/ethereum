@@ -9,10 +9,6 @@
 
 part of ethereum;
 
-// ignore_for_file: omit_local_variable_types
-// ignore_for_file: unnecessary_final
-// ignore_for_file: avoid_annotating_with_dynamic
-
 /// An ethereum transaction receipt message
 class EthereumTransactionReceipt {
   /// Constructor
@@ -134,10 +130,10 @@ class EthereumTransactionReceipt {
         _logs = <EthereumLog>[];
         for (final Map<String, dynamic> log
             in data[EthereumConstants.ethResultKey]['logs']) {
-          final Map<String, dynamic> buildLog = <String, dynamic>{
+          final buildLog = <String, dynamic>{
             EthereumConstants.ethResultKey: log
           };
-          final EthereumLog entry = EthereumLog.fromMap(buildLog);
+          final entry = EthereumLog.fromMap(buildLog);
           _logs.add(entry);
         }
       }
@@ -146,7 +142,7 @@ class EthereumTransactionReceipt {
 
   @override
   String toString() {
-    final String ret = 'Ethereum Transaction Receipt:'
+    final ret = 'Ethereum Transaction Receipt:'
         '\n'
         '  Transaction Hash : $transactionHash'
         '\n'

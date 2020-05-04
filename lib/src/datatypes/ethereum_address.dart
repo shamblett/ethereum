@@ -9,12 +9,6 @@
 
 part of ethereum;
 
-// ignore_for_file: omit_local_variable_types
-// ignore_for_file: unnecessary_final
-// ignore_for_file: avoid_types_on_closure_parameters
-// ignore_for_file: avoid_annotating_with_dynamic
-// ignore_for_file: avoid_equals_and_hash_code_on_mutable_classes
-
 /// The address data type. If any supplied value cannot be safely represented as
 /// an Ethereum address FormatException will be thrown.
 class EthereumAddress {
@@ -79,7 +73,7 @@ class EthereumAddress {
       List<String>.generate(val.length, (int index) => val[index].asString);
 
   String _bigIntToHexString(BigInt val) {
-    String hexString = val.toRadixString(16);
+    var hexString = val.toRadixString(16);
     // A Hex digit string must be composed of two characters
     // per byte, so must be even if the length is odd even it out.
     if (hexString.length.isOdd) {
@@ -95,8 +89,8 @@ class EthereumAddress {
     } else {
       if (hexString.length < addressCharacterLength) {
         // Must be even
-        final int shortfall = (addressCharacterLength - hexString.length) ~/ 2;
-        for (int i = 0; i < shortfall; i++) {
+        final shortfall = (addressCharacterLength - hexString.length) ~/ 2;
+        for (var i = 0; i < shortfall; i++) {
           hexString = '00$hexString';
         }
       }

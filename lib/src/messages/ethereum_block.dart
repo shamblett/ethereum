@@ -9,10 +9,6 @@
 
 part of ethereum;
 
-// ignore_for_file: omit_local_variable_types
-// ignore_for_file: unnecessary_final
-// ignore_for_file: avoid_annotating_with_dynamic
-
 /// An ethereum block descriptor message
 class EthereumBlock {
   /// Constructor
@@ -218,11 +214,10 @@ class EthereumBlock {
           _transactions = <EthereumTransaction>[];
           for (final Map<dynamic, dynamic> transaction
               in data[EthereumConstants.ethResultKey]['transactions']) {
-            final Map<String, dynamic> buildTrans = <String, dynamic>{
+            final buildTrans = <String, dynamic>{
               EthereumConstants.ethResultKey: transaction
             };
-            final EthereumTransaction entry =
-                EthereumTransaction.fromMap(buildTrans);
+            final entry = EthereumTransaction.fromMap(buildTrans);
             _transactions.add(entry);
           }
         }
@@ -232,7 +227,7 @@ class EthereumBlock {
 
   @override
   String toString() {
-    final String ret = 'Ethereum Block :'
+    final ret = 'Ethereum Block :'
         '\n'
         '  Number : $number'
         '\n'

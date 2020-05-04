@@ -9,8 +9,6 @@
 
 part of ethereum;
 
-// ignore_for_file: unnecessary_final
-
 /// The API base class
 class EthereumApi {
   /// Construction

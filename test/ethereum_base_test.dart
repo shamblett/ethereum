@@ -12,30 +12,22 @@ import 'package:ethereum/ethereum.dart';
 import 'package:test/test.dart';
 import 'ethereum_test_utilities.dart';
 
-// ignore_for_file: omit_local_variable_types
-// ignore_for_file: unnecessary_final
-// ignore_for_file: avoid_annotating_with_dynamic
-// ignore_for_file: lines_longer_than_80_chars
-// ignore_for_file: avoid_catching_errors
-// ignore_for_file: avoid_print
-// ignore_for_file: cascade_invocations
-
 /// These test are common to both server and client, we use the server client for convenience.
 
 void main() {
   group('Utilities', () {
     test('Int to hex', () {
-      const int testInt = 0xabcdef123450;
-      final String val = EthereumUtilities.intToHex(testInt);
+      const testInt = 0xabcdef123450;
+      final val = EthereumUtilities.intToHex(testInt);
       expect(val, '0xabcdef123450');
     });
     test('Int to hex - pad', () {
-      const int testInt = 0x1;
-      final String val = EthereumUtilities.intToHex(testInt, 8);
+      const testInt = 0x1;
+      final val = EthereumUtilities.intToHex(testInt, 8);
       expect(val, '0x0000000000000001');
     });
     test('Int to hex  - pad negative', () {
-      bool thrown = false;
+      var thrown = false;
       try {
         EthereumUtilities.intToHex(1, -2);
       } on Exception catch (e) {
@@ -47,7 +39,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('Int to hex  - pad odd', () {
-      bool thrown = false;
+      var thrown = false;
       try {
         EthereumUtilities.intToHex(1, 3);
       } on Exception catch (e) {
@@ -59,31 +51,31 @@ void main() {
       expect(thrown, isTrue);
     });
     test('Hex to int - valid', () {
-      const String testString = '0xabcdef12345';
-      final int val = EthereumUtilities.hexToInt(testString);
+      const testString = '0xabcdef12345';
+      final val = EthereumUtilities.hexToInt(testString);
       expect(val, 0xabcdef12345);
     });
     test('Hex to int - invalid', () {
-      const String testString = 'abcdef12345';
-      final int val = EthereumUtilities.hexToInt(testString);
+      const testString = 'abcdef12345';
+      final val = EthereumUtilities.hexToInt(testString);
       expect(val, isNull);
     });
     test('Hex to int list', () {
-      final List<String> testString = <String>['0xabcdef12345', '0xaabbcc'];
-      final List<int> val = EthereumTestUtilities.hexToIntList(testString);
+      final testString = <String>['0xabcdef12345', '0xaabbcc'];
+      final val = EthereumTestUtilities.hexToIntList(testString);
       expect(val, <int>[0xabcdef12345, 0xaabbcc]);
     });
     test('Int to hex list', () {
-      final List<int> testList = <int>[0xabcdef12345, 0xaabbcc];
-      final List<String> val = EthereumTestUtilities.intToHexList(testList);
+      final testList = <int>[0xabcdef12345, 0xaabbcc];
+      final val = EthereumTestUtilities.intToHexList(testList);
       expect(val, <String>['0xabcdef12345', '0xaabbcc']);
     });
   });
 
   group('Connection tests', () {
-    final EthereumServerClient client = EthereumServerClient();
+    final client = EthereumServerClient();
     test('connectString - Null', () {
-      bool thrown = false;
+      var thrown = false;
       try {
         client.connectString(null);
       } on Error catch (e) {
@@ -108,7 +100,7 @@ void main() {
     });
 
     test('connectUri - Null', () {
-      bool thrown = false;
+      var thrown = false;
       try {
         client.connectUri(null);
       } on Error catch (e) {
@@ -121,21 +113,21 @@ void main() {
     });
 
     test('connectUri - OK with port', () {
-      final Uri uri = Uri.parse('http://localhost:2000');
+      final uri = Uri.parse('http://localhost:2000');
       client.connectUri(uri);
       expect(client.host, 'localhost');
       expect(client.port, 2000);
     });
 
     test('connectUri - OK no port', () {
-      final Uri uri = Uri.parse('http://localhost');
+      final uri = Uri.parse('http://localhost');
       client.connectUri(uri);
       expect(client.host, 'localhost');
       expect(client.port, Ethereum.defaultHttpPort);
     });
 
     test('connectParameters - Hostname Null', () {
-      bool thrown = false;
+      var thrown = false;
       try {
         client.connectParameters(Ethereum.rpcHttpScheme, null);
       } on Error catch (e) {
@@ -148,7 +140,7 @@ void main() {
     });
 
     test('connectParameters - Invalid scheme', () {
-      bool thrown = false;
+      var thrown = false;
       try {
         client.connectParameters('Billy', 'localhost');
       } on Exception catch (e) {
@@ -186,9 +178,9 @@ void main() {
   });
 
   group('Null parameter tests - eth', () {
-    final EthereumServerClient client = EthereumServerClient();
+    final client = EthereumServerClient();
     test('Sha3 - data', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.eth.sha3(null);
       } on Error catch (e) {
@@ -200,7 +192,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('Balance - account number', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.eth.getBalance(null, null);
       } on Error catch (e) {
@@ -212,7 +204,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('Balance - block', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.eth
             .getBalance(EthereumAddress.fromBigInt(BigInt.zero), null);
@@ -225,7 +217,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('Storage at - block', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.eth
             .getStorageAt(EthereumAddress.fromBigInt(BigInt.one), 2, null);
@@ -238,7 +230,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('Storage at - pos', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.eth.getStorageAt(EthereumAddress.fromBigInt(BigInt.one),
             null, EthereumDefaultBlock());
@@ -251,7 +243,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('Storage at - address', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.eth.getStorageAt(null, 1, EthereumDefaultBlock());
       } on Error catch (e) {
@@ -263,7 +255,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('Block transaction count - address', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.eth.getTransactionCount(null, EthereumDefaultBlock());
       } on Error catch (e) {
@@ -275,7 +267,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('Block transaction count - block', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.eth
             .getTransactionCount(EthereumAddress.fromBigInt(BigInt.one), null);
@@ -288,7 +280,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('Block transaction count by hash', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.eth.getBlockTransactionCountByHash(null);
       } on Error catch (e) {
@@ -300,7 +292,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('Block transaction count by number', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.eth.getBlockTransactionCountByNumber(null);
       } on Error catch (e) {
@@ -312,7 +304,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('Block uncle count by hash', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.eth.getUncleCountByHash(null);
       } on Error catch (e) {
@@ -324,7 +316,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('Block uncle count by number', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.eth.getUncleCountByNumber(null);
       } on Error catch (e) {
@@ -336,7 +328,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('Code - address', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.eth.getCode(null, EthereumDefaultBlock());
       } on Error catch (e) {
@@ -348,7 +340,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('Code - block', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.eth.getCode(EthereumAddress.fromBigInt(BigInt.two), null);
       } on Error catch (e) {
@@ -360,7 +352,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('Sign - account', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.eth.sign(null, EthereumData.fromBigInt(BigInt.zero));
       } on Error catch (e) {
@@ -372,7 +364,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('Sign - message', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.eth.sign(EthereumAddress.fromBigInt(BigInt.zero), null);
       } on Error catch (e) {
@@ -384,7 +376,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('Send transaction - address', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.eth
             .sendTransaction(null, EthereumData.fromBigInt(BigInt.zero));
@@ -397,7 +389,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('Send transaction - data', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.eth
             .sendTransaction(EthereumAddress.fromBigInt(BigInt.zero), null);
@@ -410,7 +402,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('Send raw transaction', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.eth.sendRawTransaction(null);
       } on Error catch (e) {
@@ -422,7 +414,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('Call - address', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.eth.call(null, null);
       } on Error catch (e) {
@@ -434,7 +426,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('Call - block', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.eth.call(EthereumAddress.fromBigInt(BigInt.zero), null);
       } on Error catch (e) {
@@ -446,7 +438,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('Get block by hash', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.eth.getBlockByHash(null);
       } on Error catch (e) {
@@ -458,7 +450,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('Get block by number', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.eth.getBlockByNumber(null);
       } on Error catch (e) {
@@ -470,7 +462,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('Get transaction by hash', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.eth.getTransactionByHash(null);
       } on Error catch (e) {
@@ -482,7 +474,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('Get transaction by block hash and index - block hash', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.eth.getTransactionByBlockHashAndIndex(null, 0);
       } on Error catch (e) {
@@ -494,7 +486,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('Get transaction by block hash and index - index', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.eth.getTransactionByBlockHashAndIndex(
             EthereumData.fromBigInt(BigInt.zero), null);
@@ -507,7 +499,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('Get transaction by block number and index - block number', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.eth.getTransactionByBlockNumberAndIndex(null, 0);
       } on Error catch (e) {
@@ -519,7 +511,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('Get transaction by block number and index - index', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.eth
             .getTransactionByBlockNumberAndIndex(EthereumDefaultBlock(), null);
@@ -532,7 +524,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('Get transaction receipt', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.eth.getTransactionReceipt(null);
       } on Error catch (e) {
@@ -544,7 +536,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('Get uncle by block hash and index - block hash', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.eth.getUncleByBlockHashAndIndex(null, 0);
       } on Error catch (e) {
@@ -556,7 +548,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('Get uncle by block hash and index - index', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.eth.getUncleByBlockHashAndIndex(
             EthereumData.fromBigInt(BigInt.zero), null);
@@ -569,7 +561,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('Get uncle by block number and index - block number', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.eth.getUncleByBlockNumberAndIndex(null, 0);
       } on Error catch (e) {
@@ -581,7 +573,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('Get uncle by block number and index - index', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.eth
             .getUncleByBlockNumberAndIndex(EthereumDefaultBlock(), null);
@@ -594,7 +586,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('Uninstall filter', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.eth.uninstallFilter(null);
       } on Error catch (e) {
@@ -606,7 +598,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('Get filter changes', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.eth.getFilterChanges(null);
       } on Error catch (e) {
@@ -618,7 +610,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('Get filter logs', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.eth.getFilterLogs(null);
       } on Error catch (e) {
@@ -630,7 +622,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('Submit work - nonce', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.eth.submitWork(null, EthereumData.fromBigInt(BigInt.one),
             EthereumData.fromBigInt(BigInt.two));
@@ -643,7 +635,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('Submit work - powHash', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.eth.submitWork(EthereumData.fromBigInt(BigInt.one), null,
             EthereumData.fromBigInt(BigInt.two));
@@ -656,7 +648,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('Submit work - digest', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.eth.submitWork(EthereumData.fromBigInt(BigInt.one),
             EthereumData.fromBigInt(BigInt.two), null);
@@ -669,7 +661,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('Submit hash rate - hash rate', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.eth.submitHashrate(null, 'id');
       } on Error catch (e) {
@@ -681,7 +673,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('Submit hash rate - id', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.eth
             .submitHashrate(EthereumData.fromBigInt(BigInt.one), null);
@@ -694,7 +686,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('Shh Post - topics', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.eth
             .shhPost(null, EthereumData.fromBigInt(BigInt.one), 2, 3);
@@ -707,7 +699,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('Shh Post - payload', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.eth.shhPost(
             <EthereumData>[EthereumData.fromBigInt(BigInt.one)], null, 2, 3);
@@ -720,7 +712,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('Shh Post - priority', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.eth.shhPost(
             <EthereumData>[EthereumData.fromBigInt(BigInt.one)],
@@ -736,7 +728,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('Shh Post - ttl', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.eth.shhPost(
             <EthereumData>[EthereumData.fromBigInt(BigInt.one)],
@@ -755,8 +747,8 @@ void main() {
 
   group('Datatypes', () {
     ByteData fromList(List<int> data) {
-      final ByteData tmp = ByteData(data.length);
-      for (int i = 0; i < data.length; i++) {
+      final tmp = ByteData(data.length);
+      for (var i = 0; i < data.length; i++) {
         tmp.setUint8(i, data[i]);
       }
       return tmp;
@@ -764,7 +756,7 @@ void main() {
 
     group('Byte address', () {
       test('Exact', () {
-        const List<int> data = <int>[
+        const data = <int>[
           1,
           2,
           3,
@@ -786,11 +778,11 @@ void main() {
           19,
           20
         ];
-        final EthereumByteAddress address = EthereumByteAddress(fromList(data));
+        final address = EthereumByteAddress(fromList(data));
         expect(address.toList(), data);
       });
       test('Bigger', () {
-        const List<int> data = <int>[
+        const data = <int>[
           1,
           2,
           3,
@@ -821,7 +813,7 @@ void main() {
           76,
           100
         ];
-        const List<int> checkdata = <int>[
+        const checkdata = <int>[
           1,
           2,
           3,
@@ -843,12 +835,12 @@ void main() {
           19,
           20
         ];
-        final EthereumByteAddress address = EthereumByteAddress(fromList(data));
+        final address = EthereumByteAddress(fromList(data));
         expect(address.toList(), checkdata);
       });
       test('Smaller', () {
-        const List<int> data = <int>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-        const List<int> checkdata = <int>[
+        const data = <int>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        const checkdata = <int>[
           1,
           2,
           3,
@@ -870,11 +862,11 @@ void main() {
           0,
           0
         ];
-        final EthereumByteAddress address = EthereumByteAddress(fromList(data));
+        final address = EthereumByteAddress(fromList(data));
         expect(address.toList(), checkdata);
       });
       test('From List all valid', () {
-        const List<int> data = <int>[
+        const data = <int>[
           1,
           2,
           3,
@@ -896,12 +888,11 @@ void main() {
           19,
           20
         ];
-        final EthereumByteAddress address =
-            EthereumByteAddress.fromIntList(data);
+        final address = EthereumByteAddress.fromIntList(data);
         expect(address.toList(), data);
       });
       test('From list invalid', () {
-        const List<int> data = <int>[
+        const data = <int>[
           1,
           2,
           3,
@@ -923,7 +914,7 @@ void main() {
           19,
           400
         ];
-        const List<int> checkdata = <int>[
+        const checkdata = <int>[
           1,
           2,
           3,
@@ -945,12 +936,11 @@ void main() {
           19,
           0
         ];
-        final EthereumByteAddress address =
-            EthereumByteAddress.fromIntList(data);
+        final address = EthereumByteAddress.fromIntList(data);
         expect(address.toList(), checkdata);
       });
       test('toString', () {
-        const List<int> data = <int>[
+        const data = <int>[
           1,
           2,
           3,
@@ -972,12 +962,12 @@ void main() {
           19,
           20
         ];
-        final EthereumByteAddress address = EthereumByteAddress(fromList(data));
+        final address = EthereumByteAddress(fromList(data));
         expect(address.toString(),
             '[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]');
       });
       test('Equals', () {
-        const List<int> data = <int>[
+        const data = <int>[
           1,
           2,
           3,
@@ -999,14 +989,12 @@ void main() {
           19,
           20
         ];
-        final EthereumByteAddress address1 =
-            EthereumByteAddress(fromList(data));
-        final EthereumByteAddress address2 =
-            EthereumByteAddress(fromList(data));
+        final address1 = EthereumByteAddress(fromList(data));
+        final address2 = EthereumByteAddress(fromList(data));
         expect(address1 == address2, isTrue);
       });
       test('Not Equals', () {
-        const List<int> data1 = <int>[
+        const data1 = <int>[
           1,
           2,
           3,
@@ -1028,7 +1016,7 @@ void main() {
           19,
           20
         ];
-        const List<int> data2 = <int>[
+        const data2 = <int>[
           1,
           2,
           3,
@@ -1050,14 +1038,12 @@ void main() {
           19,
           20
         ];
-        final EthereumByteAddress address1 =
-            EthereumByteAddress(fromList(data1));
-        final EthereumByteAddress address2 =
-            EthereumByteAddress(fromList(data2));
+        final address1 = EthereumByteAddress(fromList(data1));
+        final address2 = EthereumByteAddress(fromList(data2));
         expect(address1 == address2, isFalse);
       });
       test('Not Equals bad type', () {
-        const List<int> data1 = <int>[
+        const data1 = <int>[
           1,
           2,
           3,
@@ -1079,7 +1065,7 @@ void main() {
           19,
           20
         ];
-        const List<int> data2 = <int>[
+        const data2 = <int>[
           1,
           2,
           3,
@@ -1101,12 +1087,11 @@ void main() {
           19,
           20
         ];
-        final EthereumByteAddress address2 =
-            EthereumByteAddress(fromList(data2));
+        final address2 = EthereumByteAddress(fromList(data2));
         expect(data1 == address2.toList(), isFalse);
       });
       test('As Hex', () {
-        const List<int> data = <int>[
+        const data = <int>[
           1,
           2,
           3,
@@ -1128,23 +1113,23 @@ void main() {
           19,
           20
         ];
-        final EthereumByteAddress address = EthereumByteAddress(fromList(data));
+        final address = EthereumByteAddress(fromList(data));
         expect(address.asString, '0x0102030405060708090a0b0c0d0e0f1011121314');
       });
     });
     group('Ethereum address', () {
       test('From string 40 chars leading 0x', () {
-        const String val = '0x0102030405060708090a0b0c0d0e0f1011121314';
-        final EthereumAddress address = EthereumAddress.fromString(val);
-        final BigInt check = BigInt.parse(val);
+        const val = '0x0102030405060708090a0b0c0d0e0f1011121314';
+        final address = EthereumAddress.fromString(val);
+        final check = BigInt.parse(val);
         expect(address.asString, val);
         expect(address.asBigInt, check);
       });
       test('From string 40 chars no leading 0x', () {
-        bool thrown = false;
-        const String val = '0102030405060708090a0b0c0d0e0f1011121314';
+        var thrown = false;
+        const val = '0102030405060708090a0b0c0d0e0f1011121314';
         try {
-          final EthereumAddress address = EthereumAddress.fromString(val);
+          final address = EthereumAddress.fromString(val);
           print(address);
         } on FormatException catch (e) {
           print(e);
@@ -1153,10 +1138,10 @@ void main() {
         expect(thrown, isTrue);
       });
       test('From string 39 chars leading 0x', () {
-        bool thrown = false;
-        const String val = '0x0102030405060708090a0b0c00e0f1011121314';
+        var thrown = false;
+        const val = '0x0102030405060708090a0b0c00e0f1011121314';
         try {
-          final EthereumAddress address = EthereumAddress.fromString(val);
+          final address = EthereumAddress.fromString(val);
           print(address);
         } on FormatException catch (e) {
           print(e);
@@ -1165,10 +1150,10 @@ void main() {
         expect(thrown, isTrue);
       });
       test('From string 41 chars leading 0x', () {
-        bool thrown = false;
-        const String val = '0x0102030405060708090a0b0c0d0e0f10111213141';
+        var thrown = false;
+        const val = '0x0102030405060708090a0b0c0d0e0f10111213141';
         try {
-          final EthereumAddress address = EthereumAddress.fromString(val);
+          final address = EthereumAddress.fromString(val);
           print(address);
         } on FormatException catch (e) {
           print(e);
@@ -1177,7 +1162,7 @@ void main() {
         expect(thrown, isTrue);
       });
       test('From Byte Address', () {
-        const List<int> data = <int>[
+        const data = <int>[
           1,
           2,
           3,
@@ -1199,37 +1184,36 @@ void main() {
           19,
           20
         ];
-        final EthereumByteAddress address = EthereumByteAddress(fromList(data));
-        final EthereumAddress eaddress =
-            EthereumAddress.fromByteAddress(address);
+        final address = EthereumByteAddress(fromList(data));
+        final eaddress = EthereumAddress.fromByteAddress(address);
         expect(eaddress.asString, '0x0102030405060708090a0b0c0d0e0f1011121314');
       });
       test('From BigInt Exact', () {
-        const String str = '0x0102030405060708090a0b0c0d0e0f1011121314';
-        final BigInt bint = BigInt.parse(str);
-        final EthereumAddress eaddress = EthereumAddress.fromBigInt(bint);
+        const str = '0x0102030405060708090a0b0c0d0e0f1011121314';
+        final bint = BigInt.parse(str);
+        final eaddress = EthereumAddress.fromBigInt(bint);
         expect(eaddress.asString, str);
       });
       test('From BigInt smaller half', () {
-        const String str = '0x08090a0b0c0d0e0f1011121314';
-        const String checkStr = '0x0000000000000008090a0b0c0d0e0f1011121314';
-        final BigInt bint = BigInt.parse(str);
-        final EthereumAddress eaddress = EthereumAddress.fromBigInt(bint);
+        const str = '0x08090a0b0c0d0e0f1011121314';
+        const checkStr = '0x0000000000000008090a0b0c0d0e0f1011121314';
+        final bint = BigInt.parse(str);
+        final eaddress = EthereumAddress.fromBigInt(bint);
         expect(eaddress.asString, checkStr);
       });
       test('From BigInt one', () {
-        const String str = '0x01';
-        const String checkStr = '0x0000000000000000000000000000000000000001';
-        final BigInt bint = BigInt.parse(str);
-        final EthereumAddress eaddress = EthereumAddress.fromBigInt(bint);
+        const str = '0x01';
+        const checkStr = '0x0000000000000000000000000000000000000001';
+        final bint = BigInt.parse(str);
+        final eaddress = EthereumAddress.fromBigInt(bint);
         expect(eaddress.asString, checkStr);
       });
       test('From BigInt bigger', () {
-        const String str = '0x0102030405060708090a0b0c0d0e0f1011121314161718';
-        final BigInt bint = BigInt.parse(str);
-        bool thrown = false;
+        const str = '0x0102030405060708090a0b0c0d0e0f1011121314161718';
+        final bint = BigInt.parse(str);
+        var thrown = false;
         try {
-          final EthereumAddress eaddress = EthereumAddress.fromBigInt(bint);
+          final eaddress = EthereumAddress.fromBigInt(bint);
           print(eaddress);
         } on FormatException catch (e) {
           print(e);
@@ -1238,36 +1222,36 @@ void main() {
         expect(thrown, isTrue);
       });
       test('Equals', () {
-        const String str = '0x0102030405060708090a0b0c0d0e0f1011121314';
-        final BigInt bint1 = BigInt.parse(str);
-        final BigInt bint2 = BigInt.parse(str);
-        final EthereumAddress eaddress1 = EthereumAddress.fromBigInt(bint1);
-        final EthereumAddress eaddress2 = EthereumAddress.fromBigInt(bint2);
+        const str = '0x0102030405060708090a0b0c0d0e0f1011121314';
+        final bint1 = BigInt.parse(str);
+        final bint2 = BigInt.parse(str);
+        final eaddress1 = EthereumAddress.fromBigInt(bint1);
+        final eaddress2 = EthereumAddress.fromBigInt(bint2);
         expect(eaddress1 == eaddress2, isTrue);
       });
       test('Not Equals', () {
-        const String str1 = '0x0102030405060708090a0b0c0d0e0f1011121314';
-        const String str2 = '0x0102030405060708090a0b04';
-        final BigInt bint1 = BigInt.parse(str1);
-        final BigInt bint2 = BigInt.parse(str2);
-        final EthereumAddress eaddress1 = EthereumAddress.fromBigInt(bint1);
-        final EthereumAddress eaddress2 = EthereumAddress.fromBigInt(bint2);
+        const str1 = '0x0102030405060708090a0b0c0d0e0f1011121314';
+        const str2 = '0x0102030405060708090a0b04';
+        final bint1 = BigInt.parse(str1);
+        final bint2 = BigInt.parse(str2);
+        final eaddress1 = EthereumAddress.fromBigInt(bint1);
+        final eaddress2 = EthereumAddress.fromBigInt(bint2);
         expect(eaddress1 == eaddress2, isFalse);
       });
     });
     group('Ethereum data', () {
       test('From string leading 0x', () {
-        const String val = '0x0102030405060708090a0b0c0d0e0f1011121314';
-        final EthereumData data = EthereumData.fromString(val);
-        final BigInt check = BigInt.parse(val);
+        const val = '0x0102030405060708090a0b0c0d0e0f1011121314';
+        final data = EthereumData.fromString(val);
+        final check = BigInt.parse(val);
         expect(data.asString, val);
         expect(data.asBigInt, check);
       });
       test('From string no leading 0x', () {
-        bool thrown = false;
-        const String val = '0102030405060708090a0b0c0d0e0f1011121314';
+        var thrown = false;
+        const val = '0102030405060708090a0b0c0d0e0f1011121314';
         try {
-          final EthereumData data = EthereumData.fromString(val);
+          final data = EthereumData.fromString(val);
           print(data);
         } on FormatException catch (e) {
           print(e);
@@ -1276,33 +1260,33 @@ void main() {
         expect(thrown, isTrue);
       });
       test('From BigInt Exact', () {
-        const String str = '0x0102030405060708090a0b0c0d0e0f1011121314';
-        final BigInt bint = BigInt.parse(str);
-        final EthereumData edata = EthereumData.fromBigInt(bint);
+        const str = '0x0102030405060708090a0b0c0d0e0f1011121314';
+        final bint = BigInt.parse(str);
+        final edata = EthereumData.fromBigInt(bint);
         expect(edata.asString, str);
       });
       test('From BigInt one', () {
-        const String str = '0x01';
-        const String checkStr = '0x01';
-        final BigInt bint = BigInt.parse(str);
-        final EthereumData edata = EthereumData.fromBigInt(bint);
+        const str = '0x01';
+        const checkStr = '0x01';
+        final bint = BigInt.parse(str);
+        final edata = EthereumData.fromBigInt(bint);
         expect(edata.asString, checkStr);
       });
       test('Equals', () {
-        const String str = '0x0102030405060708090a0b0c0d0e0f1011121314';
-        final BigInt bint1 = BigInt.parse(str);
-        final BigInt bint2 = BigInt.parse(str);
-        final EthereumData edata1 = EthereumData.fromBigInt(bint1);
-        final EthereumData edata2 = EthereumData.fromBigInt(bint2);
+        const str = '0x0102030405060708090a0b0c0d0e0f1011121314';
+        final bint1 = BigInt.parse(str);
+        final bint2 = BigInt.parse(str);
+        final edata1 = EthereumData.fromBigInt(bint1);
+        final edata2 = EthereumData.fromBigInt(bint2);
         expect(edata1 == edata2, isTrue);
       });
       test('Not Equals', () {
-        const String str1 = '0x0102030405060708090a0b0c0d0e0f1011121314';
-        const String str2 = '0x0102030405060708090a0b04';
-        final BigInt bint1 = BigInt.parse(str1);
-        final BigInt bint2 = BigInt.parse(str2);
-        final EthereumData edata1 = EthereumData.fromBigInt(bint1);
-        final EthereumData edata2 = EthereumData.fromBigInt(bint2);
+        const str1 = '0x0102030405060708090a0b0c0d0e0f1011121314';
+        const str2 = '0x0102030405060708090a0b04';
+        final bint1 = BigInt.parse(str1);
+        final bint2 = BigInt.parse(str2);
+        final edata1 = EthereumData.fromBigInt(bint1);
+        final edata2 = EthereumData.fromBigInt(bint2);
         expect(edata1 == edata2, isFalse);
       });
     });
@@ -1310,23 +1294,23 @@ void main() {
 
   group('Message tests', () {
     test('Sync status - no sync', () {
-      final Map<String, bool> nosync = <String, bool>{'result': false};
-      final EthereumSyncStatus message = EthereumSyncStatus.fromMap(nosync);
+      final nosync = <String, bool>{'result': false};
+      final message = EthereumSyncStatus.fromMap(nosync);
       expect(message.syncing, isFalse);
       expect(message.currentBlock, isNull);
       expect(message.highestBlock, isNull);
       expect(message.startingBlock, isNull);
       print(message);
-      final EthereumSyncStatus message1 = EthereumSyncStatus();
+      final message1 = EthereumSyncStatus();
       print(message1);
     });
     test('Sync status - sync', () {
-      final Map<String, String> sync = <String, String>{
+      final sync = <String, String>{
         'startingBlock': '0x384',
         'currentBlock': '0x386',
         'highestBlock': '0x454'
       };
-      final EthereumSyncStatus message = EthereumSyncStatus.fromMap(sync);
+      final message = EthereumSyncStatus.fromMap(sync);
       expect(message.syncing, isTrue);
       expect(message.currentBlock, 0x386);
       expect(message.highestBlock, 0x454);
@@ -1334,10 +1318,9 @@ void main() {
       print(message);
     });
     test('Transaction - null', () {
-      final Map<String, bool> transaction = <String, bool>{'result': null};
+      final transaction = <String, bool>{'result': null};
 
-      final EthereumTransaction message =
-          EthereumTransaction.fromMap(transaction);
+      final message = EthereumTransaction.fromMap(transaction);
       expect(message.hash, isNull);
       expect(message.nonce, isNull);
       expect(message.blockHash, isNull);
@@ -1349,13 +1332,12 @@ void main() {
       expect(message.gas, isNull);
       expect(message.gasPrice, isNull);
       expect(message.input, isNull);
-      final EthereumTransaction message1 = EthereumTransaction();
+      final message1 = EthereumTransaction();
       print(message1);
     });
 
     test('Transaction', () {
-      final Map<String, Map<String, String>> transaction =
-          <String, Map<String, String>>{
+      final transaction = <String, Map<String, String>>{
         'result': <String, String>{
           'hash':
               '0xc6ef2fc5426d6ad6fd9e2a26abeab0aa2411b7ab17f30a99d3cb96aed1d1055b',
@@ -1374,8 +1356,7 @@ void main() {
         }
       };
 
-      final EthereumTransaction message =
-          EthereumTransaction.fromMap(transaction);
+      final message = EthereumTransaction.fromMap(transaction);
       expect(message.hash.asString,
           '0xc6ef2fc5426d6ad6fd9e2a26abeab0aa2411b7ab17f30a99d3cb96aed1d1055b');
       expect(message.nonce, 0);
@@ -1394,10 +1375,8 @@ void main() {
       print(message);
     });
     test('Block - null', () {
-      final Map<String, dynamic> block = <String, dynamic>{
-        'result': <dynamic, dynamic>{}
-      };
-      final EthereumBlock message = EthereumBlock.fromMap(block);
+      final block = <String, dynamic>{'result': <dynamic, dynamic>{}};
+      final message = EthereumBlock.fromMap(block);
       expect(message.number, isNull);
       expect(message.hash, isNull);
       expect(message.parentHash, isNull);
@@ -1418,12 +1397,11 @@ void main() {
       expect(message.transactions, isNull);
       expect(message.uncles, isNull);
       expect(message.transactionsAreHashes, isFalse);
-      final EthereumBlock messageDefault = EthereumBlock();
+      final messageDefault = EthereumBlock();
       print(messageDefault);
     });
     test('Block - transactions are hashes', () {
-      final Map<String, Map<String, dynamic>> block =
-          <String, Map<String, dynamic>>{
+      final block = <String, Map<String, dynamic>>{
         'result': <String, dynamic>{
           'number': '0x1b4', // 436
           'hash':
@@ -1461,7 +1439,7 @@ void main() {
           ]
         }
       };
-      final EthereumBlock message = EthereumBlock.fromMap(block);
+      final message = EthereumBlock.fromMap(block);
       expect(message.number, 436);
       expect(message.hash.asString,
           '0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331');
@@ -1500,7 +1478,7 @@ void main() {
       print(message);
     });
     test('Block - transactions are objects', () {
-      final Map<String, dynamic> block = <String, dynamic>{
+      final block = <String, dynamic>{
         'result': <String, dynamic>{
           'number': '0x1b4', // 436
           'hash':
@@ -1566,7 +1544,7 @@ void main() {
           ]
         }
       };
-      final EthereumBlock message = EthereumBlock.fromMap(block);
+      final message = EthereumBlock.fromMap(block);
       expect(message.number, 436);
       expect(message.hash.asString,
           '0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331');
@@ -1601,10 +1579,8 @@ void main() {
       expect(message.transactionsAreHashes, isFalse);
     });
     test('Log - null', () {
-      final Map<String, dynamic> log = <String, dynamic>{
-        'result': <String, dynamic>{}
-      };
-      final EthereumLog message = EthereumLog.fromMap(log);
+      final log = <String, dynamic>{'result': <String, dynamic>{}};
+      final message = EthereumLog.fromMap(log);
       expect(message.logIndex, isNull);
       expect(message.blockNumber, isNull);
       expect(message.blockHash, isNull);
@@ -1613,11 +1589,11 @@ void main() {
       expect(message.address, isNull);
       expect(message.data, isNull);
       expect(message.topics, isNull);
-      final EthereumLog message1 = EthereumLog();
+      final message1 = EthereumLog();
       print(message1);
     });
     test('Log', () {
-      final Map<String, dynamic> log = <String, dynamic>{
+      final log = <String, dynamic>{
         'result': <String, dynamic>{
           'removed': false,
           'logIndex': '0x1', // 1
@@ -1635,7 +1611,7 @@ void main() {
           ]
         }
       };
-      final EthereumLog message = EthereumLog.fromMap(log);
+      final message = EthereumLog.fromMap(log);
       expect(message.removed, false);
       expect(message.logIndex, 1);
       expect(message.blockNumber, 436);
@@ -1654,11 +1630,8 @@ void main() {
       print(message);
     });
     test('Transaction receipt - null', () {
-      final Map<String, dynamic> tr = <String, dynamic>{
-        'result': <String, dynamic>{}
-      };
-      final EthereumTransactionReceipt message =
-          EthereumTransactionReceipt.fromMap(tr);
+      final tr = <String, dynamic>{'result': <String, dynamic>{}};
+      final message = EthereumTransactionReceipt.fromMap(tr);
       expect(message.transactionHash, isNull);
       expect(message.transactionIndex, isNull);
       expect(message.blockNumber, isNull);
@@ -1672,7 +1645,7 @@ void main() {
       expect(message.status, isNull);
     });
     test('Transaction receipt - status', () {
-      final Map<String, dynamic> tr = <String, dynamic>{
+      final tr = <String, dynamic>{
         'result': <String, dynamic>{
           'transactionHash':
               '0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238',
@@ -1725,8 +1698,7 @@ void main() {
           'status': '0x1'
         }
       };
-      final EthereumTransactionReceipt message =
-          EthereumTransactionReceipt.fromMap(tr);
+      final message = EthereumTransactionReceipt.fromMap(tr);
       expect(message.transactionHash.asString,
           '0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238');
       expect(message.transactionIndex, 1);
@@ -1745,11 +1717,11 @@ void main() {
       expect(message.status, 1);
       expect(message.root, isNull);
       print(message);
-      final EthereumTransactionReceipt message1 = EthereumTransactionReceipt();
+      final message1 = EthereumTransactionReceipt();
       print(message1);
     });
     test('Transaction receipt - root', () {
-      final Map<String, dynamic> tr = <String, dynamic>{
+      final tr = <String, dynamic>{
         'result': <String, dynamic>{
           'transactionHash':
               '0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238',
@@ -1803,8 +1775,7 @@ void main() {
               '0x59ebeb90bc63057b6515673c3ecf9438e5058bca0f92585014eced636878c9a5'
         }
       };
-      final EthereumTransactionReceipt message =
-          EthereumTransactionReceipt.fromMap(tr);
+      final message = EthereumTransactionReceipt.fromMap(tr);
       expect(message.transactionHash.asString,
           '0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238');
       expect(message.transactionIndex, 1);
@@ -1826,23 +1797,21 @@ void main() {
     });
   });
   test('Filter - null', () {
-    final Map<String, dynamic> filter = <String, dynamic>{
-      'result': <String, dynamic>{}
-    };
-    final EthereumFilter message = EthereumFilter.fromMap(filter);
+    final filter = <String, dynamic>{'result': <String, dynamic>{}};
+    final message = EthereumFilter.fromMap(filter);
     expect(message.logs, isNull);
     expect(message.hashes, isNull);
-    final EthereumFilter message1 = EthereumFilter();
+    final message1 = EthereumFilter();
     print(message1);
   });
   test('Filter - hashes', () {
-    final Map<String, dynamic> filter = <String, dynamic>{
+    final filter = <String, dynamic>{
       'result': <String>[
         '0x8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcfdf829c5a142f1fccd7d',
         '0x8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcfdf829c5a142f1fccd7e'
       ]
     };
-    final EthereumFilter message = EthereumFilter.fromMap(filter);
+    final message = EthereumFilter.fromMap(filter);
     expect(message.logs, isNull);
     expect(message.hashes, isNotNull);
     expect(message.hashes.length, 2);
@@ -1852,7 +1821,7 @@ void main() {
         '0x8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcfdf829c5a142f1fccd7e');
   });
   test('Filter - logs', () {
-    final Map<String, dynamic> filter = <String, dynamic>{
+    final filter = <String, dynamic>{
       'result': <dynamic>[
         <String, dynamic>{
           'logIndex': '0x1', // 1
@@ -1886,7 +1855,7 @@ void main() {
         }
       ]
     };
-    final EthereumFilter message = EthereumFilter.fromMap(filter);
+    final message = EthereumFilter.fromMap(filter);
     expect(message.hashes, isNull);
     expect(message.logs, isNotNull);
     expect(message.logs.length, 2);
@@ -1894,19 +1863,19 @@ void main() {
     expect(message.logs[1].logIndex, 2);
   });
   test('Work - null', () {
-    final List<String> work = <String>[];
-    final EthereumWork message = EthereumWork.fromList(work);
+    final work = <String>[];
+    final message = EthereumWork.fromList(work);
     expect(message.powHash, isNull);
     expect(message.seedHash, isNull);
     expect(message.boundaryCondition, isNull);
   });
   test('Work', () {
-    final List<String> work = <String>[
+    final work = <String>[
       '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef',
       '0x5EED00000000000000000000000000005EED0000000000000000000000000000',
       '0xd1ff1c01710000000000000000000000d1ff1c01710000000000000000000000'
     ];
-    final EthereumWork message = EthereumWork.fromList(work);
+    final message = EthereumWork.fromList(work);
     expect(message.powHash.asString,
         '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef');
     expect(message.seedHash.asString,
@@ -1914,15 +1883,15 @@ void main() {
     expect(message.boundaryCondition.asString,
         '0xd1ff1c01710000000000000000000000d1ff1c01710000000000000000000000');
     print(message);
-    final EthereumWork message1 = EthereumWork();
+    final message1 = EthereumWork();
     print(message1);
   });
   test('Work - insufficient elements', () {
-    final List<String> work = <String>[
+    final work = <String>[
       '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef',
       '0x5EED00000000000000000000000000005EED0000000000000000000000000000'
     ];
-    final EthereumWork message = EthereumWork.fromList(work);
+    final message = EthereumWork.fromList(work);
     expect(message.powHash, isNull);
     expect(message.seedHash, isNull);
     expect(message.boundaryCondition, isNull);
@@ -1930,7 +1899,7 @@ void main() {
 
   group('Parameter tests', () {
     test('Default block - default', () {
-      final EthereumDefaultBlock block = EthereumDefaultBlock();
+      final block = EthereumDefaultBlock();
       expect(block.earliest, isFalse);
       expect(block.latest, isTrue);
       expect(block.pending, isFalse);
@@ -1938,7 +1907,7 @@ void main() {
       expect(block.getSelection(), EthereumDefaultBlock.ethLatest);
     });
     test('Default block - earliest', () {
-      final EthereumDefaultBlock block = EthereumDefaultBlock();
+      final block = EthereumDefaultBlock();
       block.earliest = false;
       expect(block.earliest, isTrue);
       expect(block.latest, isFalse);
@@ -1947,7 +1916,7 @@ void main() {
       expect(block.getSelection(), EthereumDefaultBlock.ethEarliest);
     });
     test('Default block - latest', () {
-      final EthereumDefaultBlock block = EthereumDefaultBlock();
+      final block = EthereumDefaultBlock();
       block.latest = false;
       expect(block.earliest, isFalse);
       expect(block.latest, isTrue);
@@ -1956,7 +1925,7 @@ void main() {
       expect(block.getSelection(), EthereumDefaultBlock.ethLatest);
     });
     test('Default block - pending', () {
-      final EthereumDefaultBlock block = EthereumDefaultBlock();
+      final block = EthereumDefaultBlock();
       block.pending = false;
       expect(block.earliest, isFalse);
       expect(block.latest, isFalse);
@@ -1965,7 +1934,7 @@ void main() {
       expect(block.getSelection(), EthereumDefaultBlock.ethPending);
     });
     test('Default block - blockNumber', () {
-      final EthereumDefaultBlock block = EthereumDefaultBlock();
+      final block = EthereumDefaultBlock();
       block.number = 0x1b4;
       expect(block.earliest, isFalse);
       expect(block.latest, isFalse);
@@ -1977,7 +1946,7 @@ void main() {
 
   group('Error tests', () {
     test('Default', () {
-      final EthereumError error = EthereumError();
+      final error = EthereumError();
       expect(error.code, 0);
       expect(error.message, EthereumError.noError);
       expect(error.id, EthereumError.noId);
@@ -1985,7 +1954,7 @@ void main() {
       expect(error.toString(), 'Code : 0 <> Message : No Error <> Id : -1');
     });
     test('Update', () {
-      final EthereumError error = EthereumError();
+      final error = EthereumError();
       error.updateError(10, 'An Error', 50);
       expect(error.code, 10);
       expect(error.message, 'An Error');
@@ -1999,9 +1968,9 @@ void main() {
   });
 
   group('Null parameter tests - admin', () {
-    final EthereumServerClient client = EthereumServerClient();
+    final client = EthereumServerClient();
     test('personalImportRawKey - keydata', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.admin.personalImportRawKey(null, '');
       } on Error catch (e) {
@@ -2013,7 +1982,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('personalImportRawKey - passphrase', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.admin.personalImportRawKey('', null);
       } on Error catch (e) {
@@ -2025,7 +1994,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('personalLockAccount - address', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.admin.personalLockAccount(null);
       } on Error catch (e) {
@@ -2037,7 +2006,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('personalNewAccount - passphrase', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.admin.personalNewAccount(null);
       } on Error catch (e) {
@@ -2049,7 +2018,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('personalUnlockAccount - address', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.admin.personalUnlockAccount(null, '');
       } on Error catch (e) {
@@ -2061,7 +2030,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('personalUnlockAccount - passphrase', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.admin.personalUnlockAccount(
             EthereumAddress.fromBigInt(BigInt.zero), null);
@@ -2074,7 +2043,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('personalSendTransaction - address', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.admin.personalSendTransaction(null, 'password');
       } on Error catch (e) {
@@ -2086,7 +2055,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('personalSendTransaction - passphrase', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.admin.personalSendTransaction(
             EthereumAddress.fromBigInt(BigInt.zero), null);
@@ -2099,7 +2068,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('personalSign - message', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.admin.personalSign(
             null, EthereumAddress.fromBigInt(BigInt.zero), 'password');
@@ -2112,7 +2081,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('personalSign - address', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.admin.personalSign(
             EthereumData.fromBigInt(BigInt.zero), null, 'password');
@@ -2125,7 +2094,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('personalEcRecover - message', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.admin
             .personalEcRecover(null, EthereumData.fromBigInt(BigInt.zero));
@@ -2138,7 +2107,7 @@ void main() {
       expect(thrown, isTrue);
     });
     test('personalEcRecover - signature', () async {
-      bool thrown = false;
+      var thrown = false;
       try {
         await client.admin
             .personalEcRecover(EthereumData.fromBigInt(BigInt.zero), null);

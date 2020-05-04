@@ -9,13 +9,6 @@
 
 part of ethereum;
 
-// ignore_for_file: omit_local_variable_types
-// ignore_for_file: unnecessary_final
-// ignore_for_file: avoid_types_on_closure_parameters
-// ignore_for_file: avoid_annotating_with_dynamic
-// ignore_for_file: avoid_equals_and_hash_code_on_mutable_classes
-// ignore_for_file: avoid_print
-
 /// The Ethereum JSON-RPC client class.
 /// Further details of this interface and its Dapp API specification
 /// can be found at https://github.com/ethereum/wiki/wiki/JSON-RPC#web3_clientversion.
@@ -72,7 +65,6 @@ class Ethereum {
   EthereumINetworkAdapter _networkAdapter;
 
   /// HTTP Adapter
-  // ignore: avoid_setters_without_getters
   set httpAdapter(EthereumINetworkAdapter adapter) => _networkAdapter = adapter;
 
   /// Json RPC client
@@ -94,7 +86,7 @@ class Ethereum {
     if (hostname == null) {
       throw ArgumentError.notNull('Ethereum::connectString - hostname');
     }
-    final Uri uri = Uri.parse(hostname);
+    final uri = Uri.parse(hostname);
     _validateUri(uri);
   }
 
@@ -120,7 +112,7 @@ class Ethereum {
     if (port != null) {
       uriPort = port;
     }
-    final Uri uri = Uri(scheme: scheme, host: hostname, port: uriPort);
+    final uri = Uri(scheme: scheme, host: hostname, port: uriPort);
     _validateUri(uri);
   }
 
@@ -132,7 +124,7 @@ class Ethereum {
       throw ArgumentError.value(
           puri.host, 'Ethereum::_validateUri - invalid host');
     }
-    Uri newUri = puri;
+    var newUri = puri;
     if (!puri.hasPort) {
       if (puri.scheme == rpcHttpScheme) {
         newUri = puri.replace(port: defaultHttpPort);

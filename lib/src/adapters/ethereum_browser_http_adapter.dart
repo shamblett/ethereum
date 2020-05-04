@@ -10,12 +10,6 @@
 
 part of ethereum_browser_client;
 
-// ignore_for_file: omit_local_variable_types
-// ignore_for_file: unnecessary_final
-// ignore_for_file: cascade_invocations
-// ignore_for_file: avoid_print
-// ignore_for_file: avoid_types_on_closure_parameters
-
 /// The browser HTTP adapter
 class EthereumBrowserHTTPAdapter implements EthereumINetworkAdapter {
   /// Mime type
@@ -32,12 +26,9 @@ class EthereumBrowserHTTPAdapter implements EthereumINetworkAdapter {
   @override
   Future<Map<dynamic, dynamic>> httpRequest(
       Uri uri, Map<String, dynamic> request) {
-    final Completer<Map<dynamic, dynamic>> completer =
-        Completer<Map<dynamic, dynamic>>();
-    final String reqText = json.encode(request);
-    final Map<String, String> headers = <String, String>{
-      contentType: jsonMimeType
-    };
+    final completer = Completer<Map<dynamic, dynamic>>();
+    final reqText = json.encode(request);
+    final headers = <String, String>{contentType: jsonMimeType};
     HttpRequest.request(uri.toString(),
             method: 'POST',
             withCredentials: false,

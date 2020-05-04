@@ -10,21 +10,14 @@
 
 part of ethereum_browser_ws_client;
 
-// ignore_for_file: omit_local_variable_types
-// ignore_for_file: unnecessary_final
-// ignore_for_file: cascade_invocations
-// ignore_for_file: avoid_print
-// ignore_for_file: avoid_types_on_closure_parameters
-
 /// The browser web socket adapter
 class EthereumBrowserWSAdapter implements EthereumINetworkAdapter {
   @override
   Future<Map<dynamic, dynamic>> httpRequest(
       Uri uri, Map<String, dynamic> request) {
-    final Completer<Map<String, dynamic>> completer =
-        Completer<Map<String, dynamic>>();
-    final WebSocket webSocket = WebSocket(uri.toString());
-    final String message = json.encode(request);
+    final completer = Completer<Map<String, dynamic>>();
+    final webSocket = WebSocket(uri.toString());
+    final message = json.encode(request);
     webSocket.onOpen.listen((Event e) {
       webSocket.sendString(message);
     });

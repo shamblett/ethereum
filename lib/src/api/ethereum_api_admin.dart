@@ -9,15 +9,6 @@
 
 part of ethereum;
 
-// ignore_for_file: omit_local_variable_types
-// ignore_for_file: unnecessary_final
-// ignore_for_file: cascade_invocations
-// ignore_for_file: avoid_print
-// ignore_for_file: avoid_types_on_closure_parameters
-// ignore_for_file: avoid_annotating_with_dynamic
-// ignore_for_file: prefer_if_null_operators
-// ignore_for_file: prefer_null_aware_operators
-
 /// This class implements the Ethereuum Admin API
 class EthereumApiAdmin extends EthereumApi {
   /// Construction
@@ -34,8 +25,8 @@ class EthereumApiAdmin extends EthereumApi {
       throw ArgumentError.notNull(
           'Ethereum::personalImportRawKey - passphrase');
     }
-    const String method = EthereumRpcMethods.importRawKey;
-    final List<String> params = <String>[keydata, passphrase];
+    const method = EthereumRpcMethods.importRawKey;
+    final params = <String>[keydata, passphrase];
     final dynamic res = await _client.rpcClient.request(method, params);
     if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
       return EthereumData.fromString(res[EthereumConstants.ethResultKey]);
@@ -46,7 +37,7 @@ class EthereumApiAdmin extends EthereumApi {
 
   /// Returns all the Ethereum account addresses of all keys in the key store.
   Future<List<EthereumAddress>> personalListAccounts() async {
-    const String method = EthereumRpcMethods.listAccounts;
+    const method = EthereumRpcMethods.listAccounts;
     final dynamic res = await _client.rpcClient.request(method);
     if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
       return EthereumAddress.toList(
@@ -62,8 +53,8 @@ class EthereumApiAdmin extends EthereumApi {
     if (address == null) {
       throw ArgumentError.notNull('Ethereum::personalLockAccount - address');
     }
-    const String method = EthereumRpcMethods.lockAccount;
-    final List<String> params = <String>[address.asString];
+    const method = EthereumRpcMethods.lockAccount;
+    final params = <String>[address.asString];
     final dynamic res = await _client.rpcClient.request(method, params);
     if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
       return true;
@@ -79,8 +70,8 @@ class EthereumApiAdmin extends EthereumApi {
     if (passphrase == null) {
       throw ArgumentError.notNull('Ethereum::personalNewAccount - passphrase');
     }
-    const String method = EthereumRpcMethods.newAccount;
-    final List<String> params = <String>[passphrase];
+    const method = EthereumRpcMethods.newAccount;
+    final params = <String>[passphrase];
     final dynamic res = await _client.rpcClient.request(method, params);
     if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
       return EthereumData.fromString(res[EthereumConstants.ethResultKey]);
@@ -105,13 +96,9 @@ class EthereumApiAdmin extends EthereumApi {
       throw ArgumentError.notNull(
           'Ethereum::personalUnlockAccount - passphrase');
     }
-    final int paramDuration = duration == null ? 300 : duration;
-    const String method = EthereumRpcMethods.unlockAccount;
-    final List<dynamic> params = <dynamic>[
-      address.asString,
-      passphrase,
-      paramDuration
-    ];
+    final paramDuration = duration ?? 300;
+    const method = EthereumRpcMethods.unlockAccount;
+    final params = <dynamic>[address.asString, passphrase, paramDuration];
     final dynamic res = await _client.rpcClient.request(method, params);
     if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
       return true;
@@ -151,7 +138,7 @@ class EthereumApiAdmin extends EthereumApi {
       throw ArgumentError.notNull(
           'Ethereum::personalSendTransaction - passphrase');
     }
-    Map<String, String> conditionObject = <String, String>{};
+    var conditionObject = <String, String>{};
     if (condition == null) {
       conditionObject = null;
     } else {
@@ -165,7 +152,7 @@ class EthereumApiAdmin extends EthereumApi {
         };
       }
     }
-    final Map<String, dynamic> paramBlock = <String, dynamic>{
+    final paramBlock = <String, dynamic>{
       'from': address.asString,
       'to': to == null ? null : to.asString,
       'gas': gas == null ? null : EthereumUtilities.intToHex(gas),
@@ -176,7 +163,7 @@ class EthereumApiAdmin extends EthereumApi {
       'nonce': nonce == null ? null : EthereumUtilities.intToHex(nonce),
       'condition': conditionObject
     };
-    const String method = EthereumRpcMethods.psendTransaction;
+    const method = EthereumRpcMethods.psendTransaction;
     final dynamic params = <dynamic>[paramBlock, passphrase];
     final dynamic res = await _client.rpcClient.request(method, params);
     if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
@@ -202,12 +189,8 @@ class EthereumApiAdmin extends EthereumApi {
     if (address == null) {
       throw ArgumentError.notNull('Ethereum::personalSign - address');
     }
-    const String method = EthereumRpcMethods.pSign;
-    final List<String> params = <String>[
-      message.asString,
-      address.asString,
-      password
-    ];
+    const method = EthereumRpcMethods.pSign;
+    final params = <String>[message.asString, address.asString, password];
     final dynamic res = await _client.rpcClient.request(method, params);
     if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
       return EthereumData.fromString(res[EthereumConstants.ethResultKey]);
@@ -226,8 +209,8 @@ class EthereumApiAdmin extends EthereumApi {
     if (signature == null) {
       throw ArgumentError.notNull('Ethereum::personalEcRecover - signature');
     }
-    const String method = EthereumRpcMethods.ecRecover;
-    final List<String> params = <String>[message.asString, signature.asString];
+    const method = EthereumRpcMethods.ecRecover;
+    final params = <String>[message.asString, signature.asString];
     final dynamic res = await _client.rpcClient.request(method, params);
     if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
       return EthereumAddress.fromString(res[EthereumConstants.ethResultKey]);

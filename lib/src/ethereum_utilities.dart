@@ -9,10 +9,6 @@
 
 part of ethereum;
 
-// ignore_for_file: omit_local_variable_types
-// ignore_for_file: unnecessary_final
-// ignore_for_file: avoid_annotating_with_dynamic
-
 /// General client support utilities
 class EthereumUtilities {
   /// Common pad values for intToHex
@@ -36,7 +32,7 @@ class EthereumUtilities {
   /// specified, i.e if 8 is specified the string 0x1 becomes 0x0000000000000001
   /// default is 0, no padding.The pad value must be even and positive.
   static String intToHex(int val, [int pad = 0]) {
-    String ret = val.toRadixString(16);
+    var ret = val.toRadixString(16);
     if (pad != 0) {
       if (pad.isNegative || pad.isOdd) {
         throw FormatException(
@@ -45,10 +41,10 @@ class EthereumUtilities {
       if (ret.length.isOdd) {
         ret = '0$ret';
       }
-      final int bytes = (ret.length / 2).round();
+      final bytes = (ret.length / 2).round();
       if (bytes != pad) {
-        final int zeroNum = pad - bytes;
-        for (int i = 0; i < zeroNum; i++) {
+        final zeroNum = pad - bytes;
+        for (var i = 0; i < zeroNum; i++) {
           ret = '00$ret';
         }
       }
@@ -59,9 +55,8 @@ class EthereumUtilities {
   /// Hex string to integer, a value of null indicates an error.
   /// The string must start with 0x
   static int hexToInt(String val) {
-    final int temp = int.tryParse(val);
+    final temp = int.tryParse(val);
     if (temp == null) {
-      // ignore: avoid_returning_null
       return null;
     }
     return temp;
@@ -69,9 +64,9 @@ class EthereumUtilities {
 
   /// Remove null values from a map
   static Map<dynamic, dynamic> removeNull(Map<dynamic, dynamic> theMap) {
-    final List<dynamic> values = theMap.values.toList();
-    final List<dynamic> keys = theMap.keys.toList();
-    int index = 0;
+    final values = theMap.values.toList();
+    final keys = theMap.keys.toList();
+    var index = 0;
     for (final dynamic val in values) {
       if (val == null) {
         theMap.remove(keys[index]);
@@ -84,7 +79,7 @@ class EthereumUtilities {
   /// Safe parser for BigInt, returns BigInt.zero if the parse fails
   /// Geth sometimes returns '0x' rather than '0x00'
   static BigInt safeParse(String val) {
-    final BigInt temp = BigInt.tryParse(val);
+    final temp = BigInt.tryParse(val);
     if (temp == null) {
       return BigInt.zero;
     }

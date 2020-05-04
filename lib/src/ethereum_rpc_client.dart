@@ -9,10 +9,6 @@
 
 part of ethereum;
 
-// ignore_for_file: omit_local_variable_types
-// ignore_for_file: unnecessary_final
-// ignore_for_file: avoid_annotating_with_dynamic
-
 /// The RPC client
 class EthereumRpcClient {
   /// Constructor
@@ -34,7 +30,7 @@ class EthereumRpcClient {
 
   /// The request method
   Future<Map<dynamic, dynamic>> request(String method, [dynamic parameters]) {
-    final Map<String, dynamic> packet = <String, dynamic>{};
+    final packet = <String, dynamic>{};
     packet['jsonrpc'] = jsonRPpcVersion;
     packet['method'] = method;
     if (parameters != null) {
