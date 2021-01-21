@@ -24,20 +24,20 @@ class EthereumSyncStatus {
   /// Syncing indicator, true if syncing
   bool get syncing => _syncing;
 
-  int _startingBlock;
+  int? _startingBlock;
 
   /// Starting block, only valid if syncing
-  int get startingBlock => _startingBlock;
+  int? get startingBlock => _startingBlock;
 
-  int _currentBlock;
+  int? _currentBlock;
 
   /// Current block, only valid if syncing
-  int get currentBlock => _currentBlock;
+  int? get currentBlock => _currentBlock;
 
-  int _highestBlock;
+  int? _highestBlock;
 
   /// Highest block, only valid if syncing
-  int get highestBlock => _highestBlock;
+  int? get highestBlock => _highestBlock;
 
   /// Construct from the supplied Map, only check for the keys we need.
   void construct(Map<String, dynamic> data) {

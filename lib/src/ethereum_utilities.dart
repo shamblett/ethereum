@@ -54,7 +54,7 @@ class EthereumUtilities {
 
   /// Hex string to integer, a value of null indicates an error.
   /// The string must start with 0x
-  static int hexToInt(String val) {
+  static int? hexToInt(String val) {
     final temp = int.tryParse(val);
     if (temp == null) {
       return null;

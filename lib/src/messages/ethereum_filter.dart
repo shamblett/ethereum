@@ -24,15 +24,15 @@ class EthereumFilter {
     construct(result);
   }
 
-  List<EthereumData> _hashes;
+  List<EthereumData>? _hashes;
 
   /// Hashes, block or transaction
-  List<EthereumData> get hashes => _hashes;
+  List<EthereumData>? get hashes => _hashes;
 
-  List<EthereumLog> _logs;
+  List<EthereumLog>? _logs;
 
   /// Logs
-  List<EthereumLog> get logs => _logs;
+  List<EthereumLog>? get logs => _logs;
 
   /// Ethereum log objects, returned by
   /// Construct from the supplied Map, only check for the keys we need.
@@ -53,7 +53,7 @@ class EthereumFilter {
             EthereumConstants.ethResultKey: log
           };
           final entry = EthereumLog.fromMap(buildLog);
-          _logs.add(entry);
+          _logs!.add(entry);
         }
       }
     }

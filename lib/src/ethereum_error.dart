@@ -20,28 +20,28 @@ class EthereumError {
   /// No transaction id
   static const int noId = -1;
 
-  int _code = 0;
+  int? _code = 0;
 
   /// Error code
-  int get code => _code;
+  int? get code => _code;
 
-  String _message = noError;
+  String? _message = noError;
 
   /// Error message
-  String get message => _message;
+  String? get message => _message;
 
   int _id = noId;
 
   /// Error transaction id
   int get id => _id;
 
-  DateTime _timestamp;
+  DateTime? _timestamp;
 
   /// Error timestamp
-  DateTime get timestamp => _timestamp;
+  DateTime? get timestamp => _timestamp;
 
   /// Update the error details
-  void updateError(int errorCode, String errorMessage, int errorId) {
+  void updateError(int? errorCode, String? errorMessage, int errorId) {
     _code = errorCode;
     _message = errorMessage;
     _id = errorId;

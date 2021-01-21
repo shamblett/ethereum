@@ -27,33 +27,33 @@ class EthereumAddress {
   EthereumAddress.fromString(String val) {
     _checkString(val);
     _string = val;
-    _bigint = _safeParse(_string);
+    _bigint = _safeParse(_string!);
   }
 
   /// From a byte address
   EthereumAddress.fromByteAddress(EthereumByteAddress val) {
     // This is safe, a byte address is already validated.
     _string = val.asString;
-    _bigint = _safeParse(_string);
+    _bigint = _safeParse(_string!);
   }
 
   /// The address length in characters
   static const int addressCharacterLength = 40;
 
   /// The BigInt
-  BigInt _bigint;
+  BigInt? _bigint;
 
   /// The string
-  String _string;
+  String? _string;
 
   /// Get as a BigInt
-  BigInt get asBigInt => _bigint;
+  BigInt? get asBigInt => _bigint;
 
   /// Get as a String, includes the 0x prefix
-  String get asString => _string;
+  String? get asString => _string;
 
   @override
-  String toString() => asString;
+  String toString() => asString!;
 
   @override
   bool operator ==(dynamic other) =>
@@ -69,8 +69,8 @@ class EthereumAddress {
           val.length, (int index) => EthereumAddress.fromString(val[index]));
 
   /// EthereumAddress list to address string
-  static List<String> toStringList(List<EthereumAddress> val) =>
-      List<String>.generate(val.length, (int index) => val[index].asString);
+  static List<String?> toStringList(List<EthereumAddress> val) =>
+      List<String?>.generate(val.length, (int index) => val[index].asString);
 
   String _bigIntToHexString(BigInt val) {
     var hexString = val.toRadixString(16);

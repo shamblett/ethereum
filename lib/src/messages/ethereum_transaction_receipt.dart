@@ -15,72 +15,72 @@ class EthereumTransactionReceipt {
   EthereumTransactionReceipt();
 
   /// From map
-  EthereumTransactionReceipt.fromMap(Map<String, dynamic> result) {
+  EthereumTransactionReceipt.fromMap(Map<String, dynamic>? result) {
     construct(result);
   }
 
-  EthereumData _transactionHash;
+  EthereumData? _transactionHash;
 
   /// Transaction hash. Hash of the transaction.
-  EthereumData get transactionHash => _transactionHash;
+  EthereumData? get transactionHash => _transactionHash;
 
-  int _transactionIndex;
+  int? _transactionIndex;
 
   /// Transaction index. Ihe transactions index position in the block.
-  int get transactionIndex => _transactionIndex;
+  int? get transactionIndex => _transactionIndex;
 
-  EthereumData _blockHash;
+  EthereumData? _blockHash;
 
   /// Block hash. Hash of the block this transaction was in.
-  EthereumData get blockHash => _blockHash;
+  EthereumData? get blockHash => _blockHash;
 
-  int _blockNumber;
+  int? _blockNumber;
 
   /// Block number. Block number of this transaction.
-  int get blockNumber => _blockNumber;
+  int? get blockNumber => _blockNumber;
 
-  int _cumulativeGasUsed;
+  int? _cumulativeGasUsed;
 
   /// Cumulative gas used. The total amount of gas used when this
   /// transaction was executed in the block.
-  int get cumulativeGasUsed => _cumulativeGasUsed;
+  int? get cumulativeGasUsed => _cumulativeGasUsed;
 
-  int _gasUsed;
+  int? _gasUsed;
 
   /// Gas used. The amount of gas used by this transaction.
-  int get gasUsed => _gasUsed;
+  int? get gasUsed => _gasUsed;
 
-  EthereumAddress _contractAddress;
+  EthereumAddress? _contractAddress;
 
   /// Contract address. The contract address created, if the transaction was
   /// a contract creation, otherwise null.
-  EthereumAddress get contractAddress => _contractAddress;
+  EthereumAddress? get contractAddress => _contractAddress;
 
-  List<EthereumLog> _logs;
+  List<EthereumLog>? _logs;
 
   /// Logs. List of log objects, which this transaction generated.
-  List<EthereumLog> get logs => _logs;
+  List<EthereumLog>? get logs => _logs;
 
-  EthereumData _logsBloom;
+  EthereumData? _logsBloom;
 
   /// Logs bloom. Bloom filter for light clients to quickly
   /// retrieve related logs.
-  EthereumData get logsBloom => _logsBloom;
+  EthereumData? get logsBloom => _logsBloom;
 
-  EthereumData _root;
+  EthereumData? _root;
 
   /// Root. Post-transaction stateroot (pre Byzantium)
   /// Null if status is present.
-  EthereumData get root => _root;
+  EthereumData? get root => _root;
 
-  int _status;
+  int? _status;
 
   /// Status. Either 1 (success) or 0 (failure)
   /// Null if root is present
-  int get status => _status;
+  int? get status => _status;
 
   /// Construct from the supplied Map, only check for the keys we need.
-  void construct(Map<String, dynamic> data) {
+  void construct(Map<String, dynamic>? data) {
     if ((data == null) || (data[EthereumConstants.ethResultKey] == null)) {
       return;
     }
@@ -134,7 +134,7 @@ class EthereumTransactionReceipt {
             EthereumConstants.ethResultKey: log
           };
           final entry = EthereumLog.fromMap(buildLog);
-          _logs.add(entry);
+          _logs!.add(entry);
         }
       }
     }

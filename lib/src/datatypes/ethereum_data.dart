@@ -22,23 +22,23 @@ class EthereumData {
   EthereumData.fromString(String val) {
     _checkString(val);
     _string = val;
-    _bigint = _safeParse(_string);
+    _bigint = _safeParse(_string!);
   }
 
   /// The BigInt
-  BigInt _bigint;
+  BigInt? _bigint;
 
   /// The string
-  String _string;
+  String? _string;
 
   /// Get as a BigInt
-  BigInt get asBigInt => _bigint;
+  BigInt? get asBigInt => _bigint;
 
   /// Get as a String, includes the 0x prefix
-  String get asString => _string;
+  String? get asString => _string;
 
   @override
-  String toString() => asString;
+  String toString() => asString!;
 
   @override
   bool operator ==(dynamic other) =>
@@ -54,8 +54,8 @@ class EthereumData {
           val.length, (int index) => EthereumData.fromString(val[index]));
 
   /// EthereumData list to string list
-  static List<String> toStringList(List<EthereumData> val) =>
-      List<String>.generate(val.length, (int index) => val[index].asString);
+  static List<String?> toStringList(List<EthereumData> val) =>
+      List<String?>.generate(val.length, (int index) => val[index].asString);
 
   String _bigIntToHexString(BigInt val) {
     var hexString = val.toRadixString(16);

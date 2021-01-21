@@ -15,70 +15,70 @@ class EthereumTransaction {
   EthereumTransaction();
 
   /// From map
-  EthereumTransaction.fromMap(Map<String, dynamic> result) {
+  EthereumTransaction.fromMap(Map<String, dynamic>? result) {
     construct(result);
   }
 
-  EthereumData _hash;
+  EthereumData? _hash;
 
   /// Hash. hash of the transaction.
-  EthereumData get hash => _hash;
+  EthereumData? get hash => _hash;
 
-  int _nonce;
+  int? _nonce;
 
   /// Nonce. The number of transactions made by the sender prior to this one.
-  int get nonce => _nonce;
+  int? get nonce => _nonce;
 
-  EthereumData _blockHash;
+  EthereumData? _blockHash;
 
   /// Block hash. Hash of the block where this transaction was in.
   /// Null when the transaction is pending.
-  EthereumData get blockHash => _blockHash;
+  EthereumData? get blockHash => _blockHash;
 
-  int _blockNumber;
+  int? _blockNumber;
 
   /// Block number. Block number of this transaction.
   /// Null when the transaction is pending.
-  int get blockNumber => _blockNumber;
+  int? get blockNumber => _blockNumber;
 
-  int _transactionIndex;
+  int? _transactionIndex;
 
   /// Transaction index. The transactions index position in the block.
   /// Null when the transaction is pending.
-  int get transactionIndex => _transactionIndex;
+  int? get transactionIndex => _transactionIndex;
 
-  EthereumAddress _from;
+  EthereumAddress? _from;
 
   /// From. Address of the sender.
-  EthereumAddress get from => _from;
+  EthereumAddress? get from => _from;
 
-  EthereumAddress _to;
+  EthereumAddress? _to;
 
   /// To. Address of the receiver. Null when a contract creation transaction.
-  EthereumAddress get to => _to;
+  EthereumAddress? get to => _to;
 
-  int _value;
+  int? _value;
 
   /// Value. Value transferred in Wei.
-  int get value => _value;
+  int? get value => _value;
 
-  int _gasPrice;
+  int? _gasPrice;
 
   /// Gas price. Gas price provided by the sender in Wei.
-  int get gasPrice => _gasPrice;
+  int? get gasPrice => _gasPrice;
 
-  int _gas;
+  int? _gas;
 
   /// Gas. Gas provided by the sender.
-  int get gas => _gas;
+  int? get gas => _gas;
 
-  EthereumData _input;
+  EthereumData? _input;
 
   /// Input. Data sent with the transaction.
-  EthereumData get input => _input;
+  EthereumData? get input => _input;
 
   /// Construct from the supplied Map, only check for the keys we need.
-  void construct(Map<String, dynamic> data) {
+  void construct(Map<String, dynamic>? data) {
     if ((data == null) || (data[EthereumConstants.ethResultKey] == null)) {
       return;
     }

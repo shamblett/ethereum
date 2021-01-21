@@ -26,7 +26,7 @@ class EthereumRpcClient {
   int get id => _id;
 
   /// The Uri
-  Uri uri;
+  Uri? uri;
 
   /// The request method
   Future<Map<dynamic, dynamic>> request(String method, [dynamic parameters]) {
@@ -42,7 +42,7 @@ class EthereumRpcClient {
   }
 
   /// Reset the transmission id
-  void resetTransmissionId([int value]) {
+  void resetTransmissionId([int? value]) {
     if (value == null) {
       _id = 0;
     } else {

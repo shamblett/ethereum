@@ -60,12 +60,12 @@ class EthereumDefaultBlock {
     _number = null;
   }
 
-  int _number;
+  int? _number;
 
   /// Block number
-  int get number => _number;
+  int? get number => _number;
 
-  set number(int value) {
+  set number(int? value) {
     _number = value;
     _earliest = false;
     _latest = false;
@@ -73,7 +73,7 @@ class EthereumDefaultBlock {
   }
 
   /// Get the selected parameter as a string
-  String getSelection() {
+  String? getSelection() {
     if (_latest) {
       return ethLatest;
     }
@@ -84,7 +84,7 @@ class EthereumDefaultBlock {
       return ethPending;
     }
     if (_number != null) {
-      return EthereumUtilities.intToHex(_number);
+      return EthereumUtilities.intToHex(_number!);
     }
     return null;
   }

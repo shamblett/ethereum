@@ -26,7 +26,7 @@ class Ethereum {
   /// With connection parameters
   Ethereum.withConnectionParameters(
       EthereumINetworkAdapter adapter, String hostname, String scheme,
-      [int port = defaultHttpPort])
+      [int? port = defaultHttpPort])
       : _networkAdapter = adapter {
     rpcClient = EthereumRpcClient(_networkAdapter);
 
@@ -55,12 +55,12 @@ class Ethereum {
   int port = defaultHttpPort;
 
   /// Host
-  String host;
+  String? host;
 
-  Uri _uri;
+  Uri? _uri;
 
   /// Uri
-  Uri get uri => _uri;
+  Uri? get uri => _uri;
 
   EthereumINetworkAdapter _networkAdapter;
 
@@ -68,12 +68,12 @@ class Ethereum {
   set httpAdapter(EthereumINetworkAdapter adapter) => _networkAdapter = adapter;
 
   /// Json RPC client
-  EthereumRpcClient rpcClient;
+  late EthereumRpcClient rpcClient;
 
   /// Last error
   EthereumError lastError = EthereumError();
 
-  set id(int value) => rpcClient.resetTransmissionId(value);
+  set id(int? value) => rpcClient.resetTransmissionId(value);
 
   /// Transmission id
   int get id => rpcClient.id;
@@ -82,7 +82,7 @@ class Ethereum {
 
   //// Connect using a host string of the form http://thehost.com:1234,
   /// port is optional. Scheme must be http or ws
-  void connectString(String hostname) {
+  void connectString(String? hostname) {
     if (hostname == null) {
       throw ArgumentError.notNull('Ethereum::connectString - hostname');
     }
@@ -91,7 +91,7 @@ class Ethereum {
   }
 
   /// Connect using a URI, port is optional
-  void connectUri(Uri uri) {
+  void connectUri(Uri? uri) {
     if (uri == null) {
       throw ArgumentError.notNull('Ethereum::connectUri - uri');
     }
@@ -100,7 +100,7 @@ class Ethereum {
 
   /// Connect by explicitly setting the connection parameters.
   /// Scheme must be either rpcScheme or rpcWsScheme
-  void connectParameters(String scheme, String hostname, [int port]) {
+  void connectParameters(String scheme, String? hostname, [int? port]) {
     if (hostname == null) {
       throw ArgumentError.notNull('Ethereum::connectParameters - hostname');
     }
@@ -108,7 +108,7 @@ class Ethereum {
       throw FormatException(
           'Ethereum::connectParameters - invalid scheme $scheme');
     }
-    int uriPort;
+    int? uriPort;
     if (port != null) {
       uriPort = port;
     }
@@ -142,12 +142,6 @@ class Ethereum {
 
   /// Error processing helper
   void processError(String method, Map<String, dynamic> res) {
-    if (res == null) {
-      if (printError) {
-        print('ERROR:: Result from RPC call is null');
-      }
-      return;
-    }
     final Map<String, dynamic> error = res[EthereumConstants.ethErrorKey];
     lastError.updateError(error['code'], error['message'], rpcClient.id);
     if (printError) {
@@ -156,14 +150,14 @@ class Ethereum {
   }
 
   /// Eth API
-  EthereumApiEth _eth;
+  EthereumApiEth? _eth;
 
   /// The ETH API
-  EthereumApiEth get eth => _eth;
+  EthereumApiEth? get eth => _eth;
 
   /// Admin API
-  EthereumApiAdmin _admin;
+  EthereumApiAdmin? _admin;
 
   /// The Admin API
-  EthereumApiAdmin get admin => _admin;
+  EthereumApiAdmin? get admin => _admin;
 }

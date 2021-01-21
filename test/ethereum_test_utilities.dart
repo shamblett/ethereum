@@ -12,7 +12,7 @@ import 'package:ethereum/ethereum.dart';
 /// General client test support utilities
 class EthereumTestUtilities {
   /// Hex String list to Integer list
-  static List<int> hexToIntList(List<String> val) => List<int>.generate(
+  static List<int?> hexToIntList(List<String> val) => List<int?>.generate(
       val.length, (int index) => EthereumUtilities.hexToInt(val[index]));
 
   /// Integer list to Hex String list

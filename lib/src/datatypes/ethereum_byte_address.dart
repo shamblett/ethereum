@@ -36,16 +36,16 @@ class EthereumByteAddress {
   /// The length of an Ethereum address in bytes
   static const int addressByteLength = 20;
 
-  ByteData _data;
+  ByteData? _data;
 
   /// The raw byte data
-  ByteData get byteData => _data;
+  ByteData? get byteData => _data;
 
   /// To integer list
-  List<int> toList() {
-    final tmp = List<int>(addressByteLength);
+  List<int?> toList() {
+    final tmp = List<int>.filled(addressByteLength, 0);
     for (var i = 0; i <= addressByteLength - 1; i++) {
-      tmp[i] = _data.getUint8(i);
+      tmp[i] = _data!.getUint8(i);
     }
     return tmp;
   }
@@ -53,7 +53,7 @@ class EthereumByteAddress {
   /// As an address string, i.e 40 hex chars with a leading 0x
   String get asString {
     const encoder = HexEncoder();
-    final hex = encoder.convert(toList());
+    final hex = encoder.convert(toList() as List<int>);
     return '0x$hex';
   }
 
@@ -68,9 +68,9 @@ class EthereumByteAddress {
   @override
   int get hashCode => _data.hashCode;
 
-  bool _isEqual(ByteData data) {
-    for (var i = 0; i <= _data.lengthInBytes - 1; i++) {
-      if (data.getUint8(i) != _data.getUint8(i)) {
+  bool _isEqual(ByteData? data) {
+    for (var i = 0; i <= _data!.lengthInBytes - 1; i++) {
+      if (data!.getUint8(i) != _data!.getUint8(i)) {
         return false;
       }
     }
@@ -86,7 +86,7 @@ class EthereumByteAddress {
       } else {
         _data = ByteData(addressByteLength);
         for (var i = 0; i < data.lengthInBytes; i++) {
-          _data.setUint8(i, data.getUint8(i));
+          _data!.setUint8(i, data.getUint8(i));
         }
       }
     }

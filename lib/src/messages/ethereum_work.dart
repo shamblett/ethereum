@@ -16,27 +16,27 @@ class EthereumWork {
   EthereumWork();
 
   /// From list
-  EthereumWork.fromList(List<String> result) {
+  EthereumWork.fromList(List<String>? result) {
     construct(result);
   }
 
-  EthereumData _powHash;
+  EthereumData? _powHash;
 
   /// Current block header pow-hash
-  EthereumData get powHash => _powHash;
+  EthereumData? get powHash => _powHash;
 
-  EthereumData _seedHash;
+  EthereumData? _seedHash;
 
   /// Seed hash used for the DAG.
-  EthereumData get seedHash => _seedHash;
+  EthereumData? get seedHash => _seedHash;
 
-  EthereumData _boundaryCondition;
+  EthereumData? _boundaryCondition;
 
   /// The boundary condition ('target'), 2^256 / difficulty.
-  EthereumData get boundaryCondition => _boundaryCondition;
+  EthereumData? get boundaryCondition => _boundaryCondition;
 
   /// Construct from the supplied list.
-  void construct(List<String> data) {
+  void construct(List<String>? data) {
     if (data == null) {
       return;
     }

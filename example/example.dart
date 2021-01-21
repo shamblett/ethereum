@@ -25,7 +25,7 @@ FutureOr<void> main() async {
   // Make an API call, the client is stateless form a connection point of view.
   // Note that API methods are grouped under the logical ethereum rpc
   // namespace they belong to.
-  final version = await client.eth.protocolVersion();
+  final version = await client.eth!.protocolVersion();
 
   // Check for an error if you think anything is wrong.
   // Methods that should return a value return null on failure,

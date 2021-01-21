@@ -22,7 +22,7 @@ class EthereumBrowserWSClient extends Ethereum {
   EthereumBrowserWSClient() : super(browserWSAdapter);
 
   /// With connection parameters
-  EthereumBrowserWSClient.withConnectionParameters(String hostname, [int port])
+  EthereumBrowserWSClient.withConnectionParameters(String hostname, [int? port])
       : super.withConnectionParameters(
             browserWSAdapter, hostname, Ethereum.rpcWsScheme, port);
 

@@ -14,7 +14,7 @@ part of ethereum_browser_ws_client;
 class EthereumBrowserWSAdapter implements EthereumINetworkAdapter {
   @override
   Future<Map<dynamic, dynamic>> httpRequest(
-      Uri uri, Map<String, dynamic> request) {
+      Uri? uri, Map<String, dynamic> request) {
     final completer = Completer<Map<String, dynamic>>();
     final webSocket = WebSocket(uri.toString());
     final message = json.encode(request);

@@ -16,8 +16,8 @@ class EthereumApiAdmin extends EthereumApi {
 
   /// Imports the given unencrypted private key (byte string)
   /// into the key store, encrypting it with the passphrase.
-  Future<EthereumData> personalImportRawKey(
-      String keydata, String passphrase) async {
+  Future<EthereumData?> personalImportRawKey(
+      String? keydata, String? passphrase) async {
     if (keydata == null) {
       throw ArgumentError.notNull('Ethereum::personalImportRawKey - keydata');
     }
@@ -36,7 +36,7 @@ class EthereumApiAdmin extends EthereumApi {
   }
 
   /// Returns all the Ethereum account addresses of all keys in the key store.
-  Future<List<EthereumAddress>> personalListAccounts() async {
+  Future<List<EthereumAddress>?> personalListAccounts() async {
     const method = EthereumRpcMethods.listAccounts;
     final dynamic res = await _client.rpcClient.request(method);
     if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
@@ -49,12 +49,12 @@ class EthereumApiAdmin extends EthereumApi {
 
   /// Removes the private key with given address from memory.
   /// The account can no longer be used to send transactions.
-  Future<bool> personalLockAccount(EthereumAddress address) async {
+  Future<bool> personalLockAccount(EthereumAddress? address) async {
     if (address == null) {
       throw ArgumentError.notNull('Ethereum::personalLockAccount - address');
     }
     const method = EthereumRpcMethods.lockAccount;
-    final params = <String>[address.asString];
+    final params = <String?>[address.asString];
     final dynamic res = await _client.rpcClient.request(method, params);
     if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
       return true;
@@ -66,7 +66,7 @@ class EthereumApiAdmin extends EthereumApi {
   /// Generates a new private key and stores it in the key store directory.
   /// The key file is encrypted with the given passphrase.
   /// Returns the address of the new account.
-  Future<EthereumData> personalNewAccount(String passphrase) async {
+  Future<EthereumData?> personalNewAccount(String? passphrase) async {
     if (passphrase == null) {
       throw ArgumentError.notNull('Ethereum::personalNewAccount - passphrase');
     }
@@ -87,7 +87,8 @@ class EthereumApiAdmin extends EthereumApi {
   /// An explicit duration of zero seconds unlocks the key until geth exits.
   /// The account can be used with eth_sign and eth_sendTransaction
   /// while it is unlocked.
-  Future<bool> personalUnlockAccount(EthereumAddress address, String passphrase,
+  Future<bool> personalUnlockAccount(
+      EthereumAddress? address, String? passphrase,
       [int duration = 300]) async {
     if (address == null) {
       throw ArgumentError.notNull('Ethereum::personalUnlockAccount - address');
@@ -96,7 +97,7 @@ class EthereumApiAdmin extends EthereumApi {
       throw ArgumentError.notNull(
           'Ethereum::personalUnlockAccount - passphrase');
     }
-    final paramDuration = duration ?? 300;
+    final paramDuration = duration;
     const method = EthereumRpcMethods.unlockAccount;
     final params = <dynamic>[address.asString, passphrase, paramDuration];
     final dynamic res = await _client.rpcClient.request(method, params);
@@ -120,15 +121,15 @@ class EthereumApiAdmin extends EthereumApi {
   /// tx.from the transaction is verified, signed and send onto the network.
   /// The account is not unlocked globally in the node and cannot be
   /// used in other RPC calls.
-  Future<EthereumData> personalSendTransaction(
-      EthereumAddress address, String passphrase,
-      {EthereumAddress to,
-      EthereumAddress data,
-      int gas,
-      int gasPrice,
-      int value,
-      int nonce,
-      int condition,
+  Future<EthereumData?> personalSendTransaction(
+      EthereumAddress? address, String? passphrase,
+      {EthereumAddress? to,
+      EthereumAddress? data,
+      int? gas,
+      int? gasPrice,
+      int? value,
+      int? nonce,
+      int? condition,
       bool conditionIsTimestamp = false}) async {
     if (address == null) {
       throw ArgumentError.notNull(
@@ -138,7 +139,7 @@ class EthereumApiAdmin extends EthereumApi {
       throw ArgumentError.notNull(
           'Ethereum::personalSendTransaction - passphrase');
     }
-    var conditionObject = <String, String>{};
+    Map<String, String>? conditionObject = <String, String>{};
     if (condition == null) {
       conditionObject = null;
     } else {
@@ -180,8 +181,8 @@ class EthereumApiAdmin extends EthereumApi {
   /// This prevents misuse where a malicious DApp can sign arbitrary data
   /// (e.g. transaction) and use the signature to impersonate the victim.
   /// See personalEcRecover to verify the signature.
-  Future<EthereumData> personalSign(
-      EthereumData message, EthereumAddress address,
+  Future<EthereumData?> personalSign(
+      EthereumData? message, EthereumAddress? address,
       [String password = '']) async {
     if (message == null) {
       throw ArgumentError.notNull('Ethereum::personalSign - message');
@@ -190,7 +191,7 @@ class EthereumApiAdmin extends EthereumApi {
       throw ArgumentError.notNull('Ethereum::personalSign - address');
     }
     const method = EthereumRpcMethods.pSign;
-    final params = <String>[message.asString, address.asString, password];
+    final params = <String?>[message.asString, address.asString, password];
     final dynamic res = await _client.rpcClient.request(method, params);
     if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
       return EthereumData.fromString(res[EthereumConstants.ethResultKey]);
@@ -201,8 +202,8 @@ class EthereumApiAdmin extends EthereumApi {
 
   /// Returns the address associated with the private key that was used to
   /// calculate the signature in personal_sign.
-  Future<EthereumAddress> personalEcRecover(
-      EthereumData message, EthereumData signature) async {
+  Future<EthereumAddress?> personalEcRecover(
+      EthereumData? message, EthereumData? signature) async {
     if (message == null) {
       throw ArgumentError.notNull('Ethereum::personalEcRecover - message');
     }
@@ -210,7 +211,7 @@ class EthereumApiAdmin extends EthereumApi {
       throw ArgumentError.notNull('Ethereum::personalEcRecover - signature');
     }
     const method = EthereumRpcMethods.ecRecover;
-    final params = <String>[message.asString, signature.asString];
+    final params = <String?>[message.asString, signature.asString];
     final dynamic res = await _client.rpcClient.request(method, params);
     if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
       return EthereumAddress.fromString(res[EthereumConstants.ethResultKey]);
