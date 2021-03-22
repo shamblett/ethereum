@@ -690,8 +690,10 @@ void main() {
       try {
         await client.eth!.shhPost(
             null, EthereumData.fromBigInt(BigInt.one), 2, 3,
-            to: EthereumAddress.fromString('0x00'),
-            from: EthereumAddress.fromString('0x00'));
+            to: EthereumAddress.fromString(
+                '0xad52b73690c35b9211a18c9293e805d792474168'),
+            from: EthereumAddress.fromString(
+                '0xad52b73690c35b9211a18c9293e805d792474168'));
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
         expect(e.toString(),
@@ -705,8 +707,10 @@ void main() {
       try {
         await client.eth!.shhPost(
             <EthereumData>[EthereumData.fromBigInt(BigInt.one)], null, 2, 3,
-            to: EthereumAddress.fromString('0x00'),
-            from: EthereumAddress.fromString('0x00'));
+            to: EthereumAddress.fromString(
+                '0xad52b73690c35b9211a18c9293e805d792474168'),
+            from: EthereumAddress.fromString(
+                '0xad52b73690c35b9211a18c9293e805d792474168'));
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
         expect(e.toString(),
@@ -723,8 +727,10 @@ void main() {
             EthereumData.fromBigInt(BigInt.one),
             null,
             3,
-            to: EthereumAddress.fromString('0x00'),
-            from: EthereumAddress.fromString('0x00'));
+            to: EthereumAddress.fromString(
+                '0xad52b73690c35b9211a18c9293e805d792474168'),
+            from: EthereumAddress.fromString(
+                '0xad52b73690c35b9211a18c9293e805d792474168'));
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
         expect(e.toString(),
@@ -741,8 +747,10 @@ void main() {
             EthereumData.fromBigInt(BigInt.one),
             2,
             null,
-            to: EthereumAddress.fromString('0x00'),
-            from: EthereumAddress.fromString('0x00'));
+            to: EthereumAddress.fromString(
+                '0xad52b73690c35b9211a18c9293e805d792474168'),
+            from: EthereumAddress.fromString(
+                '0xad52b73690c35b9211a18c9293e805d792474168'));
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
         expect(e.toString(),

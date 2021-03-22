@@ -58,10 +58,10 @@ class EthereumCommon {
         print('Net peer count is $count');
       });
       test('Sync status', () async {
-        final res = await (client.eth!.syncStatus() as Future<EthereumSyncStatus>);
+        final res = await (client.eth!.syncStatus());
         expect(res, isNotNull);
         expect(client.eth!.id, ++id);
-        if (res.syncing) {
+        if (res!.syncing) {
           print('Sync status is syncing');
           print('Starting Block is ${res.startingBlock}');
           print('Current Block is ${res.currentBlock}');
@@ -100,9 +100,9 @@ class EthereumCommon {
         print('Gas price is $price');
       });
       test('Accounts', () async {
-        final accounts = await (client.eth!.accounts() as Future<List<EthereumAddress>>);
+        final accounts = await (client.eth!.accounts());
         expect(accounts, isNotNull);
-        final accountsStr = EthereumAddress.toStringList(accounts);
+        final accountsStr = EthereumAddress.toStringList(accounts!);
         expect(client.eth!.id, ++id);
         if (accounts.isNotEmpty) {
           print('Accounts are $accountsStr');
@@ -735,9 +735,9 @@ class EthereumCommon {
         expect(client.admin!.id, ++id);
       });
       test('Personal List Accounts', () async {
-        final ret = await (client.admin!.personalListAccounts() as Future<List<EthereumAddress>>);
+        final ret = await (client.admin!.personalListAccounts());
         expect(ret, isNotNull);
-        lockAddress = ret[0];
+        lockAddress = ret![0];
         print(ret);
         expect(client.admin!.id, ++id);
       });
@@ -762,11 +762,11 @@ class EthereumCommon {
       });
       test('Personal Sign', () async {
         final message = EthereumData.fromBigInt(BigInt.from(0xdeadbeaf));
-        final ret =
-            await (client.admin!.personalSign(message, lockAddress, 'password') as Future<EthereumData>);
+        final ret = await (client.admin!
+            .personalSign(message, lockAddress, 'password'));
         expect(ret, isNotNull);
         signature = ret;
-        print(ret.asString);
+        print(ret!.asString);
         expect(client.admin!.id, ++id);
       });
       test('Personal EcRecover', () async {
