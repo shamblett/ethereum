@@ -142,10 +142,16 @@ class Ethereum {
 
   /// Error processing helper
   void processError(String method, Map<String, dynamic> res) {
-    final Map<String, dynamic> error = res[EthereumConstants.ethErrorKey];
-    lastError.updateError(error['code'], error['message'], rpcClient.id);
-    if (printError) {
-      print('ERROR::$method - ${lastError.toString()}');
+    if (res.isEmpty) {
+      if (printError) {
+        print('ERROR::$method - No status returned - Protocol failure}');
+      }
+    } else {
+      final error = res[EthereumConstants.ethErrorKey];
+      lastError.updateError(error['code'], error['message'], rpcClient.id);
+      if (printError) {
+        print('ERROR::$method - ${lastError.toString()}');
+      }
     }
   }
 

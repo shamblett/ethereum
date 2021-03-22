@@ -18,4 +18,7 @@ class EthereumTestUtilities {
   /// Integer list to Hex String list
   static List<String> intToHexList(List<int> val) => List<String>.generate(
       val.length, (int index) => EthereumUtilities.intToHex(val[index]));
+
+  static bool browserWsTestsRunning = false;
+  static bool browserHttpTestsRunning = false;
 }

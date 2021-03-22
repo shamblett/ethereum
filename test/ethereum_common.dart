@@ -8,6 +8,7 @@
 import 'package:ethereum/ethereum.dart';
 import 'package:test/test.dart';
 import 'ethereum_test_configuration.dart';
+import 'ethereum_test_utilities.dart';
 
 /// Class to run the common Ethereum API tests
 class EthereumCommon {
@@ -729,7 +730,6 @@ class EthereumCommon {
         if (key != null) {
           expect(key.asBigInt!.isValidInt, true);
         } else {
-          expect(client.eth!.lastError.code, -32000);
           expect(client.eth!.lastError.message, 'account already exists');
         }
         expect(client.admin!.id, ++id);
@@ -776,6 +776,6 @@ class EthereumCommon {
         expect(ret, lockAddress);
         expect(client.admin!.id, ++id);
       });
-    });
+    }, skip: EthereumTestUtilities.browserWsTestsRunning);
   }
 }

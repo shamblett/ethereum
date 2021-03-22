@@ -17,7 +17,7 @@ class EthereumTestConfiguration {
   static String defaultAccount = '0xad52b73690c35b9211a18c9293e805d792474168';
 
   /// True runs the browser HTTP tests, you will need CORS support for this as above
-  static bool runBrowserHttp = false;
+  static bool runBrowserHttp = true;
 
   /// True runs the browser WS tests, you should be OK with --wsorigins as above
   static bool runBrowserWS = true;
