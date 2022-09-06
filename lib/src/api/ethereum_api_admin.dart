@@ -155,12 +155,12 @@ class EthereumApiAdmin extends EthereumApi {
     }
     final paramBlock = <String, dynamic>{
       'from': address.asString,
-      'to': to == null ? null : to.asString,
+      'to': to?.asString,
       'gas': gas == null ? null : EthereumUtilities.intToHex(gas),
       'gasPrice':
           gasPrice == null ? null : EthereumUtilities.intToHex(gasPrice),
       'value': value == null ? null : EthereumUtilities.intToHex(value),
-      'data': data == null ? null : data.asString,
+      'data': data?.asString,
       'nonce': nonce == null ? null : EthereumUtilities.intToHex(nonce),
       'condition': conditionObject
     };

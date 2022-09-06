@@ -407,7 +407,7 @@ class EthereumApiEth extends EthereumApi {
     const method = EthereumRpcMethods.sendTransaction;
     var paramBlock = <String, String?>{
       'from': address.asString,
-      'to': to == null ? null : to.asString,
+      'to': to?.asString,
       'gas': EthereumUtilities.intToHex(gas),
       'gasPrice':
           gasPrice == null ? null : EthereumUtilities.intToHex(gasPrice),
@@ -479,13 +479,13 @@ class EthereumApiEth extends EthereumApi {
     const method = EthereumRpcMethods.call;
     final blockString = block.getSelection();
     var paramBlock = <String, String?>{
-      'from': from == null ? null : from.asString,
+      'from': from?.asString,
       'to': address.asString,
       'gas': gas == null ? null : EthereumUtilities.intToHex(gas),
       'gasPrice':
           gasPrice == null ? null : EthereumUtilities.intToHex(gasPrice),
       'value': value == null ? null : EthereumUtilities.intToHex(value),
-      'data': data == null ? null : data.asString
+      'data': data?.asString
     };
     paramBlock =
         EthereumUtilities.removeNull(paramBlock) as Map<String, String?>;
@@ -516,13 +516,13 @@ class EthereumApiEth extends EthereumApi {
       int? value,
       EthereumData? data}) async {
     var paramBlock = <String, String?>{
-      'from': from == null ? null : from.asString,
-      'to': address == null ? null : address.asString,
+      'from': from?.asString,
+      'to': address?.asString,
       'gas': gas == null ? null : EthereumUtilities.intToHex(gas),
       'gasPrice':
           gasPrice == null ? null : EthereumUtilities.intToHex(gasPrice),
       'value': value == null ? null : EthereumUtilities.intToHex(value),
-      'data': data == null ? null : data.asString
+      'data': data?.asString
     };
     paramBlock =
         EthereumUtilities.removeNull(paramBlock) as Map<String, String?>;

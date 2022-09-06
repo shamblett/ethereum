@@ -10,7 +10,7 @@ import 'dart:typed_data';
 import 'package:ethereum/ethereum_server_client.dart';
 import 'package:ethereum/ethereum.dart';
 import 'package:test/test.dart';
-import 'ethereum_test_utilities.dart';
+import 'manual/ethereum_test_utilities.dart';
 
 /// These test are common to both server and client, we use the server client for convenience.
 

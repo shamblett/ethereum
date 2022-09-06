@@ -1,5 +1,5 @@
 # ethereum
-[![Build Status](https://travis-ci.org/shamblett/ethereum.svg?branch=master)](https://travis-ci.org/shamblett/ethereum)
+[![Build Status](https://github.com/shamblett/ethereum/actions/workflows/ci.yml/badge.svg)](https://github.com/shamblett/ethereum/actions/workflows/ci.yml)
 
 An ethereum RPC 2 client for Dart.
 
