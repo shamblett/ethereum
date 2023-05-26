@@ -1,6 +1,6 @@
 name: ethereum
 description: An ethereum JSON RPC 2.0 client for Dart. Interfaces ethereum API calls to Dart types and vice versa.
-version: 5.0.2
+version: 6.0.0
 repository: https://github.com/shamblett/ethereum
 homepage: https://github.com/shamblett/ethereum
 
@@ -8,15 +8,15 @@ funding:
   - https://www.darticulate.com/#funding
 
 environment:
-  sdk: '>=2.12.0 <3.0.0'
+  sdk: '>=3.0.0 <4.0.0'
 
 dependencies:
   hex: '^0.2.0'
 
 dev_dependencies:
-  test: '^1.21.5'
-  build_runner: '^2.2.0'
-  build_test: '^2.1.5'
-  build_web_compilers: '^3.2.5'
-  lints: '^2.0.0'
+  test: '^1.24.3'
+  build_runner: '^2.4.4'
+  build_test: '^2.1.7'
+  build_web_compilers: '^4.0.3'
+  lints: '^2.1.0'
 

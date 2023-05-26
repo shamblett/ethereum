@@ -1,6 +1,6 @@
-SPDXVersion: SPDX-2.2DataLicense: CC0-1.0SPDXID: SPDXRef-DOCUMENTDocumentName: ethereumDocumentNamespace: https://pub.dev/packages/ethereumLicenseListVersion: 3.8Creator: Tool: https://pub.dev/packages/sbomCreated: 2022-12-31T15:19:44Z
+SPDXVersion: SPDX-2.2DataLicense: CC0-1.0SPDXID: SPDXRef-DOCUMENTDocumentName: ethereumDocumentNamespace: https://pub.dev/packages/ethereumLicenseListVersion: 3.8Creator: Tool: https://pub.dev/packages/sbomCreated: 2023-05-26T15:00:26Z
 
-PackageName: ethereumSPDXID: SPDXRef-Package-ethereumPackageVersion: 5.0.2PackageFileName: ethereumPackageSupplier: NOASSERTIONPackageOriginator: NOASSERTIONPackageDownloadLocation: https://pub.dev/packages/ethereumFilesAnalyzed: truePackageVerificationCode: 2bf6c30a6f637a2b6d5d5186c2d839420138275ePackageHomePage: https://pub.dev/packages/ethereumPackageLicenseConcluded: MITPackageLicenseInfoFromFiles: NOASSERTIONPackageLicenseDeclared: NOASSERTIONPackageCopyrightText: NOASSERTIONPackageSummary: <text>An ethereum JSON RPC 2.0 client for Dart. Interfaces ethereum API calls to Dart types and vice versa.</text>
+PackageName: ethereumSPDXID: SPDXRef-Package-ethereumPackageVersion: 6.0.0PackageFileName: ethereumPackageSupplier: NOASSERTIONPackageOriginator: NOASSERTIONPackageDownloadLocation: https://pub.dev/packages/ethereumFilesAnalyzed: truePackageVerificationCode: 26025f081ef6d8895395cb07593338b440f529c8PackageHomePage: https://pub.dev/packages/ethereumPackageLicenseConcluded: MITPackageLicenseInfoFromFiles: NOASSERTIONPackageLicenseDeclared: NOASSERTIONPackageCopyrightText: NOASSERTIONPackageSummary: <text>An ethereum JSON RPC 2.0 client for Dart. Interfaces ethereum API calls to Dart types and vice versa.</text>
 
 FileName: /lib/ethereum.dartSPDXID: SPDXRef-ethereum-0FileType: SOURCEFileChecksum: SHA1: f7880fc6f690e570f6cc369a11492a127e45469cLicenseConcluded: NOASSERTIONLicenseInfoInFile: NOASSERTIONFileCopyrightText: NOASSERTION
 
@@ -58,7 +58,7 @@ FileName: /lib/src/messages/ethereum_work.dartSPDXID: SPDXRef-ethereum-work-26
 
 FileName: /lib/src/parameters/ethereum_default_block.dartSPDXID: SPDXRef-ethereum-default-block-27FileType: SOURCEFileChecksum: SHA1: f62f8caaebfa3c2134216a766983bf3fb6096d5cLicenseConcluded: NOASSERTIONLicenseInfoInFile: NOASSERTIONFileCopyrightText: NOASSERTION
 
-FileName: /pubspec.yamlSPDXID: SPDXRef-pubspec-28FileType: TEXTFileChecksum: SHA1: d9726653e19cf4bc00806a9163fd13b4c9bdc151LicenseConcluded: NOASSERTIONLicenseInfoInFile: NOASSERTIONFileCopyrightText: NOASSERTION
+FileName: /pubspec.yamlSPDXID: SPDXRef-pubspec-28FileType: TEXTFileChecksum: SHA1: 40a702b278264c23fedf461afd06bd4c3fffa913LicenseConcluded: NOASSERTIONLicenseInfoInFile: NOASSERTIONFileCopyrightText: NOASSERTION
 
 Relationship: SPDXRef-pubspec-28 DEPENDENCY_MANIFEST_OF SPDXRef-Package-ethereum
 
