@@ -7,7 +7,7 @@
  * The Ethereum client package
  */
 
-part of ethereum;
+part of '../../ethereum.dart';
 
 /// The API base class
 class EthereumApi {

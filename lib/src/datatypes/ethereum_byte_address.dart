@@ -7,7 +7,7 @@
  * A JSON RPC 2.0 client for Ethereum
  */
 
-part of ethereum;
+part of '../../ethereum.dart';
 
 /// Ethereum address as a byte array, 20 bytes long
 class EthereumByteAddress {

@@ -7,7 +7,7 @@
  * A JSON RPC 2.0 client for Ethereum
  */
 
-part of ethereum;
+part of '../../ethereum.dart';
 
 /// An ethereum transaction message
 class EthereumTransaction {

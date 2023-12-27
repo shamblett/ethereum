@@ -7,7 +7,7 @@
  * A JSON RPC 2.0 client for Ethereum
  */
 
-part of ethereum;
+part of '../../ethereum.dart';
 
 /// An ethereum work message.
 /// All elements of the work message must be present.

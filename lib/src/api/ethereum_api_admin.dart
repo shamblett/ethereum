@@ -7,12 +7,12 @@
  * The Ethereum client package
  */
 
-part of ethereum;
+part of '../../ethereum.dart';
 
 /// This class implements the Ethereuum Admin API
 class EthereumApiAdmin extends EthereumApi {
   /// Construction
-  EthereumApiAdmin(Ethereum client) : super(client);
+  EthereumApiAdmin(super.client);
 
   /// Imports the given unencrypted private key (byte string)
   /// into the key store, encrypting it with the passphrase.

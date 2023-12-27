@@ -7,7 +7,7 @@
  * A JSON RPC 2.0 client for Ethereum
  */
 
-part of ethereum;
+part of '../../ethereum.dart';
 
 /// The address data type. If any supplied value cannot be safely represented as
 /// an Ethereum address FormatException will be thrown.

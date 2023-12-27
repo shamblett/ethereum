@@ -7,7 +7,7 @@
  * A JSON RPC 2.0 client for Ethereum
  */
 
-part of ethereum;
+part of '../../ethereum.dart';
 
 /// The Ethereum data type. This is not as constrained as the address type.
 class EthereumData {

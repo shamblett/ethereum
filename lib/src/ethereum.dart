@@ -7,7 +7,7 @@
  * The Ethereum client package
  */
 
-part of ethereum;
+part of '../ethereum.dart';
 
 /// The Ethereum JSON-RPC client class.
 /// Further details of this interface and its Dapp API specification
