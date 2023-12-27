@@ -8,7 +8,7 @@
  * on the server.
  */
 
-part of ethereum_server_client;
+part of '../../ethereum_server_client.dart';
 
 /// The server HTTP adapter
 class EthereumServerHTTPAdapter implements EthereumINetworkAdapter {

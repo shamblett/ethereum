@@ -7,12 +7,12 @@
  * The Ethereum client package
  */
 
-part of ethereum;
+part of '../../ethereum.dart';
 
 /// This class implements the Ethereuum eth API, sometimes referred to as DApp
 class EthereumApiEth extends EthereumApi {
   /// Construction
-  EthereumApiEth(Ethereum client) : super(client);
+  EthereumApiEth(super.client);
 
   //// Client version
   Future<String?> clientVersion() async {

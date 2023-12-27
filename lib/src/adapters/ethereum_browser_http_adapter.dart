@@ -8,7 +8,7 @@
  * browser.
  */
 
-part of ethereum_browser_client;
+part of '../../ethereum_browser_http_client.dart';
 
 /// The browser HTTP adapter
 class EthereumBrowserHTTPAdapter implements EthereumINetworkAdapter {

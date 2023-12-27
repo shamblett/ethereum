@@ -7,7 +7,7 @@
  * The Ethereum client package
  */
 
-part of ethereum;
+part of '../../ethereum.dart';
 
 /// The Default Block parameter.
 /// The parameter selections are mutually exclusive.

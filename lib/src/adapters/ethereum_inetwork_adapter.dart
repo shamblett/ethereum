@@ -8,7 +8,7 @@
  * allowing for different HTTP adapters to be used.
  */
 
-part of ethereum;
+part of '../../ethereum.dart';
 
 /// Base class for all network adapters
 abstract class EthereumINetworkAdapter {
