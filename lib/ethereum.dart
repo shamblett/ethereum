@@ -5,7 +5,7 @@
  * Copyright :  S.Hamblett
  */
 
-library ethereum;
+library;
 
 import 'dart:async';
 import 'dart:typed_data';

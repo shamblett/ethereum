@@ -7,7 +7,7 @@
  * An instance of Ethereum specialised for use in the browser.
  */
 
-library ethereum_browser_ws_client;
+library;
 
 import 'dart:async';
 import 'dart:convert';

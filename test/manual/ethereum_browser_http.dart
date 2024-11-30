@@ -6,6 +6,8 @@
  */
 
 @TestOn('browser')
+library;
+
 import 'package:ethereum/ethereum_browser_http_client.dart';
 import 'package:test/test.dart';
 import 'ethereum_common.dart';
