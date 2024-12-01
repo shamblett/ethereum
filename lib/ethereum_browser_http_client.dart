@@ -13,8 +13,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'ethereum.dart';
 
-import 'package:web/web.dart';
 import 'package:http/browser_client.dart';
+
 part 'src/adapters/ethereum_browser_http_adapter.dart';
 
 /// The browser HTTP client

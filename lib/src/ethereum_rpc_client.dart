@@ -26,7 +26,7 @@ class EthereumRpcClient {
   int get id => _id;
 
   /// The Uri
-  Uri? uri;
+  late Uri uri;
 
   /// The request method
   Future<Map<dynamic, dynamic>> request(String method, [dynamic parameters]) {

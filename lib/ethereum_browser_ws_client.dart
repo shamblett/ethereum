@@ -11,8 +11,10 @@ library;
 
 import 'dart:async';
 import 'dart:convert';
-import 'dart:html';
+import 'dart:js_interop';
 import 'ethereum.dart';
+
+import 'package:web/web.dart';
 
 part 'src/adapters/ethereum_browser_ws_adapter.dart';
 

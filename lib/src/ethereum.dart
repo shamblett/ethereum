@@ -57,10 +57,10 @@ class Ethereum {
   /// Host
   String? host;
 
-  Uri? _uri;
+  late Uri _uri;
 
   /// Uri
-  Uri? get uri => _uri;
+  Uri get uri => _uri;
 
   EthereumINetworkAdapter _networkAdapter;
 
