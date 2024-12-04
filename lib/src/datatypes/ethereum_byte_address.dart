@@ -61,9 +61,10 @@ class EthereumByteAddress {
   String toString() => toList().toString();
 
   @override
-  bool operator ==(dynamic other) =>
+  bool operator ==(Object other) =>
       identical(this, other) ||
-      other.runtimeType == runtimeType && _isEqual(other._data);
+      other.runtimeType == runtimeType &&
+          _isEqual((other as EthereumByteAddress)._data);
 
   @override
   int get hashCode => _data.hashCode;

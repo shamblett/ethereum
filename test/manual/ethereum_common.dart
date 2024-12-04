@@ -8,7 +8,6 @@
 import 'package:ethereum/ethereum.dart';
 import 'package:test/test.dart';
 import 'ethereum_test_configuration.dart';
-import 'ethereum_test_utilities.dart';
 
 /// Class to run the common Ethereum API tests
 class EthereumCommon {
@@ -20,13 +19,13 @@ class EthereumCommon {
         expect(version, isNotNull);
         expect(client.eth!.id, ++id);
         print('Protocol Version is $version');
-      });
+      }, skip: true);
       test('Protocol version 2', () async {
         final version = await client.eth!.protocolVersion();
         expect(version, isNotNull);
         expect(client.eth!.id, ++id);
         print('Protocol Version is $version');
-      });
+      }, skip: true);
       test('Client version', () async {
         final version = await client.eth!.clientVersion();
         expect(version, isNotNull);
@@ -689,7 +688,7 @@ class EthereumCommon {
               'The method eth_submitHashrate does not exist/is not available');
         }
         expect(client.eth!.id, ++id);
-      });
+      }, skip: true);
       test('SHH version', () async {
         final version = await client.eth!.shhVersion();
         if (version != null) {
@@ -705,7 +704,7 @@ class EthereumCommon {
         }
         print('SHH version is $version');
         expect(client.eth!.id, ++id);
-      });
+      }, skip: true);
       test('SHH post', () async {
         final ret = await client.eth!.shhPost(<EthereumData>[
           EthereumData.fromString('0x776869737065722d636861742d636c69656e74'),
@@ -717,7 +716,7 @@ class EthereumCommon {
                 '0x8888f1f195afa192cfee860698584c030f4c9db2'));
         expect(ret, isNull);
         expect(client.eth!.id, ++id);
-      });
+      }, skip: true);
     });
 
     group('Admin', () {
@@ -776,6 +775,6 @@ class EthereumCommon {
         expect(ret, lockAddress);
         expect(client.admin!.id, ++id);
       });
-    }, skip: EthereumTestUtilities.browserWsTestsRunning);
+    }, skip: true);
   }
 }

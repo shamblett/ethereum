@@ -25,24 +25,14 @@ class EthereumBrowserHTTPAdapter implements EthereumINetworkAdapter {
   /// a JSON Object
   @override
   Future<Map<dynamic, dynamic>> httpRequest(
-      Uri? uri, Map<String, dynamic> request) {
+      Uri uri, Map<String, dynamic> request) {
     final completer = Completer<Map<String, dynamic>>();
     final reqText = json.encode(request);
     final headers = <String, String>{contentType: jsonMimeType};
-    HttpRequest.request(uri.toString(),
-            method: 'POST',
-            withCredentials: false,
-            requestHeaders: headers,
-            sendData: reqText)
-        .then((HttpRequest req) {
-      if (req.responseText != null) {
-        final Map<String, dynamic> resp = json.decode(req.responseText!);
-        completer.complete(resp);
-        return completer.future;
-      } else {
-        completer.complete(<String, dynamic>{});
-        return completer.future;
-      }
+    BrowserClient().post(uri, headers: headers, body: reqText).then((req) {
+      final Map<String, dynamic> resp = json.decode(req.body);
+      completer.complete(resp);
+      return completer.future;
     }, onError: (final error) {
       completer.complete(<String, dynamic>{});
       return completer.future;

@@ -7,7 +7,7 @@
  * An instance of Ethereum specialised for use in the server.
  */
 
-library ethereum_server_client;
+library;
 
 import 'dart:async';
 import 'dart:convert';

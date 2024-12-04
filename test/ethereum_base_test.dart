@@ -6,6 +6,8 @@
  */
 
 @TestOn('vm')
+library;
+
 import 'dart:typed_data';
 import 'package:ethereum/ethereum_server_client.dart';
 import 'package:ethereum/ethereum.dart';

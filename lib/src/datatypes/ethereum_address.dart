@@ -56,9 +56,10 @@ class EthereumAddress {
   String toString() => asString!;
 
   @override
-  bool operator ==(dynamic other) =>
+  bool operator ==(Object other) =>
       identical(this, other) ||
-      other.runtimeType == runtimeType && _bigint == other._bigint;
+      other.runtimeType == runtimeType &&
+          _bigint == (other as EthereumAddress)._bigint;
 
   @override
   int get hashCode => _bigint.hashCode;
