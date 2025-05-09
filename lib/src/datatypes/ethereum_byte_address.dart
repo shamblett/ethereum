@@ -11,6 +11,26 @@ part of '../../ethereum.dart';
 
 /// Ethereum address as a byte array, 20 bytes long
 class EthereumByteAddress {
+  static const maxIntValue = 255;
+
+  /// The length of an Ethereum address in bytes
+  static const int addressByteLength = 20;
+
+  ByteData? _data;
+
+  /// The raw byte data
+  ByteData? get byteData => _data;
+
+  @override
+  int get hashCode => _data.hashCode;
+
+  /// As an address string, i.e 40 hex chars with a leading 0x
+  String get asString {
+    const encoder = HexEncoder();
+    final hex = encoder.convert(toList() as List<int>);
+    return '0x$hex';
+  }
+
   /// If the length is greater than addressByteLength then only
   /// addressByteLength are taken.
   /// If the length is less than addressByteLength the size is padded
@@ -26,20 +46,12 @@ class EthereumByteAddress {
   EthereumByteAddress.fromIntList(List<int> data) {
     final tmp = ByteData(data.length);
     for (var i = 0; i < tmp.lengthInBytes; i++) {
-      if (data[i] <= 255) {
+      if (data[i] <= maxIntValue) {
         tmp.setUint8(i, data[i]);
       }
     }
     _setData(tmp);
   }
-
-  /// The length of an Ethereum address in bytes
-  static const int addressByteLength = 20;
-
-  ByteData? _data;
-
-  /// The raw byte data
-  ByteData? get byteData => _data;
 
   /// To integer list
   List<int?> toList() {
@@ -50,13 +62,6 @@ class EthereumByteAddress {
     return tmp;
   }
 
-  /// As an address string, i.e 40 hex chars with a leading 0x
-  String get asString {
-    const encoder = HexEncoder();
-    final hex = encoder.convert(toList() as List<int>);
-    return '0x$hex';
-  }
-
   @override
   String toString() => toList().toString();
 
@@ -65,9 +70,6 @@ class EthereumByteAddress {
       identical(this, other) ||
       other.runtimeType == runtimeType &&
           _isEqual((other as EthereumByteAddress)._data);
-
-  @override
-  int get hashCode => _data.hashCode;
 
   bool _isEqual(ByteData? data) {
     for (var i = 0; i <= _data!.lengthInBytes - 1; i++) {

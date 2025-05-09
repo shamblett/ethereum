@@ -1,3 +1,5 @@
+// ignore_for_file: no-magic-number
+
 /*
  * Package : Ethereum
  * Author : S. Hamblett <steve.hamblett@linux.com>
@@ -12,6 +14,24 @@ part of '../../ethereum.dart';
 /// The address data type. If any supplied value cannot be safely represented as
 /// an Ethereum address FormatException will be thrown.
 class EthereumAddress {
+  /// The address length in characters
+  static const int addressCharacterLength = 40;
+
+  /// The BigInt
+  BigInt? _bigint;
+
+  /// The string
+  String? _string;
+
+  /// Get as a BigInt
+  BigInt? get asBigInt => _bigint;
+
+  /// Get as a String, includes the 0x prefix
+  String? get asString => _string;
+
+  @override
+  int get hashCode => _bigint.hashCode;
+
   /// From a BigInt. The value must be convertible into the
   /// standard Ethereum address
   /// format of 20 bytes, however unlike the string constructor
@@ -37,21 +57,6 @@ class EthereumAddress {
     _bigint = _safeParse(_string!);
   }
 
-  /// The address length in characters
-  static const int addressCharacterLength = 40;
-
-  /// The BigInt
-  BigInt? _bigint;
-
-  /// The string
-  String? _string;
-
-  /// Get as a BigInt
-  BigInt? get asBigInt => _bigint;
-
-  /// Get as a String, includes the 0x prefix
-  String? get asString => _string;
-
   @override
   String toString() => asString!;
 
@@ -60,9 +65,6 @@ class EthereumAddress {
       identical(this, other) ||
       other.runtimeType == runtimeType &&
           _bigint == (other as EthereumAddress)._bigint;
-
-  @override
-  int get hashCode => _bigint.hashCode;
 
   /// Address string list to EthereumAddress list
   static List<EthereumAddress> toList(List<String> val) =>

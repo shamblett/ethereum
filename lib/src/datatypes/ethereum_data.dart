@@ -1,3 +1,5 @@
+// ignore_for_file: no-magic-number
+
 /*
  * Package : Ethereum
  * Author : S. Hamblett <steve.hamblett@linux.com>
@@ -11,6 +13,21 @@ part of '../../ethereum.dart';
 
 /// The Ethereum data type. This is not as constrained as the address type.
 class EthereumData {
+  /// The BigInt
+  BigInt? _bigint;
+
+  /// The string
+  String? _string;
+
+  /// Get as a BigInt
+  BigInt? get asBigInt => _bigint;
+
+  /// Get as a String, includes the 0x prefix
+  String? get asString => _string;
+
+  @override
+  int get hashCode => _bigint.hashCode;
+
   /// From a BigInt.
   EthereumData.fromBigInt(BigInt val) {
     _bigint = val;
@@ -25,18 +42,6 @@ class EthereumData {
     _bigint = _safeParse(_string!);
   }
 
-  /// The BigInt
-  BigInt? _bigint;
-
-  /// The string
-  String? _string;
-
-  /// Get as a BigInt
-  BigInt? get asBigInt => _bigint;
-
-  /// Get as a String, includes the 0x prefix
-  String? get asString => _string;
-
   @override
   String toString() => asString!;
 
@@ -45,9 +50,6 @@ class EthereumData {
       identical(this, other) ||
       other.runtimeType == runtimeType &&
           _bigint == (other as EthereumData)._bigint;
-
-  @override
-  int get hashCode => _bigint.hashCode;
 
   /// Data string list to EthereumAddress list
   static List<EthereumData> toList(List<String> val) =>
@@ -73,11 +75,7 @@ class EthereumData {
 
   BigInt _safeParse(String val) {
     // If the string is zero trap this
-    if (val.contains(RegExp(r'[1-9]'))) {
-      return BigInt.parse(val);
-    } else {
-      return BigInt.zero;
-    }
+    return val.contains(RegExp(r'[1-9]')) ? BigInt.parse(val) : BigInt.zero;
   }
 
   void _checkString(String val) {
