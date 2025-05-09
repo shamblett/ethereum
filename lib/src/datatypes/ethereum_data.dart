@@ -52,7 +52,9 @@ class EthereumData {
   /// Data string list to EthereumAddress list
   static List<EthereumData> toList(List<String> val) =>
       List<EthereumData>.generate(
-          val.length, (int index) => EthereumData.fromString(val[index]));
+        val.length,
+        (int index) => EthereumData.fromString(val[index]),
+      );
 
   /// EthereumData list to string list
   static List<String?> toStringList(List<EthereumData> val) =>

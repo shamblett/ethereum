@@ -17,8 +17,10 @@ import 'ethereum_test_utilities.dart';
 void main() {
   if (EthereumTestConfiguration.runBrowserWS) {
     // Run the common API tests
-    final client =
-        EthereumBrowserWSClient.withConnectionParameters('localhost', 8546);
+    final client = EthereumBrowserWSClient.withConnectionParameters(
+      'localhost',
+      8546,
+    );
     // Print errors
     client.printError = true;
     EthereumTestUtilities.browserWsTestsRunning = true;

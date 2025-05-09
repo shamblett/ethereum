@@ -13,11 +13,15 @@ import 'package:ethereum/ethereum.dart';
 class EthereumTestUtilities {
   /// Hex String list to Integer list
   static List<int?> hexToIntList(List<String> val) => List<int?>.generate(
-      val.length, (int index) => EthereumUtilities.hexToInt(val[index]));
+    val.length,
+    (int index) => EthereumUtilities.hexToInt(val[index]),
+  );
 
   /// Integer list to Hex String list
   static List<String> intToHexList(List<int> val) => List<String>.generate(
-      val.length, (int index) => EthereumUtilities.intToHex(val[index]));
+    val.length,
+    (int index) => EthereumUtilities.intToHex(val[index]),
+  );
 
   static bool browserWsTestsRunning = false;
   static bool browserHttpTestsRunning = false;

@@ -93,44 +93,53 @@ class EthereumLog {
     }
     if (data[EthereumConstants.ethResultKey].containsKey('logIndex')) {
       _logIndex = EthereumUtilities.hexToInt(
-          data[EthereumConstants.ethResultKey]['logIndex']);
+        data[EthereumConstants.ethResultKey]['logIndex'],
+      );
     }
     if (data[EthereumConstants.ethResultKey].containsKey('transactionIndex')) {
       _transactionIndex = EthereumUtilities.hexToInt(
-          data[EthereumConstants.ethResultKey]['transactionIndex']);
+        data[EthereumConstants.ethResultKey]['transactionIndex'],
+      );
     }
     if (data[EthereumConstants.ethResultKey].containsKey('transactionHash')) {
       _transactionHash = EthereumData.fromString(
-          data[EthereumConstants.ethResultKey]['transactionHash']);
+        data[EthereumConstants.ethResultKey]['transactionHash'],
+      );
     }
     if (data[EthereumConstants.ethResultKey].containsKey('blockHash')) {
       _blockHash = EthereumData.fromString(
-          data[EthereumConstants.ethResultKey]['blockHash']);
+        data[EthereumConstants.ethResultKey]['blockHash'],
+      );
     }
     if (data[EthereumConstants.ethResultKey].containsKey('blockNumber')) {
       _blockNumber = EthereumUtilities.hexToInt(
-          data[EthereumConstants.ethResultKey]['blockNumber']);
+        data[EthereumConstants.ethResultKey]['blockNumber'],
+      );
     }
     if (data[EthereumConstants.ethResultKey].containsKey('address')) {
       _address = EthereumAddress.fromString(
-          data[EthereumConstants.ethResultKey]['address']);
+        data[EthereumConstants.ethResultKey]['address'],
+      );
     }
     if (data[EthereumConstants.ethResultKey].containsKey('data')) {
-      _data =
-          EthereumData.fromString(data[EthereumConstants.ethResultKey]['data']);
+      _data = EthereumData.fromString(
+        data[EthereumConstants.ethResultKey]['data'],
+      );
     }
     if (data[EthereumConstants.ethResultKey].containsKey('topics')) {
       if ((data[EthereumConstants.ethResultKey]['topics'] != null) &&
           (data[EthereumConstants.ethResultKey]['topics'].isNotEmpty)) {
-        _topics =
-            EthereumData.toList(data[EthereumConstants.ethResultKey]['topics']);
+        _topics = EthereumData.toList(
+          data[EthereumConstants.ethResultKey]['topics'],
+        );
       }
     }
   }
 
   @override
   String toString() {
-    final ret = 'Ethereum Log :'
+    final ret =
+        'Ethereum Log :'
         '\n'
         '  Removed : $removed'
         '\n'

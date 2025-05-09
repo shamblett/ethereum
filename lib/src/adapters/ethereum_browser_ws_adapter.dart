@@ -14,7 +14,9 @@ part of '../../ethereum_browser_ws_client.dart';
 class EthereumBrowserWSAdapter implements EthereumINetworkAdapter {
   @override
   Future<Map<dynamic, dynamic>> httpRequest(
-      Uri uri, Map<String, dynamic> request) {
+    Uri uri,
+    Map<String, dynamic> request,
+  ) {
     final completer = Completer<Map<String, dynamic>>();
     final webSocket = WebSocket(uri.toString());
     final message = json.encode(request);
@@ -22,8 +24,10 @@ class EthereumBrowserWSAdapter implements EthereumINetworkAdapter {
       webSocket.send(message.jsify()!);
     });
     webSocket.onError.listen((Event e) {
-      print('EthereumBrowserWSAdapter::WebSocket error, message not sent, '
-          'state is ${webSocket.readyState.toString()}');
+      print(
+        'EthereumBrowserWSAdapter::WebSocket error, message not sent, '
+        'state is ${webSocket.readyState.toString()}',
+      );
       webSocket.close();
       completer.complete(<String, dynamic>{});
     });

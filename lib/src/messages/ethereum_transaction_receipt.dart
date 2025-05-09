@@ -86,43 +86,53 @@ class EthereumTransactionReceipt {
     }
     if (data[EthereumConstants.ethResultKey].containsKey('transactionHash')) {
       _transactionHash = EthereumData.fromString(
-          data[EthereumConstants.ethResultKey]['transactionHash']);
+        data[EthereumConstants.ethResultKey]['transactionHash'],
+      );
     }
     if (data[EthereumConstants.ethResultKey].containsKey('transactionIndex')) {
       _transactionIndex = EthereumUtilities.hexToInt(
-          data[EthereumConstants.ethResultKey]['transactionIndex']);
+        data[EthereumConstants.ethResultKey]['transactionIndex'],
+      );
     }
     if (data[EthereumConstants.ethResultKey].containsKey('blockHash')) {
       _blockHash = EthereumData.fromString(
-          data[EthereumConstants.ethResultKey]['blockHash']);
+        data[EthereumConstants.ethResultKey]['blockHash'],
+      );
     }
     if (data[EthereumConstants.ethResultKey].containsKey('blockNumber')) {
       _blockNumber = EthereumUtilities.hexToInt(
-          data[EthereumConstants.ethResultKey]['blockNumber']);
+        data[EthereumConstants.ethResultKey]['blockNumber'],
+      );
     }
     if (data[EthereumConstants.ethResultKey].containsKey('cumulativeGasUsed')) {
       _cumulativeGasUsed = EthereumUtilities.hexToInt(
-          data[EthereumConstants.ethResultKey]['cumulativeGasUsed']);
+        data[EthereumConstants.ethResultKey]['cumulativeGasUsed'],
+      );
     }
     if (data[EthereumConstants.ethResultKey].containsKey('gasUsed')) {
       _gasUsed = EthereumUtilities.hexToInt(
-          data[EthereumConstants.ethResultKey]['gasUsed']);
+        data[EthereumConstants.ethResultKey]['gasUsed'],
+      );
     }
     if (data[EthereumConstants.ethResultKey].containsKey('contractAddress')) {
       _contractAddress = EthereumAddress.fromString(
-          data[EthereumConstants.ethResultKey]['contractAddress']);
+        data[EthereumConstants.ethResultKey]['contractAddress'],
+      );
     }
     if (data[EthereumConstants.ethResultKey].containsKey('logsBloom')) {
       _logsBloom = EthereumData.fromString(
-          data[EthereumConstants.ethResultKey]['logsBloom']);
+        data[EthereumConstants.ethResultKey]['logsBloom'],
+      );
     }
     if (data[EthereumConstants.ethResultKey].containsKey('root')) {
-      _root =
-          EthereumData.fromString(data[EthereumConstants.ethResultKey]['root']);
+      _root = EthereumData.fromString(
+        data[EthereumConstants.ethResultKey]['root'],
+      );
     }
     if (data[EthereumConstants.ethResultKey].containsKey('status')) {
       _status = EthereumUtilities.hexToInt(
-          data[EthereumConstants.ethResultKey]['status']);
+        data[EthereumConstants.ethResultKey]['status'],
+      );
     }
     if (data[EthereumConstants.ethResultKey].containsKey('logs')) {
       if ((data[EthereumConstants.ethResultKey]['logs'] != null) &&
@@ -131,7 +141,7 @@ class EthereumTransactionReceipt {
         for (final Map<String, dynamic> log
             in data[EthereumConstants.ethResultKey]['logs']) {
           final buildLog = <String, dynamic>{
-            EthereumConstants.ethResultKey: log
+            EthereumConstants.ethResultKey: log,
           };
           final entry = EthereumLog.fromMap(buildLog);
           _logs!.add(entry);
@@ -142,7 +152,8 @@ class EthereumTransactionReceipt {
 
   @override
   String toString() {
-    final ret = 'Ethereum Transaction Receipt:'
+    final ret =
+        'Ethereum Transaction Receipt:'
         '\n'
         '  Transaction Hash : $transactionHash'
         '\n'

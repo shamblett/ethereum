@@ -36,7 +36,8 @@ class EthereumUtilities {
     if (pad != 0) {
       if (pad.isNegative || pad.isOdd) {
         throw FormatException(
-            'EthereumUtilities:: intToHex - invalid pad value, $pad');
+          'EthereumUtilities:: intToHex - invalid pad value, $pad',
+        );
       }
       if (ret.length.isOdd) {
         ret = '0$ret';

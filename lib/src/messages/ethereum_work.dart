@@ -50,7 +50,8 @@ class EthereumWork {
 
   @override
   String toString() {
-    final ret = 'Ethereum Work :'
+    final ret =
+        'Ethereum Work :'
         '\n'
         '  Pow Hash : $powHash'
         '\n'

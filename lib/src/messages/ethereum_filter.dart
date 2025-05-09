@@ -50,7 +50,7 @@ class EthereumFilter {
         for (final Map<String, dynamic> log
             in data[EthereumConstants.ethResultKey]) {
           final buildLog = <String, dynamic>{
-            EthereumConstants.ethResultKey: log
+            EthereumConstants.ethResultKey: log,
           };
           final entry = EthereumLog.fromMap(buildLog);
           _logs!.add(entry);

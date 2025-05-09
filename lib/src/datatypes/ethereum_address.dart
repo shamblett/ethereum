@@ -67,7 +67,9 @@ class EthereumAddress {
   /// Address string list to EthereumAddress list
   static List<EthereumAddress> toList(List<String> val) =>
       List<EthereumAddress>.generate(
-          val.length, (int index) => EthereumAddress.fromString(val[index]));
+        val.length,
+        (int index) => EthereumAddress.fromString(val[index]),
+      );
 
   /// EthereumAddress list to address string
   static List<String?> toStringList(List<EthereumAddress> val) =>
@@ -86,7 +88,8 @@ class EthereumAddress {
     // to be padded with 00
     if (hexString.length > addressCharacterLength) {
       throw const FormatException(
-          'EthereumAddress - address has more than 40 characters');
+        'EthereumAddress - address has more than 40 characters',
+      );
     } else {
       if (hexString.length < addressCharacterLength) {
         // Must be even
@@ -106,7 +109,8 @@ class EthereumAddress {
     if (!val.startsWith(EthereumConstants.leadingHexString) ||
         val.length != addressCharacterLength + 2) {
       throw const FormatException(
-          'EthereumAddress - address string is badly formed');
+        'EthereumAddress - address string is badly formed',
+      );
     }
   }
 }

@@ -23,10 +23,15 @@ class EthereumBrowserHTTPClient extends Ethereum {
   EthereumBrowserHTTPClient() : super(browserHttpAdapter);
 
   /// With connection parameters
-  EthereumBrowserHTTPClient.withConnectionParameters(String hostname,
-      [int? port])
-      : super.withConnectionParameters(
-            browserHttpAdapter, hostname, Ethereum.rpcHttpScheme, port);
+  EthereumBrowserHTTPClient.withConnectionParameters(
+    String hostname, [
+    int? port,
+  ]) : super.withConnectionParameters(
+         browserHttpAdapter,
+         hostname,
+         Ethereum.rpcHttpScheme,
+         port,
+       );
 
   /// The adapter
   static EthereumBrowserHTTPAdapter browserHttpAdapter =

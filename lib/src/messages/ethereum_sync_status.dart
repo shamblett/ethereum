@@ -57,9 +57,14 @@ class EthereumSyncStatus {
 
   @override
   String toString() {
-    var ret = 'Ethereum Sync Status :' '\n' '  Syncing : $syncing' '\n';
+    var ret =
+        'Ethereum Sync Status :'
+        '\n'
+        '  Syncing : $syncing'
+        '\n';
     if (syncing) {
-      ret += '  Starting Block : $startingBlock'
+      ret +=
+          '  Starting Block : $startingBlock'
           '\n'
           '  Current Block : $currentBlock'
           '\n'

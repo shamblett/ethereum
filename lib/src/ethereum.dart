@@ -25,9 +25,11 @@ class Ethereum {
 
   /// With connection parameters
   Ethereum.withConnectionParameters(
-      EthereumINetworkAdapter adapter, String hostname, String scheme,
-      [int? port = defaultHttpPort])
-      : _networkAdapter = adapter {
+    EthereumINetworkAdapter adapter,
+    String hostname,
+    String scheme, [
+    int? port = defaultHttpPort,
+  ]) : _networkAdapter = adapter {
     rpcClient = EthereumRpcClient(_networkAdapter);
 
     /// Construct the API classes
@@ -106,7 +108,8 @@ class Ethereum {
     }
     if ((scheme != rpcHttpScheme) && (scheme != rpcWsScheme)) {
       throw FormatException(
-          'Ethereum::connectParameters - invalid scheme $scheme');
+        'Ethereum::connectParameters - invalid scheme $scheme',
+      );
     }
     int? uriPort;
     if (port != null) {
@@ -122,7 +125,9 @@ class Ethereum {
       host = puri.host;
     } else {
       throw ArgumentError.value(
-          puri.host, 'Ethereum::_validateUri - invalid host');
+        puri.host,
+        'Ethereum::_validateUri - invalid host',
+      );
     }
     var newUri = puri;
     if (!puri.hasPort) {
