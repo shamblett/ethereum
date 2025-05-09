@@ -20,6 +20,10 @@ part 'src/adapters/ethereum_browser_ws_adapter.dart';
 
 /// The browser web socket client
 class EthereumBrowserWSClient extends Ethereum {
+  /// The adapter
+  static final EthereumBrowserWSAdapter browserWSAdapter =
+      EthereumBrowserWSAdapter();
+
   /// Default construction
   EthereumBrowserWSClient() : super(browserWSAdapter);
 
@@ -31,7 +35,4 @@ class EthereumBrowserWSClient extends Ethereum {
         Ethereum.rpcWsScheme,
         port,
       );
-
-  /// The adapter
-  static EthereumBrowserWSAdapter browserWSAdapter = EthereumBrowserWSAdapter();
 }

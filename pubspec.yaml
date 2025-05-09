@@ -21,4 +21,5 @@ dev_dependencies:
   build_test: '^2.2.2'
   build_web_compilers: '^4.0.7'
   lints: '^5.0.0'
+  dart_code_metrics_presets: '^2.22.0'
 

@@ -11,10 +11,7 @@ part of '../../ethereum.dart';
 
 /// The API base class
 class EthereumApi {
-  /// Construction
-  EthereumApi(this._client);
-
-  /// Our client
+  // Our client
   final Ethereum _client;
 
   /// Message Id
@@ -22,4 +19,7 @@ class EthereumApi {
 
   /// Last error
   EthereumError get lastError => _client.lastError;
+
+  /// Construction
+  EthereumApi(this._client);
 }

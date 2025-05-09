@@ -9,8 +9,10 @@
 
 part of '../../ethereum.dart';
 
-/// This class implements the Ethereuum eth API, sometimes referred to as DApp
+/// This class implements the Ethereum eth API, sometimes referred to as DApp
 class EthereumApiEth extends EthereumApi {
+  static const gasDefault = 7000;
+
   /// Construction
   EthereumApiEth(super.client);
 
@@ -257,11 +259,9 @@ class EthereumApiEth extends EthereumApi {
     final params = <String?>[blockHash.asString];
     final dynamic res = await _client.rpcClient.request(method, params);
     if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
-      if (res[EthereumConstants.ethResultKey] != null) {
-        return EthereumUtilities.hexToInt(res[EthereumConstants.ethResultKey]);
-      } else {
-        return 0;
-      }
+      return res[EthereumConstants.ethResultKey] != null
+          ? EthereumUtilities.hexToInt(res[EthereumConstants.ethResultKey])
+          : 0;
     }
     _client.processError(method, res);
     return null;
@@ -284,11 +284,9 @@ class EthereumApiEth extends EthereumApi {
     final params = <String?>[blockString];
     final dynamic res = await _client.rpcClient.request(method, params);
     if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
-      if (res[EthereumConstants.ethResultKey] != null) {
-        return EthereumUtilities.hexToInt(res[EthereumConstants.ethResultKey]);
-      } else {
-        return 0;
-      }
+      return res[EthereumConstants.ethResultKey] != null
+          ? EthereumUtilities.hexToInt(res[EthereumConstants.ethResultKey])
+          : 0;
     }
     _client.processError(method, res);
     return null;
@@ -307,11 +305,9 @@ class EthereumApiEth extends EthereumApi {
     final params = <String?>[blockHash.asString];
     final dynamic res = await _client.rpcClient.request(method, params);
     if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
-      if (res[EthereumConstants.ethResultKey] != null) {
-        return EthereumUtilities.hexToInt(res[EthereumConstants.ethResultKey]);
-      } else {
-        return 0;
-      }
+      return res[EthereumConstants.ethResultKey] != null
+          ? EthereumUtilities.hexToInt(res[EthereumConstants.ethResultKey])
+          : 0;
     }
     _client.processError(method, res);
     return null;
@@ -332,11 +328,9 @@ class EthereumApiEth extends EthereumApi {
     final params = <String?>[blockString];
     final dynamic res = await _client.rpcClient.request(method, params);
     if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
-      if (res[EthereumConstants.ethResultKey] != null) {
-        return EthereumUtilities.hexToInt(res[EthereumConstants.ethResultKey]);
-      } else {
-        return 0;
-      }
+      return res[EthereumConstants.ethResultKey] != null
+          ? EthereumUtilities.hexToInt(res[EthereumConstants.ethResultKey])
+          : 0;
     }
     _client.processError(method, res);
     return null;
@@ -394,7 +388,7 @@ class EthereumApiEth extends EthereumApi {
   /// address: The address the transaction is sent from.
   /// to: (optional when creating new contract)
   /// The address the transaction is directed to.
-  /// gas: (optional, default: 90000)
+  /// gas: (optional, default: [gasDefault])
   /// Integer of the gas provided for the transaction execution.
   /// It will return unused gas.
   /// gasPrice: (optional, default:
@@ -411,7 +405,7 @@ class EthereumApiEth extends EthereumApi {
     EthereumAddress? address,
     EthereumData? data, {
     EthereumAddress? to,
-    int gas = 9000,
+    int gas = gasDefault,
     int? gasPrice,
     int? value,
     int? nonce,

@@ -9,8 +9,10 @@
 
 part of '../../ethereum.dart';
 
-/// This class implements the Ethereuum Admin API
+/// This class implements the Ethereum Admin API
 class EthereumApiAdmin extends EthereumApi {
+  static const unlockDuration = 300; //seconds
+
   /// Construction
   EthereumApiAdmin(super.client);
 
@@ -87,14 +89,14 @@ class EthereumApiAdmin extends EthereumApi {
   /// Decrypts the key with the given address from the key store.
   /// The unencrypted key will be held in memory until the unlock
   /// duration expires.
-  /// The unlock duration defaults to 300 seconds.
+  /// The unlock duration defaults to [unlockDuration] seconds.
   /// An explicit duration of zero seconds unlocks the key until geth exits.
   /// The account can be used with eth_sign and eth_sendTransaction
   /// while it is unlocked.
   Future<bool> personalUnlockAccount(
     EthereumAddress? address,
     String? passphrase, [
-    int duration = 300,
+    int duration = unlockDuration,
   ]) async {
     if (address == null) {
       throw ArgumentError.notNull('Ethereum::personalUnlockAccount - address');
@@ -151,19 +153,14 @@ class EthereumApiAdmin extends EthereumApi {
       );
     }
     Map<String, String>? conditionObject = <String, String>{};
-    if (condition == null) {
-      conditionObject = null;
-    } else {
-      if (conditionIsTimestamp) {
-        conditionObject = <String, String>{
-          'timestamp': EthereumUtilities.intToHex(condition),
-        };
-      } else {
-        conditionObject = <String, String>{
-          'block': EthereumUtilities.intToHex(condition),
-        };
-      }
-    }
+    conditionObject =
+        condition == null
+            ? null
+            : conditionIsTimestamp
+            ? <String, String>{
+              'timestamp': EthereumUtilities.intToHex(condition),
+            }
+            : <String, String>{'block': EthereumUtilities.intToHex(condition)};
     final paramBlock = <String, dynamic>{
       'from': address.asString,
       'to': to?.asString,
