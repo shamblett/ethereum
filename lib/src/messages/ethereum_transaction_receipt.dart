@@ -11,6 +11,66 @@ part of '../../ethereum.dart';
 
 /// An ethereum transaction receipt message
 class EthereumTransactionReceipt {
+  EthereumData? _transactionHash;
+
+  int? _transactionIndex;
+
+  EthereumData? _blockHash;
+
+  int? _blockNumber;
+
+  int? _cumulativeGasUsed;
+
+  int? _gasUsed;
+
+  EthereumAddress? _contractAddress;
+
+  List<EthereumLog>? _logs;
+
+  EthereumData? _logsBloom;
+
+  EthereumData? _root;
+
+  int? _status;
+
+  /// Status. Either 1 (success) or 0 (failure)
+  /// Null if root is present
+  int? get status => _status;
+
+  /// Transaction hash. Hash of the transaction.
+  EthereumData? get transactionHash => _transactionHash;
+
+  /// Transaction index. Ihe transactions index position in the block.
+  int? get transactionIndex => _transactionIndex;
+
+  /// Block hash. Hash of the block this transaction was in.
+  EthereumData? get blockHash => _blockHash;
+
+  /// Block number. Block number of this transaction.
+  int? get blockNumber => _blockNumber;
+
+  /// Cumulative gas used. The total amount of gas used when this
+  /// transaction was executed in the block.
+  int? get cumulativeGasUsed => _cumulativeGasUsed;
+
+  /// Gas used. The amount of gas used by this transaction.
+  int? get gasUsed => _gasUsed;
+
+  /// Contract address. The contract address created, if the transaction was
+  /// a contract creation, otherwise null.
+  EthereumAddress? get contractAddress => _contractAddress;
+
+  /// Logs. List of log objects, which this transaction generated.
+  List<EthereumLog>? get logs => _logs;
+
+  /// Logs bloom. Bloom filter for light clients to quickly
+  /// retrieve related logs.
+  EthereumData? get logsBloom => _logsBloom;
+
+  /// Root. Post-transaction state root (pre Byzantium)
+  /// Null if status is present.
+  EthereumData? get root => _root;
+
   /// Constructor
   EthereumTransactionReceipt();
 
@@ -18,66 +78,6 @@ class EthereumTransactionReceipt {
   EthereumTransactionReceipt.fromMap(Map<String, dynamic>? result) {
     construct(result);
   }
-
-  EthereumData? _transactionHash;
-
-  /// Transaction hash. Hash of the transaction.
-  EthereumData? get transactionHash => _transactionHash;
-
-  int? _transactionIndex;
-
-  /// Transaction index. Ihe transactions index position in the block.
-  int? get transactionIndex => _transactionIndex;
-
-  EthereumData? _blockHash;
-
-  /// Block hash. Hash of the block this transaction was in.
-  EthereumData? get blockHash => _blockHash;
-
-  int? _blockNumber;
-
-  /// Block number. Block number of this transaction.
-  int? get blockNumber => _blockNumber;
-
-  int? _cumulativeGasUsed;
-
-  /// Cumulative gas used. The total amount of gas used when this
-  /// transaction was executed in the block.
-  int? get cumulativeGasUsed => _cumulativeGasUsed;
-
-  int? _gasUsed;
-
-  /// Gas used. The amount of gas used by this transaction.
-  int? get gasUsed => _gasUsed;
-
-  EthereumAddress? _contractAddress;
-
-  /// Contract address. The contract address created, if the transaction was
-  /// a contract creation, otherwise null.
-  EthereumAddress? get contractAddress => _contractAddress;
-
-  List<EthereumLog>? _logs;
-
-  /// Logs. List of log objects, which this transaction generated.
-  List<EthereumLog>? get logs => _logs;
-
-  EthereumData? _logsBloom;
-
-  /// Logs bloom. Bloom filter for light clients to quickly
-  /// retrieve related logs.
-  EthereumData? get logsBloom => _logsBloom;
-
-  EthereumData? _root;
-
-  /// Root. Post-transaction stateroot (pre Byzantium)
-  /// Null if status is present.
-  EthereumData? get root => _root;
-
-  int? _status;
-
-  /// Status. Either 1 (success) or 0 (failure)
-  /// Null if root is present
-  int? get status => _status;
 
   /// Construct from the supplied Map, only check for the keys we need.
   void construct(Map<String, dynamic>? data) {
@@ -152,8 +152,7 @@ class EthereumTransactionReceipt {
 
   @override
   String toString() {
-    final ret =
-        'Ethereum Transaction Receipt:'
+    return 'Ethereum Transaction Receipt:'
         '\n'
         '  Transaction Hash : $transactionHash'
         '\n'
@@ -167,7 +166,5 @@ class EthereumTransactionReceipt {
         '\n'
         '  Gas used : $gasUsed'
         '\n';
-
-    return ret;
   }
 }

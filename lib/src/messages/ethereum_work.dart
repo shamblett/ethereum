@@ -12,6 +12,23 @@ part of '../../ethereum.dart';
 /// An ethereum work message.
 /// All elements of the work message must be present.
 class EthereumWork {
+  static const workMessageLength = 3;
+
+  EthereumData? _powHash;
+
+  EthereumData? _seedHash;
+
+  EthereumData? _boundaryCondition;
+
+  /// The boundary condition ('target'), 2^256 / difficulty.
+  EthereumData? get boundaryCondition => _boundaryCondition;
+
+  /// Current block header pow-hash
+  EthereumData? get powHash => _powHash;
+
+  /// Seed hash used for the DAG.
+  EthereumData? get seedHash => _seedHash;
+
   /// Construction
   EthereumWork();
 
@@ -20,38 +37,22 @@ class EthereumWork {
     construct(result);
   }
 
-  EthereumData? _powHash;
-
-  /// Current block header pow-hash
-  EthereumData? get powHash => _powHash;
-
-  EthereumData? _seedHash;
-
-  /// Seed hash used for the DAG.
-  EthereumData? get seedHash => _seedHash;
-
-  EthereumData? _boundaryCondition;
-
-  /// The boundary condition ('target'), 2^256 / difficulty.
-  EthereumData? get boundaryCondition => _boundaryCondition;
-
   /// Construct from the supplied list.
   void construct(List<String>? data) {
     if (data == null) {
       return;
     }
-    if (data.length != 3) {
+    if (data.length != workMessageLength) {
       return;
     }
-    _powHash = EthereumData.fromString(data[0]);
+    _powHash = EthereumData.fromString(data.first);
     _seedHash = EthereumData.fromString(data[1]);
     _boundaryCondition = EthereumData.fromString(data[2]);
   }
 
   @override
   String toString() {
-    final ret =
-        'Ethereum Work :'
+    return 'Ethereum Work :'
         '\n'
         '  Pow Hash : $powHash'
         '\n'
@@ -59,7 +60,5 @@ class EthereumWork {
         '\n'
         '  Boundary Condition : $boundaryCondition'
         '\n';
-
-    return ret;
   }
 }

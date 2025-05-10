@@ -11,6 +11,64 @@ part of '../../ethereum.dart';
 
 /// An ethereum transaction message
 class EthereumTransaction {
+  EthereumData? _hash;
+
+  int? _nonce;
+
+  EthereumData? _blockHash;
+
+  int? _blockNumber;
+
+  int? _transactionIndex;
+
+  EthereumAddress? _from;
+
+  EthereumAddress? _to;
+
+  int? _value;
+
+  int? _gasPrice;
+
+  int? _gas;
+
+  EthereumData? _input;
+
+  /// Input. Data sent with the transaction.
+  EthereumData? get input => _input;
+
+  /// Hash. hash of the transaction.
+  EthereumData? get hash => _hash;
+
+  /// Nonce. The number of transactions made by the sender prior to this one.
+  int? get nonce => _nonce;
+
+  /// Block hash. Hash of the block where this transaction was in.
+  /// Null when the transaction is pending.
+  EthereumData? get blockHash => _blockHash;
+
+  /// Block number. Block number of this transaction.
+  /// Null when the transaction is pending.
+  int? get blockNumber => _blockNumber;
+
+  /// Transaction index. The transactions index position in the block.
+  /// Null when the transaction is pending.
+  int? get transactionIndex => _transactionIndex;
+
+  /// From. Address of the sender.
+  EthereumAddress? get from => _from;
+
+  /// To. Address of the receiver. Null when a contract creation transaction.
+  EthereumAddress? get to => _to;
+
+  /// Value. Value transferred in Wei.
+  int? get value => _value;
+
+  /// Gas price. Gas price provided by the sender in Wei.
+  int? get gasPrice => _gasPrice;
+
+  /// Gas. Gas provided by the sender.
+  int? get gas => _gas;
+
   /// Constructor
   EthereumTransaction();
 
@@ -18,64 +76,6 @@ class EthereumTransaction {
   EthereumTransaction.fromMap(Map<String, dynamic>? result) {
     construct(result);
   }
-
-  EthereumData? _hash;
-
-  /// Hash. hash of the transaction.
-  EthereumData? get hash => _hash;
-
-  int? _nonce;
-
-  /// Nonce. The number of transactions made by the sender prior to this one.
-  int? get nonce => _nonce;
-
-  EthereumData? _blockHash;
-
-  /// Block hash. Hash of the block where this transaction was in.
-  /// Null when the transaction is pending.
-  EthereumData? get blockHash => _blockHash;
-
-  int? _blockNumber;
-
-  /// Block number. Block number of this transaction.
-  /// Null when the transaction is pending.
-  int? get blockNumber => _blockNumber;
-
-  int? _transactionIndex;
-
-  /// Transaction index. The transactions index position in the block.
-  /// Null when the transaction is pending.
-  int? get transactionIndex => _transactionIndex;
-
-  EthereumAddress? _from;
-
-  /// From. Address of the sender.
-  EthereumAddress? get from => _from;
-
-  EthereumAddress? _to;
-
-  /// To. Address of the receiver. Null when a contract creation transaction.
-  EthereumAddress? get to => _to;
-
-  int? _value;
-
-  /// Value. Value transferred in Wei.
-  int? get value => _value;
-
-  int? _gasPrice;
-
-  /// Gas price. Gas price provided by the sender in Wei.
-  int? get gasPrice => _gasPrice;
-
-  int? _gas;
-
-  /// Gas. Gas provided by the sender.
-  int? get gas => _gas;
-
-  EthereumData? _input;
-
-  /// Input. Data sent with the transaction.
-  EthereumData? get input => _input;
 
   /// Construct from the supplied Map, only check for the keys we need.
   void construct(Map<String, dynamic>? data) {
@@ -141,8 +141,7 @@ class EthereumTransaction {
 
   @override
   String toString() {
-    final ret =
-        'Ethereum Transaction :'
+    return 'Ethereum Transaction :'
         '\n'
         '  Hash : $hash'
         '\n'
@@ -160,7 +159,5 @@ class EthereumTransaction {
         '\n'
         '  Gas : $gas'
         '\n';
-
-    return ret;
   }
 }
