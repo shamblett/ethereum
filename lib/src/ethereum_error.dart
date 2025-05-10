@@ -11,9 +11,6 @@ part of '../ethereum.dart';
 
 /// Manages Ethereum client errors
 class EthereumError {
-  /// Constructor
-  EthereumError();
-
   /// No error
   static const String noError = 'No Error';
 
@@ -22,23 +19,26 @@ class EthereumError {
 
   int? _code = 0;
 
-  /// Error code
-  int? get code => _code;
+  int _id = noId;
+
+  DateTime? _timestamp;
 
   String? _message = noError;
 
   /// Error message
   String? get message => _message;
 
-  int _id = noId;
+  /// Error code
+  int? get code => _code;
 
   /// Error transaction id
   int get id => _id;
 
-  DateTime? _timestamp;
-
   /// Error timestamp
   DateTime? get timestamp => _timestamp;
+
+  /// Constructor
+  EthereumError();
 
   /// Update the error details
   void updateError(int? errorCode, String? errorMessage, int errorId) {

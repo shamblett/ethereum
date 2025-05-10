@@ -14,6 +14,64 @@ part of '../ethereum.dart';
 /// can be found at https://github.com/ethereum/wiki/wiki/JSON-RPC#web3_clientversion.
 /// The API calls return null if an ethereum error occurred.
 class Ethereum {
+  /// Constants
+  /// HTTP scheme
+  static const String rpcHttpScheme = 'http';
+
+  /// Web socket scheme
+  static const String rpcWsScheme = 'ws';
+
+  /// Defaults
+  /// HTTP port
+  static const int defaultHttpPort = 8545;
+
+  /// Web socket port
+  static const int defaultWsPort = 8546;
+
+  /// Connection parameters
+  /// Port
+  int port = defaultHttpPort;
+
+  /// Host
+  String? host;
+
+  /// Json RPC client
+  late EthereumRpcClient rpcClient;
+
+  /// Print errors, default is off
+  bool printError = false;
+
+  /// Last error
+  EthereumError lastError = EthereumError();
+
+  late Uri _uri;
+
+  // Network adaptor
+  EthereumINetworkAdapter _networkAdapter;
+
+  // Admin API
+  EthereumApiAdmin? _admin;
+
+  // Eth API
+  EthereumApiEth? _eth;
+
+  /// Uri
+  Uri get uri => _uri;
+
+  /// Transmission id
+  int get id => rpcClient.id;
+
+  /// The ETH API
+  EthereumApiEth? get eth => _eth;
+
+  /// The Admin API
+  EthereumApiAdmin? get admin => _admin;
+
+  /// HTTP Adapter
+  set httpAdapter(EthereumINetworkAdapter adapter) => _networkAdapter = adapter;
+
+  set id(int? value) => rpcClient.resetTransmissionId(value);
+
   /// Default constructor
   Ethereum(this._networkAdapter) {
     rpcClient = EthereumRpcClient(_networkAdapter);
@@ -37,50 +95,6 @@ class Ethereum {
     _admin = EthereumApiAdmin(this);
     connectParameters(scheme, hostname, port);
   }
-
-  /// Constants
-  /// HTTP scheme
-  static const String rpcHttpScheme = 'http';
-
-  /// Web socket scheme
-  static const String rpcWsScheme = 'ws';
-
-  /// Defaults
-  /// HTTP port
-  static const int defaultHttpPort = 8545;
-
-  /// Web socket port
-  static const int defaultWsPort = 8546;
-
-  /// Connection parameters
-  /// Port
-  int port = defaultHttpPort;
-
-  /// Host
-  String? host;
-
-  late Uri _uri;
-
-  /// Uri
-  Uri get uri => _uri;
-
-  EthereumINetworkAdapter _networkAdapter;
-
-  /// HTTP Adapter
-  set httpAdapter(EthereumINetworkAdapter adapter) => _networkAdapter = adapter;
-
-  /// Json RPC client
-  late EthereumRpcClient rpcClient;
-
-  /// Last error
-  EthereumError lastError = EthereumError();
-
-  set id(int? value) => rpcClient.resetTransmissionId(value);
-
-  /// Transmission id
-  int get id => rpcClient.id;
-
-  /// Connection methods
 
   //// Connect using a host string of the form http://thehost.com:1234,
   /// port is optional. Scheme must be http or ws
@@ -119,32 +133,6 @@ class Ethereum {
     _validateUri(uri);
   }
 
-  void _validateUri(Uri puri) {
-    // Must have a valid scheme which must be http, host and port
-    if (puri.hasAuthority && (puri.host.isNotEmpty)) {
-      host = puri.host;
-    } else {
-      throw ArgumentError.value(
-        puri.host,
-        'Ethereum::_validateUri - invalid host',
-      );
-    }
-    var newUri = puri;
-    if (!puri.hasPort) {
-      if (puri.scheme == rpcHttpScheme) {
-        newUri = puri.replace(port: defaultHttpPort);
-      } else {
-        newUri = puri.replace(port: defaultWsPort);
-      }
-    }
-    port = newUri.port;
-    _uri = newUri;
-    rpcClient.uri = _uri;
-  }
-
-  /// Print errors, default is off
-  bool printError = false;
-
   /// Error processing helper
   void processError(String method, Map<String, dynamic> res) {
     if (res.isEmpty) {
@@ -160,15 +148,25 @@ class Ethereum {
     }
   }
 
-  /// Eth API
-  EthereumApiEth? _eth;
-
-  /// The ETH API
-  EthereumApiEth? get eth => _eth;
-
-  /// Admin API
-  EthereumApiAdmin? _admin;
-
-  /// The Admin API
-  EthereumApiAdmin? get admin => _admin;
+  void _validateUri(Uri puri) {
+    // Must have a valid scheme which must be http, host and port
+    if (puri.hasAuthority && (puri.host.isNotEmpty)) {
+      host = puri.host;
+    } else {
+      throw ArgumentError.value(
+        puri.host,
+        'Ethereum::_validateUri - invalid host',
+      );
+    }
+    var newUri = puri;
+    if (!puri.hasPort) {
+      newUri =
+          puri.scheme == rpcHttpScheme
+              ? puri.replace(port: defaultHttpPort)
+              : puri.replace(port: defaultWsPort);
+    }
+    port = newUri.port;
+    _uri = newUri;
+    rpcClient.uri = _uri;
+  }
 }
