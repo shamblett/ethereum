@@ -34,8 +34,10 @@ void main() {
         EthereumUtilities.intToHex(1, -2);
       } on Exception catch (e) {
         expect(e is FormatException, isTrue);
-        expect(e.toString(),
-            'FormatException: EthereumUtilities:: intToHex - invalid pad value, -2');
+        expect(
+          e.toString(),
+          'FormatException: EthereumUtilities:: intToHex - invalid pad value, -2',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -46,8 +48,10 @@ void main() {
         EthereumUtilities.intToHex(1, 3);
       } on Exception catch (e) {
         expect(e is FormatException, isTrue);
-        expect(e.toString(),
-            'FormatException: EthereumUtilities:: intToHex - invalid pad value, 3');
+        expect(
+          e.toString(),
+          'FormatException: EthereumUtilities:: intToHex - invalid pad value, 3',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -82,8 +86,10 @@ void main() {
         client.connectString(null);
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::connectString - hostname): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::connectString - hostname): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -107,8 +113,10 @@ void main() {
         client.connectUri(null);
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::connectUri - uri): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::connectUri - uri): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -134,8 +142,10 @@ void main() {
         client.connectParameters(Ethereum.rpcHttpScheme, null);
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::connectParameters - hostname): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::connectParameters - hostname): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -147,8 +157,10 @@ void main() {
         client.connectParameters('Billy', 'localhost');
       } on Exception catch (e) {
         expect(e is FormatException, isTrue);
-        expect(e.toString(),
-            'FormatException: Ethereum::connectParameters - invalid scheme Billy');
+        expect(
+          e.toString(),
+          'FormatException: Ethereum::connectParameters - invalid scheme Billy',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -187,8 +199,10 @@ void main() {
         await client.eth!.sha3(null);
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::sha3 - data): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::sha3 - data): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -199,8 +213,10 @@ void main() {
         await client.eth!.getBalance(null, null);
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::getBalance - address): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::getBalance - address): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -208,12 +224,16 @@ void main() {
     test('Balance - block', () async {
       var thrown = false;
       try {
-        await client.eth!
-            .getBalance(EthereumAddress.fromBigInt(BigInt.zero), null);
+        await client.eth!.getBalance(
+          EthereumAddress.fromBigInt(BigInt.zero),
+          null,
+        );
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::getBalance - block): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::getBalance - block): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -221,12 +241,17 @@ void main() {
     test('Storage at - block', () async {
       var thrown = false;
       try {
-        await client.eth!
-            .getStorageAt(EthereumAddress.fromBigInt(BigInt.one), 2, null);
+        await client.eth!.getStorageAt(
+          EthereumAddress.fromBigInt(BigInt.one),
+          2,
+          null,
+        );
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::getStorageAt - block): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::getStorageAt - block): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -234,12 +259,17 @@ void main() {
     test('Storage at - pos', () async {
       var thrown = false;
       try {
-        await client.eth!.getStorageAt(EthereumAddress.fromBigInt(BigInt.one),
-            null, EthereumDefaultBlock());
+        await client.eth!.getStorageAt(
+          EthereumAddress.fromBigInt(BigInt.one),
+          null,
+          EthereumDefaultBlock(),
+        );
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::getStorageAt - pos): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::getStorageAt - pos): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -250,8 +280,10 @@ void main() {
         await client.eth!.getStorageAt(null, 1, EthereumDefaultBlock());
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::getStorageAt - address): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::getStorageAt - address): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -262,8 +294,10 @@ void main() {
         await client.eth!.getTransactionCount(null, EthereumDefaultBlock());
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::getTransactionCount - address): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::getTransactionCount - address): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -271,12 +305,16 @@ void main() {
     test('Block transaction count - block', () async {
       var thrown = false;
       try {
-        await client.eth!
-            .getTransactionCount(EthereumAddress.fromBigInt(BigInt.one), null);
+        await client.eth!.getTransactionCount(
+          EthereumAddress.fromBigInt(BigInt.one),
+          null,
+        );
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::getTransactionCount - block): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::getTransactionCount - block): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -287,8 +325,10 @@ void main() {
         await client.eth!.getBlockTransactionCountByHash(null);
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::getBlockTransactionCountByHash - blockHash): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::getBlockTransactionCountByHash - blockHash): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -299,8 +339,10 @@ void main() {
         await client.eth!.getBlockTransactionCountByNumber(null);
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::getBlockTransactionCountByNumber - blockNumber): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::getBlockTransactionCountByNumber - blockNumber): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -311,8 +353,10 @@ void main() {
         await client.eth!.getUncleCountByHash(null);
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::getUncleCountByHash - blockHash): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::getUncleCountByHash - blockHash): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -323,8 +367,10 @@ void main() {
         await client.eth!.getUncleCountByNumber(null);
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::getUncleCountByNumber - blockNumber): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::getUncleCountByNumber - blockNumber): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -335,8 +381,10 @@ void main() {
         await client.eth!.getCode(null, EthereumDefaultBlock());
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::getCode - address): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::getCode - address): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -347,8 +395,10 @@ void main() {
         await client.eth!.getCode(EthereumAddress.fromBigInt(BigInt.two), null);
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::getCode - block): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::getCode - block): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -359,8 +409,10 @@ void main() {
         await client.eth!.sign(null, EthereumData.fromBigInt(BigInt.zero));
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::sign - account): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::sign - account): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -371,8 +423,10 @@ void main() {
         await client.eth!.sign(EthereumAddress.fromBigInt(BigInt.zero), null);
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::sign - message): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::sign - message): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -380,12 +434,16 @@ void main() {
     test('Send transaction - address', () async {
       var thrown = false;
       try {
-        await client.eth!
-            .sendTransaction(null, EthereumData.fromBigInt(BigInt.zero));
+        await client.eth!.sendTransaction(
+          null,
+          EthereumData.fromBigInt(BigInt.zero),
+        );
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::sendTransaction - address): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::sendTransaction - address): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -393,12 +451,16 @@ void main() {
     test('Send transaction - data', () async {
       var thrown = false;
       try {
-        await client.eth!
-            .sendTransaction(EthereumAddress.fromBigInt(BigInt.zero), null);
+        await client.eth!.sendTransaction(
+          EthereumAddress.fromBigInt(BigInt.zero),
+          null,
+        );
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::sendTransaction - data): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::sendTransaction - data): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -409,8 +471,10 @@ void main() {
         await client.eth!.sendRawTransaction(null);
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::sendRawTransaction - signedTransaction): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::sendRawTransaction - signedTransaction): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -421,8 +485,10 @@ void main() {
         await client.eth!.call(null, null);
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::call - address): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::call - address): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -433,8 +499,10 @@ void main() {
         await client.eth!.call(EthereumAddress.fromBigInt(BigInt.zero), null);
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::call - block): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::call - block): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -445,8 +513,10 @@ void main() {
         await client.eth!.getBlockByHash(null);
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::getBlockByHash - blockHash): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::getBlockByHash - blockHash): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -457,8 +527,10 @@ void main() {
         await client.eth!.getBlockByNumber(null);
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::getBlockByNumber - blockNumber): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::getBlockByNumber - blockNumber): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -469,8 +541,10 @@ void main() {
         await client.eth!.getTransactionByHash(null);
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::getTransactionByHash - hash): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::getTransactionByHash - hash): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -481,8 +555,10 @@ void main() {
         await client.eth!.getTransactionByBlockHashAndIndex(null, 0);
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::getTransactionByBlockHashAndIndex - blockHash): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::getTransactionByBlockHashAndIndex - blockHash): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -491,11 +567,15 @@ void main() {
       var thrown = false;
       try {
         await client.eth!.getTransactionByBlockHashAndIndex(
-            EthereumData.fromBigInt(BigInt.zero), null);
+          EthereumData.fromBigInt(BigInt.zero),
+          null,
+        );
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::getTransactionByBlockHashAndIndex - index): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::getTransactionByBlockHashAndIndex - index): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -506,8 +586,10 @@ void main() {
         await client.eth!.getTransactionByBlockNumberAndIndex(null, 0);
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::getTransactionByBlockNumberAndIndex - blockNumber): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::getTransactionByBlockNumberAndIndex - blockNumber): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -515,12 +597,16 @@ void main() {
     test('Get transaction by block number and index - index', () async {
       var thrown = false;
       try {
-        await client.eth!
-            .getTransactionByBlockNumberAndIndex(EthereumDefaultBlock(), null);
+        await client.eth!.getTransactionByBlockNumberAndIndex(
+          EthereumDefaultBlock(),
+          null,
+        );
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::getTransactionByBlockNumberAndIndex - index): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::getTransactionByBlockNumberAndIndex - index): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -531,8 +617,10 @@ void main() {
         await client.eth!.getTransactionReceipt(null);
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::getTransactionReceipt - transactionHash): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::getTransactionReceipt - transactionHash): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -543,8 +631,10 @@ void main() {
         await client.eth!.getUncleByBlockHashAndIndex(null, 0);
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::getUncleByBlockHashAndIndex - blockHash): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::getUncleByBlockHashAndIndex - blockHash): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -553,11 +643,15 @@ void main() {
       var thrown = false;
       try {
         await client.eth!.getUncleByBlockHashAndIndex(
-            EthereumData.fromBigInt(BigInt.zero), null);
+          EthereumData.fromBigInt(BigInt.zero),
+          null,
+        );
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::getUncleByBlockHashAndIndex - index): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::getUncleByBlockHashAndIndex - index): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -568,8 +662,10 @@ void main() {
         await client.eth!.getUncleByBlockNumberAndIndex(null, 0);
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::getUncleByBlockNumberAndIndex - blockNumber): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::getUncleByBlockNumberAndIndex - blockNumber): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -577,12 +673,16 @@ void main() {
     test('Get uncle by block number and index - index', () async {
       var thrown = false;
       try {
-        await client.eth!
-            .getUncleByBlockNumberAndIndex(EthereumDefaultBlock(), null);
+        await client.eth!.getUncleByBlockNumberAndIndex(
+          EthereumDefaultBlock(),
+          null,
+        );
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::getUncleByBlockNumberAndIndex - index): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::getUncleByBlockNumberAndIndex - index): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -593,8 +693,10 @@ void main() {
         await client.eth!.uninstallFilter(null);
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::uninstallFilter - filterId): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::uninstallFilter - filterId): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -605,8 +707,10 @@ void main() {
         await client.eth!.getFilterChanges(null);
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::getFilterChanges - filterId): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::getFilterChanges - filterId): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -617,8 +721,10 @@ void main() {
         await client.eth!.getFilterLogs(null);
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::getFilterLogs - filterId): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::getFilterLogs - filterId): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -626,12 +732,17 @@ void main() {
     test('Submit work - nonce', () async {
       var thrown = false;
       try {
-        await client.eth!.submitWork(null, EthereumData.fromBigInt(BigInt.one),
-            EthereumData.fromBigInt(BigInt.two));
+        await client.eth!.submitWork(
+          null,
+          EthereumData.fromBigInt(BigInt.one),
+          EthereumData.fromBigInt(BigInt.two),
+        );
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::submitWork - nonce): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::submitWork - nonce): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -639,12 +750,17 @@ void main() {
     test('Submit work - powHash', () async {
       var thrown = false;
       try {
-        await client.eth!.submitWork(EthereumData.fromBigInt(BigInt.one), null,
-            EthereumData.fromBigInt(BigInt.two));
+        await client.eth!.submitWork(
+          EthereumData.fromBigInt(BigInt.one),
+          null,
+          EthereumData.fromBigInt(BigInt.two),
+        );
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::submitWork - powHash): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::submitWork - powHash): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -652,12 +768,17 @@ void main() {
     test('Submit work - digest', () async {
       var thrown = false;
       try {
-        await client.eth!.submitWork(EthereumData.fromBigInt(BigInt.one),
-            EthereumData.fromBigInt(BigInt.two), null);
+        await client.eth!.submitWork(
+          EthereumData.fromBigInt(BigInt.one),
+          EthereumData.fromBigInt(BigInt.two),
+          null,
+        );
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::submitWork - digest): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::submitWork - digest): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -668,8 +789,10 @@ void main() {
         await client.eth!.submitHashrate(null, 'id');
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::submitHashRate - hashRate): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::submitHashRate - hashRate): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -677,12 +800,16 @@ void main() {
     test('Submit hash rate - id', () async {
       var thrown = false;
       try {
-        await client.eth!
-            .submitHashrate(EthereumData.fromBigInt(BigInt.one), null);
+        await client.eth!.submitHashrate(
+          EthereumData.fromBigInt(BigInt.one),
+          null,
+        );
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::submitHashRate - id): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::submitHashRate - id): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -691,15 +818,23 @@ void main() {
       var thrown = false;
       try {
         await client.eth!.shhPost(
-            null, EthereumData.fromBigInt(BigInt.one), 2, 3,
-            to: EthereumAddress.fromString(
-                '0xad52b73690c35b9211a18c9293e805d792474168'),
-            from: EthereumAddress.fromString(
-                '0xad52b73690c35b9211a18c9293e805d792474168'));
+          null,
+          EthereumData.fromBigInt(BigInt.one),
+          2,
+          3,
+          to: EthereumAddress.fromString(
+            '0xad52b73690c35b9211a18c9293e805d792474168',
+          ),
+          from: EthereumAddress.fromString(
+            '0xad52b73690c35b9211a18c9293e805d792474168',
+          ),
+        );
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::shhPost - topics): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::shhPost - topics): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -708,15 +843,23 @@ void main() {
       var thrown = false;
       try {
         await client.eth!.shhPost(
-            <EthereumData>[EthereumData.fromBigInt(BigInt.one)], null, 2, 3,
-            to: EthereumAddress.fromString(
-                '0xad52b73690c35b9211a18c9293e805d792474168'),
-            from: EthereumAddress.fromString(
-                '0xad52b73690c35b9211a18c9293e805d792474168'));
+          <EthereumData>[EthereumData.fromBigInt(BigInt.one)],
+          null,
+          2,
+          3,
+          to: EthereumAddress.fromString(
+            '0xad52b73690c35b9211a18c9293e805d792474168',
+          ),
+          from: EthereumAddress.fromString(
+            '0xad52b73690c35b9211a18c9293e805d792474168',
+          ),
+        );
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::shhPost - payload): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::shhPost - payload): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -725,18 +868,23 @@ void main() {
       var thrown = false;
       try {
         await client.eth!.shhPost(
-            <EthereumData>[EthereumData.fromBigInt(BigInt.one)],
-            EthereumData.fromBigInt(BigInt.one),
-            null,
-            3,
-            to: EthereumAddress.fromString(
-                '0xad52b73690c35b9211a18c9293e805d792474168'),
-            from: EthereumAddress.fromString(
-                '0xad52b73690c35b9211a18c9293e805d792474168'));
+          <EthereumData>[EthereumData.fromBigInt(BigInt.one)],
+          EthereumData.fromBigInt(BigInt.one),
+          null,
+          3,
+          to: EthereumAddress.fromString(
+            '0xad52b73690c35b9211a18c9293e805d792474168',
+          ),
+          from: EthereumAddress.fromString(
+            '0xad52b73690c35b9211a18c9293e805d792474168',
+          ),
+        );
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::shhPost - priority): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::shhPost - priority): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -745,18 +893,23 @@ void main() {
       var thrown = false;
       try {
         await client.eth!.shhPost(
-            <EthereumData>[EthereumData.fromBigInt(BigInt.one)],
-            EthereumData.fromBigInt(BigInt.one),
-            2,
-            null,
-            to: EthereumAddress.fromString(
-                '0xad52b73690c35b9211a18c9293e805d792474168'),
-            from: EthereumAddress.fromString(
-                '0xad52b73690c35b9211a18c9293e805d792474168'));
+          <EthereumData>[EthereumData.fromBigInt(BigInt.one)],
+          EthereumData.fromBigInt(BigInt.one),
+          2,
+          null,
+          to: EthereumAddress.fromString(
+            '0xad52b73690c35b9211a18c9293e805d792474168',
+          ),
+          from: EthereumAddress.fromString(
+            '0xad52b73690c35b9211a18c9293e805d792474168',
+          ),
+        );
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::shhPost - ttl): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::shhPost - ttl): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -794,7 +947,7 @@ void main() {
           17,
           18,
           19,
-          20
+          20,
         ];
         final address = EthereumByteAddress(fromList(data));
         expect(address.toList(), data);
@@ -829,7 +982,7 @@ void main() {
           67,
           98,
           76,
-          100
+          100,
         ];
         const checkdata = <int>[
           1,
@@ -851,7 +1004,7 @@ void main() {
           17,
           18,
           19,
-          20
+          20,
         ];
         final address = EthereumByteAddress(fromList(data));
         expect(address.toList(), checkdata);
@@ -878,7 +1031,7 @@ void main() {
           0,
           0,
           0,
-          0
+          0,
         ];
         final address = EthereumByteAddress(fromList(data));
         expect(address.toList(), checkdata);
@@ -904,7 +1057,7 @@ void main() {
           17,
           18,
           19,
-          20
+          20,
         ];
         final address = EthereumByteAddress.fromIntList(data);
         expect(address.toList(), data);
@@ -930,7 +1083,7 @@ void main() {
           17,
           18,
           19,
-          400
+          400,
         ];
         const checkdata = <int>[
           1,
@@ -952,7 +1105,7 @@ void main() {
           17,
           18,
           19,
-          0
+          0,
         ];
         final address = EthereumByteAddress.fromIntList(data);
         expect(address.toList(), checkdata);
@@ -978,11 +1131,13 @@ void main() {
           17,
           18,
           19,
-          20
+          20,
         ];
         final address = EthereumByteAddress(fromList(data));
-        expect(address.toString(),
-            '[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]');
+        expect(
+          address.toString(),
+          '[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]',
+        );
       });
       test('Equals', () {
         const data = <int>[
@@ -1005,7 +1160,7 @@ void main() {
           17,
           18,
           19,
-          20
+          20,
         ];
         final address1 = EthereumByteAddress(fromList(data));
         final address2 = EthereumByteAddress(fromList(data));
@@ -1032,7 +1187,7 @@ void main() {
           17,
           18,
           19,
-          20
+          20,
         ];
         const data2 = <int>[
           1,
@@ -1054,7 +1209,7 @@ void main() {
           17,
           18,
           19,
-          20
+          20,
         ];
         final address1 = EthereumByteAddress(fromList(data1));
         final address2 = EthereumByteAddress(fromList(data2));
@@ -1081,7 +1236,7 @@ void main() {
           17,
           18,
           19,
-          20
+          20,
         ];
         const data2 = <int>[
           1,
@@ -1103,7 +1258,7 @@ void main() {
           17,
           18,
           19,
-          20
+          20,
         ];
         final address2 = EthereumByteAddress(fromList(data2));
         expect(data1 == address2.toList(), isFalse);
@@ -1129,7 +1284,7 @@ void main() {
           17,
           18,
           19,
-          20
+          20,
         ];
         final address = EthereumByteAddress(fromList(data));
         expect(address.asString, '0x0102030405060708090a0b0c0d0e0f1011121314');
@@ -1200,7 +1355,7 @@ void main() {
           17,
           18,
           19,
-          20
+          20,
         ];
         final address = EthereumByteAddress(fromList(data));
         final eaddress = EthereumAddress.fromByteAddress(address);
@@ -1326,7 +1481,7 @@ void main() {
       final sync = <String, String>{
         'startingBlock': '0x384',
         'currentBlock': '0x386',
-        'highestBlock': '0x454'
+        'highestBlock': '0x454',
       };
       final message = EthereumSyncStatus.fromMap(sync);
       expect(message.syncing, isTrue);
@@ -1370,27 +1525,37 @@ void main() {
           'gas': '0x7f111', // 520465
           'gasPrice': '0x09184e72a000',
           'input':
-              '0x603880600c6000396000f300603880600c6000396000f3603880600c6000396000f360'
-        }
+              '0x603880600c6000396000f300603880600c6000396000f3603880600c6000396000f360',
+        },
       };
 
       final message = EthereumTransaction.fromMap(transaction);
-      expect(message.hash!.asString,
-          '0xc6ef2fc5426d6ad6fd9e2a26abeab0aa2411b7ab17f30a99d3cb96aed1d1055b');
+      expect(
+        message.hash!.asString,
+        '0xc6ef2fc5426d6ad6fd9e2a26abeab0aa2411b7ab17f30a99d3cb96aed1d1055b',
+      );
       expect(message.nonce, 0);
-      expect(message.blockHash!.asString,
-          '0xbeab0aa2411b7ab17f30a99d3cb9c6ef2fc5426d6ad6fd9e2a26a6aed1d1055b');
+      expect(
+        message.blockHash!.asString,
+        '0xbeab0aa2411b7ab17f30a99d3cb9c6ef2fc5426d6ad6fd9e2a26a6aed1d1055b',
+      );
       expect(message.blockNumber, 5599);
       expect(message.transactionIndex, 1);
       expect(
-          message.from!.asString, '0x407d73d8a49eeb85d32cf465507dd71d507100c1');
+        message.from!.asString,
+        '0x407d73d8a49eeb85d32cf465507dd71d507100c1',
+      );
       expect(
-          message.to!.asString, '0x85a43d8a49eeb85d32cf465507dd71d507100c10');
+        message.to!.asString,
+        '0x85a43d8a49eeb85d32cf465507dd71d507100c10',
+      );
       expect(message.value, 520464);
       expect(message.gas, 520465);
       expect(message.gasPrice, 0x09184e72a000);
-      expect(message.input!.asString,
-          '0x603880600c6000396000f300603880600c6000396000f3603880600c6000396000f360');
+      expect(
+        message.input!.asString,
+        '0x603880600c6000396000f300603880600c6000396000f3603880600c6000396000f360',
+      );
       print(message);
     });
     test('Block - null', () {
@@ -1450,34 +1615,52 @@ void main() {
           'timestamp': '0x54e34e8e', // 1424182926
           'transactions': <String>[
             '0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527332',
-            '0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527333'
+            '0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527333',
           ],
           'uncles': <String>[
             '0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527334',
-            '0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527335'
-          ]
-        }
+            '0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527335',
+          ],
+        },
       };
       final message = EthereumBlock.fromMap(block);
       expect(message.number, 436);
-      expect(message.hash!.asString,
-          '0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331');
-      expect(message.parentHash!.asString,
-          '0x9646252be9520f6e71339a8df9c55e4d7619deeb018d2a3f2d21fc165dde5eb5');
-      expect(message.nonce!.asString,
-          '0xe04d296d2460cfb8472af2c5fd05b5a214109c25688d3704aed5484f9a7792f2');
-      expect(message.sha3Uncles!.asString,
-          '0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347');
-      expect(message.logsBloom!.asString,
-          '0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331');
-      expect(message.transactionsRoot!.asString,
-          '0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421');
-      expect(message.stateRoot!.asString,
-          '0xd5855eb08b3387c0af375e9cdb6acfc05eb8f519e419b874b6ff2ffda7ed1dff');
-      expect(message.receiptsRoot!.asString,
-          '0xd5855eb08b3387c0af375e9cdb6acfc05eb8f519e419b874b6ff2ffda7ed1dff');
-      expect(message.miner!.asString,
-          '0x4e65fda2159562a496f9f3522f89122a3088497a');
+      expect(
+        message.hash!.asString,
+        '0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331',
+      );
+      expect(
+        message.parentHash!.asString,
+        '0x9646252be9520f6e71339a8df9c55e4d7619deeb018d2a3f2d21fc165dde5eb5',
+      );
+      expect(
+        message.nonce!.asString,
+        '0xe04d296d2460cfb8472af2c5fd05b5a214109c25688d3704aed5484f9a7792f2',
+      );
+      expect(
+        message.sha3Uncles!.asString,
+        '0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347',
+      );
+      expect(
+        message.logsBloom!.asString,
+        '0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331',
+      );
+      expect(
+        message.transactionsRoot!.asString,
+        '0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421',
+      );
+      expect(
+        message.stateRoot!.asString,
+        '0xd5855eb08b3387c0af375e9cdb6acfc05eb8f519e419b874b6ff2ffda7ed1dff',
+      );
+      expect(
+        message.receiptsRoot!.asString,
+        '0xd5855eb08b3387c0af375e9cdb6acfc05eb8f519e419b874b6ff2ffda7ed1dff',
+      );
+      expect(
+        message.miner!.asString,
+        '0x4e65fda2159562a496f9f3522f89122a3088497a',
+      );
       expect(message.difficulty, 163591);
       expect(message.totalDifficulty, 163591);
       expect(message.extraData, EthereumData.fromBigInt(BigInt.zero));
@@ -1485,14 +1668,22 @@ void main() {
       expect(message.gasLimit, 653145);
       expect(message.gasUsed, 653145);
       expect(message.timestamp!.millisecondsSinceEpoch, 1424182926);
-      expect(message.transactions![0].asString,
-          '0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527332');
-      expect(message.transactions![1].asString,
-          '0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527333');
-      expect(message.uncles![0].asString,
-          '0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527334');
-      expect(message.uncles![1].asString,
-          '0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527335');
+      expect(
+        message.transactions![0].asString,
+        '0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527332',
+      );
+      expect(
+        message.transactions![1].asString,
+        '0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527333',
+      );
+      expect(
+        message.uncles![0].asString,
+        '0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527334',
+      );
+      expect(
+        message.uncles![1].asString,
+        '0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527335',
+      );
       expect(message.transactionsAreHashes, isTrue);
       print(message);
     });
@@ -1538,7 +1729,7 @@ void main() {
               'gas': '0x7f111', // 520465
               'gasPrice': '0x09184e72a000',
               'input':
-                  '0x603880600c6000396000f300603880600c6000396000f3603880600c6000396000f360'
+                  '0x603880600c6000396000f300603880600c6000396000f3603880600c6000396000f360',
             },
             <String, dynamic>{
               'hash':
@@ -1554,33 +1745,49 @@ void main() {
               'gas': '0x7f111', // 520465
               'gasPrice': '0x09184e72a000',
               'input':
-                  '0x603880600c6000396000f300603880600c6000396000f3603880600c6000396000f360'
-            }
+                  '0x603880600c6000396000f300603880600c6000396000f3603880600c6000396000f360',
+            },
           ],
           'uncles': <String>[
             '0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527334',
-            '0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527335'
-          ]
-        }
+            '0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527335',
+          ],
+        },
       };
       final message = EthereumBlock.fromMap(block);
       expect(message.number, 436);
-      expect(message.hash!.asString,
-          '0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331');
-      expect(message.parentHash!.asString,
-          '0x9646252be9520f6e71339a8df9c55e4d7619deeb018d2a3f2d21fc165dde5eb5');
-      expect(message.nonce!.asString,
-          '0xe04d296d2460cfb8472af2c5fd05b5a214109c25688d3704aed5484f9a7792f2');
-      expect(message.sha3Uncles!.asString,
-          '0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347');
-      expect(message.logsBloom!.asString,
-          '0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331');
-      expect(message.transactionsRoot!.asString,
-          '0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421');
-      expect(message.stateRoot!.asString,
-          '0xd5855eb08b3387c0af375e9cdb6acfc05eb8f519e419b874b6ff2ffda7ed1dff');
-      expect(message.miner!.asString,
-          '0x4e65fda2159562a496f9f3522f89122a3088497a');
+      expect(
+        message.hash!.asString,
+        '0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331',
+      );
+      expect(
+        message.parentHash!.asString,
+        '0x9646252be9520f6e71339a8df9c55e4d7619deeb018d2a3f2d21fc165dde5eb5',
+      );
+      expect(
+        message.nonce!.asString,
+        '0xe04d296d2460cfb8472af2c5fd05b5a214109c25688d3704aed5484f9a7792f2',
+      );
+      expect(
+        message.sha3Uncles!.asString,
+        '0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347',
+      );
+      expect(
+        message.logsBloom!.asString,
+        '0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331',
+      );
+      expect(
+        message.transactionsRoot!.asString,
+        '0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421',
+      );
+      expect(
+        message.stateRoot!.asString,
+        '0xd5855eb08b3387c0af375e9cdb6acfc05eb8f519e419b874b6ff2ffda7ed1dff',
+      );
+      expect(
+        message.miner!.asString,
+        '0x4e65fda2159562a496f9f3522f89122a3088497a',
+      );
       expect(message.difficulty, 163591);
       expect(message.totalDifficulty, 163591);
       expect(message.extraData!.asBigInt, BigInt.zero);
@@ -1591,10 +1798,14 @@ void main() {
       expect(message.transactions!.length, 2);
       expect(message.transactions![0].nonce, 0);
       expect(message.transactions![1].nonce, 1);
-      expect(message.uncles![0].asString,
-          '0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527334');
-      expect(message.uncles![1].asString,
-          '0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527335');
+      expect(
+        message.uncles![0].asString,
+        '0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527334',
+      );
+      expect(
+        message.uncles![1].asString,
+        '0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527335',
+      );
       expect(message.transactionsAreHashes, isFalse);
     });
     test('Log - null', () {
@@ -1626,26 +1837,34 @@ void main() {
           'data':
               '0x0000000000000000000000000000000000000000000000000000000000000000',
           'topics': <String>[
-            '0x59ebeb90bc63057b6515673c3ecf9438e5058bca0f92585014eced636878c9a5'
-          ]
-        }
+            '0x59ebeb90bc63057b6515673c3ecf9438e5058bca0f92585014eced636878c9a5',
+          ],
+        },
       };
       final message = EthereumLog.fromMap(log);
       expect(message.removed, false);
       expect(message.logIndex, 1);
       expect(message.blockNumber, 436);
-      expect(message.blockHash!.asString,
-          '0x8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcfdf829c5a142f1fccd7d');
-      expect(message.transactionHash!.asString,
-          '0xdf829c5a142f1fccd7d8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcf');
+      expect(
+        message.blockHash!.asString,
+        '0x8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcfdf829c5a142f1fccd7d',
+      );
+      expect(
+        message.transactionHash!.asString,
+        '0xdf829c5a142f1fccd7d8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcf',
+      );
       expect(message.transactionIndex, 0);
-      expect(message.address!.asString,
-          '0x16c5785ac562ff41e2dcfdf829c5a142f1fccd7d');
+      expect(
+        message.address!.asString,
+        '0x16c5785ac562ff41e2dcfdf829c5a142f1fccd7d',
+      );
       expect(message.data!.asBigInt, BigInt.zero);
       expect(message.topics, isNotNull);
       expect(message.topics!.length, 1);
-      expect(message.topics![0].asString,
-          '0x59ebeb90bc63057b6515673c3ecf9438e5058bca0f92585014eced636878c9a5');
+      expect(
+        message.topics![0].asString,
+        '0x59ebeb90bc63057b6515673c3ecf9438e5058bca0f92585014eced636878c9a5',
+      );
       print(message);
     });
     test('Transaction receipt - null', () {
@@ -1693,8 +1912,8 @@ void main() {
               'data':
                   '0x0000000000000000000000000000000000000000000000000000000000000000',
               'topics': <String>[
-                '0x59ebeb90bc63057b6515673c3ecf9438e5058bca0f92585014eced636878c9a5'
-              ]
+                '0x59ebeb90bc63057b6515673c3ecf9438e5058bca0f92585014eced636878c9a5',
+              ],
             },
             <String, dynamic>{
               'logIndex': '0x2', // 1
@@ -1708,26 +1927,32 @@ void main() {
               'data':
                   '0x0000000000000000000000000000000000000000000000000000000000000000',
               'topics': <String>[
-                '0x59ebeb90bc63057b6515673c3ecf9438e5058bca0f92585014eced636878c9a5'
-              ]
-            }
+                '0x59ebeb90bc63057b6515673c3ecf9438e5058bca0f92585014eced636878c9a5',
+              ],
+            },
           ],
           'logsBloom': '0x0',
           // 256 byte bloom filter
-          'status': '0x1'
-        }
+          'status': '0x1',
+        },
       };
       final message = EthereumTransactionReceipt.fromMap(tr);
-      expect(message.transactionHash!.asString,
-          '0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238');
+      expect(
+        message.transactionHash!.asString,
+        '0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238',
+      );
       expect(message.transactionIndex, 1);
       expect(message.blockNumber, 11);
-      expect(message.blockHash!.asString,
-          '0xc6ef2fc5426d6ad6fd9e2a26abeab0aa2411b7ab17f30a99d3cb96aed1d1055b');
+      expect(
+        message.blockHash!.asString,
+        '0xc6ef2fc5426d6ad6fd9e2a26abeab0aa2411b7ab17f30a99d3cb96aed1d1055b',
+      );
       expect(message.cumulativeGasUsed, 13244);
       expect(message.gasUsed, 1244);
-      expect(message.contractAddress!.asString,
-          '0xb60e8dd61c5d32be8058bb8eb970870f07233155');
+      expect(
+        message.contractAddress!.asString,
+        '0xb60e8dd61c5d32be8058bb8eb970870f07233155',
+      );
       expect(message.logs, isNotNull);
       expect(message.logs!.length, 2);
       expect(message.logs![0].logIndex, 1);
@@ -1769,8 +1994,8 @@ void main() {
               'data':
                   '0x0000000000000000000000000000000000000000000000000000000000000000',
               'topics': <String>[
-                '0x59ebeb90bc63057b6515673c3ecf9438e5058bca0f92585014eced636878c9a5'
-              ]
+                '0x59ebeb90bc63057b6515673c3ecf9438e5058bca0f92585014eced636878c9a5',
+              ],
             },
             <String, dynamic>{
               'logIndex': '0x2', // 1
@@ -1784,34 +2009,42 @@ void main() {
               'data':
                   '0x0000000000000000000000000000000000000000000000000000000000000000',
               'topics': <String>[
-                '0x59ebeb90bc63057b6515673c3ecf9438e5058bca0f92585014eced636878c9a5'
-              ]
-            }
+                '0x59ebeb90bc63057b6515673c3ecf9438e5058bca0f92585014eced636878c9a5',
+              ],
+            },
           ],
           'logsBloom': '0x0',
           // 256 byte bloom filter
           'root':
-              '0x59ebeb90bc63057b6515673c3ecf9438e5058bca0f92585014eced636878c9a5'
-        }
+              '0x59ebeb90bc63057b6515673c3ecf9438e5058bca0f92585014eced636878c9a5',
+        },
       };
       final message = EthereumTransactionReceipt.fromMap(tr);
-      expect(message.transactionHash!.asString,
-          '0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238');
+      expect(
+        message.transactionHash!.asString,
+        '0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238',
+      );
       expect(message.transactionIndex, 1);
       expect(message.blockNumber, 11);
-      expect(message.blockHash!.asString,
-          '0xc6ef2fc5426d6ad6fd9e2a26abeab0aa2411b7ab17f30a99d3cb96aed1d1055b');
+      expect(
+        message.blockHash!.asString,
+        '0xc6ef2fc5426d6ad6fd9e2a26abeab0aa2411b7ab17f30a99d3cb96aed1d1055b',
+      );
       expect(message.cumulativeGasUsed, 13244);
       expect(message.gasUsed, 1244);
-      expect(message.contractAddress!.asString,
-          '0xb60e8dd61c5d32be8058bb8eb970870f07233155');
+      expect(
+        message.contractAddress!.asString,
+        '0xb60e8dd61c5d32be8058bb8eb970870f07233155',
+      );
       expect(message.logs, isNotNull);
       expect(message.logs!.length, 2);
       expect(message.logs![0].logIndex, 1);
       expect(message.logs![1].logIndex, 2);
       expect(message.logsBloom!.asBigInt, BigInt.zero);
-      expect(message.root!.asString,
-          '0x59ebeb90bc63057b6515673c3ecf9438e5058bca0f92585014eced636878c9a5');
+      expect(
+        message.root!.asString,
+        '0x59ebeb90bc63057b6515673c3ecf9438e5058bca0f92585014eced636878c9a5',
+      );
       expect(message.status, isNull);
     });
   });
@@ -1827,17 +2060,21 @@ void main() {
     final filter = <String, dynamic>{
       'result': <String>[
         '0x8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcfdf829c5a142f1fccd7d',
-        '0x8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcfdf829c5a142f1fccd7e'
-      ]
+        '0x8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcfdf829c5a142f1fccd7e',
+      ],
     };
     final message = EthereumFilter.fromMap(filter);
     expect(message.logs, isNull);
     expect(message.hashes, isNotNull);
     expect(message.hashes!.length, 2);
-    expect(message.hashes![0].asString,
-        '0x8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcfdf829c5a142f1fccd7d');
-    expect(message.hashes![1].asString,
-        '0x8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcfdf829c5a142f1fccd7e');
+    expect(
+      message.hashes![0].asString,
+      '0x8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcfdf829c5a142f1fccd7d',
+    );
+    expect(
+      message.hashes![1].asString,
+      '0x8216c5785ac562ff41e2dcfdf5785ac562ff41e2dcfdf829c5a142f1fccd7e',
+    );
   });
   test('Filter - logs', () {
     final filter = <String, dynamic>{
@@ -1854,8 +2091,8 @@ void main() {
           'data':
               '0x0000000000000000000000000000000000000000000000000000000000000000',
           'topics': <String>[
-            '0x59ebeb90bc63057b6515673c3ecf9438e5058bca0f92585014eced636878c9a5'
-          ]
+            '0x59ebeb90bc63057b6515673c3ecf9438e5058bca0f92585014eced636878c9a5',
+          ],
         },
         <String, dynamic>{
           'logIndex': '0x2', // 1
@@ -1869,10 +2106,10 @@ void main() {
           'data':
               '0x0000000000000000000000000000000000000000000000000000000000000000',
           'topics': <String>[
-            '0x59ebeb90bc63057b6515673c3ecf9438e5058bca0f92585014eced636878c9a5'
-          ]
-        }
-      ]
+            '0x59ebeb90bc63057b6515673c3ecf9438e5058bca0f92585014eced636878c9a5',
+          ],
+        },
+      ],
     };
     final message = EthereumFilter.fromMap(filter);
     expect(message.hashes, isNull);
@@ -1892,15 +2129,21 @@ void main() {
     final work = <String>[
       '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef',
       '0x5EED00000000000000000000000000005EED0000000000000000000000000000',
-      '0xd1ff1c01710000000000000000000000d1ff1c01710000000000000000000000'
+      '0xd1ff1c01710000000000000000000000d1ff1c01710000000000000000000000',
     ];
     final message = EthereumWork.fromList(work);
-    expect(message.powHash!.asString,
-        '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef');
-    expect(message.seedHash!.asString,
-        '0x5EED00000000000000000000000000005EED0000000000000000000000000000');
-    expect(message.boundaryCondition!.asString,
-        '0xd1ff1c01710000000000000000000000d1ff1c01710000000000000000000000');
+    expect(
+      message.powHash!.asString,
+      '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef',
+    );
+    expect(
+      message.seedHash!.asString,
+      '0x5EED00000000000000000000000000005EED0000000000000000000000000000',
+    );
+    expect(
+      message.boundaryCondition!.asString,
+      '0xd1ff1c01710000000000000000000000d1ff1c01710000000000000000000000',
+    );
     print(message);
     final message1 = EthereumWork();
     print(message1);
@@ -1908,7 +2151,7 @@ void main() {
   test('Work - insufficient elements', () {
     final work = <String>[
       '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef',
-      '0x5EED00000000000000000000000000005EED0000000000000000000000000000'
+      '0x5EED00000000000000000000000000005EED0000000000000000000000000000',
     ];
     final message = EthereumWork.fromList(work);
     expect(message.powHash, isNull);
@@ -1979,9 +2222,10 @@ void main() {
       expect(error.message, 'An Error');
       expect(error.id, 50);
       expect(
-          error.timestamp!.millisecondsSinceEpoch <=
-              DateTime.now().millisecondsSinceEpoch,
-          isTrue);
+        error.timestamp!.millisecondsSinceEpoch <=
+            DateTime.now().millisecondsSinceEpoch,
+        isTrue,
+      );
       expect(error.toString(), 'Code : 10 <> Message : An Error <> Id : 50');
     });
   });
@@ -1994,8 +2238,10 @@ void main() {
         await client.admin!.personalImportRawKey(null, '');
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::personalImportRawKey - keydata): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::personalImportRawKey - keydata): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -2006,8 +2252,10 @@ void main() {
         await client.admin!.personalImportRawKey('', null);
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::personalImportRawKey - passphrase): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::personalImportRawKey - passphrase): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -2018,8 +2266,10 @@ void main() {
         await client.admin!.personalLockAccount(null);
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::personalLockAccount - address): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::personalLockAccount - address): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -2030,8 +2280,10 @@ void main() {
         await client.admin!.personalNewAccount(null);
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::personalNewAccount - passphrase): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::personalNewAccount - passphrase): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -2042,8 +2294,10 @@ void main() {
         await client.admin!.personalUnlockAccount(null, '');
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::personalUnlockAccount - address): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::personalUnlockAccount - address): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -2052,11 +2306,15 @@ void main() {
       var thrown = false;
       try {
         await client.admin!.personalUnlockAccount(
-            EthereumAddress.fromBigInt(BigInt.zero), null);
+          EthereumAddress.fromBigInt(BigInt.zero),
+          null,
+        );
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::personalUnlockAccount - passphrase): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::personalUnlockAccount - passphrase): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -2067,8 +2325,10 @@ void main() {
         await client.admin!.personalSendTransaction(null, 'password');
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::personalSendTransaction - address): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::personalSendTransaction - address): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -2077,11 +2337,15 @@ void main() {
       var thrown = false;
       try {
         await client.admin!.personalSendTransaction(
-            EthereumAddress.fromBigInt(BigInt.zero), null);
+          EthereumAddress.fromBigInt(BigInt.zero),
+          null,
+        );
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::personalSendTransaction - passphrase): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::personalSendTransaction - passphrase): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -2090,11 +2354,16 @@ void main() {
       var thrown = false;
       try {
         await client.admin!.personalSign(
-            null, EthereumAddress.fromBigInt(BigInt.zero), 'password');
+          null,
+          EthereumAddress.fromBigInt(BigInt.zero),
+          'password',
+        );
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::personalSign - message): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::personalSign - message): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -2103,11 +2372,16 @@ void main() {
       var thrown = false;
       try {
         await client.admin!.personalSign(
-            EthereumData.fromBigInt(BigInt.zero), null, 'password');
+          EthereumData.fromBigInt(BigInt.zero),
+          null,
+          'password',
+        );
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::personalSign - address): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::personalSign - address): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -2115,12 +2389,16 @@ void main() {
     test('personalEcRecover - message', () async {
       var thrown = false;
       try {
-        await client.admin!
-            .personalEcRecover(null, EthereumData.fromBigInt(BigInt.zero));
+        await client.admin!.personalEcRecover(
+          null,
+          EthereumData.fromBigInt(BigInt.zero),
+        );
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::personalEcRecover - message): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::personalEcRecover - message): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);
@@ -2128,12 +2406,16 @@ void main() {
     test('personalEcRecover - signature', () async {
       var thrown = false;
       try {
-        await client.admin!
-            .personalEcRecover(EthereumData.fromBigInt(BigInt.zero), null);
+        await client.admin!.personalEcRecover(
+          EthereumData.fromBigInt(BigInt.zero),
+          null,
+        );
       } on Error catch (e) {
         expect(e is ArgumentError, isTrue);
-        expect(e.toString(),
-            'Invalid argument(s) (Ethereum::personalEcRecover - signature): Must not be null');
+        expect(
+          e.toString(),
+          'Invalid argument(s) (Ethereum::personalEcRecover - signature): Must not be null',
+        );
         thrown = true;
       }
       expect(thrown, isTrue);

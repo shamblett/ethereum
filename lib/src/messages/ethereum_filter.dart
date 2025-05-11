@@ -16,6 +16,16 @@ part of '../../ethereum.dart';
 /// For filters created with newFilter or getFilterChanges the
 /// class contains logs which are are Ethereum Log objects.
 class EthereumFilter {
+  List<EthereumData>? _hashes;
+
+  List<EthereumLog>? _logs;
+
+  /// Hashes, block or transaction
+  List<EthereumData>? get hashes => _hashes;
+
+  /// Logs
+  List<EthereumLog>? get logs => _logs;
+
   /// Construction
   EthereumFilter();
 
@@ -23,16 +33,6 @@ class EthereumFilter {
   EthereumFilter.fromMap(Map<String, dynamic> result) {
     construct(result);
   }
-
-  List<EthereumData>? _hashes;
-
-  /// Hashes, block or transaction
-  List<EthereumData>? get hashes => _hashes;
-
-  List<EthereumLog>? _logs;
-
-  /// Logs
-  List<EthereumLog>? get logs => _logs;
 
   /// Ethereum log objects, returned by
   /// Construct from the supplied Map, only check for the keys we need.
@@ -50,7 +50,7 @@ class EthereumFilter {
         for (final Map<String, dynamic> log
             in data[EthereumConstants.ethResultKey]) {
           final buildLog = <String, dynamic>{
-            EthereumConstants.ethResultKey: log
+            EthereumConstants.ethResultKey: log,
           };
           final entry = EthereumLog.fromMap(buildLog);
           _logs!.add(entry);

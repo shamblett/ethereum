@@ -11,11 +11,11 @@ part of '../ethereum.dart';
 
 /// The RPC client
 class EthereumRpcClient {
-  /// Constructor
-  EthereumRpcClient(this._adapter);
-
   /// Version
   static const String jsonRPpcVersion = '2.0';
+
+  /// The Uri
+  late Uri uri;
 
   /// The HTTP adapter
   final EthereumINetworkAdapter _adapter;
@@ -25,8 +25,8 @@ class EthereumRpcClient {
   /// The transmission id
   int get id => _id;
 
-  /// The Uri
-  late Uri uri;
+  /// Constructor
+  EthereumRpcClient(this._adapter);
 
   /// The request method
   Future<Map<dynamic, dynamic>> request(String method, [dynamic parameters]) {
@@ -43,10 +43,6 @@ class EthereumRpcClient {
 
   /// Reset the transmission id
   void resetTransmissionId([int? value]) {
-    if (value == null) {
-      _id = 0;
-    } else {
-      _id = value;
-    }
+    _id = value ?? 0;
   }
 }

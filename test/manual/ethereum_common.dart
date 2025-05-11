@@ -77,8 +77,10 @@ class EthereumCommon {
           print('Coinbase address is $address');
         } else {
           expect(client.eth!.lastError.code, -32000);
-          expect(client.eth!.lastError.message,
-              'etherbase must be explicitly specified');
+          expect(
+            client.eth!.lastError.message,
+            'etherbase must be explicitly specified',
+          );
         }
       });
       test('Mining', () async {
@@ -107,7 +109,9 @@ class EthereumCommon {
         if (accounts.isNotEmpty) {
           print('Accounts are $accountsStr');
           expect(
-              accounts[0].asString, EthereumTestConfiguration.defaultAccount);
+            accounts[0].asString,
+            EthereumTestConfiguration.defaultAccount,
+          );
         } else {
           print('There are no accounts');
         }
@@ -122,9 +126,11 @@ class EthereumCommon {
         final block = EthereumDefaultBlock();
         block.number = 0;
         final balance = await client.eth!.getBalance(
-            EthereumAddress.fromString(
-                '0x407d73d8a49eeb85d32cf465507dd71d507100c1'),
-            block);
+          EthereumAddress.fromString(
+            '0x407d73d8a49eeb85d32cf465507dd71d507100c1',
+          ),
+          block,
+        );
         expect(balance, isNotNull);
         expect(client.eth!.id, ++id);
         print('Balance number is $balance');
@@ -133,9 +139,11 @@ class EthereumCommon {
         final block = EthereumDefaultBlock();
         block.latest = true;
         final balance = await client.eth!.getBalance(
-            EthereumAddress.fromString(
-                '0x407d73d8a49eeb85d32cf465507dd71d507100c1'),
-            block);
+          EthereumAddress.fromString(
+            '0x407d73d8a49eeb85d32cf465507dd71d507100c1',
+          ),
+          block,
+        );
         expect(balance, isNotNull);
         expect(client.eth!.id, ++id);
         print('Balance latest is $balance');
@@ -144,9 +152,11 @@ class EthereumCommon {
         final block = EthereumDefaultBlock();
         block.earliest = true;
         final balance = await client.eth!.getBalance(
-            EthereumAddress.fromString(
-                '0x407d73d8a49eeb85d32cf465507dd71d507100c1'),
-            block);
+          EthereumAddress.fromString(
+            '0x407d73d8a49eeb85d32cf465507dd71d507100c1',
+          ),
+          block,
+        );
         expect(balance, isNotNull);
         expect(client.eth!.id, ++id);
         print('Balance earliest is $balance');
@@ -155,9 +165,11 @@ class EthereumCommon {
         final block = EthereumDefaultBlock();
         block.pending = true;
         final balance = await client.eth!.getBalance(
-            EthereumAddress.fromString(
-                '0x407d73d8a49eeb85d32cf465507dd71d507100c1'),
-            block);
+          EthereumAddress.fromString(
+            '0x407d73d8a49eeb85d32cf465507dd71d507100c1',
+          ),
+          block,
+        );
         expect(balance, isNotNull);
         expect(client.eth!.id, ++id);
         print('Balance pending is $balance');
@@ -166,10 +178,12 @@ class EthereumCommon {
         final block = EthereumDefaultBlock();
         block.latest = true;
         final storage = await client.eth!.getStorageAt(
-            EthereumAddress.fromString(
-                '0x295a70b2de5e3953354a6a8344e616ed314d7251'),
-            0x0,
-            block);
+          EthereumAddress.fromString(
+            '0x295a70b2de5e3953354a6a8344e616ed314d7251',
+          ),
+          0x0,
+          block,
+        );
         expect(storage, isNotNull);
         expect(client.eth!.id, ++id);
         print('Storage at latest is $storage');
@@ -178,10 +192,12 @@ class EthereumCommon {
         final block = EthereumDefaultBlock();
         block.earliest = true;
         final storage = await client.eth!.getStorageAt(
-            EthereumAddress.fromString(
-                '0x295a70b2de5e3953354a6a8344e616ed314d7251'),
-            0x0,
-            block);
+          EthereumAddress.fromString(
+            '0x295a70b2de5e3953354a6a8344e616ed314d7251',
+          ),
+          0x0,
+          block,
+        );
         expect(storage, isNotNull);
         expect(client.eth!.id, ++id);
         print('Storage at earliest is $storage');
@@ -190,10 +206,12 @@ class EthereumCommon {
         final block = EthereumDefaultBlock();
         block.pending = true;
         final storage = await client.eth!.getStorageAt(
-            EthereumAddress.fromString(
-                '0x295a70b2de5e3953354a6a8344e616ed314d7251'),
-            0x0,
-            block);
+          EthereumAddress.fromString(
+            '0x295a70b2de5e3953354a6a8344e616ed314d7251',
+          ),
+          0x0,
+          block,
+        );
         expect(storage, isNotNull);
         expect(client.eth!.id, ++id);
         print('Storage at pending is $storage');
@@ -202,10 +220,12 @@ class EthereumCommon {
         final block = EthereumDefaultBlock();
         block.number = 0x4b7;
         final storage = await client.eth!.getStorageAt(
-            EthereumAddress.fromString(
-                '0x295a70b2de5e3953354a6a8344e616ed314d7251'),
-            0x0,
-            block);
+          EthereumAddress.fromString(
+            '0x295a70b2de5e3953354a6a8344e616ed314d7251',
+          ),
+          0x0,
+          block,
+        );
         if (storage != null) {
           expect(storage.asBigInt, BigInt.zero);
         }
@@ -216,9 +236,11 @@ class EthereumCommon {
         final block = EthereumDefaultBlock();
         block.number = 0;
         final count = await client.eth!.getTransactionCount(
-            EthereumAddress.fromString(
-                '0x407d73d8a49eeb85d32cf465507dd71d507100c1'),
-            block);
+          EthereumAddress.fromString(
+            '0x407d73d8a49eeb85d32cf465507dd71d507100c1',
+          ),
+          block,
+        );
         expect(count, isNotNull);
         expect(client.eth!.id, ++id);
         print('Transaction count is $count');
@@ -227,9 +249,11 @@ class EthereumCommon {
         final block = EthereumDefaultBlock();
         block.earliest = true;
         final count = await client.eth!.getTransactionCount(
-            EthereumAddress.fromString(
-                '0x407d73d8a49eeb85d32cf465507dd71d507100c1'),
-            block);
+          EthereumAddress.fromString(
+            '0x407d73d8a49eeb85d32cf465507dd71d507100c1',
+          ),
+          block,
+        );
         expect(count, isNotNull);
         expect(client.eth!.id, ++id);
         print('Transaction count  is $count');
@@ -238,9 +262,11 @@ class EthereumCommon {
         final block = EthereumDefaultBlock();
         block.pending = true;
         final count = await client.eth!.getTransactionCount(
-            EthereumAddress.fromString(
-                '0x407d73d8a49eeb85d32cf465507dd71d507100c1'),
-            block);
+          EthereumAddress.fromString(
+            '0x407d73d8a49eeb85d32cf465507dd71d507100c1',
+          ),
+          block,
+        );
         expect(count, isNotNull);
         expect(client.eth!.id, ++id);
         print('Transaction count  is $count');
@@ -249,17 +275,21 @@ class EthereumCommon {
         final block = EthereumDefaultBlock();
         block.latest = true;
         final count = await client.eth!.getTransactionCount(
-            EthereumAddress.fromString(
-                '0x407d73d8a49eeb85d32cf465507dd71d507100c1'),
-            block);
+          EthereumAddress.fromString(
+            '0x407d73d8a49eeb85d32cf465507dd71d507100c1',
+          ),
+          block,
+        );
         expect(count, isNotNull);
         expect(client.eth!.id, ++id);
         print('Transaction count  is $count');
       });
       test('Block transaction count by hash', () async {
         final count = await client.eth!.getBlockTransactionCountByHash(
-            EthereumData.fromString(
-                '0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238'));
+          EthereumData.fromString(
+            '0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238',
+          ),
+        );
         expect(count, 0);
         expect(client.eth!.id, ++id);
       });
@@ -292,8 +322,11 @@ class EthereumCommon {
         expect(client.eth!.id, ++id);
       });
       test('Block uncle count by hash', () async {
-        final count = await client.eth!.getUncleCountByHash(EthereumData.fromString(
-            '0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238'));
+        final count = await client.eth!.getUncleCountByHash(
+          EthereumData.fromString(
+            '0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238',
+          ),
+        );
         expect(count, 0);
         expect(client.eth!.id, ++id);
       });
@@ -329,9 +362,11 @@ class EthereumCommon {
         final block = EthereumDefaultBlock();
         block.number = 0;
         final code = await client.eth!.getCode(
-            EthereumAddress.fromString(
-                '0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b'),
-            block);
+          EthereumAddress.fromString(
+            '0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b',
+          ),
+          block,
+        );
         expect(code, isNull);
         expect(client.eth!.id, ++id);
         print('Code is $code');
@@ -340,9 +375,11 @@ class EthereumCommon {
         final block = EthereumDefaultBlock();
         block.latest = true;
         final code = await client.eth!.getCode(
-            EthereumAddress.fromString(
-                '0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b'),
-            block);
+          EthereumAddress.fromString(
+            '0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b',
+          ),
+          block,
+        );
         expect(code, isNull);
         expect(client.eth!.id, ++id);
         print('Code is $code');
@@ -351,9 +388,11 @@ class EthereumCommon {
         final block = EthereumDefaultBlock();
         block.pending = true;
         final code = await client.eth!.getCode(
-            EthereumAddress.fromString(
-                '0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b'),
-            block);
+          EthereumAddress.fromString(
+            '0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b',
+          ),
+          block,
+        );
         expect(code, isNull);
         expect(client.eth!.id, ++id);
         print('Code is $code');
@@ -362,18 +401,20 @@ class EthereumCommon {
         final block = EthereumDefaultBlock();
         block.earliest = true;
         final code = await client.eth!.getCode(
-            EthereumAddress.fromString(
-                '0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b'),
-            block);
+          EthereumAddress.fromString(
+            '0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b',
+          ),
+          block,
+        );
         expect(code, isNull);
         expect(client.eth!.id, ++id);
         print('Code is $code');
       });
       test('Sign', () async {
         final signature = await client.eth!.sign(
-            EthereumAddress.fromString(
-                EthereumTestConfiguration.defaultAccount),
-            EthereumData.fromString('0xdeadbeaf'));
+          EthereumAddress.fromString(EthereumTestConfiguration.defaultAccount),
+          EthereumData.fromString('0xdeadbeaf'),
+        );
         if (signature != null) {
           print(signature);
         } else {
@@ -383,16 +424,18 @@ class EthereumCommon {
       });
       test('Send transaction', () async {
         final hash = await client.eth!.sendTransaction(
-            EthereumAddress.fromString(
-                EthereumTestConfiguration.defaultAccount),
-            EthereumData.fromString(
-                '0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675'),
-            to: EthereumAddress.fromString(
-                '0xd46e8dd67c5d32be8058bb8eb970870f07244567'),
-            gas: 0x100,
-            gasPrice: 0x1000,
-            value: 0x2000,
-            nonce: 2);
+          EthereumAddress.fromString(EthereumTestConfiguration.defaultAccount),
+          EthereumData.fromString(
+            '0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675',
+          ),
+          to: EthereumAddress.fromString(
+            '0xd46e8dd67c5d32be8058bb8eb970870f07244567',
+          ),
+          gas: 0x100,
+          gasPrice: 0x1000,
+          value: 0x2000,
+          nonce: 2,
+        );
         if (hash != null) {
           print(hash);
         }
@@ -401,13 +444,15 @@ class EthereumCommon {
       });
       test('Send transaction - some null', () async {
         final hash = await client.eth!.sendTransaction(
-            EthereumAddress.fromString(
-                EthereumTestConfiguration.defaultAccount),
-            EthereumData.fromString(
-                '0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675'),
-            to: EthereumAddress.fromString(
-                '0xd46e8dd67c5d32be8058bb8eb970870f07244567'),
-            nonce: 2);
+          EthereumAddress.fromString(EthereumTestConfiguration.defaultAccount),
+          EthereumData.fromString(
+            '0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675',
+          ),
+          to: EthereumAddress.fromString(
+            '0xd46e8dd67c5d32be8058bb8eb970870f07244567',
+          ),
+          nonce: 2,
+        );
         if (hash != null) {
           print(hash);
         }
@@ -415,8 +460,11 @@ class EthereumCommon {
         expect(client.eth!.lastError.id, id);
       });
       test('Send raw transaction', () async {
-        final hash = await client.eth!.sendRawTransaction(EthereumData.fromString(
-            '0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675'));
+        final hash = await client.eth!.sendRawTransaction(
+          EthereumData.fromString(
+            '0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675',
+          ),
+        );
         if (hash != null) {
           print(hash);
         }
@@ -427,16 +475,18 @@ class EthereumCommon {
         final block = EthereumDefaultBlock();
         block.number = 0x10;
         final ret = await client.eth!.call(
-            EthereumAddress.fromString(
-                EthereumTestConfiguration.defaultAccount),
-            block,
-            from: EthereumAddress.fromString(
-                '0xd10de988e845d33859c3f96c7f1fc723b7b56f4c'),
-            gas: 0x2000,
-            gasPrice: 0x1000,
-            value: 0x2000,
-            data: EthereumData.fromString(
-                '0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675'));
+          EthereumAddress.fromString(EthereumTestConfiguration.defaultAccount),
+          block,
+          from: EthereumAddress.fromString(
+            '0xd10de988e845d33859c3f96c7f1fc723b7b56f4c',
+          ),
+          gas: 0x2000,
+          gasPrice: 0x1000,
+          value: 0x2000,
+          data: EthereumData.fromString(
+            '0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675',
+          ),
+        );
         if (ret != null) {
           print(ret);
         }
@@ -446,14 +496,16 @@ class EthereumCommon {
         final block = EthereumDefaultBlock();
         block.latest = true;
         final ret = await client.eth!.call(
-            EthereumAddress.fromString(
-                EthereumTestConfiguration.defaultAccount),
-            block,
-            from: EthereumAddress.fromString(
-                '0xd10de988e845d33859c3f96c7f1fc723b7b56f4c'),
-            gasPrice: 0x1000,
-            data: EthereumData.fromString(
-                '0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675'));
+          EthereumAddress.fromString(EthereumTestConfiguration.defaultAccount),
+          block,
+          from: EthereumAddress.fromString(
+            '0xd10de988e845d33859c3f96c7f1fc723b7b56f4c',
+          ),
+          gasPrice: 0x1000,
+          data: EthereumData.fromString(
+            '0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675',
+          ),
+        );
         if (ret != null) {
           print(ret);
         }
@@ -461,15 +513,19 @@ class EthereumCommon {
       });
       test('Estimate gas', () async {
         final ret = await client.eth!.estimateGas(
-            address: EthereumAddress.fromString(
-                EthereumTestConfiguration.defaultAccount),
-            from: EthereumAddress.fromString(
-                '0xd10de988e845d33859c3f96c7f1fc723b7b56f4c'),
-            gas: 0x2000,
-            gasPrice: 0x1000,
-            value: 0x2000,
-            data: EthereumData.fromString(
-                '0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675'));
+          address: EthereumAddress.fromString(
+            EthereumTestConfiguration.defaultAccount,
+          ),
+          from: EthereumAddress.fromString(
+            '0xd10de988e845d33859c3f96c7f1fc723b7b56f4c',
+          ),
+          gas: 0x2000,
+          gasPrice: 0x1000,
+          value: 0x2000,
+          data: EthereumData.fromString(
+            '0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675',
+          ),
+        );
         if (ret != null) {
           print(ret);
         }
@@ -477,20 +533,26 @@ class EthereumCommon {
       });
       test('Estimate gas - some null', () async {
         final ret = await client.eth!.estimateGas(
-            address: EthereumAddress.fromString(
-                EthereumTestConfiguration.defaultAccount),
-            from: EthereumAddress.fromString(
-                '0xd10de988e845d33859c3f96c7f1fc723b7b56f4c'),
-            gas: 0x2000,
-            gasPrice: 0x1000);
+          address: EthereumAddress.fromString(
+            EthereumTestConfiguration.defaultAccount,
+          ),
+          from: EthereumAddress.fromString(
+            '0xd10de988e845d33859c3f96c7f1fc723b7b56f4c',
+          ),
+          gas: 0x2000,
+          gasPrice: 0x1000,
+        );
         if (ret != null) {
           print(ret);
         }
         expect(client.eth!.id, ++id);
       });
       test('Get block by hash', () async {
-        final ret = await client.eth!.getBlockByHash(EthereumData.fromString(
-            '0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8'));
+        final ret = await client.eth!.getBlockByHash(
+          EthereumData.fromString(
+            '0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8',
+          ),
+        );
         if (ret != null) {
           print(ret);
         }
@@ -506,8 +568,11 @@ class EthereumCommon {
         expect(client.eth!.id, ++id);
       });
       test('Get transaction by hash', () async {
-        final ret = await client.eth!.getTransactionByHash(EthereumData.fromString(
-            '0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8'));
+        final ret = await client.eth!.getTransactionByHash(
+          EthereumData.fromString(
+            '0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8',
+          ),
+        );
         if (ret != null) {
           print(ret);
         }
@@ -515,9 +580,11 @@ class EthereumCommon {
       });
       test('Get transaction by block hash and index', () async {
         final ret = await client.eth!.getTransactionByBlockHashAndIndex(
-            EthereumData.fromString(
-                '0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8'),
-            0);
+          EthereumData.fromString(
+            '0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8',
+          ),
+          0,
+        );
         if (ret != null) {
           print(ret);
         }
@@ -526,16 +593,21 @@ class EthereumCommon {
       test('Get transaction by block number and index', () async {
         final block = EthereumDefaultBlock();
         block.number = 0x100;
-        final ret =
-            await client.eth!.getTransactionByBlockNumberAndIndex(block, 0);
+        final ret = await client.eth!.getTransactionByBlockNumberAndIndex(
+          block,
+          0,
+        );
         if (ret != null) {
           print(ret);
         }
         expect(client.eth!.id, ++id);
       });
       test('Get transaction receipt', () async {
-        var ret = await client.eth!.getTransactionReceipt(EthereumData.fromString(
-            '0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8'));
+        var ret = await client.eth!.getTransactionReceipt(
+          EthereumData.fromString(
+            '0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8',
+          ),
+        );
         if (ret != null) {
           print(ret);
         }
@@ -543,9 +615,11 @@ class EthereumCommon {
       });
       test('Get uncle by block hash and index', () async {
         final ret = await client.eth!.getUncleByBlockHashAndIndex(
-            EthereumData.fromString(
-                '0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8'),
-            0);
+          EthereumData.fromString(
+            '0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8',
+          ),
+          0,
+        );
         if (ret != null) {
           print(ret);
         }
@@ -567,16 +641,20 @@ class EthereumCommon {
         final to = EthereumDefaultBlock();
         from.number = 2;
         filterId = await client.eth!.newFilter(
-            fromBlock: from,
-            toBlock: to,
-            address: EthereumAddress.fromString(
-                '0x8888f1f195afa192cfee860698584c030f4c9db1'),
-            topics: <EthereumData>[
-              EthereumData.fromString(
-                  '0x000000000000000000000000a94f5374fce5edbc8e2a8697c15331677e6ebf0b'),
-              EthereumData.fromString(
-                  '0x000000000000000000000000a94f5374fce5edbc8e2a8697c15331677e6ebf0b')
-            ]);
+          fromBlock: from,
+          toBlock: to,
+          address: EthereumAddress.fromString(
+            '0x8888f1f195afa192cfee860698584c030f4c9db1',
+          ),
+          topics: <EthereumData>[
+            EthereumData.fromString(
+              '0x000000000000000000000000a94f5374fce5edbc8e2a8697c15331677e6ebf0b',
+            ),
+            EthereumData.fromString(
+              '0x000000000000000000000000a94f5374fce5edbc8e2a8697c15331677e6ebf0b',
+            ),
+          ],
+        );
         if (filterId != null) {
           print(filterId);
         }
@@ -587,18 +665,26 @@ class EthereumCommon {
         from.number = 1;
         final to = EthereumDefaultBlock();
         from.number = 2;
-        filterId = await client.eth!
-            .newFilter(fromBlock: from, toBlock: to, address: <EthereumAddress>[
-          EthereumAddress.fromString(
-              '0x8888f1f195afa192cfee860698584c030f4c9db1'),
-          EthereumAddress.fromString(
-              '0x8888f1f195afa192cfee860698584c030f4c9db2')
-        ], topics: <EthereumData>[
-          EthereumData.fromString(
-              '0x000000000000000000000000a94f5374fce5edbc8e2a8697c15331677e6ebf0b'),
-          EthereumData.fromString(
-              '0x000000000000000000000000a94f5374fce5edbc8e2a8697c15331677e6ebf0b')
-        ]);
+        filterId = await client.eth!.newFilter(
+          fromBlock: from,
+          toBlock: to,
+          address: <EthereumAddress>[
+            EthereumAddress.fromString(
+              '0x8888f1f195afa192cfee860698584c030f4c9db1',
+            ),
+            EthereumAddress.fromString(
+              '0x8888f1f195afa192cfee860698584c030f4c9db2',
+            ),
+          ],
+          topics: <EthereumData>[
+            EthereumData.fromString(
+              '0x000000000000000000000000a94f5374fce5edbc8e2a8697c15331677e6ebf0b',
+            ),
+            EthereumData.fromString(
+              '0x000000000000000000000000a94f5374fce5edbc8e2a8697c15331677e6ebf0b',
+            ),
+          ],
+        );
         if (filterId != null) {
           print(filterId);
         }
@@ -646,14 +732,17 @@ class EthereumCommon {
         final to = EthereumDefaultBlock();
         to.earliest = true;
         final ret = await client.eth!.getLogs(
-            fromBlock: from,
-            toBlock: to,
-            address: EthereumAddress.fromString(
-                '0x8888f1f195afa192cfee860698584c030f4c9db2'),
-            topics: <EthereumData>[
-              EthereumData.fromString(
-                  '0x000000000000000000000000a94f5374fce5edbc8e2a8697c15331677e6ebf0b')
-            ]);
+          fromBlock: from,
+          toBlock: to,
+          address: EthereumAddress.fromString(
+            '0x8888f1f195afa192cfee860698584c030f4c9db2',
+          ),
+          topics: <EthereumData>[
+            EthereumData.fromString(
+              '0x000000000000000000000000a94f5374fce5edbc8e2a8697c15331677e6ebf0b',
+            ),
+          ],
+        );
         if (ret != null) {
           print(ret);
         }
@@ -668,24 +757,30 @@ class EthereumCommon {
       });
       test('Submit work', () async {
         final ret = await client.eth!.submitWork(
-            EthereumData.fromString('0x123456789abcdef0'),
-            EthereumData.fromString(
-                '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef'),
-            EthereumData.fromString(
-                '0xD1FE5700000000000000000000000000D1FE5700000000000000000000000000'));
+          EthereumData.fromString('0x123456789abcdef0'),
+          EthereumData.fromString(
+            '0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef',
+          ),
+          EthereumData.fromString(
+            '0xD1FE5700000000000000000000000000D1FE5700000000000000000000000000',
+          ),
+        );
         expect(ret, isFalse);
         expect(client.eth!.id, ++id);
       });
       test('Submit hash rate', () async {
         final ret = await client.eth!.submitHashrate(
-            EthereumData.fromString('0x500000'),
-            '0x59daa26581d0acd1fce254fb7e85952f4c09d0915afd33d3886cd914bc7d283c');
+          EthereumData.fromString('0x500000'),
+          '0x59daa26581d0acd1fce254fb7e85952f4c09d0915afd33d3886cd914bc7d283c',
+        );
         if (ret != null) {
           expect(ret, isTrue);
         } else {
           expect(client.eth!.lastError.code, -32601);
-          expect(client.eth!.lastError.message,
-              'The method eth_submitHashrate does not exist/is not available');
+          expect(
+            client.eth!.lastError.message,
+            'The method eth_submitHashrate does not exist/is not available',
+          );
         }
         expect(client.eth!.id, ++id);
       }, skip: true);
@@ -699,21 +794,30 @@ class EthereumCommon {
           expect(ok, isTrue);
         } else {
           expect(client.eth!.lastError.code, -32601);
-          expect(client.eth!.lastError.message,
-              'The method shh_version does not exist/is not available');
+          expect(
+            client.eth!.lastError.message,
+            'The method shh_version does not exist/is not available',
+          );
         }
         print('SHH version is $version');
         expect(client.eth!.id, ++id);
       }, skip: true);
       test('SHH post', () async {
-        final ret = await client.eth!.shhPost(<EthereumData>[
-          EthereumData.fromString('0x776869737065722d636861742d636c69656e74'),
-          EthereumData.fromString('0x4d5a695276454c39425154466b61693532')
-        ], EthereumData.fromString('0x7b2274797065223a226d60'), 0x64, 0x64,
-            to: EthereumAddress.fromString(
-                '0x8888f1f195afa192cfee860698584c030f4c9db2'),
-            from: EthereumAddress.fromString(
-                '0x8888f1f195afa192cfee860698584c030f4c9db2'));
+        final ret = await client.eth!.shhPost(
+          <EthereumData>[
+            EthereumData.fromString('0x776869737065722d636861742d636c69656e74'),
+            EthereumData.fromString('0x4d5a695276454c39425154466b61693532'),
+          ],
+          EthereumData.fromString('0x7b2274797065223a226d60'),
+          0x64,
+          0x64,
+          to: EthereumAddress.fromString(
+            '0x8888f1f195afa192cfee860698584c030f4c9db2',
+          ),
+          from: EthereumAddress.fromString(
+            '0x8888f1f195afa192cfee860698584c030f4c9db2',
+          ),
+        );
         expect(ret, isNull);
         expect(client.eth!.id, ++id);
       }, skip: true);
@@ -724,8 +828,9 @@ class EthereumCommon {
       EthereumData? signature;
       test('Personal ImportRawKey', () async {
         final key = await client.admin!.personalImportRawKey(
-            'b5b1870957d373ef0eeffecc6e4812c0fd08f554b37b233526acc331bf1544f7',
-            'password');
+          'b5b1870957d373ef0eeffecc6e4812c0fd08f554b37b233526acc331bf1544f7',
+          'password',
+        );
         if (key != null) {
           expect(key.asBigInt!.isValidInt, true);
         } else {
@@ -761,8 +866,11 @@ class EthereumCommon {
       });
       test('Personal Sign', () async {
         final message = EthereumData.fromBigInt(BigInt.from(0xdeadbeaf));
-        final ret = await (client.admin!
-            .personalSign(message, lockAddress, 'password'));
+        final ret = await (client.admin!.personalSign(
+          message,
+          lockAddress,
+          'password',
+        ));
         expect(ret, isNotNull);
         signature = ret;
         print(ret!.asString);

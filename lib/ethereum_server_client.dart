@@ -18,15 +18,19 @@ part 'src/adapters/ethereum_server_http_adapter.dart';
 
 /// The server HTTP client
 class EthereumServerClient extends Ethereum {
+  /// The adapter
+  static final EthereumServerHTTPAdapter serverHttpAdapter =
+      EthereumServerHTTPAdapter();
+
   /// Default constructor
   EthereumServerClient() : super(serverHttpAdapter);
 
   /// With connection parameters
   EthereumServerClient.withConnectionParameters(String hostname, [int? port])
-      : super.withConnectionParameters(
-            serverHttpAdapter, hostname, Ethereum.rpcHttpScheme, port);
-
-  /// The adapter
-  static EthereumServerHTTPAdapter serverHttpAdapter =
-      EthereumServerHTTPAdapter();
+    : super.withConnectionParameters(
+        serverHttpAdapter,
+        hostname,
+        Ethereum.rpcHttpScheme,
+        port,
+      );
 }

@@ -9,21 +9,26 @@
 
 part of '../../ethereum.dart';
 
-/// This class implements the Ethereuum Admin API
+/// This class implements the Ethereum Admin API
 class EthereumApiAdmin extends EthereumApi {
+  static const unlockDuration = 300; //seconds
+
   /// Construction
   EthereumApiAdmin(super.client);
 
   /// Imports the given unencrypted private key (byte string)
   /// into the key store, encrypting it with the passphrase.
   Future<EthereumData?> personalImportRawKey(
-      String? keydata, String? passphrase) async {
+    String? keydata,
+    String? passphrase,
+  ) async {
     if (keydata == null) {
       throw ArgumentError.notNull('Ethereum::personalImportRawKey - keydata');
     }
     if (passphrase == null) {
       throw ArgumentError.notNull(
-          'Ethereum::personalImportRawKey - passphrase');
+        'Ethereum::personalImportRawKey - passphrase',
+      );
     }
     const method = EthereumRpcMethods.importRawKey;
     final params = <String>[keydata, passphrase];
@@ -41,7 +46,8 @@ class EthereumApiAdmin extends EthereumApi {
     final dynamic res = await _client.rpcClient.request(method);
     if (res != null && res.containsKey(EthereumConstants.ethResultKey)) {
       return EthereumAddress.toList(
-          res[EthereumConstants.ethResultKey].cast<String>());
+        res[EthereumConstants.ethResultKey].cast<String>(),
+      );
     }
     _client.processError(method, res);
     return null;
@@ -83,19 +89,22 @@ class EthereumApiAdmin extends EthereumApi {
   /// Decrypts the key with the given address from the key store.
   /// The unencrypted key will be held in memory until the unlock
   /// duration expires.
-  /// The unlock duration defaults to 300 seconds.
+  /// The unlock duration defaults to [unlockDuration] seconds.
   /// An explicit duration of zero seconds unlocks the key until geth exits.
   /// The account can be used with eth_sign and eth_sendTransaction
   /// while it is unlocked.
   Future<bool> personalUnlockAccount(
-      EthereumAddress? address, String? passphrase,
-      [int duration = 300]) async {
+    EthereumAddress? address,
+    String? passphrase, [
+    int duration = unlockDuration,
+  ]) async {
     if (address == null) {
       throw ArgumentError.notNull('Ethereum::personalUnlockAccount - address');
     }
     if (passphrase == null) {
       throw ArgumentError.notNull(
-          'Ethereum::personalUnlockAccount - passphrase');
+        'Ethereum::personalUnlockAccount - passphrase',
+      );
     }
     final paramDuration = duration;
     const method = EthereumRpcMethods.unlockAccount;
@@ -122,37 +131,36 @@ class EthereumApiAdmin extends EthereumApi {
   /// The account is not unlocked globally in the node and cannot be
   /// used in other RPC calls.
   Future<EthereumData?> personalSendTransaction(
-      EthereumAddress? address, String? passphrase,
-      {EthereumAddress? to,
-      EthereumAddress? data,
-      int? gas,
-      int? gasPrice,
-      int? value,
-      int? nonce,
-      int? condition,
-      bool conditionIsTimestamp = false}) async {
+    EthereumAddress? address,
+    String? passphrase, {
+    EthereumAddress? to,
+    EthereumAddress? data,
+    int? gas,
+    int? gasPrice,
+    int? value,
+    int? nonce,
+    int? condition,
+    bool conditionIsTimestamp = false,
+  }) async {
     if (address == null) {
       throw ArgumentError.notNull(
-          'Ethereum::personalSendTransaction - address');
+        'Ethereum::personalSendTransaction - address',
+      );
     }
     if (passphrase == null) {
       throw ArgumentError.notNull(
-          'Ethereum::personalSendTransaction - passphrase');
+        'Ethereum::personalSendTransaction - passphrase',
+      );
     }
     Map<String, String>? conditionObject = <String, String>{};
-    if (condition == null) {
-      conditionObject = null;
-    } else {
-      if (conditionIsTimestamp) {
-        conditionObject = <String, String>{
-          'timestamp': EthereumUtilities.intToHex(condition)
-        };
-      } else {
-        conditionObject = <String, String>{
-          'block': EthereumUtilities.intToHex(condition)
-        };
-      }
-    }
+    conditionObject =
+        condition == null
+            ? null
+            : conditionIsTimestamp
+            ? <String, String>{
+              'timestamp': EthereumUtilities.intToHex(condition),
+            }
+            : <String, String>{'block': EthereumUtilities.intToHex(condition)};
     final paramBlock = <String, dynamic>{
       'from': address.asString,
       'to': to?.asString,
@@ -162,7 +170,7 @@ class EthereumApiAdmin extends EthereumApi {
       'value': value == null ? null : EthereumUtilities.intToHex(value),
       'data': data?.asString,
       'nonce': nonce == null ? null : EthereumUtilities.intToHex(nonce),
-      'condition': conditionObject
+      'condition': conditionObject,
     };
     const method = EthereumRpcMethods.psendTransaction;
     final dynamic params = <dynamic>[paramBlock, passphrase];
@@ -182,8 +190,10 @@ class EthereumApiAdmin extends EthereumApi {
   /// (e.g. transaction) and use the signature to impersonate the victim.
   /// See personalEcRecover to verify the signature.
   Future<EthereumData?> personalSign(
-      EthereumData? message, EthereumAddress? address,
-      [String password = '']) async {
+    EthereumData? message,
+    EthereumAddress? address, [
+    String password = '',
+  ]) async {
     if (message == null) {
       throw ArgumentError.notNull('Ethereum::personalSign - message');
     }
@@ -203,7 +213,9 @@ class EthereumApiAdmin extends EthereumApi {
   /// Returns the address associated with the private key that was used to
   /// calculate the signature in personal_sign.
   Future<EthereumAddress?> personalEcRecover(
-      EthereumData? message, EthereumData? signature) async {
+    EthereumData? message,
+    EthereumData? signature,
+  ) async {
     if (message == null) {
       throw ArgumentError.notNull('Ethereum::personalEcRecover - message');
     }

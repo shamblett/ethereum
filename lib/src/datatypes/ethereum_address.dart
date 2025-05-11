@@ -1,3 +1,5 @@
+// ignore_for_file: no-magic-number
+
 /*
  * Package : Ethereum
  * Author : S. Hamblett <steve.hamblett@linux.com>
@@ -12,6 +14,24 @@ part of '../../ethereum.dart';
 /// The address data type. If any supplied value cannot be safely represented as
 /// an Ethereum address FormatException will be thrown.
 class EthereumAddress {
+  /// The address length in characters
+  static const int addressCharacterLength = 40;
+
+  /// The BigInt
+  BigInt? _bigint;
+
+  /// The string
+  String? _string;
+
+  /// Get as a BigInt
+  BigInt? get asBigInt => _bigint;
+
+  /// Get as a String, includes the 0x prefix
+  String? get asString => _string;
+
+  @override
+  int get hashCode => _bigint.hashCode;
+
   /// From a BigInt. The value must be convertible into the
   /// standard Ethereum address
   /// format of 20 bytes, however unlike the string constructor
@@ -37,21 +57,6 @@ class EthereumAddress {
     _bigint = _safeParse(_string!);
   }
 
-  /// The address length in characters
-  static const int addressCharacterLength = 40;
-
-  /// The BigInt
-  BigInt? _bigint;
-
-  /// The string
-  String? _string;
-
-  /// Get as a BigInt
-  BigInt? get asBigInt => _bigint;
-
-  /// Get as a String, includes the 0x prefix
-  String? get asString => _string;
-
   @override
   String toString() => asString!;
 
@@ -61,13 +66,12 @@ class EthereumAddress {
       other.runtimeType == runtimeType &&
           _bigint == (other as EthereumAddress)._bigint;
 
-  @override
-  int get hashCode => _bigint.hashCode;
-
   /// Address string list to EthereumAddress list
   static List<EthereumAddress> toList(List<String> val) =>
       List<EthereumAddress>.generate(
-          val.length, (int index) => EthereumAddress.fromString(val[index]));
+        val.length,
+        (int index) => EthereumAddress.fromString(val[index]),
+      );
 
   /// EthereumAddress list to address string
   static List<String?> toStringList(List<EthereumAddress> val) =>
@@ -86,7 +90,8 @@ class EthereumAddress {
     // to be padded with 00
     if (hexString.length > addressCharacterLength) {
       throw const FormatException(
-          'EthereumAddress - address has more than 40 characters');
+        'EthereumAddress - address has more than 40 characters',
+      );
     } else {
       if (hexString.length < addressCharacterLength) {
         // Must be even
@@ -106,7 +111,8 @@ class EthereumAddress {
     if (!val.startsWith(EthereumConstants.leadingHexString) ||
         val.length != addressCharacterLength + 2) {
       throw const FormatException(
-          'EthereumAddress - address string is badly formed');
+        'EthereumAddress - address string is badly formed',
+      );
     }
   }
 }

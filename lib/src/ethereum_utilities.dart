@@ -1,3 +1,5 @@
+// ignore_for_file: no-magic-number
+
 /*
  * Package : Ethereum
  * Author : S. Hamblett <steve.hamblett@linux.com>
@@ -36,7 +38,8 @@ class EthereumUtilities {
     if (pad != 0) {
       if (pad.isNegative || pad.isOdd) {
         throw FormatException(
-            'EthereumUtilities:: intToHex - invalid pad value, $pad');
+          'EthereumUtilities:: intToHex - invalid pad value, $pad',
+        );
       }
       if (ret.length.isOdd) {
         ret = '0$ret';

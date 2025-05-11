@@ -24,10 +24,25 @@ class EthereumDefaultBlock {
   /// Pending
   static const String ethPending = 'pending';
 
+  bool _pending = false;
+
   bool _latest = true;
+
+  bool _earliest = false;
+
+  int? _number;
 
   /// Latest indicator. Default
   bool get latest => _latest;
+
+  /// Earliest indicator
+  bool get earliest => _earliest;
+
+  /// Pending indicator
+  bool get pending => _pending;
+
+  /// Block number
+  int? get number => _number;
 
   set latest(bool state) {
     _latest = true;
@@ -36,11 +51,6 @@ class EthereumDefaultBlock {
     _number = null;
   }
 
-  bool _earliest = false;
-
-  /// Earliest indicator
-  bool get earliest => _earliest;
-
   set earliest(bool state) {
     _earliest = true;
     _latest = false;
@@ -48,22 +58,12 @@ class EthereumDefaultBlock {
     _number = null;
   }
 
-  bool _pending = false;
-
-  /// Pending indicator
-  bool get pending => _pending;
-
   set pending(bool state) {
     _pending = true;
     _earliest = false;
     _latest = false;
     _number = null;
   }
-
-  int? _number;
-
-  /// Block number
-  int? get number => _number;
 
   set number(int? value) {
     _number = value;

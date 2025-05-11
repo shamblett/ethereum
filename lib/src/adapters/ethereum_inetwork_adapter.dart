@@ -18,5 +18,7 @@ abstract class EthereumINetworkAdapter {
   /// Processes the HTTP request returning the  HTTP response as
   /// a map
   Future<Map<dynamic, dynamic>> httpRequest(
-      Uri uri, Map<String, dynamic> request);
+    Uri uri,
+    Map<String, dynamic> request,
+  );
 }
