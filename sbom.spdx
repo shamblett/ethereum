@@ -1,64 +1,291 @@
-SPDXVersion: SPDX-2.2DataLicense: CC0-1.0SPDXID: SPDXRef-DOCUMENTDocumentName: ethereumDocumentNamespace: https://pub.dev/packages/ethereumLicenseListVersion: 3.8Creator: Tool: https://pub.dev/packages/sbomCreated: 2024-12-04T10:36:21Z
+SPDXVersion: SPDX-2.2
+DataLicense: CC0-1.0
+SPDXID: SPDXRef-DOCUMENT
+DocumentName: ethereum
+DocumentNamespace: https://pub.dev/packages/ethereum
+LicenseListVersion: 3.8
+Creator: Tool: https://pub.dev/packages/sbom
+Created: 2025-05-11T09:52:01Z
 
-PackageName: ethereumSPDXID: SPDXRef-Package-ethereumPackageVersion: 6.1.0PackageFileName: ethereumPackageSupplier: NOASSERTIONPackageOriginator: NOASSERTIONPackageDownloadLocation: https://pub.dev/packages/ethereumFilesAnalyzed: truePackageVerificationCode: a2070d56fa584da343a2545f066f773ecdbac9bcPackageHomePage: https://pub.dev/packages/ethereumPackageLicenseConcluded: MITPackageLicenseInfoFromFiles: NOASSERTIONPackageLicenseDeclared: NOASSERTIONPackageCopyrightText: NOASSERTIONPackageSummary: <text>An ethereum JSON RPC 2.0 client for Dart. Interfaces ethereum API calls to Dart types and vice versa.</text>
 
-FileName: /lib/ethereum.dartSPDXID: SPDXRef-ethereum-0FileType: SOURCEFileChecksum: SHA1: 7f561ee11b7591f2772e5d813acac974b2d16f1eLicenseConcluded: NOASSERTIONLicenseInfoInFile: NOASSERTIONFileCopyrightText: NOASSERTION
+PackageName: ethereum
+SPDXID: SPDXRef-Package-ethereum
+PackageVersion: 6.1.1
+PackageFileName: ethereum
+PackageSupplier: NOASSERTION
+PackageOriginator: NOASSERTION
+PackageDownloadLocation: https://pub.dev/packages/ethereum
+FilesAnalyzed: true
+PackageVerificationCode: 76a54d94ec98c80f6fd008a45318fd13b4e687b9
+PackageHomePage: https://pub.dev/packages/ethereum
+PackageLicenseConcluded: MIT
+PackageLicenseInfoFromFiles: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageSummary: <text>An ethereum JSON RPC 2.0 client for Dart. Interfaces ethereum API calls to Dart types and vice versa.</text>
 
-FileName: /lib/ethereum_browser_http_client.dartSPDXID: SPDXRef-ethereum-browser-http-client-1FileType: SOURCEFileChecksum: SHA1: df13077033e7f7553756c4a9d4c2718528db270eLicenseConcluded: NOASSERTIONLicenseInfoInFile: NOASSERTIONFileCopyrightText: NOASSERTION
 
-FileName: /lib/ethereum_browser_ws_client.dartSPDXID: SPDXRef-ethereum-browser-ws-client-2FileType: SOURCEFileChecksum: SHA1: d37ac8a8b4d1c449062ea4260078c645cb7fea12LicenseConcluded: NOASSERTIONLicenseInfoInFile: NOASSERTIONFileCopyrightText: NOASSERTION
+FileName: lib/ethereum.dart
+SPDXID: SPDXRef-ethereum-0
+FileType: SOURCE
+FileChecksum: SHA1: 90ec3f7469b25a50c55931ca6b99e2aa0a5a0c52
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NOASSERTION
+FileCopyrightText: NOASSERTION
 
-FileName: /lib/ethereum_server_client.dartSPDXID: SPDXRef-ethereum-server-client-3FileType: SOURCEFileChecksum: SHA1: 01ec621d68728971f4af959a32aa66f808ca7d63LicenseConcluded: NOASSERTIONLicenseInfoInFile: NOASSERTIONFileCopyrightText: NOASSERTION
 
-FileName: /lib/src/adapters/ethereum_browser_http_adapter.dartSPDXID: SPDXRef-ethereum-browser-http-adapter-4FileType: SOURCEFileChecksum: SHA1: ef728e2dd88630cdbf43f9782e0f0ab295ec5625LicenseConcluded: NOASSERTIONLicenseInfoInFile: NOASSERTIONFileCopyrightText: NOASSERTION
+FileName: lib/ethereum_browser_http_client.dart
+SPDXID: SPDXRef-ethereum-browser-http-client-1
+FileType: SOURCE
+FileChecksum: SHA1: 0943ce12c73334ef05adb0bd577dd8f7a6228381
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NOASSERTION
+FileCopyrightText: NOASSERTION
 
-FileName: /lib/src/adapters/ethereum_browser_ws_adapter.dartSPDXID: SPDXRef-ethereum-browser-ws-adapter-5FileType: SOURCEFileChecksum: SHA1: 19e77a5b9fb240d8bd2af932c1816e8f4144f11dLicenseConcluded: NOASSERTIONLicenseInfoInFile: NOASSERTIONFileCopyrightText: NOASSERTION
 
-FileName: /lib/src/adapters/ethereum_inetwork_adapter.dartSPDXID: SPDXRef-ethereum-inetwork-adapter-6FileType: SOURCEFileChecksum: SHA1: 7ad01c3f102437806f923215cfceef32b52cc547LicenseConcluded: NOASSERTIONLicenseInfoInFile: NOASSERTIONFileCopyrightText: NOASSERTION
+FileName: lib/ethereum_browser_ws_client.dart
+SPDXID: SPDXRef-ethereum-browser-ws-client-2
+FileType: SOURCE
+FileChecksum: SHA1: bdc19e5e8be70c57ad629f0c993a2e9a3a01eed6
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NOASSERTION
+FileCopyrightText: NOASSERTION
 
-FileName: /lib/src/adapters/ethereum_server_http_adapter.dartSPDXID: SPDXRef-ethereum-server-http-adapter-7FileType: SOURCEFileChecksum: SHA1: 47a88622ea8f41d3877ab97c7de085095c897e67LicenseConcluded: NOASSERTIONLicenseInfoInFile: NOASSERTIONFileCopyrightText: NOASSERTION
 
-FileName: /lib/src/api/ethereum_api.dartSPDXID: SPDXRef-ethereum-api-8FileType: SOURCEFileChecksum: SHA1: f2d90fd846ef03ebc43f873bb9824a3b8543ce95LicenseConcluded: NOASSERTIONLicenseInfoInFile: NOASSERTIONFileCopyrightText: NOASSERTION
+FileName: lib/ethereum_server_client.dart
+SPDXID: SPDXRef-ethereum-server-client-3
+FileType: SOURCE
+FileChecksum: SHA1: 5a05e28fde374a252cbde42520154d5fb18a5463
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NOASSERTION
+FileCopyrightText: NOASSERTION
 
-FileName: /lib/src/api/ethereum_api_admin.dartSPDXID: SPDXRef-ethereum-api-admin-9FileType: SOURCEFileChecksum: SHA1: 3708410bea087b3a28e512ce9c7ce7d10ed738c9LicenseConcluded: NOASSERTIONLicenseInfoInFile: NOASSERTIONFileCopyrightText: NOASSERTION
 
-FileName: /lib/src/api/ethereum_api_eth.dartSPDXID: SPDXRef-ethereum-api-eth-10FileType: SOURCEFileChecksum: SHA1: d3bd75f9ee3e440ad5104b5ca52e4dca2671191aLicenseConcluded: NOASSERTIONLicenseInfoInFile: NOASSERTIONFileCopyrightText: NOASSERTION
+FileName: lib/src/adapters/ethereum_browser_http_adapter.dart
+SPDXID: SPDXRef-ethereum-browser-http-adapter-4
+FileType: SOURCE
+FileChecksum: SHA1: 17b4a4f30b36ef42a236a8bf95aeb2506801e44b
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NOASSERTION
+FileCopyrightText: NOASSERTION
 
-FileName: /lib/src/datatypes/ethereum_address.dartSPDXID: SPDXRef-ethereum-address-11FileType: SOURCEFileChecksum: SHA1: 7f2599479bbfe4d4e9e61ab4d0005b9c626db4fbLicenseConcluded: NOASSERTIONLicenseInfoInFile: NOASSERTIONFileCopyrightText: NOASSERTION
 
-FileName: /lib/src/datatypes/ethereum_byte_address.dartSPDXID: SPDXRef-ethereum-byte-address-12FileType: SOURCEFileChecksum: SHA1: e3a3357ca9ce64ebf6d3507db95b24de0a94032fLicenseConcluded: NOASSERTIONLicenseInfoInFile: NOASSERTIONFileCopyrightText: NOASSERTION
+FileName: lib/src/adapters/ethereum_browser_ws_adapter.dart
+SPDXID: SPDXRef-ethereum-browser-ws-adapter-5
+FileType: SOURCE
+FileChecksum: SHA1: 546ca88f973a49eb0d65a7954c352f880fd554f4
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NOASSERTION
+FileCopyrightText: NOASSERTION
 
-FileName: /lib/src/datatypes/ethereum_data.dartSPDXID: SPDXRef-ethereum-data-13FileType: SOURCEFileChecksum: SHA1: 454299ee194f416c16b89fe1306e60194fe5d33cLicenseConcluded: NOASSERTIONLicenseInfoInFile: NOASSERTIONFileCopyrightText: NOASSERTION
 
-FileName: /lib/src/ethereum.dartSPDXID: SPDXRef-ethereum-14FileType: SOURCEFileChecksum: SHA1: f2733adeeeac9651672667995dc638f37f3682b2LicenseConcluded: NOASSERTIONLicenseInfoInFile: NOASSERTIONFileCopyrightText: NOASSERTION
+FileName: lib/src/adapters/ethereum_inetwork_adapter.dart
+SPDXID: SPDXRef-ethereum-inetwork-adapter-6
+FileType: SOURCE
+FileChecksum: SHA1: 352f4ec85051f8fe4121acbeb6f37a3378e8289c
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NOASSERTION
+FileCopyrightText: NOASSERTION
 
-FileName: /lib/src/ethereum_constants.dartSPDXID: SPDXRef-ethereum-constants-15FileType: SOURCEFileChecksum: SHA1: 306ec7cc89427b1bc5be53c19a0646d61cb7fd45LicenseConcluded: NOASSERTIONLicenseInfoInFile: NOASSERTIONFileCopyrightText: NOASSERTION
 
-FileName: /lib/src/ethereum_error.dartSPDXID: SPDXRef-ethereum-error-16FileType: SOURCEFileChecksum: SHA1: 13378352e296cae7160bea290939ea950866d886LicenseConcluded: NOASSERTIONLicenseInfoInFile: NOASSERTIONFileCopyrightText: NOASSERTION
+FileName: lib/src/adapters/ethereum_server_http_adapter.dart
+SPDXID: SPDXRef-ethereum-server-http-adapter-7
+FileType: SOURCE
+FileChecksum: SHA1: e4a2d8d040735a8789735aa5e684785f83c1d15a
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NOASSERTION
+FileCopyrightText: NOASSERTION
 
-FileName: /lib/src/ethereum_rpc_client.dartSPDXID: SPDXRef-ethereum-rpc-client-17FileType: SOURCEFileChecksum: SHA1: 17eb5881ec02aa3b227eb6a9020f053bc32c2c7fLicenseConcluded: NOASSERTIONLicenseInfoInFile: NOASSERTIONFileCopyrightText: NOASSERTION
 
-FileName: /lib/src/ethereum_rpc_methods.dartSPDXID: SPDXRef-ethereum-rpc-methods-18FileType: SOURCEFileChecksum: SHA1: 39a93e78d7707b407367c33f04b7972d1d75f94cLicenseConcluded: NOASSERTIONLicenseInfoInFile: NOASSERTIONFileCopyrightText: NOASSERTION
+FileName: lib/src/api/ethereum_api.dart
+SPDXID: SPDXRef-ethereum-api-8
+FileType: SOURCE
+FileChecksum: SHA1: 1ce20b54cd64ce6b91fd8453a21ff11cf4f04046
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NOASSERTION
+FileCopyrightText: NOASSERTION
 
-FileName: /lib/src/ethereum_utilities.dartSPDXID: SPDXRef-ethereum-utilities-19FileType: SOURCEFileChecksum: SHA1: 4867c52558c3e9335b75f212fb1244586c983673LicenseConcluded: NOASSERTIONLicenseInfoInFile: NOASSERTIONFileCopyrightText: NOASSERTION
 
-FileName: /lib/src/messages/ethereum_block.dartSPDXID: SPDXRef-ethereum-block-20FileType: SOURCEFileChecksum: SHA1: 01f95b16584b4320779f3bbea6b207c7564a128cLicenseConcluded: NOASSERTIONLicenseInfoInFile: NOASSERTIONFileCopyrightText: NOASSERTION
+FileName: lib/src/api/ethereum_api_admin.dart
+SPDXID: SPDXRef-ethereum-api-admin-9
+FileType: SOURCE
+FileChecksum: SHA1: 972eff1bda598e1f3a3b8d517190ab5d9f67888f
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NOASSERTION
+FileCopyrightText: NOASSERTION
 
-FileName: /lib/src/messages/ethereum_filter.dartSPDXID: SPDXRef-ethereum-filter-21FileType: SOURCEFileChecksum: SHA1: bc640559358a77cac301b3ccb64b237748d06cfcLicenseConcluded: NOASSERTIONLicenseInfoInFile: NOASSERTIONFileCopyrightText: NOASSERTION
 
-FileName: /lib/src/messages/ethereum_log.dartSPDXID: SPDXRef-ethereum-log-22FileType: SOURCEFileChecksum: SHA1: 596ca57da157a47ad16e2a9a810a633fb4010774LicenseConcluded: NOASSERTIONLicenseInfoInFile: NOASSERTIONFileCopyrightText: NOASSERTION
+FileName: lib/src/api/ethereum_api_eth.dart
+SPDXID: SPDXRef-ethereum-api-eth-10
+FileType: SOURCE
+FileChecksum: SHA1: 56c710ebd65b0225b20507af94d79676dc913a9a
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NOASSERTION
+FileCopyrightText: NOASSERTION
 
-FileName: /lib/src/messages/ethereum_sync_status.dartSPDXID: SPDXRef-ethereum-sync-status-23FileType: SOURCEFileChecksum: SHA1: 3fd5aeb0a6cda1ea8d64e50e68212e2147ad9b54LicenseConcluded: NOASSERTIONLicenseInfoInFile: NOASSERTIONFileCopyrightText: NOASSERTION
 
-FileName: /lib/src/messages/ethereum_transaction.dartSPDXID: SPDXRef-ethereum-transaction-24FileType: SOURCEFileChecksum: SHA1: 3cc0698f574e1878a3b5f021e14df8a98d220f6cLicenseConcluded: NOASSERTIONLicenseInfoInFile: NOASSERTIONFileCopyrightText: NOASSERTION
+FileName: lib/src/datatypes/ethereum_address.dart
+SPDXID: SPDXRef-ethereum-address-11
+FileType: SOURCE
+FileChecksum: SHA1: 6c08dd1faeee7099e818c0aafbf880d0aa566a22
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NOASSERTION
+FileCopyrightText: NOASSERTION
 
-FileName: /lib/src/messages/ethereum_transaction_receipt.dartSPDXID: SPDXRef-ethereum-transaction-receipt-25FileType: SOURCEFileChecksum: SHA1: 622b966355dbabf2e29e0cbfe6eff3dda505285dLicenseConcluded: NOASSERTIONLicenseInfoInFile: NOASSERTIONFileCopyrightText: NOASSERTION
 
-FileName: /lib/src/messages/ethereum_work.dartSPDXID: SPDXRef-ethereum-work-26FileType: SOURCEFileChecksum: SHA1: 364dd2c03be2abf180f7abe8eb05af7371623cc4LicenseConcluded: NOASSERTIONLicenseInfoInFile: NOASSERTIONFileCopyrightText: NOASSERTION
+FileName: lib/src/datatypes/ethereum_byte_address.dart
+SPDXID: SPDXRef-ethereum-byte-address-12
+FileType: SOURCE
+FileChecksum: SHA1: 45c63bc4ebf80bcedf02c985f96f129d826320e2
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NOASSERTION
+FileCopyrightText: NOASSERTION
 
-FileName: /lib/src/parameters/ethereum_default_block.dartSPDXID: SPDXRef-ethereum-default-block-27FileType: SOURCEFileChecksum: SHA1: 1712df251ecb3de25f3566dae1fa6a23d150bd66LicenseConcluded: NOASSERTIONLicenseInfoInFile: NOASSERTIONFileCopyrightText: NOASSERTION
 
-FileName: /pubspec.yamlSPDXID: SPDXRef-pubspec-28FileType: TEXTFileChecksum: SHA1: 70048a9e97c46e739ddd7ecf4344afa5c00054caLicenseConcluded: NOASSERTIONLicenseInfoInFile: NOASSERTIONFileCopyrightText: NOASSERTION
+FileName: lib/src/datatypes/ethereum_data.dart
+SPDXID: SPDXRef-ethereum-data-13
+FileType: SOURCE
+FileChecksum: SHA1: bd90951371a695dfb9c5863a5718590254c15f7b
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NOASSERTION
+FileCopyrightText: NOASSERTION
+
+
+FileName: lib/src/ethereum.dart
+SPDXID: SPDXRef-ethereum-14
+FileType: SOURCE
+FileChecksum: SHA1: db951b307c21e17ccae0e9c8cbb9db812397760c
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NOASSERTION
+FileCopyrightText: NOASSERTION
+
+
+FileName: lib/src/ethereum_constants.dart
+SPDXID: SPDXRef-ethereum-constants-15
+FileType: SOURCE
+FileChecksum: SHA1: 0f31e542dcbf7b53edea8a0d7964bc183805591c
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NOASSERTION
+FileCopyrightText: NOASSERTION
+
+
+FileName: lib/src/ethereum_error.dart
+SPDXID: SPDXRef-ethereum-error-16
+FileType: SOURCE
+FileChecksum: SHA1: 02b3aa72abe181ce068f0e21e11abda7f43be37e
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NOASSERTION
+FileCopyrightText: NOASSERTION
+
+
+FileName: lib/src/ethereum_rpc_client.dart
+SPDXID: SPDXRef-ethereum-rpc-client-17
+FileType: SOURCE
+FileChecksum: SHA1: e9ad311886b916915f47dae52be7a33515895eae
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NOASSERTION
+FileCopyrightText: NOASSERTION
+
+
+FileName: lib/src/ethereum_rpc_methods.dart
+SPDXID: SPDXRef-ethereum-rpc-methods-18
+FileType: SOURCE
+FileChecksum: SHA1: 39a93e78d7707b407367c33f04b7972d1d75f94c
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NOASSERTION
+FileCopyrightText: NOASSERTION
+
+
+FileName: lib/src/ethereum_utilities.dart
+SPDXID: SPDXRef-ethereum-utilities-19
+FileType: SOURCE
+FileChecksum: SHA1: 01f95b16584b4320779f3bbea6b207c7564a128c
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NOASSERTION
+FileCopyrightText: NOASSERTION
+
+
+FileName: lib/src/messages/ethereum_block.dart
+SPDXID: SPDXRef-ethereum-block-20
+FileType: SOURCE
+FileChecksum: SHA1: c49c88e94148bfdcb272cf5a1e0a7cfca6983fa1
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NOASSERTION
+FileCopyrightText: NOASSERTION
+
+
+FileName: lib/src/messages/ethereum_filter.dart
+SPDXID: SPDXRef-ethereum-filter-21
+FileType: SOURCE
+FileChecksum: SHA1: 8dae3648cea2f3c6f909f376f2c50be5cb0e5cdd
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NOASSERTION
+FileCopyrightText: NOASSERTION
+
+
+FileName: lib/src/messages/ethereum_log.dart
+SPDXID: SPDXRef-ethereum-log-22
+FileType: SOURCE
+FileChecksum: SHA1: fd078e4967e367dd925f52a5b51e09ea9a9590e8
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NOASSERTION
+FileCopyrightText: NOASSERTION
+
+
+FileName: lib/src/messages/ethereum_sync_status.dart
+SPDXID: SPDXRef-ethereum-sync-status-23
+FileType: SOURCE
+FileChecksum: SHA1: 925b724bb6d35bdae7add649943225a55cf86792
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NOASSERTION
+FileCopyrightText: NOASSERTION
+
+
+FileName: lib/src/messages/ethereum_transaction.dart
+SPDXID: SPDXRef-ethereum-transaction-24
+FileType: SOURCE
+FileChecksum: SHA1: 3cc0698f574e1878a3b5f021e14df8a98d220f6c
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NOASSERTION
+FileCopyrightText: NOASSERTION
+
+
+FileName: lib/src/messages/ethereum_transaction_receipt.dart
+SPDXID: SPDXRef-ethereum-transaction-receipt-25
+FileType: SOURCE
+FileChecksum: SHA1: d8451457c8cf7df0b03d8d541431daf6247a2015
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NOASSERTION
+FileCopyrightText: NOASSERTION
+
+
+FileName: lib/src/messages/ethereum_work.dart
+SPDXID: SPDXRef-ethereum-work-26
+FileType: SOURCE
+FileChecksum: SHA1: e8f68fa1bf4b65f37efa188aed9605416d39d3a1
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NOASSERTION
+FileCopyrightText: NOASSERTION
+
+
+FileName: lib/src/parameters/ethereum_default_block.dart
+SPDXID: SPDXRef-ethereum-default-block-27
+FileType: SOURCE
+FileChecksum: SHA1: 143e87d164bfc00d6fef2123e3031c0f1ad3a478
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NOASSERTION
+FileCopyrightText: NOASSERTION
+
+
+FileName: pubspec.yaml
+SPDXID: SPDXRef-pubspec-28
+FileType: TEXT
+FileChecksum: SHA1: a2fecd6093ed64205fd8fc365abf0c516c4212ed
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NOASSERTION
+FileCopyrightText: NOASSERTION
+
 
 Relationship: SPDXRef-pubspec-28 DEPENDENCY_MANIFEST_OF SPDXRef-Package-ethereum
+
 

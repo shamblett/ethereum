@@ -1,9 +1,11 @@
+
+# 6.1.1
+- [Issue 23](https://github.com/shamblett/ethereum/issues23)
+
 # 6.1.0
-Issue 21
 - [Issue 21](https://github.com/shamblett/ethereum/issues21)
 
 # 6.0.1
-Issue 19
 - [Issue 19](https://github.com/shamblett/ethereum/issues/19)
 
 # 6.0.0
@@ -11,11 +13,9 @@ Issue 18 - Dart 3
 - [Issue 18](https://github.com/shamblett/ethereum/issues/18)
 
 # 5.0.2
-Issue 17
 - [Issue 17](https://github.com/shamblett/ethereum/issues/14)
 
 # 5.0.1
-Issue 13
 - [Issue 13](https://github.com/shamblett/ethereum/issues/13)
 
 # 5.0.0
